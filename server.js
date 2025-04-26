@@ -26,10 +26,10 @@ const connectDB = require('./dbConn');
 mongoose.set('strictQuery', false);
 connectDB();
 
-// Start the server
 mongoose.connection.once('open', () => {
+  db = mongoose.connection.db; // Initialize the db variable
   app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
   });
 });
 
