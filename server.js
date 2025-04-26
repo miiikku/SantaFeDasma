@@ -106,6 +106,7 @@ const createPaymongoPaymentLink = async (amount, description) => {
 // Define allowed origins
 const allowedOrigins = [
   'http://localhost:8080', // Adjust port if different
+  'http://localhost:3000', // For React development server
   'https://barangaysantafedasma.com' // Replace with your actual domain when deploying
 ];
 
