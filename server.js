@@ -106,7 +106,7 @@ const createPaymongoPaymentLink = async (amount, description) => {
 // Define allowed origins
 const allowedOrigins = [
   'http://localhost:8080', // Adjust port if different
-  'https://barangaysantafedasma.com/' // Replace with your actual domain when deploying
+  'https://barangaysantafedasma.com' // Replace with your actual domain when deploying
 ];
 
 // CORS configuration function
