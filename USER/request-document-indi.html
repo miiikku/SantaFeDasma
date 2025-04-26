@@ -1,0 +1,283 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Barangay Santa Fe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter m-0 p-0 bg-gray-100 flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="bg-green-900 flex flex-col md:flex-row justify-between items-center p-4 relative">
+        <div class="mb-2 md:mb-0">
+            <img src="https://www.dropbox.com/scl/fi/fan2zv4s27rhmpd7gmtex/brgystafe.png?rlkey=exhrm1gcwkaik313g0r9al119&st=2j1m6lkb&dl=1" alt="Barangay Santa Fe Logo" class="h-20">
+        </div>
+
+        <!-- Navigation Menu for Desktop -->
+        <nav id="nav-menu" class="w-full md:w-auto md:flex md:gap-4 md:text-white md:font-bold md:text-sm md:tracking-wide justify-center px-4 hidden md:block">
+            <ul class="flex flex-row flex-wrap gap-4 text-white font-bold text-sm tracking-wide justify-center px-4">
+                <li><a href="home.html" class="hover:underline">HOME</a></li>
+                <li><a href="offices.html" class="hover:underline">OFFICES</a></li>
+                <li><a href="request-document.html" class="hover:underline">REQUEST DOCUMENT</a></li>
+                <li><a href="#about-section" class="hover:underline">ABOUT</a></li>
+                <li>
+                    <a href="#" id="user-icon-large">
+                        <img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccountWhite.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=07eppc1l&dl=1" alt="user-icon" class="w-5 h-5 rounded-full">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Bottom Navigation Menu (for smaller screens) -->
+    <div id="bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 bg-green-900 text-white p-3 flex justify-between items-center z-50">
+        <a href="home.html" class="text-white flex flex-col items-center">
+            <img src="https://www.dropbox.com/scl/fi/3tjxqwr2t3q0ukrejpmxo/home.png?rlkey=8bgfkys4b41atoditmzgr0nnu&st=diqx81gd&dl=1" class="w-6 h-6">
+            <span class="text-xs mt-1">Home</span>
+        </a>
+        <a href="offices.html" class="text-white flex flex-col items-center">
+            <img src="https://www.dropbox.com/scl/fi/uojsh4dfz5nrgxuv5w4gi/briefcase.png?rlkey=jrbggymeimeit6uljo4sckk8j&st=r0saupw7&dl=1" class="w-6 h-6">
+            <span class="text-xs mt-1">Offices</span>
+        </a>
+        <a href="request-document.html" class="text-white flex flex-col items-center">
+            <img src="https://www.dropbox.com/scl/fi/al2r2ujmkjeynpixrw0gd/google-docs-4.png?rlkey=0tdrfo5y05uimuc45nbgrcsqg&st=kcrekqtm&dl=1" class="w-6 h-6">
+            <span class="text-xs mt-1">Request</span>
+        </a>
+        <a href="#about-section" class="text-white flex flex-col items-center">
+            <img src="https://www.dropbox.com/scl/fi/1cbd3lleyhj1dvcjow5g1/info.png?rlkey=8npgc5r5ozjdg10746kf9wsol&st=r963bvwj&dl=1" class="w-6 h-6">
+            <span class="text-xs mt-1">About</span>
+        </a>
+        <a href="#" class="text-white flex flex-col items-center" id="user-icon-small">
+            <img src="https://www.dropbox.com/scl/fi/1xu3gg1oyp6gccvbymulh/user-2.png?rlkey=u8jb7s2tfha43mcan1hhlmbf3&st=krl9gh62&dl=1" class="w-6 h-6">
+            <span class="text-xs mt-1">Login</span>
+        </a>   
+    </div>
+    
+     <!-- Main Content -->
+     <main class="p-8 flex justify-center items-start flex-grow bg-gray-100">
+        <div class="form-container bg-white p-8 rounded-xl shadow-lg max-w-4xl w-full mt-2 mb-4">
+            <h1 class="text-2xl font-semibold text-green-800 mb-6 text-left">REQUEST DOCUMENT - INDIGENCY</h1>
+            <form id="requestForm">
+                <!-- Row 1: Names -->
+                <div class="input-row grid grid-cols-3 gap-2 mb-4">
+                    <div class="floating-label-group">
+                        <input type="text" name="firstName" id="firstName" placeholder=" " required readonly class="border border-gray-300 rounded px-4 py-2 w-full">
+                        <label for="firstName" class="text-sm text-gray-500">First Name</label>
+                    </div>
+                    <div class="floating-label-group">
+                        <input type="text" name="middleName" id="middleName" placeholder=" " required readonly class="border border-gray-300 rounded px-4 py-2 w-full">
+                        <label for="middleName" class="text-sm text-gray-500">Middle Name</label>
+                    </div>
+                    <div class="floating-label-group">
+                        <input type="text" name="lastName" id="lastName" placeholder=" " required readonly class="border border-gray-300 rounded px-4 py-2 w-full">
+                        <label for="lastName" class="text-sm text-gray-500">Last Name</label>
+                    </div>
+                </div>
+
+                <!-- Row 2: Age, Years Residing, Purpose -->
+                <div class="input-row grid grid-cols-3 gap-2 mb-4">
+                    <div class="floating-label-group">
+                        <input type="number" name="age" placeholder=" " required class="border border-gray-300 rounded px-4 py-2 w-full">
+                        <label for="age" class="text-sm text-gray-500">Age</label>
+                    </div>
+                    <div class="floating-label-group">
+                        <input type="number" name="yearsresiding" placeholder=" " readonly class="border border-gray-300 rounded px-4 py-2 w-full">
+                        <label for="yearsresiding" class="text-sm text-gray-500">Years Residing</label>
+                    </div>                    
+                    <div class="floating-label-group">
+                        <input type="text" name="purpose" placeholder=" " required class="border border-gray-300 rounded px-4 py-2 w-full">
+                        <label for="purpose" class="text-sm text-gray-500">Purpose</label>
+                    </div>
+                </div>
+
+                <!-- Updated Address Fields -->
+                <div class="input-row grid grid-cols-3 gap-2 mb-4">
+                    <div class="floating-label-group">
+                        <input type="text" name="blk" id="blk" placeholder=" " required class="border border-gray-300 rounded px-4 py-2 w-full">
+                        <label for="blk" class="text-sm text-gray-500">Blk</label>
+                    </div>
+                    <div class="floating-label-group">
+                        <input type="text" name="lot" id="lot" placeholder=" " required class="border border-gray-300 rounded px-4 py-2 w-full">
+                        <label for="lot" class="text-sm text-gray-500">Lot</label>
+                    </div>
+                    <div class="floating-label-group">
+                        <input type="text" name="street" id="street" placeholder=" " required class="border border-gray-300 rounded px-4 py-2 w-full">
+                        <label for="street" class="text-sm text-gray-500">Street</label>
+                    </div>
+                </div>
+
+                <div class="input-row grid grid-cols-3 gap-2 mb-4">
+                    <div class="floating-label-group">
+                        <input type="text" name="barangay" id="barangay" value="Santa Fe" readonly required class="border border-gray-300 rounded px-4 py-2 w-full">
+                        <label for="barangay" class="text-sm text-gray-500">Barangay</label>
+                    </div>
+                    <div class="floating-label-group">
+                        <input type="text" name="city" id="city" value="Dasmariñas" readonly required class="border border-gray-300 rounded px-4 py-2 w-full">
+                        <label for="city" class="text-sm text-gray-500">City</label>
+                    </div>
+                    <div class="floating-label-group">
+                        <input type="text" name="province" id="province" value="Cavite" readonly required class="border border-gray-300 rounded px-4 py-2 w-full">
+                        <label for="province" class="text-sm text-gray-500">Province</label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="bg-green-900 text-white px-6 py-3 rounded-lg w-full md:w-auto mt-4">REQUEST</button>
+            </form>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer id="about-section" class="bg-green-900 text-white text-center py-6 font-light tracking-wide font-inter pb-24">
+        <div class="mb-4">
+            <ul class="flex flex-row flex-wrap justify-center gap-4 font-bold text-sm tracking-wide">
+                <li><a href="home.html" class="hover:underline">HOME</a></li>
+                <li><a href="offices.html" class="hover:underline">OFFICES</a></li>
+                <li><a href="request-document.html" class="hover:underline">REQUEST DOCUMENT</a></li>
+            </ul>            
+        </div>
+        <hr class="border-white w-3/4 mx-auto my-4">
+        <div class="px-6 text-sm mb-4">
+            <p class="font-inter">Santa Fe Barangay Hall is a town hall in Dasmariñas, Cavite near the Santa Fe Multi-Purpose Court and Half Court.</p>
+        </div>
+        <div class="text-xs">
+            <p class="font-inter">&copy; 2025 Barangay Santa Fe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- User Profile Popup -->
+    <div id="user-popup" class="user-popup hidden absolute right-4 top-20 bg-white shadow-lg p-4 rounded-lg w-64 border border-gray-200 z-20">
+        <div class="user-header flex justify-between items-center border-b border-gray-300 pb-2 mb-3">
+            <span class="text-lg font-semibold text-gray-800">User Options</span>
+            <span class="close-btn cursor-pointer font-bold text-xl text-gray-600 hover:text-gray-800" onclick="toggleUserPopup()">&times;</span>
+        </div>
+        <div class="user-content space-y-2">
+            <a href="user-profile.html" class="block text-gray-800 hover:text-green-600 transition-colors duration-200">User Profile</a>
+            <a href="/logout" class="block text-gray-800 hover:text-red-600 transition-colors duration-200">Logout</a>
+        </div>
+    </div>
+
+    <script src="public/styles/users.js"></script>
+    <script src="/public/js/sessionTimeout.js"></script>
+
+
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    fetchUserDetails();
+
+    const requestForm = document.getElementById('requestForm');
+    requestForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(requestForm);
+        const fullAddress = `${formData.get('blk')}, ${formData.get('lot')}, ${formData.get('street')}, ${formData.get('barangay')}, ${formData.get('city')}, ${formData.get('province')}`;
+
+        const requestData = {
+            firstName: formData.get('firstName'),
+            middleName: formData.get('middleName'),
+            lastName: formData.get('lastName'),
+            age: formData.get('age'),
+            purpose: formData.get('purpose'),
+            yearsResiding: formData.get('yearsresiding'),
+            address: fullAddress,  // Combine the individual parts into a full address string
+            dateIssued: " ",
+            status: "Processing"
+        };
+
+        // First, submit the document request
+        try {
+            const response = await fetch('/add-request-indigency', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestData)
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                
+                // After successful request submission, initiate the payment process
+                const paymentResponse = await fetch('/request-indi-payment', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        firstName: formData.get('firstName'),
+                        middleName: formData.get('middleName'),
+                        lastName: formData.get('lastName')
+                    })
+                });
+
+                const paymentData = await paymentResponse.json();
+                if (paymentData.success) {
+                    alert(`Request submitted successfully! We have sent an email to ${paymentData.email} with the payment link.`);
+                } else {
+                    alert('Failed to generate payment link');
+                }
+            } else {
+                alert('Failed to submit request');
+            }
+        } catch (error) {
+            console.error('Error submitting request:', error);
+            alert('An error occurred while submitting the request');
+        }
+    });
+});
+
+function fetchUserDetails() {
+    fetch('/user-details')
+        .then(response => response.json())
+        .then(user => {
+            console.log("Fetched user details in frontend:", user); // Add a log to check user data in frontend
+            document.getElementById('firstName').value = user.firstname;
+            document.getElementById('middleName').value = user.middlename;
+            document.getElementById('lastName').value = user.lastname;
+            if (user.age) {
+                document.querySelector('input[name="age"]').value = user.age;
+            } else {
+                console.log("Age not found in user details.");
+            }
+
+            if (user.Address) {
+            const parts = user.Address.split(',').map(p => p.trim());
+
+            const blk = parts[0] || '';
+            const lot = parts[1] || '';
+            const street = parts[2] || '';
+
+            document.getElementById('blk').value = blk;
+            document.getElementById('lot').value = lot;
+            document.getElementById('street').value = street;
+            }
+
+            if (user.yearsresiding) {
+            document.querySelector('input[name="yearsresiding"]').value = user.yearsresiding;
+            } else {
+            console.log("Years residing not found in user details.");
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching user details:', error);
+        });
+}
+
+function clearUserDetails() {
+    localStorage.removeItem('userDetails');
+}
+
+    </script>    
+</body>
+</html>

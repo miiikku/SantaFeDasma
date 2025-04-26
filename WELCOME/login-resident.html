@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resident Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="font-inter bg-green-50 bg-cover bg-center min-h-screen flex items-center justify-center px-4 py-8" style="background-image: url('https://www.dropbox.com/scl/fi/708ec6qjs3d1rn6wqcaxk/LOGIN-RESIDENT.png?rlkey=5ss0gh1e6expbaz8cgv76tsp3&st=5aof6i03&dl=1');">
+  <div class="bg-white bg-opacity-90 shadow-md rounded-xl w-full max-w-lg mx-4 p-8">
+    <form id="login-form" class="flex flex-col gap-y-6">
+      <h2 class="text-2xl font-bold text-center text-green-800 mb-5">RESIDENT LOGIN</h2>
+
+      <!-- Username -->
+      <div class="w-full space-y-2">
+        <label for="username" class="block text-green-800 text-sm">Username</label>
+        <input type="text" id="username" name="username" required class="w-full p-2 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-1 focus:ring-black focus:border-black text-sm">
+      </div>
+
+      <!-- Password -->
+      <div class="w-full space-y-2">
+        <label for="password" class="block text-green-800 text-sm">Password</label>
+        <input type="password" id="password" name="password" required class="w-full p-2 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-1 focus:ring-black focus:border-black text-sm">
+      </div>
+
+      <!-- Submit Button -->
+      <div class="w-full text-center">
+        <button type="submit" class="w-full p-2 bg-green-700 text-white font-semibold rounded-md hover:bg-green-800 transition duration-200">
+          Login
+        </button>
+      </div>
+
+      <!-- Forgot Password and Sign Up Links - Stacked vertically and aligned right -->
+      <div class="flex flex-col items-end text-sm mt-3 space-y-2">
+        <a href="signup.html" class="text-green-700 hover:underline">Sign Up</a>
+        <a href="forgotpassword.html" class="text-green-700 hover:underline">Forgot Password?</a>
+      </div>
+
+      <!-- Barangay Admin Link -->
+      <div class="w-full text-center mt-3">
+        <a href="login.html" class="text-blue-800 hover:underline">Barangay Admin</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Notification Popup -->
+  <div id="notification" class="hidden fixed top-5 right-5 bg-red-500 text-white p-4 rounded-md shadow-lg">
+    <span class="closebtn cursor-pointer font-bold text-xl float-right" onclick="this.parentElement.style.display='none';">&times;</span>
+    <span id="notification-message"></span>
+  </div>
+
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      
+      const formData = new FormData(event.target);
+      const data = {};
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      const response = await fetch('/resident-login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.text();
+
+      const notification = document.getElementById('notification');
+      const message = document.getElementById('notification-message');
+
+      if (response.ok) {
+        window.location.href = '/home';
+      } else {
+        message.innerText = result;
+        notification.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

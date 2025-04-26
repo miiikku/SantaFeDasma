@@ -1,0 +1,237 @@
+/* WELCOME HTML */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Styles specific to the welcome page */
+header {
+    background-color: #005f27;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header .logo img {
+    height: 85px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 40px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.user-icon, .notif-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+main {
+    text-align: center;
+    padding: 20px;
+}
+
+.welcome {
+    position: relative;
+    width: 100%;
+}
+
+.welcome .header-image {
+    width: 100%;
+    height: auto;
+    display: flex;
+    background-size: cover;
+}
+
+.vision-mission {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+.vision, .mission {
+    background-color: #C8E9C8;
+    margin: 10px;
+    padding: 100px;
+    width: 45%;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 20px;
+}
+
+.officials {
+    background-image: linear-gradient(#008000, #96CB96);
+    color: white;
+    padding: 20px 0;
+}
+
+.officials h2 {
+    margin: 0;
+    padding: 20px 0;
+}
+
+.official-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.official {
+    text-align: center;
+    width: 300px;
+}
+
+.official img {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.4s ease;
+}
+
+.official img:hover {
+    transform: scale(1.05);
+}
+
+footer {
+    background-color: #005f27;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer-top ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.footer-top ul li {
+    margin: 0 20px;
+}
+
+.footer-top ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.footer-top ul li a:hover {
+    text-decoration: underline;
+}
+
+.footer-divider {
+    border: 0;
+    height: 1px;
+    background: #ffffff;
+    margin: 20px 0;
+}
+
+.footer-middle {
+    margin: 20px 0;
+    padding: 0 20px;
+}
+
+.footer-bottom {
+    background-color: #005f27;
+    padding: 10px 0;
+}
+
+.notif-popup {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.521);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 1000;
+    width: 500px;
+    margin-right: 5px;
+    margin-top: 30px;
+}
+
+.user-popup {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.521);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 1000;
+    width: 200px;
+    margin-right: 5px;
+    margin-top: 30px;
+}
+
+.notif-popup.show, .user-popup.show {
+    display: block;
+}
+
+.notif-header, .user-header {
+    background-color: #1c492f;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notif-content, .user-content {
+    padding: 10px;
+}
+
+.notif-item, .user-content a {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.user-content a:hover {
+    text-decoration: underline;
+}
+
+.notif-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.delete-btn {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.close-btn {
+    cursor: pointer;
+}

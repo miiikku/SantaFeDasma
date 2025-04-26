@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residents</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter m-0 p-0 bg-gray-100 flex min-h-screen overflow-x-hidden">
+
+    <!-- Sidebar (Visible on larger screens) -->
+    <div class="sidebar w-80 bg-green-900 text-white p-4 flex flex-col justify-between h-auto hidden md:block">
+        <center>
+            <img src="https://www.dropbox.com/scl/fi/94o2cqiknm3a4dasbyz1q/sidebarlogo.png?rlkey=9suwtde1z2qk3ea73d64yt5he&st=13kmqf8k&dl=1" alt="Barangay Santa Fe Logo" class="w-36 mb-4">
+            <h1 class="text-sm text-center font-inter font-bold">BARANGAY SANTA FE<br>CITY OF DASMARIÑAS</h1>
+        </center>
+        <div class="sidenav mt-8 flex-grow">
+            <ul class="space-y-4">
+                <li><a href="dashboard.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/es7o8fr6dw2vkkywjpg66/dashboard.png?rlkey=pp0dy252j9wao81jpz1n50f4p&st=83lbnbnz&dl=1" class="w-5 h-5 ">
+                        <span class="ml-3">Dashboard</span></a></li>
+                
+                <li><a href="notification.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/te9qkrjtunarm8znvfs1w/notification.png?rlkey=kqzy50yimgtro1l8caiqnqbua&st=4zuvr1p0&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Notification</span></a></li>
+
+                <li><a href="user-account.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccount.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=4ko3y2wy&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">User Account</span></a></li>
+
+                <li><a href="residents.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/e57yqafcdt0z58wbgvv9e/residents.png?rlkey=wcqigcrhwveax3qubldx0qaql&st=np6th3hf&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Residents</span></a></li>
+
+                <li class="relative">
+                    <a href="complaints.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/kbs0xnrc9usw40lv30clw/scales-of-justice.png?rlkey=d36ewu4dge121egpw53qri8mf&st=r04p7f12&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Complaints</span></a>
+                        <span id="complaintsNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+
+                <li class="relative">
+                    <a href="barangay-id.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Barangay ID</span></a>
+                        <span id="barangayIDNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+
+                <li class="relative">
+                    <a href="request.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/idqomcr0ujnsmd54ktpu5/quote-request.png?rlkey=swquji94hs61jlr8y0p992s0n&st=vkr8y4i7&dl=1" class="w-5 h-5">
+                        <span class="ml-3">Requests</span></a>
+                        <span id="sidebarNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+                
+                <li><a href="module.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                    <img src="https://www.dropbox.com/scl/fi/olqdewf6h2pi148jw0j2p/maintenance.png?rlkey=5rnv8iajpbytp799jgyvs6cqa&st=dn26ng5a&dl=1" class="w-5 h-5">
+                    <span class="ml-3">Maintenance</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Menu (for smaller screens) -->
+    <div id="bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 bg-green-900 text-white p-3 font-inter">
+        <div class="flex overflow-x-auto space-x-6 px-4 py-4">
+        <!-- Dashboard Icon -->
+        <a href="dashboard.html" class="flex flex-col items-center text-white">
+            <img src="https://www.dropbox.com/scl/fi/es7o8fr6dw2vkkywjpg66/dashboard.png?rlkey=pp0dy252j9wao81jpz1n50f4p&st=83lbnbnz&dl=1" class="w-6 h-6">
+            <span class="text-xs">Dashboard</span>
+        </a>
+        <!-- Notification Icon -->
+        <a href="notification.html" class="flex flex-col items-center text-white">
+            <img src="https://www.dropbox.com/scl/fi/te9qkrjtunarm8znvfs1w/notification.png?rlkey=kqzy50yimgtro1l8caiqnqbua&st=4zuvr1p0&dl=1" class="w-6 h-6">
+            <span class="text-xs">Notification</span>
+        </a>
+        <!-- User Account Icon -->
+        <a href="user-account.html" class="flex flex-col items-center text-white">
+            <img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccount.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=4ko3y2wy&dl=1" class="w-6 h-6">
+            <span class="text-xs">Account</span>
+        </a>
+        <!-- Residents Icon -->
+        <a href="residents.html" class="flex flex-col items-center text-white">
+            <img src="https://www.dropbox.com/scl/fi/e57yqafcdt0z58wbgvv9e/residents.png?rlkey=wcqigcrhwveax3qubldx0qaql&st=np6th3hf&dl=1" class="w-6 h-6">
+            <span class="text-xs">Residents</span>
+        </a>
+        <!-- Complaints Icon -->
+        <a href="complaints.html" class="flex flex-col items-center text-white">
+            <img src="https://www.dropbox.com/scl/fi/kbs0xnrc9usw40lv30clw/scales-of-justice.png?rlkey=d36ewu4dge121egpw53qri8mf&st=r04p7f12&dl=1" class="w-6 h-6">
+            <span class="text-xs">Complaints</span>
+        </a>
+        <!-- Barangay ID Icon -->
+        <a href="barangay-id.html" class="flex flex-col items-center text-white">
+            <img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" class="w-6 h-6">
+            <span class="text-xs">ID</span>
+        </a>
+        <!-- Requests Icon -->
+        <a href="request.html" class="flex flex-col items-center text-white">
+            <img src="https://www.dropbox.com/scl/fi/idqomcr0ujnsmd54ktpu5/quote-request.png?rlkey=swquji94hs61jlr8y0p992s0n&st=vkr8y4i7&dl=1" class="w-6 h-6">
+            <span class="text-xs">Requests</span>
+        </a>
+        <!-- Maintenance Icon -->
+        <a href="module.html" class="flex flex-col items-center text-white">
+            <img src="https://www.dropbox.com/scl/fi/olqdewf6h2pi148jw0j2p/maintenance.png?rlkey=5rnv8iajpbytp799jgyvs6cqa&st=dn26ng5a&dl=1" class="w-6 h-6">
+            <span class="text-xs">Maintenance</span>
+        </a>
+    </div>
+</div>
+
+    <!-- Main Content -->
+    <div class="main-content flex-grow p-6 bg-gray-100 max-w-full overflow-x-auto">
+        <div class="header flex justify-between items-center bg-white p-4 shadow-md rounded-xl">
+            <h2 class="text-2xl font-semibold">Residents</h2>
+            <div class="user-info flex items-center space-x-4">
+                <!-- User Avatar -->
+                <div class="dropdown relative">
+                    <img id="resident-profile-pic" src="" 
+                         alt="User Avatar" 
+                         class="w-8 h-8 rounded-full cursor-pointer" onclick="toggleDropdown()">
+                
+                    <!-- User Profile Popup -->
+                    <div id="user-popup" class="user-popup hidden absolute right-0 top-10 bg-white shadow-lg p-4 rounded-lg w-64 border border-gray-200">
+                        <div class="user-header flex justify-between items-center border-b border-gray-300 pb-2 mb-3">
+                            <span class="text-lg font-semibold text-gray-800">Admin Options</span>
+                            <span class="close-btn cursor-pointer font-bold text-xl text-gray-600 hover:text-gray-800" onclick="toggleDropdown()">&times;</span>
+                        </div>
+                        <div class="user-content space-y-2">
+                            <a href="admin-details.html" class="block text-gray-800 hover:text-green-600 transition-colors duration-200">User Profile</a>
+                            <a href="module.html" class="block text-gray-800 hover:text-yellow-600 transition-colors duration-200">Maintenance</a>
+                            <a href="#" onclick="logout()" class="block text-gray-800 hover:text-red-600 transition-colors duration-200">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Actions -->
+        <div class="mb-2 flex items-center justify-end gap-6 p-6">
+            <!-- Search Input -->
+            <div>
+                <input type="text" id="searchInput" placeholder="Search..." oninput="searchResidents()" class="ml-auto w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-800">
+            </div>
+            <!-- Add Button -->
+            <div>
+                <button class="bg-green-800 text-white px-6 py-1 rounded-md hover:bg-green-700 focus:outline-none" onclick="openModal()">Add</button>
+            </div>
+        </div>
+
+       <!-- Add Modal -->
+<div id="addModal" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="modal-content bg-white p-4 rounded-lg shadow-xl w-full max-w-xl mx-auto mt-24 sm:mt-24 px-4 relative">
+        <!-- Adjusted Close Button -->
+        <span class="close absolute top-4 right-4 text-3xl font-bold cursor-pointer text-gray-300 hover:text-green-800" onclick="closeModal()">&times;</span>
+        
+        <form id="addForm">
+            <h2 class="text-2xl font-semibold text-green-800 mb-4 text-center">Add Resident</h2>
+
+            <!-- Row 1: File Input -->
+            <div class="mb-4">
+                <label for="photo" class="block text-gray-800 font-medium mb-2 text-xs">Choose Photo</label>
+                <input type="file" id="photo" name="photo" accept="image/*" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+
+            <!-- Row 2: Name (First, Middle, Last) -->
+            <div class="grid grid-cols-3 gap-2 mb-4">
+                <div>
+                    <input type="text" id="addFirstname" name="firstname" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="text" id="addMiddlename" name="middlename" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="text" id="addLastname" name="lastname" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+
+            <!-- Row 3: Age, Gender, Birthdate, Civil Status (All in one row) -->
+            <div class="grid grid-cols-4 gap-2 mb-4">
+                <div>
+                    <input type="text" id="addAge" name="age" placeholder="Age" readonly class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <select id="addGender" name="gender" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="date" id="addBirthdate" name="birthdate" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <select id="addCivilStatus" name="civilstatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        <option value="" disabled selected>Select Civil Status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Widowed">Widowed</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Row 4: PWD/Senior, Voter Status, Contact #, Start Date, Years Residing (All in one row) -->
+            <div class="grid grid-cols-5 gap-2 mb-4">
+                <div>
+                    <select id="addPwdSenior" name="pwd_senior" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        <option value="" disabled selected>Select PWD/Senior</option>
+                        <option value="N/A">N/A</option>
+                        <option value="PWD">PWD</option>
+                        <option value="Senior">Senior</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="addVoterStatus" name="voter_status" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        <option value="" disabled selected>Select Voter Status</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="text" id="addContactNumber" name="contact_number" placeholder="Contact #" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="date" id="addStartDate" name="startDate" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="number" id="addYearsResiding" name="yearsresiding" placeholder="Years Residing" readonly class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+
+            <!-- Row 5: Address (Blk, Lot) -->
+            <div class="grid grid-cols-2 gap-2 mb-4">
+                <div>
+                    <input type="text" id="addBlk" name="blk" placeholder="Blk" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="text" id="addLot" name="lot" placeholder="Lot No." required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+
+            <!-- Row 6: Address (Street, Barangay) -->
+            <div class="grid grid-cols-2 gap-2 mb-4">
+                <div>
+                    <input type="text" id="addStreet" name="street" placeholder="Street" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="text" id="addBarangay" name="barangay" placeholder="Barangay" value="Santa Fe" readonly required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+
+            <!-- Row 7: Address (City, Province) -->
+            <div class="grid grid-cols-2 gap-2 mb-4">
+                <div>
+                    <input type="text" id="addCity" name="city" placeholder="City" value="Dasmariñas" readonly required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="text" id="addProvince" name="province" placeholder="Province" value="Cavite" readonly required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-4">
+                <input type="email" id="addEmail" name="email" placeholder="Email" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-end gap-2">
+                <button type="submit" class="bg-green-800 text-white px-6 py-1 rounded-md hover:bg-green-700 text-sm">Add</button>
+                <button type="button" class="bg-gray-200 text-black px-6 py-1 rounded-md hover:bg-gray-400 text-sm" onclick="closeModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+
+     <!-- Resident Information Table -->
+     <div class="account-content bg-white p-6 rounded-lg shadow-md overflow-x-auto">
+        <h3 class="text-lg font-semibold text-gray-800">Resident Information</h3>
+        <div class="overflow-x-auto mt-4 max-h-[500px]"> <!-- Increased max-height for better spacing -->
+            <table class="min-w-full table-auto border-collapse border border-gray-300">
+                <thead class="bg-green-800">
+                    <tr>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Picture</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Name</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Birthdate</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Age</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Gender</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Civil Status</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">PWD/Senior</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Voter Status</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Contact #</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Email</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Address</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Years Residing</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="resident-table-body">
+                    <!-- Rows will be dynamically inserted here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
+
+    <!-- Edit Modal -->
+<div id="editModal" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="modal-content bg-white p-4 rounded-lg shadow-xl w-full max-w-xl mx-auto mt-24 sm:mt-24 px-4 relative">
+        <span class="close absolute top-4 right-4 text-3xl font-bold cursor-pointer text-gray-300 hover:text-green-800" onclick="closeEditModal()">&times;</span>
+        <form id="editForm">
+            <h2 class="text-2xl font-semibold text-green-800 mb-4 text-center">Edit Resident</h2>
+
+            <!-- Row 1: File Input -->
+            <div class="mb-4">
+                <label for="editPhoto" class="block text-gray-800 font-medium mb-2 text-xs">Choose Photo</label>
+                <input type="file" id="editPhoto" name="photo" accept="image/*" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+
+            <!-- Row 2: Name (First, Middle, Last) -->
+            <div class="grid grid-cols-3 gap-2 mb-4">
+                <div>
+                    <input type="text" id="editFirstname" name="firstname" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="text" id="editMiddlename" name="middlename" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="text" id="editLastname" name="lastname" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+
+            <!-- Row 3: Age, Gender, Birthdate, Civil Status (All in one row) -->
+            <div class="grid grid-cols-4 gap-2 mb-4">
+                <div>
+                    <input type="text" id="editAge" name="age" placeholder="Age" readonly class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <select id="editGender" name="gender" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        <option value="" disabled selected>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="date" id="editBirthdate" name="birthdate" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <select id="editCivilStatus" name="civilstatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        <option value="" disabled selected>Select Civil Status</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Widowed">Widowed</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Row 4: PWD/Senior, Voter Status, Contact # -->
+            <div class="grid grid-cols-5 gap-2 mb-4">
+                <div>
+                    <select id="editPwdSenior" name="pwd_senior" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        <option value="" disabled selected>Select PWD/Senior</option>
+                        <option value="N/A">N/A</option>
+                        <option value="PWD">PWD</option>
+                        <option value="Senior">Senior</option>
+                    </select>
+                </div>
+                <div>
+                    <select id="editVoterStatus" name="voter_status" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        <option value="" disabled selected>Select Voter Status</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="text" id="editContactNumber" name="contact_number" placeholder="Contact #" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="date" id="editStartDate" name="startDate" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="number" id="editYearsResiding" name="yearsresiding" placeholder="Years Residing" readonly class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+
+            <!-- Row 5: Address (Blk, Lot) -->
+            <div class="grid grid-cols-2 gap-2 mb-4">
+                <div>
+                    <input type="text" id="editBlk" name="blk" placeholder="Blk" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="text" id="editLot" name="lot" placeholder="Lot No." required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+
+            <!-- Row 6: Address (Street, Barangay) -->
+            <div class="grid grid-cols-2 gap-2 mb-4">
+                <div>
+                    <input type="text" id="editStreet" name="street" placeholder="Street" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="text" id="editBarangay" name="barangay" placeholder="Barangay" value="Santa Fe" readonly required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+
+            <!-- Row 7: Address (City, Province) -->
+            <div class="grid grid-cols-2 gap-2 mb-4">
+                <div>
+                    <input type="text" id="editCity" name="city" placeholder="City" value="Dasmariñas" readonly required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="text" id="editProvince" name="province" placeholder="Province" value="Cavite" readonly required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-4">
+                <input type="email" id="editEmail" name="email" placeholder="Email" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+
+            <!-- Buttons -->
+            <div class="flex justify-end gap-2">
+                <button type="submit" class="bg-green-800 text-white px-6 py-1 rounded-md hover:bg-green-700 text-sm">Save</button>
+                <button type="button" class="bg-gray-200 text-black px-6 py-1 rounded-md hover:bg-gray-400 text-sm" onclick="closeEditModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
+    
+    <!-- Script -->
+    <script src="public/styles/script.js"></script>
+    <script src="/public/js/sessionTimeout.js"></script>
+
+        <script>
+            // SEARCH
+            function searchResidents() {
+                // Get the search input value
+                const searchValue = document.querySelector('#searchInput').value.toLowerCase(); // Use correct selector
+
+                // Get the table rows
+                const rows = document.querySelectorAll('#resident-table-body tr');
+
+                // Loop through all rows and hide those that don't match the search query
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    const matches = Array.from(cells).some(cell => 
+                        cell.textContent.toLowerCase().includes(searchValue) // Search through text content
+                    );
+
+                    if (matches) {
+                        row.style.display = ''; // Show the row
+                    } else {
+                        row.style.display = 'none'; // Hide the row
+                    }
+                });
+            }
+
+            //User Popup details
+            // Function to toggle the user popup visibility
+            function toggleDropdown() {
+                const userPopup = document.getElementById('user-popup');
+                userPopup.classList.toggle('hidden'); // Toggle visibility on click
+            }
+
+            // Close the popup if click is outside of the user popup
+            document.addEventListener('click', function(event) {
+                const userPopup = document.getElementById('user-popup');
+                const userIcon = document.getElementById('resident-profile-pic');
+
+                // If the click is outside the popup and the user icon, close the popup
+                if (
+                    !userPopup.contains(event.target) && 
+                    event.target !== userIcon && 
+                    !userIcon.contains(event.target)
+                ) {
+                    userPopup.classList.add('hidden'); // Hide the popup
+                }
+            });
+
+            // CALCULATE AGE NAG IINCREMENT EACH YEAR
+            function calculateAge(birthdate) {
+            const today = new Date();  // Get the current date
+            const birthDate = new Date(birthdate);  // Convert birthdate to Date object
+            let age = today.getFullYear() - birthDate.getFullYear();  // Calculate the difference in years
+            const monthDiff = today.getMonth() - birthDate.getMonth();  // Calculate the difference in months
+
+            // If the current month is earlier than the birth month or it's the birth month but the day hasn't come yet, subtract one year
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+            //Update Resident Age
+            function updateResidentAge() {
+                // Assuming you have an array of residents data (with birthdates) or fetch it from an API
+                fetch('/residents')  // Example of fetching resident data
+                    .then(response => response.json())
+                    .then(residents => {
+                        // Loop through each resident and update their age dynamically
+                        residents.forEach(resident => {
+                            const age = calculateAge(resident.birthdate);  // Calculate age based on their birthdate
+                            
+                            // Assuming each resident is in a row and you want to display the age in a specific table column
+                            const ageElement = document.getElementById(`age-${resident._id}`);  // Assuming you have an element with id age-residentId
+                            if (ageElement) {
+                                ageElement.textContent = age;  // Update the text content of the age element
+                            }
+                        });
+                    })
+                    .catch(error => console.error('Error fetching residents:', error));
+            }
+
+            // Call the updateResidentAge function when the page loads
+            document.addEventListener('DOMContentLoaded', function () {
+                fetchTotalProcessingRequests();
+                fetchTotalProcessingComplaints();
+                fetchProcessingBarangayID();
+                updateResidentAge();  // Recalculate and update the age for all residents
+            });
+
+            // CALCULATE AGE SA EDIT
+            document.getElementById('editBirthdate').addEventListener('change', function () {
+                const birthdate = this.value;
+                const age = calculateAge(birthdate);
+                document.getElementById('editAge').value = age;
+            });
+
+            // YEARS RESIDING INCREMENT EACH YEAR
+            function calculateYearsResiding(startDate) {
+                const today = new Date();
+                const start = new Date(startDate);
+
+                let yearsResiding = today.getFullYear() - start.getFullYear();
+                const monthDiff = today.getMonth() - start.getMonth();
+                const dayDiff = today.getDate() - start.getDate();
+
+                // Check if the current month and day are earlier than the start date month and day
+                if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+                    yearsResiding--;
+                }
+
+                return yearsResiding;
+            }
+
+            // Add this code for Start Date -> Years Residing calculation
+            document.getElementById('addStartDate').addEventListener('change', function() {
+                const startDate = this.value;
+                const yearsResiding = calculateYearsResiding(startDate);
+                document.getElementById('addYearsResiding').value = yearsResiding;
+            });
+
+                //EDIT START DATE
+                document.getElementById('editStartDate').addEventListener('change', function() {
+                const startDate = this.value;
+                const yearsResiding = calculateYearsResiding(startDate);
+                document.getElementById('editYearsResiding').value = yearsResiding;
+            });
+
+            // Automatically update age when birthdate is entered
+            document.getElementById('addBirthdate').addEventListener('change', function () {
+                const birthdate = this.value;
+                const age = calculateAge(birthdate);
+                document.getElementById('addAge').value = age;
+            });
+
+            // Add Modal
+            function openModal() {
+                document.getElementById("addModal").style.display = "block";
+            }
+
+            function closeModal() {
+                document.getElementById("addModal").style.display = "none";
+            }
+
+            function openEditModal(id) {
+            fetch(`/residents/${id}`)
+                .then(response => response.json())
+                .then(resident => {
+                    console.log(resident);  // Debugging to verify the data structure
+            
+            // Set field values only if the elements exist
+            if (document.getElementById('editFirstname')) {
+                document.getElementById('editFirstname').value = resident.Firstname || '';
+            }
+            if (document.getElementById('editMiddlename')) {
+                document.getElementById('editMiddlename').value = resident.Middlename || '';
+            }
+            if (document.getElementById('editLastname')) {
+                document.getElementById('editLastname').value = resident.Lastname || '';
+            }
+            if (document.getElementById('editBirthdate')) {
+                document.getElementById('editBirthdate').value = resident.birthdate || '';
+            }
+            if (document.getElementById('editAge')) {
+                document.getElementById('editAge').value = resident.age || '';
+            }
+            if (document.getElementById('editGender')) {
+                document.getElementById('editGender').value = resident.gender || '';
+            }
+            if (document.getElementById('editCivilStatus')) {
+                document.getElementById('editCivilStatus').value = resident.civilstatus || '';
+            }
+            if (document.getElementById('editPwdSenior')) {
+                document.getElementById('editPwdSenior').value = resident["PWD/Senior"] || 'N/A';
+            }
+            if (document.getElementById('editVoterStatus')) {
+                document.getElementById('editVoterStatus').value = resident["Voter Status"] || '';
+            }
+            if (document.getElementById('editContactNumber')) {
+             document.getElementById('editContactNumber').value = resident["Contact Number"] || '';
+            }
+            if (resident.Address) {
+            const addressParts = resident.Address.split(', ');
+            if (addressParts.length >= 6) {
+                document.getElementById('editBlk').value = addressParts[0].replace('Blk ', '') || '';
+                document.getElementById('editLot').value = addressParts[1].replace('Lot ', '') || '';
+                document.getElementById('editStreet').value = addressParts[2] || '';
+                document.getElementById('editBarangay').value = addressParts[3] || '';
+                document.getElementById('editCity').value = addressParts[4] || '';
+                document.getElementById('editProvince').value = addressParts[5] || '';
+            }
+        }
+
+            if (document.getElementById('editEmail')) {
+                document.getElementById('editEmail').value = resident["e-mail"] || '';
+            }
+            if (document.getElementById('editYearsResiding')) {
+            document.getElementById('editYearsResiding').value = resident.yearsresiding || '';
+            }
+            if (resident.startDate) {
+                document.getElementById('editStartDate').value = new Date(resident.startDate).toISOString().split('T')[0]; // Ensure the date is formatted correctly
+            }
+
+            // Store the resident's ID in a hidden input for later use
+            let hiddenIdInput = document.getElementById('editResidentId');
+            if (!hiddenIdInput) {
+                hiddenIdInput = document.createElement('input');
+                hiddenIdInput.type = 'hidden';
+                hiddenIdInput.id = 'editResidentId';
+                document.getElementById('editForm').appendChild(hiddenIdInput);
+            }
+            hiddenIdInput.value = resident._id;
+
+            document.getElementById("editModal").style.display = "block";
+        })
+        .catch(error => console.error('Error fetching resident details:', error));
+}
+
+            function closeEditModal() {
+                document.getElementById("editModal").style.display = "none";
+                // Remove the hidden input to avoid duplicates
+                const hiddenIdInput = document.getElementById('editResidentId');
+                if (hiddenIdInput) {
+                    hiddenIdInput.remove();
+                }
+            }
+
+            function submitEditForm(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('editForm');
+            const formData = new FormData(form); // Handles both fields + file
+            const id = document.getElementById('editResidentId').value;
+
+            fetch(`/residents/${id}`, {
+                method: 'PUT',
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                closeEditModal();
+                fetchResidents();
+                } else {
+                alert(data.message || 'Update failed');
+                }
+            })
+            .catch(err => console.error('Error updating resident:', err));
+            }
+
+            function deleteResident(id) {
+            if (confirm("Are you sure you want to delete this resident?")) {
+                fetch(`/residents/${id}`, {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (response.ok) {
+                        fetchResidents(); // Refresh the residents table after deletion
+                    } else {
+                        alert('Failed to delete resident');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error deleting resident:', error);
+                });
+            }
+        }
+
+            // Fetch Residents
+            // On fetch residents
+function fetchResidents() {
+    fetch('/residents')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(residents => {
+            const tableBody = document.querySelector('#resident-table-body');
+            tableBody.innerHTML = ''; // Clear any existing rows
+
+            residents.forEach(resident => {
+                const age = calculateAge(resident.birthdate); // Dynamically calculate age
+                const yearsResiding = calculateYearsResiding(resident.startDate); // Calculate years residing dynamically
+
+                const row = document.createElement('tr');
+                row.classList.add('border-b', 'border-gray-300');  // Add bottom border for each row
+                row.innerHTML = `
+                    <td class="px-4 py-2">
+                        <img src="${resident.Profilepic}" alt="Picture" class="w-12 h-12 object-cover">
+                    </td>
+                    <td class="px-4 py-2">${resident.Firstname} ${resident.Middlename} ${resident.Lastname}</td>
+                    <td class="px-4 py-2">${resident.birthdate}</td>
+                    <td class="px-4 py-2">${age}</td> <!-- Use calculated age -->
+                    <td class="px-4 py-2">${resident.gender}</td>
+                    <td class="px-4 py-2">${resident.civilstatus}</td>
+                    <td class="px-4 py-2">${resident["PWD/Senior"]}</td>
+                    <td class="px-4 py-2">${resident["Voter Status"]}</td>
+                    <td class="px-4 py-2">${resident["Contact Number"]}</td>
+                    <td class="px-4 py-2">${resident["e-mail"]}</td>
+                    <td class="px-4 py-2">${resident.Address}</td>
+                    <td class="px-4 py-2">${resident.yearsresiding}</td> 
+                    <td class="px-4 py-2"><div class="flex items-center space-x-1">
+                        <a href="#"><img src="https://www.dropbox.com/scl/fi/u6i83geituweeaybi8y9w/pen.png?rlkey=5f7vjmsrn42d1t0iaxdu3jbjy&st=0sk8r60h&dl=1" alt="Edit" class="edit-icon" onclick="openEditModal('${resident._id}')"></a>
+                        <a href="#"><img src="https://www.dropbox.com/scl/fi/ho6y40rqr930v22ja9219/delete.png?rlkey=b1xjg0s1v3rnrgjx1n5v2usgm&st=xgbxk20f&dl=1" alt="Delete" class="delete-icon" onclick="deleteResident('${resident._id}')"></a>
+                        <a href="resident-details.html?id=${resident._id}"><img src="https://www.dropbox.com/scl/fi/htv0k6jfdgwb5jd1j5chz/right-arrow.png?rlkey=9vigkl2f1vzdq86892hruea3d&st=s63pgtou&dl=1" alt="Details" class="view-icon"></a>
+                    </div></td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching residents:', error));
+}
+
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('addForm').addEventListener('submit', submitAddForm);
+                document.getElementById('editForm').addEventListener('submit', submitEditForm);
+                fetchResidents(); // Fetch and display residents on page load
+            });
+
+            function submitAddForm(event) {
+            event.preventDefault();
+
+            const form = document.getElementById('addForm');
+            const formData = new FormData(form); // includes image + fields
+
+            fetch('/residents', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                form.reset();
+                closeModal();
+                fetchResidents();
+                } else {
+                alert(data.message);
+                }
+            })
+            .catch(error => console.error('Error adding resident:', error));
+            }
+
+            // Close the modal when the user clicks anywhere outside of it
+            window.onclick = function(event) {
+                if (!event.target.matches('.dropbtn') && !event.target.closest('.modal-content')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-content");
+                    for (var i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                    }
+
+                    var addModal = document.getElementById("addModal");
+                    var editModal = document.getElementById("editModal");
+                    if (event.target == addModal) {
+                        addModal.style.display = "none";
+                    }
+                    if (event.target == editModal) {
+                        editModal.style.display = "none";
+                        const hiddenIdInput = document.getElementById('editResidentId');
+                        if (hiddenIdInput) {
+                            hiddenIdInput.remove();
+                        }
+                    }
+                }
+            }
+        
+          //side notification count
+// Function to fetch total count of "Processing" requests across all collections
+function fetchTotalProcessingRequests() {
+    fetch('/count-all-processing-requests')
+        .then(response => response.json())
+        .then(data => {
+            const sidebarNotif = document.getElementById('sidebarNotif');
+            if (data.totalCount > 0) {
+                sidebarNotif.textContent = data.totalCount; // Show total count
+                sidebarNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                sidebarNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching total processing count:', error));
+}
+
+        function fetchTotalProcessingComplaints() {
+    fetch('/complaint-counts')
+        .then(response => response.json())
+        .then(data => {
+            const total =
+                (data.blotterCount || 0) +
+                (data.blotterKasunduanCount || 0) +
+                (data.luponCount || 0) +
+                (data.luponKasunduanCount || 0) +
+                (data.cfaCount || 0);
+
+            const complaintsNotif = document.getElementById('complaintsNotif');
+            if (complaintsNotif) {
+                complaintsNotif.textContent = total;
+                complaintsNotif.style.display = total > 0 ? 'inline-flex' : 'none';
+            }
+        })
+        .catch(error => console.error('Error fetching complaint counts:', error));
+}
+
+function fetchProcessingBarangayID() {
+    fetch('/count-processing-barangay-id')
+        .then(response => response.json())
+        .then(data => {
+            const barangayIDNotif = document.getElementById('barangayIDNotif');
+            if (data.barangayIdCount > 0) {
+                barangayIDNotif.textContent = data.barangayIdCount; // Show total count
+                barangayIDNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                barangayIDNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching Barangay ID count:', error));
+}
+
+            //Top right Profile Picture
+            function fetchAdminProfilePicture() {
+                fetch('/admin-details-data')
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        const profilePicElement = document.getElementById('resident-profile-pic');
+                        if (data.Profilepic) {
+                            profilePicElement.src = data.Profilepic;
+                        }
+                    })
+                    .catch(error => console.error('Error fetching profile picture:', error));
+            }   
+            document.addEventListener('DOMContentLoaded', function() {
+                            fetchAdminProfilePicture();
+                            fetchTotalProcessingRequests();
+                        fetchTotalProcessingComplaints();
+                        fetchProcessingBarangayID();
+                    });
+        </script>
+</body>
+</html>

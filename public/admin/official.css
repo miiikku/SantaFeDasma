@@ -1,0 +1,338 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 250px; /* Fixed width */
+    min-width: 250px; /* Ensure it doesn't shrink */
+    background-color: #2c662d;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Ensure it takes full height */
+}
+.sidebar .Logo {
+    width: 100px;
+    margin-bottom: 20px;
+}
+.sidebar h1 {
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.sidebar .sidenav {
+    margin-top: 30px;
+    flex-grow: 1; /* Ensure it grows to fill the space */
+}
+.sidebar .sidenav ul {
+    padding: 0;
+    list-style: none;
+}
+.sidebar .sidenav ul li {
+    padding: 20px 0;
+    border-radius: 15px;
+    font-weight: bold;
+}
+.sidebar .sidenav ul li:hover {
+    background-color: #8fb98e;
+}
+.sidebar .sidenav ul li:hover a {
+    color: black;
+}
+.sidebar .sidebar-link {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.sidebar .sidebar-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+.sidebar .sidenav ul li a img {
+    transition: transform 0.3s ease;
+}
+.sidebar .sidenav ul li a:hover img {
+    transform: scale(1.5);
+    filter: brightness(0.100);
+}
+
+/* MAIN */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f1f1f1;
+    box-sizing: border-box;
+    overflow-y: auto; /* Ensure the content can scroll if it overflows */
+}
+.header {
+    background-color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    border-radius: 8px;
+}
+.header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+.header .user-info {
+    display: flex;
+    align-items: center;
+}
+.header .user-info img {
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+/* LOGOUT DROPDOWN */
+.dropdown {
+    position: relative;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%; /* Align the dropdown below the button */
+    right: 0; /* Align the dropdown to the right */
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 8px;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+.show {
+    display: block;
+}
+
+/* USER AND ADMIN ACCOUNT */
+.account-content {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 20px;
+}
+
+/* SEARCH AND ACTIONS */
+.search-and-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.search-box input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    margin-right: 10px;
+}
+
+.filter-box select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.account-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.account-table th, .account-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.account-table th {
+    background-color: #2c662d;
+    color: #fff;
+}
+
+.account-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+.account-actions .add-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007BFF;
+    color: white;
+}
+.account-actions .add-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Modal Adjustments */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.modal-content h2 {
+    text-align: center;
+    color: #2c662d;
+}
+
+.modal-content .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal-content .close:hover,
+.modal-content .close:focus {
+    color: #2c662d;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.modal-content textarea {
+    resize: none; /* Prevent resizing */
+}
+
+
+
+/* Floating Label Styles */
+.floating-label {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.floating-label input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.floating-label label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    font-size: 16px;
+    color: #aaa;
+    background-color: #fff;
+    padding: 0 5px;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #005f27;
+}
+
+.floating-label input:focus {
+    border-color: #005f27;
+    outline: none;
+}
+
+/* Form Layout */
+.form-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.form-row .floating-label {
+    flex: 1;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.button-container button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button-container .add-btn {
+    background-color: #007BFF;
+    color: white;
+}
+
+.button-container .add-btn:hover {
+    background-color: #0056b3;
+}
+
+.button-container .cancel-btn {
+    background-color: #FF0000;
+    color: white;
+}
+
+.button-container .cancel-btn:hover {
+    background-color: #b30000;
+}
+
+/* Error Message */
+.error-message {
+    color: red;
+    font-size: 12px;
+    display: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}

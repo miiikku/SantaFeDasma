@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter m-0 p-0 bg-gray-100 flex min-h-screen overflow-x-hidden">
+
+    <!-- Sidebar (Visible on larger screens) -->
+    <div class="sidebar w-80 bg-green-900 text-white p-4 flex flex-col justify-between h-auto hidden md:block">
+        <center>
+            <img src="https://www.dropbox.com/scl/fi/94o2cqiknm3a4dasbyz1q/sidebarlogo.png?rlkey=9suwtde1z2qk3ea73d64yt5he&st=13kmqf8k&dl=1" alt="Barangay Santa Fe Logo" class="w-36 mb-4">
+            <h1 class="text-sm text-center font-inter font-bold">BARANGAY SANTA FE<br>CITY OF DASMARIÑAS</h1>
+        </center>
+        <div class="sidenav mt-8 flex-grow">
+            <ul class="space-y-4">
+                <li><a href="dashboard.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/es7o8fr6dw2vkkywjpg66/dashboard.png?rlkey=pp0dy252j9wao81jpz1n50f4p&st=83lbnbnz&dl=1" class="w-5 h-5 ">
+                        <span class="ml-3">Dashboard</span></a></li>
+                
+                <li><a href="notification.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/te9qkrjtunarm8znvfs1w/notification.png?rlkey=kqzy50yimgtro1l8caiqnqbua&st=4zuvr1p0&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Notification</span></a></li>
+
+                <li><a href="user-account.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccount.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=4ko3y2wy&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">User Account</span></a></li>
+
+                <li><a href="residents.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/e57yqafcdt0z58wbgvv9e/residents.png?rlkey=wcqigcrhwveax3qubldx0qaql&st=np6th3hf&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Residents</span></a></li>
+
+                <li class="relative">
+                    <a href="complaints.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/kbs0xnrc9usw40lv30clw/scales-of-justice.png?rlkey=d36ewu4dge121egpw53qri8mf&st=r04p7f12&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Complaints</span></a>
+                        <span id="complaintsNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+
+                <li class="relative">
+                    <a href="barangay-id.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Barangay ID</span></a>
+                        <span id="barangayIDNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+
+                <li class="relative">
+                    <a href="request.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/idqomcr0ujnsmd54ktpu5/quote-request.png?rlkey=swquji94hs61jlr8y0p992s0n&st=vkr8y4i7&dl=1" class="w-5 h-5">
+                        <span class="ml-3">Requests</span></a>
+                        <span id="sidebarNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+                
+                <li><a href="module.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                    <img src="https://www.dropbox.com/scl/fi/olqdewf6h2pi148jw0j2p/maintenance.png?rlkey=5rnv8iajpbytp799jgyvs6cqa&st=dn26ng5a&dl=1" class="w-5 h-5">
+                    <span class="ml-3">Maintenance</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Menu (for smaller screens) -->
+    <div id="bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 bg-green-900 text-white p-3 font-inter">
+        <div class="flex overflow-x-auto space-x-6 px-4 py-2">
+            <!-- Dashboard Icon -->
+            <a href="dashboard.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/es7o8fr6dw2vkkywjpg66/dashboard.png?rlkey=pp0dy252j9wao81jpz1n50f4p&st=83lbnbnz&dl=1" class="w-6 h-6">
+                <span class="text-xs">Dashboard</span>
+            </a>
+            <!-- Notification Icon -->
+            <a href="notification.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/te9qkrjtunarm8znvfs1w/notification.png?rlkey=kqzy50yimgtro1l8caiqnqbua&st=4zuvr1p0&dl=1" class="w-6 h-6">
+                <span class="text-xs">Notification</span>
+            </a>
+            <!-- User Account Icon -->
+            <a href="user-account.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccount.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=4ko3y2wy&dl=1" class="w-6 h-6">
+                <span class="text-xs">Account</span>
+            </a>
+            <!-- Residents Icon -->
+            <a href="residents.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/e57yqafcdt0z58wbgvv9e/residents.png?rlkey=wcqigcrhwveax3qubldx0qaql&st=np6th3hf&dl=1" class="w-6 h-6">
+                <span class="text-xs">Residents</span>
+            </a>
+            <!-- Complaints Icon -->
+            <a href="complaints.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/kbs0xnrc9usw40lv30clw/scales-of-justice.png?rlkey=d36ewu4dge121egpw53qri8mf&st=r04p7f12&dl=1" class="w-6 h-6">
+                <span class="text-xs">Complaints</span>
+            </a>
+            <!-- Barangay ID Icon -->
+            <a href="barangay-id.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" class="w-6 h-6">
+                <span class="text-xs">ID</span>
+            </a>
+            <!-- Requests Icon -->
+            <a href="request.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/idqomcr0ujnsmd54ktpu5/quote-request.png?rlkey=swquji94hs61jlr8y0p992s0n&st=vkr8y4i7&dl=1" class="w-6 h-6">
+                <span class="text-xs">Requests</span>
+            </a>
+            <!-- Maintenance Icon -->
+            <a href="module.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/olqdewf6h2pi148jw0j2p/maintenance.png?rlkey=5rnv8iajpbytp799jgyvs6cqa&st=dn26ng5a&dl=1" class="w-6 h-6">
+                <span class="text-xs">Maintenance</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content flex-grow p-6 bg-gray-100 max-w-full pb-24">
+        <div class="header flex justify-between items-center bg-white p-4 shadow-md rounded-xl">
+            <h2 class="text-2xl font-semibold">Admin Details</h2>
+            <div class="user-info flex items-center space-x-4">
+                <!-- User Avatar -->
+                <div class="dropdown relative">
+                    <img id="resident-profile-pic" src="" 
+                         alt="User Avatar" 
+                         class="w-8 h-8 rounded-full cursor-pointer" onclick="toggleDropdown()">
+                
+                    <!-- User Profile Popup -->
+                    <div id="user-popup" class="user-popup hidden absolute right-0 top-10 bg-white shadow-lg p-4 rounded-lg w-64 border border-gray-200">
+                        <div class="user-header flex justify-between items-center border-b border-gray-300 pb-2 mb-3">
+                            <span class="text-lg font-semibold text-gray-800">Admin Options</span>
+                            <span class="close-btn cursor-pointer font-bold text-xl text-gray-600 hover:text-gray-800" onclick="toggleDropdown()">&times;</span>
+                        </div>
+                        <div class="user-content space-y-2">
+                            <a href="admin-details.html" class="block text-gray-800 hover:text-green-600 transition-colors duration-200">User Profile</a>
+                            <a href="module.html" class="block text-gray-800 hover:text-yellow-600 transition-colors duration-200">Maintenance</a>
+                            <a href="#" onclick="logout()" class="block text-gray-800 hover:text-red-600 transition-colors duration-200">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content --> 
+        <main class="flex-grow p-6 sm:p-8">
+            <section class="user-profile bg-white p-6 sm:p-8 rounded-2xl shadow-lg max-w-2xl mx-auto text-sm tracking-tight">
+                
+                <!-- Profile Header -->
+                <div class="profile-header flex items-center gap-4 sm:gap-6 mb-6">
+                    <img id="resident-profilepic" src="" alt="Profile Picture"
+                        class="rounded-full w-20 h-20 sm:w-24 sm:h-24 border-4 border-green-600 shadow-md">
+                    <div>
+                        <h1 id="resident-name" class="text-lg sm:text-xl font-bold text-green-800">Loading...</h1>
+                    </div>
+                </div>
+
+        <!-- Profile Details -->
+        <div class="profile-details space-y-3">
+            <!-- Each detail group -->
+            <div class="detail-group flex justify-between py-1">
+                <span class="font-semibold text-gray-700 w-1/3">Name:</span>
+                <span id="resident-name-detail" class="text-gray-900 w-2/3">Loading...</span>
+            </div>
+            <div class="detail-group flex justify-between py-1">
+                <span class="font-semibold text-gray-700 w-1/3">Voter Status:</span>
+                <span id="resident-voterstatus" class="text-gray-900 w-2/3">Loading...</span>
+            </div>
+            <div class="detail-group flex justify-between py-1">
+                <span class="font-semibold text-gray-700 w-1/3">PWD/Senior:</span>
+                <span id="resident-pwdsenior" class="text-gray-900 w-2/3">Loading...</span>
+            </div>
+            <div class="detail-group flex justify-between py-1">
+                <span class="font-semibold text-gray-700 w-1/3">Address:</span>
+                <span id="resident-address" class="text-gray-900 w-2/3">Loading...</span>
+            </div>
+            <div class="detail-group flex justify-between py-1">
+                <span class="font-semibold text-gray-700 w-1/3">Age:</span>
+                <span id="resident-age" class="text-gray-900 w-2/3">Loading...</span>
+            </div>
+            <div class="detail-group flex justify-between py-1">
+                <span class="font-semibold text-gray-700 w-1/3">Starting Date of Residency:</span>
+                <span id="resident-startdate" class="text-gray-900 w-2/3">Loading...</span>
+            </div>
+            <div class="detail-group flex justify-between py-1">
+                <span class="font-semibold text-gray-700 w-1/3">Birthdate:</span>
+                <span id="resident-birthdate" class="text-gray-900 w-2/3">Loading...</span>
+            </div>
+            <div class="detail-group flex justify-between py-1">
+                <span class="font-semibold text-gray-700 w-1/3">Years Residing:</span>
+                <span id="resident-yearsresiding" class="text-gray-900 w-2/3">Loading...</span>
+            </div>
+            <div class="detail-group flex justify-between py-1">
+                <span class="font-semibold text-gray-700 w-1/3">Gender:</span>
+                <span id="resident-gender" class="text-gray-900 w-2/3">Loading...</span>
+            </div>
+            <div class="detail-group flex justify-between py-1">
+                <span class="font-semibold text-gray-700 w-1/3">Contact Number:</span>
+                <span id="resident-contactnumber" class="text-gray-900 w-2/3">Loading...</span>
+            </div>
+            <div class="detail-group flex justify-between py-1">
+                <span class="font-semibold text-gray-700 w-1/3">Civil Status:</span>
+                <span id="resident-civilstatus" class="text-gray-900 w-2/3">Loading...</span>
+            </div>
+            <div class="detail-group flex justify-between py-1">
+                <span class="font-semibold text-gray-700 w-1/3">Email:</span>
+                <span id="resident-email" class="text-gray-900 w-2/3">Loading...</span>
+            </div>
+        </div>
+    </section>
+</main>
+
+    <!-- Script -->
+    <script src="public/styles/script.js"></script>
+    <script src="/public/js/sessionTimeout.js"></script>
+
+    <script>
+        // Fetch all admin details and handle profile + notifications
+        function fetchAdminDetails() {
+            fetch('/admin-details-data', {
+                method: 'GET',
+                credentials: 'include' // 🔐 ensures session cookie is sent with the request
+            })
+            .then(response => {
+                if (!response.ok) {
+                    if (response.status === 401) {
+                        console.warn("Session expired. Redirecting to login.");
+                        window.location.href = "/login";
+                    }
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(admin => {
+                if (!admin) return;
+
+        // Profile Picture (used in both top right and profile section)
+        const avatarEl = document.getElementById('resident-avatar');
+        if (avatarEl && admin.Profilepic) {
+            avatarEl.src = admin.Profilepic;
+        }
+        const profilePicEl = document.getElementById('resident-profilepic');
+        if (profilePicEl && admin.Profilepic) {
+            profilePicEl.src = admin.Profilepic;
+        }
+
+        // Display name and optional username
+        const nameEl = document.getElementById('resident-name');
+        if (nameEl) {
+            nameEl.textContent = `${admin.Firstname} ${admin.Middlename} ${admin.Lastname}`;
+        if (admin.username) {
+            const usernameElement = document.createElement('p');
+            usernameElement.innerHTML = `<strong>Username:</strong> ${admin.username}`;
+            nameEl.appendChild(usernameElement);
+            }
+        }        
+    
+                // Fill profile fields if elements exist
+                const fieldMap = {
+                    'resident-lastname': admin.Lastname,
+                    'resident-firstname': admin.Firstname,
+                    'resident-middlename': admin.Middlename,
+                    'resident-age': admin.age,
+                    'resident-birthdate': admin.birthdate,
+                    'resident-gender': admin.gender,
+                    'resident-civilstatus': admin.civilstatus,
+                    'resident-voterstatus': admin["Voter Status"],
+                    'resident-pwdsenior': admin["PWD/Senior"],
+                    'resident-address': admin.Address,
+                    'resident-startdate': admin.startDate,
+                    'resident-yearsresiding': admin.yearsresiding,
+                    'resident-contactnumber': admin["Contact Number"],
+                    'resident-email': admin["e-mail"],
+                    'resident-name-detail': `${admin.Firstname} ${admin.Middlename} ${admin.Lastname}`,
+                    'resident-username': `Username: ${admin.username}`
+                };
+    
+                for (const id in fieldMap) {
+                    const el = document.getElementById(id);
+                    if (el) el.textContent = fieldMap[id] || 'N/A';
+                }
+            })
+            .catch(error => console.error('Error fetching admin details:', error));
+        }
+    
+        // Notifications: request, complaint, barangay ID
+        function fetchTotalProcessingRequests() {
+            fetch('/count-all-processing-requests')
+                .then(res => res.json())
+                .then(data => {
+                    const el = document.getElementById('sidebarNotif');
+                    if (el) {
+                        el.textContent = data.totalCount;
+                        el.style.display = data.totalCount > 0 ? 'inline-block' : 'none';
+                    }
+                })
+                .catch(err => console.error('Error fetching total processing requests:', err));
+        }
+    
+        function fetchTotalProcessingComplaints() {
+        fetch('/complaint-counts')
+            .then(res => res.json())
+            .then(data => {
+                const total =
+                    (data.blotterCount || 0) +
+                    (data.blotterKasunduanCount || 0) +
+                    (data.luponCount || 0) +
+                    (data.luponKasunduanCount || 0) +
+                    (data.cfaCount || 0);
+
+                const el = document.getElementById('complaintsNotif');
+                if (el) {
+                    el.textContent = total;
+                    el.style.display = total > 0 ? 'inline-block' : 'none';
+                }
+            })
+            .catch(err => console.error('Error fetching total complaints:', err));
+        }
+
+        function fetchProcessingBarangayID() {
+            fetch('/count-processing-barangay-id')
+                .then(res => res.json())
+                .then(data => {
+                    const el = document.getElementById('barangayIDNotif');
+                    if (el) {
+                        el.textContent = data.barangayIdCount;
+                        el.style.display = data.barangayIdCount > 0 ? 'inline-block' : 'none';
+                    }
+                })
+                .catch(err => console.error('Error fetching Barangay ID count:', err));
+        }
+    
+        // Run all on DOM ready
+        document.addEventListener('DOMContentLoaded', function () {
+            fetchAdminDetails();
+            fetchTotalProcessingRequests();
+            fetchTotalProcessingComplaints();
+            fetchProcessingBarangayID();
+        });
+    </script>  
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Blotter</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/styles/styles.css">
+    <style>
+        .blotter-container {
+            padding: 20px;
+            margin: 0 auto;
+            font-family: 'Century Gothic', serif;
+            font-size: 12pt;
+            position: relative;
+        }
+        .date-time {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            text-align: right;
+            font-size: 16px;
+        }
+        .blotter-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .blotter-header h4 {
+            font-weight: bold;
+        }
+        .blotter-body {
+            margin: 20px 0;
+            text-align: justify;
+        }
+        .blotter-body p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+        .name-block {
+            margin-top: 40px;
+            font-size: 18px;
+        }
+        .name-block p {
+            margin: 5px 0;
+        }
+        .label {
+            font-weight: bold;
+        }
+        .export-print-buttons {
+            margin: 20px 0;
+            text-align: right;
+        }
+        .export-print-buttons button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .export-print-buttons .export-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .export-print-buttons .print-btn {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        @media print {
+            .sidebar, .header, .export-print-buttons {
+                display: none;
+            }
+            .blotter-container {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                border: none;
+            }
+        }
+
+        .header-barangay {
+        background: linear-gradient(to bottom, #9cf4a1, #b2d7b5) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .header-barangay img {
+        display: block !important;
+    }
+
+    .header-barangay {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    background: linear-gradient(to bottom, #9cf4a1, #b2d7b5);
+    padding: 10px 0;
+    margin-bottom: 10px;
+    border-bottom: 3px solid black;
+    font-family: 'Arial', sans-serif;
+}
+
+.header-barangay h1 {
+    font-size: 16pt;
+    font-weight: bold;
+    margin: 0;
+    font-family: 'Georgia', serif;
+    margin-left: 110px;
+    text-align: left;
+}
+
+.header-barangay h2 {
+    font-size: 12pt;
+    margin: 0;
+    font-family: 'Georgia', serif;
+    margin-left: 110px;
+    text-align: left;
+}
+
+.header-barangay h3 {
+    font-size: 16pt;
+    margin: 5px 0 0 0;
+    color: green;
+    text-transform: uppercase;
+    font-family: 'Georgia', serif;
+    margin-right: 75px;
+    text-align: right;
+}
+
+.header-barangay img {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    width: 90px;
+}
+
+.header-two-logo {
+    position: absolute;
+    right: 250px;
+    top: 1px;
+}
+
+.header-two-logo img {
+    width: 120px;
+    height: auto;
+}
+
+.labelRepublika {
+    font-family: 'Century Gothic', serif;
+            font-size: 12pt;
+    
+}
+
+.footer-picture {
+    text-align: center;
+}
+
+.footer-picture img {
+    width: 70%;  /* Same as the font size of header-barangay h3 */
+    height: auto; /* Keep aspect ratio */
+    display: inline-block;
+}
+      
+.sidebar-notif {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 7px;
+    border-radius: 50%;
+    margin-left: 50px;
+}
+
+.sidebar-notif2 {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 7px;
+    border-radius: 50%;
+    margin-left: 40px;
+}
+
+.sidebar-notif3 {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 7px;
+    border-radius: 50%;
+    margin-left: 35px;
+}
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <center>
+            <img src="https://www.dropbox.com/scl/fi/94o2cqiknm3a4dasbyz1q/sidebarlogo.png?rlkey=9suwtde1z2qk3ea73d64yt5he&st=13kmqf8k&dl=1" class="Logo">
+            <h1>BARANGAY SANTA FE<br>CITY OF DASMARIÑAS</h1>
+        </center>
+        <div class="sidenav">
+            <ul>
+                <li><a href="dashboard.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/es7o8fr6dw2vkkywjpg66/dashboard.png?rlkey=pp0dy252j9wao81jpz1n50f4p&st=83lbnbnz&dl=1" class="sidebar-icon">Dashboard</a></li>
+                <li><a href="notification.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/te9qkrjtunarm8znvfs1w/notification.png?rlkey=kqzy50yimgtro1l8caiqnqbua&st=4zuvr1p0&dl=1" class="sidebar-icon">Notification</a></li>
+                <li><a href="user-account.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccount.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=4ko3y2wy&dl=1" class="sidebar-icon">User Account</a></li>
+                <li><a href="residents.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/e57yqafcdt0z58wbgvv9e/residents.png?rlkey=wcqigcrhwveax3qubldx0qaql&st=np6th3hf&dl=1" class="sidebar-icon">Residents</a></li>
+                <li>
+                    <a href="complaints.html" class="sidebar-link">
+                        <img src="https://www.dropbox.com/scl/fi/kbs0xnrc9usw40lv30clw/scales-of-justice.png?rlkey=d36ewu4dge121egpw53qri8mf&st=r04p7f12&dl=1" class="sidebar-icon">
+                        Complaints
+                        <span id="complaintsNotif" class="sidebar-notif2" style="display: none;">0</span>
+                    </a>
+                </li>                
+                <li>
+                    <a href="barangay-id.html" class="sidebar-link">
+                        <img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" class="sidebar-icon">
+                        Barangay ID
+                        <span id="barangayIDNotif" class="sidebar-notif3" style="display: none;">0</span>
+                    </a>
+                </li>                               
+                <li>
+                    <a href="request.html" class="sidebar-link">
+                        <img src="https://www.dropbox.com/scl/fi/idqomcr0ujnsmd54ktpu5/quote-request.png?rlkey=swquji94hs61jlr8y0p992s0n&st=vkr8y4i7&dl=1" class="sidebar-icon">
+                        Requests
+                        <span id="sidebarNotif" class="sidebar-notif" style="display: none;">0</span>
+                    </a>
+                </li>
+                <li><a href="module.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/olqdewf6h2pi148jw0j2p/maintenance.png?rlkey=5rnv8iajpbytp799jgyvs6cqa&st=9qpfgd82&dl=1" class="sidebar-icon">Maintenance</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <div class="main-content">
+        <div class="header">
+            <h2>Generate Blotter</h2>
+            <div class="user-info">
+                <div class="dropdown">
+                    <img id="resident-profile-pic" src=""  alt="User Avatar" class="dropbtn" onclick="toggleDropdown()">
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="admin-details.html" onclick="viewProfile()">User Profile</a>
+                        <a href="module.html">Maintenance</a>
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-barangay">
+            <img src="https://www.dropbox.com/scl/fi/14aqli76v3qnysocj1xin/generateLOGO.png?rlkey=q5nxwu5nh94lekglr8p55z01g&st=nph69ivj&dl=1" alt="Barangay Logo">
+            <h2>Republic of the Philippines</h2>
+            <h2>Province of Cavite</h2>
+            <h1>City of Dasmariñas</h1>
+            <div class="separator-line"></div>
+            <div class="header-two-logo">
+                <img src="https://www.dropbox.com/scl/fi/zp2ptp9efgo3thn7jgdtj/FINALheadertwo.png?rlkey=nzvg8dca2lygkjp0r9ruq4ay9&st=8siirakz&dl=1" style="float: right" alt="Barangay Two Logo">
+            </div>
+            <h3>BARANGAY STA. FE</h3>
+        </div>
+    
+        <div class="blotter-container">
+            <div class="date-time">
+                <span id="blotterDate"></span><br>
+                <span id="blotterTime"></span>
+            </div>
+            <div class="blotter-header">
+                <div class="labelRepublika">
+                <br><br><h4>Republika ng Pilipinas Lalawigan ng Kabite</h4>
+                <h4>Lungsod ng Dasmariñas Barangay Santa Fe</h4>
+            </div>
+            </div>
+            <div class="blotter-body">
+                <br><p id="blotterText"></p>
+            </div>
+            <div class="name-block">
+                <p id="complainantName"></p>
+                <p class="label">Complainant's Name</p><br>
+
+                <p id="complaineeName"></p>
+                <p class="label">Complainee's Name</p><br>
+
+                <p id="justiceOnDuty"></p>
+                <p class="label">Justice on Duty</p><br>
+            </div>
+            <div class="footer-picture">
+                <img src="https://www.dropbox.com/scl/fi/ltjwk7iu4va0ly2lcmj2f/footerlogoFINAL.png?rlkey=fqxksz5ydcy44ftdgq57ygev7&st=231waivf&dl=1" class="center" alt="Footer Logo">
+            </div>
+        </div>
+
+        <div class="export-print-buttons">
+            <button class="export-btn" onclick="exportToPDF()">Export as PDF</button>
+            <button class="print-btn" onclick="window.print()">Print</button>
+        </div>
+    </div>
+    <script src="/public/js/sessionTimeout.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const params = new URLSearchParams(window.location.search);
+
+            document.getElementById('blotterDate').textContent = params.get('date');
+            document.getElementById('blotterTime').textContent = params.get('time');
+            document.getElementById('complainantName').textContent = params.get('complainants') || '';
+            document.getElementById('complaineeName').textContent = params.get('complainees') || '';
+            document.getElementById('blotterText').textContent = params.get('blotter');
+            document.getElementById('justiceOnDuty').textContent = params.get('justiceOnDuty');
+        });
+
+        function exportToPDF() {
+            const blotter = document.querySelector('.blotter-container');
+            const opt = {
+                margin:       0.5,
+                filename:     'BlotterDetails.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(blotter).set(opt).save();
+        }
+
+    // Toggle Dropdown
+    function toggleDropdown() {
+        var dropdown = document.getElementById("myDropdown");
+            if (dropdown) {
+                dropdown.classList.toggle("show");
+            } else {
+                console.error("Dropdown element not found");
+            }
+    }
+
+    function fetchAdminProfilePicture() {
+    fetch('/admin-details-data')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const profilePicElement = document.getElementById('resident-profile-pic');
+            if (data.Profilepic) {
+                profilePicElement.src = data.Profilepic;
+            }
+        })
+        .catch(error => console.error('Error fetching profile picture:', error));
+}   
+document.addEventListener('DOMContentLoaded', function() {
+                fetchAdminProfilePicture();
+                fetchTotalProcessingRequests();
+            fetchTotalProcessingComplaints();
+            fetchProcessingBarangayID();
+        });
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                }
+        }
+    }
+
+     //side notification count
+// Function to fetch total count of "Processing" requests across all collections
+function fetchTotalProcessingRequests() {
+    fetch('/count-all-processing-requests')
+        .then(response => response.json())
+        .then(data => {
+            const sidebarNotif = document.getElementById('sidebarNotif');
+            if (data.totalCount > 0) {
+                sidebarNotif.textContent = data.totalCount; // Show total count
+                sidebarNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                sidebarNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching total processing count:', error));
+}
+
+        function fetchTotalProcessingComplaints() {
+    fetch('/complaint-counts')
+        .then(response => response.json())
+        .then(data => {
+            const total =
+                (data.blotterCount || 0) +
+                (data.blotterKasunduanCount || 0) +
+                (data.luponCount || 0) +
+                (data.luponKasunduanCount || 0) +
+                (data.cfaCount || 0);
+
+            const complaintsNotif = document.getElementById('complaintsNotif');
+            if (complaintsNotif) {
+                complaintsNotif.textContent = total;
+                complaintsNotif.style.display = total > 0 ? 'inline-flex' : 'none';
+            }
+        })
+        .catch(error => console.error('Error fetching complaint counts:', error));
+}
+
+function fetchProcessingBarangayID() {
+    fetch('/count-processing-barangay-id')
+        .then(response => response.json())
+        .then(data => {
+            const barangayIDNotif = document.getElementById('barangayIDNotif');
+            if (data.barangayIdCount > 0) {
+                barangayIDNotif.textContent = data.barangayIdCount; // Show total count
+                barangayIDNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                barangayIDNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching Barangay ID count:', error));
+}
+    
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</body>
+</html>

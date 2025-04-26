@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barangay Santa Fe</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              inter: ['Inter', 'sans-serif']
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="font-inter m-0 p-0">
+    <!-- Header -->
+    <header class="bg-green-900 flex flex-col md:flex-row justify-between items-center p-4 relative">
+        <div class="mb-2 md:mb-0">
+            <img src="https://www.dropbox.com/scl/fi/fan2zv4s27rhmpd7gmtex/brgystafe.png?rlkey=exhrm1gcwkaik313g0r9al119&st=2j1m6lkb&dl=1" alt="Barangay Santa Fe Logo" class="h-20">
+        </div>
+
+        <!-- Navigation Menu for Desktop -->
+        <nav id="nav-menu" class="w-full md:w-auto md:flex md:gap-4 md:text-white md:font-bold md:text-sm md:tracking-wide justify-center px-4 hidden md:block">
+            <ul class="flex flex-row flex-wrap gap-4 text-white font-bold text-sm tracking-wide justify-center px-4">
+                <li><a href="home.html" class="hover:underline">HOME</a></li>
+                <li><a href="offices.html" class="hover:underline">OFFICES</a></li>
+                <li><a href="request-document.html" class="hover:underline">REQUEST DOCUMENT</a></li>
+                <li><a href="#about-section" class="hover:underline">ABOUT</a></li>
+                <li>
+                    <a href="#" id="user-icon-large">
+                        <img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccountWhite.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=07eppc1l&dl=1" alt="user-icon" class="w-5 h-5 rounded-full">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Bottom Navigation Menu (for smaller screens) -->
+    <div id="bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 bg-green-900 text-white p-3 flex justify-between items-center z-50">
+        <a href="home.html" class="text-white flex flex-col items-center">
+            <img src="https://www.dropbox.com/scl/fi/3tjxqwr2t3q0ukrejpmxo/home.png?rlkey=8bgfkys4b41atoditmzgr0nnu&st=diqx81gd&dl=1" class="w-6 h-6">
+            <span class="text-xs mt-1">Home</span>
+        </a>
+        <a href="offices.html" class="text-white flex flex-col items-center">
+            <img src="https://www.dropbox.com/scl/fi/uojsh4dfz5nrgxuv5w4gi/briefcase.png?rlkey=jrbggymeimeit6uljo4sckk8j&st=r0saupw7&dl=1" class="w-6 h-6">
+            <span class="text-xs mt-1">Offices</span>
+        </a>
+        <a href="request-document.html" class="text-white flex flex-col items-center">
+            <img src="https://www.dropbox.com/scl/fi/al2r2ujmkjeynpixrw0gd/google-docs-4.png?rlkey=0tdrfo5y05uimuc45nbgrcsqg&st=kcrekqtm&dl=1" class="w-6 h-6">
+            <span class="text-xs mt-1">Request</span>
+        </a>
+        <a href="#about-section" class="text-white flex flex-col items-center">
+            <img src="https://www.dropbox.com/scl/fi/1cbd3lleyhj1dvcjow5g1/info.png?rlkey=8npgc5r5ozjdg10746kf9wsol&st=r963bvwj&dl=1" class="w-6 h-6">
+            <span class="text-xs mt-1">About</span>
+        </a>
+        <a href="#" class="text-white flex flex-col items-center" id="user-icon-small">
+            <img src="https://www.dropbox.com/scl/fi/1xu3gg1oyp6gccvbymulh/user-2.png?rlkey=u8jb7s2tfha43mcan1hhlmbf3&st=krl9gh62&dl=1" class="w-6 h-6">
+            <span class="text-xs mt-1">Login</span>
+        </a>   
+    </div>
+
+    <!-- Main Content -->
+    <main class="text-center p-4 pb-18">
+        <section class="w-full">
+            <img src="https://www.dropbox.com/scl/fi/jqngvhwapmqbw0rkn9r2y/userheader.png?rlkey=einfho4f52ec1q93q00cqhehz&st=swvlrab6&dl=1" alt="Welcome Header" class="w-full h-auto object-cover">
+        </section>
+
+        <!-- Vision & Mission -->
+        <section class="flex flex-col md:flex-row justify-center items-stretch gap-4 my-8">
+            <div class="bg-green-100 p-8 md:p-12 rounded-2xl shadow w-full md:w-1/2">
+                <h2 class="text-2xl font-extrabold mb-4 font-inter">Vision</h2>
+                <p class="text-gray-700 font-inter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+            <div class="bg-green-100 p-8 md:p-12 rounded-2xl shadow w-full md:w-1/2">
+                <h2 class="text-2xl font-extrabold mb-4 font-inter">Mission</h2>
+                <p class="text-gray-700 font-inter">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            </div>
+        </section>
+
+        <!-- Barangay Officials -->
+        <section class="bg-gradient-to-b from-green-700 to-green-300 text-white py-8">
+            <h2 class="text-2xl font-extrabold mb-4 font-inter">Barangay Officials</h2>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+                <div class="text-center w-64">
+                    <img id="secretary-img" src="" alt="Barangay Secretary" class="w-36 h-48 object-cover rounded-lg mx-auto mb-2 hover:scale-105 transition-transform duration-300">
+                    <h3 id="secretary-name" class="font-semibold text-lg font-inter text-white tracking-wide"></h3>
+                    <p class="font-medium text-sm font-inter text-white uppercase opacity-90">Barangay Secretary</p>
+                </div>
+                <div class="text-center w-64">
+                    <img id="chairman-img" src="" alt="Barangay Chairman" class="w-36 h-48 object-cover rounded-lg mx-auto mb-2 hover:scale-105 transition-transform duration-300">
+                    <h3 id="chairman-name" class="font-semibold text-lg font-inter text-white tracking-wide"></h3>
+                    <p class="font-medium text-sm font-inter text-white uppercase opacity-90">BARANGAY CHAIRMAN</p>
+                </div>
+                <div class="text-center w-64">
+                    <img id="treasurer-img" src="" alt="Barangay Treasurer" class="w-36 h-48 object-cover rounded-lg mx-auto mb-2 hover:scale-105 transition-transform duration-300">
+                    <h3 id="treasurer-name" class="font-semibold text-lg font-inter text-white tracking-wide"></h3>
+                    <p class="font-medium text-sm font-inter text-white uppercase opacity-90">BARANGAY TREASURER</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer id="about-section" class="bg-green-900 text-white text-center py-6 font-light tracking-wide font-inter pb-24">
+        <div class="mb-4">
+            <ul class="flex flex-row flex-wrap justify-center gap-4 font-bold text-sm tracking-wide">
+                <li><a href="home.html" class="hover:underline">HOME</a></li>
+                <li><a href="offices.html" class="hover:underline">OFFICES</a></li>
+                <li><a href="request-document.html" class="hover:underline">REQUEST DOCUMENT</a></li>
+            </ul>            
+        </div>
+        <hr class="border-white w-3/4 mx-auto my-4">
+        <div class="px-6 text-sm mb-4">
+            <p class="font-inter">Santa Fe Barangay Hall is a town hall in Dasmariñas, Cavite near the Santa Fe Multi-Purpose Court and Half Court.</p>
+        </div>
+        <div class="text-xs">
+            <p class="font-inter">&copy; 2025 Barangay Santa Fe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- User Profile Popup -->
+    <div id="user-popup" class="user-popup hidden absolute right-4 top-20 bg-white shadow-lg p-4 rounded-lg w-64 border border-gray-200 z-20">
+        <div class="user-header flex justify-between items-center border-b border-gray-300 pb-2 mb-3">
+            <span class="text-lg font-semibold text-gray-800">User Options</span>
+            <span class="close-btn cursor-pointer font-bold text-xl text-gray-600 hover:text-gray-800" onclick="toggleUserPopup()">&times;</span>
+        </div>
+        <div class="user-content space-y-2">
+            <a href="user-profile.html" class="block text-gray-800 hover:text-green-600 transition-colors duration-200">User Profile</a>
+            <a href="/logout" class="block text-gray-800 hover:text-red-600 transition-colors duration-200">Logout</a>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="public/styles/users.js"></script>
+    <script src="/public/js/sessionTimeout.js"></script>
+
+    <script>
+        async function fetchOfficials() {
+  try {
+    const response = await fetch('/get-officials');
+    const officials = await response.json();
+
+    officials.forEach(official => {
+      const fullName = `${official.firstName} ${official.middleName} ${official.lastName}`;
+      const profilePic = official.Profilepic || 'https://via.placeholder.com/150';
+
+      const position = official.position.toLowerCase();
+
+      if (position === 'secretary') {
+        document.querySelector('#secretary-name').textContent = fullName;
+        document.querySelector('#secretary-img').src = profilePic;
+      } else if (position === 'punong barangay') {
+        document.querySelector('#chairman-name').textContent = fullName;
+        document.querySelector('#chairman-img').src = profilePic;
+      } else if (position === 'treasurer') {
+        document.querySelector('#treasurer-name').textContent = fullName;
+        document.querySelector('#treasurer-img').src = profilePic;
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching officials:', error);
+  }
+}
+                
+        // Call the fetchOfficials function after the page loads
+        window.onload = fetchOfficials;
+    </script>        
+</body>
+</html>

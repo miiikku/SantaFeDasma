@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Forgot Password</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="font-inter bg-cover bg-center flex justify-center items-center min-h-screen px-4" style="background-image: url('https://www.dropbox.com/scl/fi/qdz359iwyj5wme0szeiws/LOGIN-ADMIN.png?rlkey=keqj2ywlvjwik2fhk3z71bvjx&st=npybi7z2&dl=1');">
+  <div class="bg-white bg-opacity-90 shadow-md rounded-xl w-full max-w-lg sm:px-8 px-6 py-8">
+    <!-- Step 1: Admin Username Form -->
+    <form id="admin-forgot-password-form" class="flex flex-col space-y-6">
+      <h2 class="text-2xl font-bold text-center text-blue-800 mb-5">Admin Forgot Password</h2>
+
+      <!-- Check Username -->
+      <div class="w-full space-y-2">
+        <input type="text" id="admin-username" name="username" placeholder="Enter Admin Username" required
+               class="w-full p-2 border border-gray-300 bg-white rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-black focus:border-black text-sm"/>
+      </div>
+
+      <!-- Check Username Button -->
+      <button type="submit" class="w-full p-2 bg-blue-800 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200">
+        Check Username
+      </button>
+    </form>
+
+    <!-- Step 2: OTP Verification Form (Hidden Initially) -->
+    <form id="admin-otp-verification-form" class="flex flex-col space-y-6" style="display:none;">
+      <h2 class="text-2xl font-bold text-center text-blue-800 mb-5">Enter OTP</h2>
+      <div class="w-full space-y-2">
+
+        <!-- Enter OTP -->
+        <input type="text" id="admin-otp" name="otp" placeholder="Enter OTP" required
+               class="w-full p-2 border border-gray-300 bg-white rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-black focus:border-black text-sm"/>
+      </div>
+      <button type="submit" class="w-full p-2 bg-blue-800 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200">
+        Verify OTP
+      </button>
+    </form>
+
+    <!-- Step 3: Reset Password Form (Hidden Initially) -->
+    <form id="admin-reset-password-form" class="flex flex-col space-y-6" style="display:none;">
+      <h2 class="text-2xl font-bold text-center text-blue-800 mb-5">Reset Password</h2>
+      <div class="w-full space-y-2">
+        <input type="password" id="admin-new-password" name="new-password" placeholder="New Password" required
+               class="w-full p-2 border border-gray-300 bg-white rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-black focus:border-black text-sm"/>
+      </div>
+      <div class="w-full space-y-2">
+        <input type="password" id="admin-confirm-password" name="confirm-password" placeholder="Confirm Password" required
+               class="w-full p-2 border border-gray-300 bg-white rounded-md px-4 py-2 focus:outline-none focus:ring-1 focus:ring-black focus:border-black text-sm"/>
+      </div>
+      <button type="submit" class="w-full p-2 bg-blue-800 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200">
+        Reset Password
+      </button>
+    </form>
+
+    <!-- Notification Popup -->
+    <div id="admin-notification" class="hidden fixed top-5 right-5 bg-red-500 text-white p-4 rounded-md shadow-lg">
+      <span class="closebtn cursor-pointer font-bold text-xl float-right" onclick="this.parentElement.style.display='none';">&times;</span>
+      <span id="admin-notification-message"></span>
+    </div>
+  </div>
+
+  <script>
+    const adminForgotPasswordForm = document.getElementById('admin-forgot-password-form');
+    const adminOtpVerificationForm = document.getElementById('admin-otp-verification-form');
+    const adminResetPasswordForm = document.getElementById('admin-reset-password-form');
+    const adminNotification = document.getElementById('admin-notification');
+    const adminMessage = document.getElementById('admin-notification-message');
+
+    // Step 1: Check Admin Username and Send OTP
+    adminForgotPasswordForm.addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const username = document.getElementById('admin-username').value;
+
+      const response = await fetch('/admin-forgot-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username })
+      });
+
+      const result = await response.text();
+      adminMessage.innerText = result;
+
+      if (response.ok) {
+        adminForgotPasswordForm.style.display = 'none';
+        adminOtpVerificationForm.style.display = 'block';
+      }
+      adminNotification.style.display = 'block';
+    });
+
+    // Step 2: Verify OTP
+    adminOtpVerificationForm.addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const otp = document.getElementById('admin-otp').value;
+      const username = document.getElementById('admin-username').value;
+
+      const response = await fetch('/admin-verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, otp })
+      });
+
+      const result = await response.text();
+      adminMessage.innerText = result;
+
+      if (response.ok) {
+        adminOtpVerificationForm.style.display = 'none';
+        adminResetPasswordForm.style.display = 'block';
+      }
+      adminNotification.style.display = 'block';
+    });
+
+    // Step 3: Reset Password
+    adminResetPasswordForm.addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const newPassword = document.getElementById('admin-new-password').value;
+      const confirmPassword = document.getElementById('admin-confirm-password').value;
+      const username = document.getElementById('admin-username').value;
+
+      if (newPassword !== confirmPassword) {
+        adminMessage.innerText = 'Passwords do not match.';
+        adminNotification.style.display = 'block';
+        return;
+      }
+
+      const response = await fetch('/admin-reset-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, newPassword })
+      });
+
+      const result = await response.text();
+      adminMessage.innerText = result;
+
+      if (response.ok) {
+        setTimeout(() => window.location.href = '/login.html', 2000);
+      }
+      adminNotification.style.display = 'block';
+    });
+  </script>
+</body>
+</html>

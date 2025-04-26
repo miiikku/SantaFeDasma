@@ -1,0 +1,236 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: url('https://www.dropbox.com/scl/fi/5ss0gh1e6expbaz8cgv76tsp3/LOGIN-RESIDENT.png?rlkey=5ss0gh1e6expbaz8cgv76tsp3&st=5aof6i03&dl=1') no-repeat center center/cover;
+}
+
+header {
+    background-color: #005f27;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+header .logo img {
+    height: 85px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 40px;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+.user-icon, .notif-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+main {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 105px); /* Adjust height to account for header */
+}
+
+.form-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.form-container h1 {
+    color: #005f27;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.form-container form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.input-row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.floating-label-group {
+    position: relative;
+    margin-bottom: 20px;
+    flex: 1;
+    margin-right: 10px; /* Space between fields */
+}
+
+.floating-label-group:last-child {
+    margin-right: 0;
+}
+
+.floating-label-group input,
+.floating-label-group select,
+.floating-label-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding is included within the width */
+}
+
+textarea {
+    resize: none;
+    height: 60px;
+}
+
+.floating-label-group label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    font-size: 14px;
+    color: #2c662d;
+    background-color: white;
+    padding: 0 5px;
+    transform: translateY(-50%);
+    transition: all 0.2s ease-in-out;
+}
+
+.floating-label-group input:focus ~ label,
+.floating-label-group input:not(:placeholder-shown) ~ label,
+.floating-label-group select:focus ~ label,
+.floating-label-group select:not([value=""]) ~ label,
+.floating-label-group textarea:focus ~ label,
+.floating-label-group textarea:not(:placeholder-shown) ~ label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #005f27;
+    transform: translateY(0);
+}
+
+textarea {
+    resize: none;
+    height: 60px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #005f27;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-end; /* Aligns the button to the right */
+    width: 150px;
+    margin-top: 20px;
+    margin-left: auto; /* Forces the button to the far right */
+}
+
+button:hover {
+    background-color: #00411f;
+}
+
+/* POPUPS */
+.notif-popup {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.521);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 1000;
+    width: 500px;
+    margin-right: 5px;
+    margin-top: 30px;
+}
+
+.user-popup {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.521);
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 1000;
+    width: 200px;
+    margin-right: 5px;
+    margin-top: 30px;
+}
+
+.notif-popup.show, .user-popup.show {
+    display: block;
+}
+
+.notif-header, .user-header {
+    background-color: #1c492f;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notif-content, .user-content {
+    padding: 10px;
+}
+
+.notif-item, .user-content a {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.user-content a:hover {
+    text-decoration: underline;
+}
+
+.notif-item img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.delete-btn {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.close-btn {
+    cursor: pointer;
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resident Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            inter: ['Inter', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="font-inter bg-green-50 bg-cover bg-center min-h-screen flex items-center justify-center px-4 py-8" style="background-image: url('https://www.dropbox.com/scl/fi/708ec6qjs3d1rn6wqcaxk/LOGIN-RESIDENT.png?rlkey=5ss0gh1e6expbaz8cgv76tsp3&st=5aof6i03&dl=1');">
+    <div class="bg-white bg-opacity-90 shadow-md rounded-xl w-full max-w-2xl p-6 sm:p-8">
+        <form id="signup-form" class="flex flex-col gap-y-3" action="/signup" method="POST">
+            <h2 class="text-2xl font-bold text-center text-green-800">RESIDENT SIGN UP</h2>
+
+            <!-- First Name, Middle Name, Last Name -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                <input type="text" id="firstname" name="firstname" placeholder="First Name" required
+                class="border border-gray-300 bg-white rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-black"/>
+                <input type="text" id="middlename" name="middlename" placeholder="Middle Name" required
+                class="border border-gray-300 bg-white rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-black"/>
+                <input type="text" id="lastname" name="lastname" placeholder="Last Name" required
+                class="border border-gray-300 bg-white rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-black"/>
+            </div>
+
+            <!-- Email, Username -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <input type="email" id="email" name="email" placeholder="Email" required
+                class="border border-gray-300 bg-white rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-black"/>
+                <input type="text" id="username" name="username" placeholder="Username" required
+                class="border border-gray-300 bg-white rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-black"/>
+            </div>
+
+            <!-- Password, Confirm Password -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <input type="password" id="password" name="password" placeholder="Password" required
+                class="border border-gray-300 bg-white rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-black"/>
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required
+                class="border border-gray-300 bg-white rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-black focus:border-black"/>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit"
+                class="mt-3 bg-green-700 text-white font-semibold py-2 px-4 rounded-md hover:bg-green-800 transition duration-200">
+                SIGN UP
+            </button>
+
+            <a href="login-resident.html" class="text-center text-sm text-green-700 hover:underline mt-2">
+                Already have an account?
+            </a>
+        </form>
+    </div>
+
+    <!-- Notification Popup -->
+    <div id="notification"
+        class="fixed bottom-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded hidden z-50">
+        <span class="closebtn cursor-pointer font-bold mr-2" onclick="this.parentElement.style.display='none';">&times;</span>
+        <span id="notification-message"></span>
+    </div>
+
+    <!-- Script -->
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', async function(event) {
+            event.preventDefault();  <!-- This line prevents the form from submitting normally -->
+
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            const response = await fetch('/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.text();
+
+            const notification = document.getElementById('notification');
+            const message = document.getElementById('notification-message');
+            message.innerText = result;
+
+            if (response.ok) {
+                notification.classList.add('success');
+            } else {
+                notification.classList.remove('success');
+            }
+
+            notification.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

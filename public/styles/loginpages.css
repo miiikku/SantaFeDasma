@@ -1,0 +1,184 @@
+body.login-page-body,
+body.resident-login-page-body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-size: cover;
+}
+
+body.login-page-body {
+    background: url('https://www.dropbox.com/scl/fi/qdz359iwyj5wme0szeiws/LOGIN-ADMIN.png?rlkey=keqj2ywlvjwik2fhk3z71bvjx&st=npybi7z2&dl=1') no-repeat center center/cover;
+}
+
+body.resident-login-page-body {
+    background: url('https://www.dropbox.com/scl/fi/708ec6qjs3d1rn6wqcaxk/LOGIN-RESIDENT.png?rlkey=5ss0gh1e6expbaz8cgv76tsp3&st=5aof6i03&dl=1') no-repeat center center/cover;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.enterotp, .resetp {
+    text-align: center;  
+}
+
+.login-form h2 {
+    margin-bottom: 20px;
+    color: #1e3a8a;
+}
+
+.resident-login h2 {
+    color: #005f27;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    width: 100%;
+    margin-left: 20px;
+    
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #1e3a8a;
+}
+
+.resident-login .input-group label {
+    color: #005f27;
+}
+
+.input-group input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.button-group {
+    width: 100%;
+    text-align: center;
+}
+
+button {
+    width: calc(100% - 20px);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1e3a8a;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.resident-login button {
+    background-color: #005f27;
+}
+
+button:hover {
+    background-color: #163f7a;
+}
+
+.resident-login button:hover {
+    background-color: #00411f;
+}
+
+.link-signup {
+    width: 100%;
+    text-align: right;
+    margin-top: 15px;
+    margin-right: 30px;
+}
+
+.link-admin {
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+    
+}
+
+.admin-login h2 {
+    color: #1e3a8a; /* Admin-specific color */
+}
+
+.admin-login button {
+    background-color: #1e3a8a; /* Admin button color */
+}
+
+
+.admin-login button:hover {
+    background-color: #163f7a;
+}
+
+.admin-login .resident-link {
+    color: #1e3a8a; /* Admin forgot password link color */
+}
+.resident-link, .admin-link {
+    color: #005f27;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.resident-link:hover, .admin-link:hover {
+    text-decoration: underline;
+}
+
+.resident-login .resident-link, .link-resident {
+    color: #005f27;
+    font-size: small;
+}
+
+.admin-link {
+    color: #1e3a8a;
+    font-size: small;
+}
+
+/* Notification Popup */
+.notification {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #f44336;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.notification.success {
+    background-color: #4CAF50;
+}
+
+.notification .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.notification .closebtn:hover {
+    color: black;
+}

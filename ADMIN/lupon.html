@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Lupon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter m-0 p-0 bg-gray-100 flex min-h-screen overflow-x-hidden">
+
+    <!-- Sidebar (Visible on larger screens) -->
+    <div class="sidebar w-80 bg-green-900 text-white p-4 flex flex-col justify-between h-auto hidden md:block">
+        <center>
+            <img src="https://www.dropbox.com/scl/fi/94o2cqiknm3a4dasbyz1q/sidebarlogo.png?rlkey=9suwtde1z2qk3ea73d64yt5he&st=13kmqf8k&dl=1" alt="Barangay Santa Fe Logo" class="w-36 mb-4">
+            <h1 class="text-sm text-center font-inter font-bold">BARANGAY SANTA FE<br>CITY OF DASMARIÑAS</h1>
+        </center>
+        <div class="sidenav mt-8 flex-grow">
+            <ul class="space-y-4">
+                <li><a href="dashboard.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/es7o8fr6dw2vkkywjpg66/dashboard.png?rlkey=pp0dy252j9wao81jpz1n50f4p&st=83lbnbnz&dl=1" class="w-5 h-5 ">
+                        <span class="ml-3">Dashboard</span></a></li>
+                
+                <li><a href="notification.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/te9qkrjtunarm8znvfs1w/notification.png?rlkey=kqzy50yimgtro1l8caiqnqbua&st=4zuvr1p0&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Notification</span></a></li>
+
+                <li><a href="user-account.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccount.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=4ko3y2wy&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">User Account</span></a></li>
+
+                <li><a href="residents.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/e57yqafcdt0z58wbgvv9e/residents.png?rlkey=wcqigcrhwveax3qubldx0qaql&st=np6th3hf&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Residents</span></a></li>
+
+                <li class="relative">
+                    <a href="complaints.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/kbs0xnrc9usw40lv30clw/scales-of-justice.png?rlkey=d36ewu4dge121egpw53qri8mf&st=r04p7f12&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Complaints</span></a>
+                        <span id="complaintsNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+
+                <li class="relative">
+                    <a href="barangay-id.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Barangay ID</span></a>
+                        <span id="barangayIDNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+
+                <li class="relative">
+                    <a href="request.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/idqomcr0ujnsmd54ktpu5/quote-request.png?rlkey=swquji94hs61jlr8y0p992s0n&st=vkr8y4i7&dl=1" class="w-5 h-5">
+                        <span class="ml-3">Requests</span></a>
+                        <span id="sidebarNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+                
+                <li><a href="module.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                    <img src="https://www.dropbox.com/scl/fi/olqdewf6h2pi148jw0j2p/maintenance.png?rlkey=5rnv8iajpbytp799jgyvs6cqa&st=dn26ng5a&dl=1" class="w-5 h-5">
+                    <span class="ml-3">Maintenance</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Menu (for smaller screens) -->
+    <div id="bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 bg-green-900 text-white p-3 font-inter">
+        <div class="flex overflow-x-auto space-x-6 px-4 py-2">
+            <!-- Dashboard Icon -->
+            <a href="dashboard.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/es7o8fr6dw2vkkywjpg66/dashboard.png?rlkey=pp0dy252j9wao81jpz1n50f4p&st=83lbnbnz&dl=1" class="w-6 h-6">
+                <span class="text-xs">Dashboard</span>
+            </a>
+            <!-- Notification Icon -->
+            <a href="notification.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/te9qkrjtunarm8znvfs1w/notification.png?rlkey=kqzy50yimgtro1l8caiqnqbua&st=4zuvr1p0&dl=1" class="w-6 h-6">
+                <span class="text-xs">Notification</span>
+            </a>
+            <!-- User Account Icon -->
+            <a href="user-account.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccount.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=4ko3y2wy&dl=1" class="w-6 h-6">
+                <span class="text-xs">Account</span>
+            </a>
+            <!-- Residents Icon -->
+            <a href="residents.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/e57yqafcdt0z58wbgvv9e/residents.png?rlkey=wcqigcrhwveax3qubldx0qaql&st=np6th3hf&dl=1" class="w-6 h-6">
+                <span class="text-xs">Residents</span>
+            </a>
+            <!-- Complaints Icon -->
+            <a href="complaints.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/kbs0xnrc9usw40lv30clw/scales-of-justice.png?rlkey=d36ewu4dge121egpw53qri8mf&st=r04p7f12&dl=1" class="w-6 h-6">
+                <span class="text-xs">Complaints</span>
+            </a>
+            <!-- Barangay ID Icon -->
+            <a href="barangay-id.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" class="w-6 h-6">
+                <span class="text-xs">ID</span>
+            </a>
+            <!-- Requests Icon -->
+            <a href="request.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/idqomcr0ujnsmd54ktpu5/quote-request.png?rlkey=swquji94hs61jlr8y0p992s0n&st=vkr8y4i7&dl=1" class="w-6 h-6">
+                <span class="text-xs">Requests</span>
+            </a>
+            <!-- Maintenance Icon -->
+            <a href="module.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/olqdewf6h2pi148jw0j2p/maintenance.png?rlkey=5rnv8iajpbytp799jgyvs6cqa&st=dn26ng5a&dl=1" class="w-6 h-6">
+                <span class="text-xs">Maintenance</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content flex-grow p-6 bg-gray-100 max-w-full pb-24">
+        <div class="header flex justify-between items-center bg-white p-4 shadow-md rounded-xl">
+            <h2 class="text-2xl font-semibold">Lupon</h2>
+            <div class="user-info flex items-center space-x-4">
+                <!-- User Avatar -->
+                <div class="dropdown relative">
+                    <img id="resident-profile-pic" src="" 
+                         alt="User Avatar" 
+                         class="w-8 h-8 rounded-full cursor-pointer" onclick="toggleDropdown()">
+                
+                    <!-- User Profile Popup -->
+                    <div id="user-popup" class="user-popup hidden absolute right-0 top-10 bg-white shadow-lg p-4 rounded-lg w-64 border border-gray-200">
+                        <div class="user-header flex justify-between items-center border-b border-gray-300 pb-2 mb-3">
+                            <span class="text-lg font-semibold text-gray-800">Admin Options</span>
+                            <span class="close-btn cursor-pointer font-bold text-xl text-gray-600 hover:text-gray-800" onclick="toggleDropdown()">&times;</span>
+                        </div>
+                        <div class="user-content space-y-2">
+                            <a href="admin-details.html" class="block text-gray-800 hover:text-green-600 transition-colors duration-200">User Profile</a>
+                            <a href="module.html" class="block text-gray-800 hover:text-yellow-600 transition-colors duration-200">Maintenance</a>
+                            <a href="#" onclick="logout()" class="block text-gray-800 hover:text-red-600 transition-colors duration-200">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Actions Section -->
+        <div class="mb-2 flex items-center justify-end gap-6 p-6">
+            <!-- Search Input -->
+            <div class="w-full sm:w-auto">
+                <input type="text" id="searchInput" placeholder="Search..." oninput="searchLuponAndKasunduan()" class="ml-auto w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-800">
+            </div>
+
+        
+            <!-- Filter Dropdown -->
+            <div class="w-full sm:w-auto">
+                <select onchange="navigateToPage(this)" class="ml-auto w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800 overflow-hidden text-ellipsis">
+                    <option value="lupon.html" selected>Processing</option>
+                    <option value="lupon-complete.html">Completed</option>
+                </select>
+            </div>
+
+            <!-- Add Complaint / Kasunduan Buttons -->
+            <div>
+                <button class="bg-blue-800 text-white px-6 py-1 rounded-md hover:bg-blue-700 focus:outline-none" onclick="openAddKasunduanModal()">Kasunduan</button>
+            </div>
+        </div>
+
+
+        <!-- Lupon Table -->
+        <div class="account-content bg-white p-6 rounded-lg shadow-md overflow-x-auto mb-8">
+            <h3 class="text-xl font-semibold text-gray-800">Lupon</h3>
+            <div class="overflow-x-auto mt-4 max-h-[300px] relative">
+                <table class="min-w-full table-auto border-collapse border border-gray-300">
+                    <thead class="bg-green-800">
+                <tr>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Petsa</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Usapin Blg.</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Nagsumbong</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Laban kay</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Sumbong</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Lunas</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Reason</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Stage</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Date</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Date</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Status</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Action</th> 
+                </tr>
+            </thead>
+            <tbody id="lupon-table-body">
+                <!-- Rows will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Kasunduan Table -->
+<div class="account-content bg-white p-6 rounded-lg shadow-md overflow-x-auto mt-4">
+    <h3 class="text-xl font-semibold text-gray-800">Kasunduan</h3>
+    <div class="overflow-x-auto mt-4 max-h-[300px]">
+        <table class="min-w-full table-auto border-collapse border border-gray-300">
+            <thead class="bg-green-800">
+                <tr>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Date</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Time</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Complainant's Name</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Complainee's Name</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Kasunduan</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Lupong Tagapamahala</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Status</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Action</th>
+                </tr>
+            </thead>
+            <tbody id="kasunduan-table-body">
+                <!-- Rows will be dynamically inserted here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+        <!-- Add Kasunduan Modal -->
+        <div id="addKasunduanModal" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+            <div class="modal-content bg-white p-4 rounded-lg shadow-xl w-full max-w-xl mx-auto mt-24 sm:mt-24 px-4 relative">
+                <span class="close absolute top-4 right-4 text-3xl font-bold cursor-pointer text-gray-300 hover:text-green-800" onclick="closeAddKasunduanModal()">&times;</span>
+                <h2 class="text-2xl font-semibold text-green-800 mb-4 text-center">Add Kasunduan</h2>
+                <form id="addKasunduanForm">
+
+                    <!-- Date, Time -->
+                    <div class="grid grid-cols-2 gap-2 mb-4">
+                        <div>
+                            <input type="date" id="kasunduanDate" placeholder="Date" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        </div>
+                        <div>
+                            <input type="time" id="kasunduanTime" placeholder="Time" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        </div>
+                    </div>
+
+                    <!-- KASUNDUAN COMPLAINANTS -->
+                    <div id="kasunduancomplainant-container">
+                        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+                        <div class="form-row kasunduancomplainant-row">
+                          <div>
+                            <button type="button" class="add-btn-name" onclick="addKasunduanComplainant()">+</button>
+                          </div>
+                          <div class="grid grid-cols-3 gap-2 mb-4">
+                          <div>
+                            <input type="text" name="kasunduancomplainantFirstName[]" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                          </div>
+                          <div>
+                            <input type="text" name="kasunduancomplainantMiddleName[]" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                          </div>
+                          <div>
+                            <input type="text" name="kasunduancomplainantLastName[]" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+
+            <!-- KASUNDUAN COMPLAINEES -->
+            <div id="kasunduancomplainee-container">
+                <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+            <div class="form-row kasunduancomplainee-row">
+                <div>
+                <button type="button" class="add-btn-name" onclick="addKasunduanComplainee()">+</button>
+                </div>
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                <div>
+                <input type="text" name="kasunduancomplaineeFirstName[]" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                <input type="text" name="kasunduancomplaineeMiddleName[]" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                <input type="text" name="kasunduancomplaineeLastName[]" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+            </div>
+            </div>
+                
+                <!-- Kasunduan -->
+                <div class="mb-4">
+                    <textarea id="kasunduanText" placeholder="Kasunduan" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
+                </div>
+
+                <!-- Lupong Tagapamahala and Status -->
+                <div class="grid grid-cols-2 gap-2 mb-4">
+                    <div>
+                        <select id="kasunduanJusticeOnDuty" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                            <option value="" disabled selected>Select Justice on Duty</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <select id="kasunduanStatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                            <option value="Processing">Processing</option>
+                        </select>
+                    </div>
+                </div>
+
+                    <div class="flex justify-end gap-4">
+                        <button type="submit" class="bg-green-800 text-white px-6 py-2 rounded-md hover:bg-green-700 text-sm">Add Kasunduan</button>
+                        <button type="button" class="bg-gray-200 text-black px-6 py-2 rounded-md hover:bg-gray-400 text-sm" onclick="closeAddKasunduanModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Edit Lupon Modal -->
+        <div id="editModal" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+            <div class="modal-content bg-white p-4 rounded-lg shadow-xl w-full max-w-xl mx-auto mt-24 sm:mt-24 px-4 relative">
+                <span class="close absolute top-4 right-4 text-3xl font-bold cursor-pointer text-gray-300 hover:text-green-800" onclick="closeEditModal()">&times;</span>
+                <h2 class="text-2xl font-semibold text-green-800 mb-4 text-center">Edit Lupon</h2>
+                <form id="editLuponForm">
+            <input type="hidden" id="editId">
+
+            <!-- Date, Time, Blotter Number -->
+            <div class="grid grid-cols-2 gap-2 mb-4">
+                <div>
+                    <input type="date" id="editDate" placeholder="Petsa" readonly class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="text" id="editText" placeholder="Usapin Blg." required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+
+           <!-- Nagsumbong Fields for Edit -->
+           <div>
+            <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+            <div id="editComplainantsContainer"></div>         
+        </div>
+
+        <!-- Laban Kay Fields for Edit -->
+        <div>
+            <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+            <div id="editComplaineesContainer"></div>   
+        </div>
+        
+        <!-- Sumbong, Lunas, Reason -->
+        <div class="mb-4">
+                <div>
+                    <textarea id="editSumbong" placeholder="Sumbong" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
+                </div>
+            </div>
+
+        <div class="mb-4">
+                <div>
+                    <textarea id="editLunas" placeholder="Lunas" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
+                </div>
+            </div>
+
+        <div class="mb-4">
+                <div>
+                    <textarea id="editReason" placeholder="Reason" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
+                </div>
+            </div>
+
+            <!-- Hearing Stage, Hearing Date, Hearing Time, Status -->
+            <div class="grid grid-cols-4 gap-2 mb-4">
+                <div>
+                    <select id="editHearingStage" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                      <option value="1" >1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    </select>
+                </div>
+
+                <div>
+                    <input type="date" id="editHearingDate" placeholder=" " class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+
+                <div>
+                    <input type="time" id="editHearingTime" placeholder=" " class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+
+                <div>
+                    <select id="editStatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        <option value="Processing">Processing</option>
+                        <option value="Transfer to CFA">Transfer to CFA</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-4">
+                <button type="submit" class="bg-green-800 text-white px-6 py-2 rounded-md hover:bg-green-700 text-sm">Save</button>
+                <button type="button" class="bg-gray-200 text-black px-6 py-2 rounded-md hover:bg-gray-400 text-sm" onclick="closeEditModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+            
+
+        <!-- Edit Kasunduan Modal -->
+        <div id="editKasunduanModal" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+            <div class="modal-content bg-white p-4 rounded-lg shadow-xl w-full max-w-xl mx-auto mt-24 sm:mt-24 px-4 relative">
+                <span class="close absolute top-4 right-4 text-3xl font-bold cursor-pointer text-gray-300 hover:text-green-800" onclick="closeEditKasunduanModal()">&times;</span>
+                <h2 class="text-2xl font-semibold text-green-800 mb-4 text-center">Edit Kasunduan</h2>
+                <form id="editKasunduanForm">
+                    <input type="hidden" id="editKasunduanId">
+
+                     <!-- Date, Time -->
+                    <div class="grid grid-cols-2 gap-2 mb-4">
+                        <div>
+                            <input type="date" id="editKasunduanDate" placeholder="Date" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        </div>
+                        <div>
+                            <input type="time" id="editKasunduanTime" placeholder="Time" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        </div>
+                    </div>
+
+                    <!-- EDIT KASUNDUAN COMPLAINANTS -->
+                    <div>
+                        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+                        <!-- Complainant's Name (First Name, Middle Name, Last Name) -->
+                        <div id="editKasunduanComplainantsContainer"></div> <!-- Dynamic Complainant Fields -->
+                    </div>
+
+                    <!-- EDIT KASUNDUAN COMPLAINEES -->
+                    <div>
+                        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainee Details</label>
+                        <!-- Complainee's Name (First Name, Middle Name, Last Name) -->
+                        <div id="editKasunduanComplaineesContainer"></div> <!-- Dynamic Complainee Fields -->
+                    </div>
+
+                    <!-- Kasunduan -->
+                    <div class="mb-4">
+                            <textarea id="editKasunduanText" placeholder="Kasunduan" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
+                    </div>
+
+                    <!-- Lupong Tagapamahala and Status -->
+                    <div class="grid grid-cols-2 gap-2 mb-4">
+                <div>
+                    <select id="editKasunduanJusticeOnDuty" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        <option value="" disabled selected>Select Lupong Tagapamahala</option>
+                    </select>
+                </div>
+
+                <div>
+                    <select id="editKasunduanStatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        <option value="Processing">Processing</option>
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Edit and Cancel Buttons -->
+            <div class="flex justify-end gap-4">
+                <button type="submit" class="bg-green-800 text-white px-6 py-2 rounded-md hover:bg-green-700 text-sm">Save</button>
+                <button type="button" class="bg-gray-200 text-black px-6 py-2 rounded-md hover:bg-gray-400 text-sm" onclick="closeEditKasunduanModal()">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="public/styles/script.js"></script>
+    <script src="/public/js/sessionTimeout.js"></script>
+    <script>
+        //SEARCH
+        function searchLuponAndKasunduan() {
+    // Get the search input value
+    const searchValue = document.querySelector('#searchInput').value.toLowerCase();
+
+    // Search Lupon Table
+    const luponRows = document.querySelectorAll('#lupon-table-body tr');
+    luponRows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const matches = Array.from(cells).some(cell => 
+            cell.textContent.toLowerCase().includes(searchValue)
+        );
+        if (matches) {
+            row.style.display = ''; // Show the row
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+
+    // Search Kasunduan Table
+    const kasunduanRows = document.querySelectorAll('#kasunduan-table-body tr');
+    kasunduanRows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const matches = Array.from(cells).some(cell => 
+            cell.textContent.toLowerCase().includes(searchValue)
+        );
+        if (matches) {
+            row.style.display = ''; // Show the row
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+}
+
+        // DISPLAY TABLE
+
+        // Fetch Lupon Data
+async function fetchLuponData() {
+  try {
+    const response = await fetch('/fetch-lupon');
+    const luponData = await response.json();
+
+    const luponTableBody = document.getElementById('lupon-table-body');
+    luponTableBody.innerHTML = ''; // Clear existing rows
+
+    luponData.forEach(lupon => {
+        // for arrays
+        const complainantsText = lupon.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ') || '';
+        const complaineesText = lupon.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ') || '';
+
+    const row = document.createElement('tr');
+    row.classList.add('border-b', 'border-gray-300');
+      row.innerHTML = `
+    <td class="px-4 py-2">${lupon.petsa}</td>
+    <td class="px-4 py-2">${lupon.usapinBlg}</td>
+    <td class="px-4 py-2">${complainantsText}</td>
+    <td class="px-4 py-2">${complaineesText}</td>
+    <td class="px-4 py-2">${lupon.sumbong}</td>
+    <td class="px-4 py-2">${lupon.lunas}</td>
+    <td class="px-4 py-2">${lupon.reason}</td>
+    <td class="px-4 py-2">${lupon.hearingStage}</td>
+    <td class="px-4 py-2">${lupon.hearingDate}</td>
+    <td class="px-4 py-2">${lupon.hearingTime}</td>
+    <td class="px-4 py-2">${lupon.status}</td>
+         <td class="px-4 py-2"><div class="flex items-center space-x-1">
+          <a href="#"><img src="https://www.dropbox.com/scl/fi/u6i83geituweeaybi8y9w/pen.png?rlkey=5f7vjmsrn42d1t0iaxdu3jbjy&st=0sk8r60h&dl=1" alt="Edit" class="edit-icon" onclick='openEditModal(${JSON.stringify(lupon._id)}, ${JSON.stringify(lupon.petsa)}, ${JSON.stringify(lupon.usapinBlg)}, ${JSON.stringify(lupon.complainants)}, ${JSON.stringify(lupon.complainees)}, ${JSON.stringify(lupon.sumbong)}, ${JSON.stringify(lupon.lunas)}, ${JSON.stringify(lupon.reason)}, ${JSON.stringify(lupon.hearingStage)}, ${JSON.stringify(lupon.hearingDate)}, ${JSON.stringify(lupon.hearingTime)}, ${JSON.stringify(lupon.status)})'></a>
+          <a href="#"><img src="https://www.dropbox.com/scl/fi/ho6y40rqr930v22ja9219/delete.png?rlkey=b1xjg0s1v3rnrgjx1n5v2usgm&st=xgbxk20f&dl=1" alt="Delete" class="delete-icon" onclick="deleteLupon('${lupon._id}')"></a>
+          ${lupon.status === 'Processing' ? `<a href="#"><img src="https://www.dropbox.com/scl/fi/2f706u84pw40jwnv3mice/generateJusticeSystem.png?rlkey=xjmdwr9qljhbs4d2p065i8ofe&st=klgizqwg&dl=1" alt="Generate" class="generate-icon" onclick="generatePatawag('${lupon._id}')"></a>` : ''}
+          ${lupon.hearingStage === "3" ? `<a href="#"><img src="https://www.dropbox.com/scl/fi/v185qat4whwt769dbbbya/blueDocument.png?rlkey=uy1zoguvwgxd55x7sw6ki8c6h&st=4jg7gfil&dl=1" alt="Generate" class="generate-icon" onclick="generateLupon('${lupon._id}')"></a>` : ''}
+          ${lupon.status === 'Completed' ? `<a href="#"><img src="https://www.dropbox.com/scl/fi/brbnzjxfdeqjerssseaxc/checked.png?rlkey=yinbka4wjvra6n5dxazi4l13a&st=wpwljnp2&dl=1" alt="Transfer" class="transfer-icon" onclick="transferLupon('${lupon._id}')"></a>` : ''}
+          ${lupon.status === 'Transfer to CFA' ? `<a href="#"><img src="https://www.dropbox.com/scl/fi/brbnzjxfdeqjerssseaxc/checked.png?rlkey=yinbka4wjvra6n5dxazi4l13a&st=wpwljnp2&dl=1" alt="Transfer" class="transfer-icon" onclick="transfertoCFA('${lupon._id}')"></a>` : ''}
+          </div></td>
+      `;
+      luponTableBody.appendChild(row);
+    });
+  } catch (err) {
+    console.error('Error fetching lupon data:', err);
+  }
+}
+
+// Fetch Kasunduan Data
+async function fetchKasunduanData() {
+  try {
+    const response = await fetch('/fetch-lupon-kasunduan');
+    const kasunduanData = await response.json();
+
+    const kasunduanTableBody = document.getElementById('kasunduan-table-body');
+    kasunduanTableBody.innerHTML = ''; // Clear existing rows
+
+    kasunduanData.forEach(kasunduan => {
+        // for arrays
+        const complainantsText = kasunduan.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ') || '';
+        const complaineesText = kasunduan.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ') || '';
+      
+    const row = document.createElement('tr');
+    row.classList.add('border-b', 'border-gray-300');
+      row.innerHTML = `
+        <td class="px-4 py-2">${kasunduan.date}</td>
+        <td class="px-4 py-2">${kasunduan.time}</td>
+        <td class="px-4 py-2">${complainantsText}</td>
+        <td class="px-4 py-2">${complaineesText}</td>
+        <td class="px-4 py-2">${kasunduan.kasunduan}</td>
+        <td class="px-4 py-2">${kasunduan.justiceOnDuty}</td>
+        <td class="px-4 py-2">${kasunduan.status}
+        <td class="px-4 py-2"><div class="flex items-center space-x-1">
+          <a href="#"><img src="https://www.dropbox.com/scl/fi/u6i83geituweeaybi8y9w/pen.png?rlkey=5f7vjmsrn42d1t0iaxdu3jbjy&st=0sk8r60h&dl=1" alt="Edit" class="edit-icon" onclick='openEditKasunduanModal("${kasunduan._id}", "${kasunduan.date}", "${kasunduan.time}", ${JSON.stringify(kasunduan.complainants)}, ${JSON.stringify(kasunduan.complainees)}, ${JSON.stringify(kasunduan.kasunduan)}, ${JSON.stringify(kasunduan.justiceOnDuty)}, ${JSON.stringify(kasunduan.status)})'></a>
+          <a href="#"><img src="https://www.dropbox.com/scl/fi/ho6y40rqr930v22ja9219/delete.png?rlkey=b1xjg0s1v3rnrgjx1n5v2usgm&st=xgbxk20f&dl=1" alt="Delete" class="delete-icon" onclick="deleteKasunduan('${kasunduan._id}')"></a>
+          <a href="#"><img src="https://www.dropbox.com/scl/fi/v185qat4whwt769dbbbya/blueDocument.png?rlkey=uy1zoguvwgxd55x7sw6ki8c6h&st=4jg7gfil&dl=1" alt="Generate" class="generate-icon" onclick="generateLuponKasunduan('${kasunduan._id}')"></a>
+
+          ${kasunduan.status === 'Completed' ? `<a href="#"><img src="https://www.dropbox.com/scl/fi/brbnzjxfdeqjerssseaxc/checked.png?rlkey=yinbka4wjvra6n5dxazi4l13a&st=wpwljnp2&dl=1" alt="Transfer" class="transfer-icon" onclick="transferkasunduan('${kasunduan._id}')"></a>` : ''}
+        </div></td>
+      `;
+      kasunduanTableBody.appendChild(row);
+    });
+  } catch (err) {
+    console.error('Error fetching kasunduan data:', err);
+  }
+}
+
+// Call the functions to fetch and populate the data when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+  fetchLuponData();
+  fetchKasunduanData();
+});
+
+// ADDING KASUNDUAN
+function openAddKasunduanModal() {
+    const addKasunduanModal = document.getElementById('addKasunduanModal');
+    addKasunduanModal.style.display = 'block';
+
+    // Clear previous options (in case the modal is reopened)
+    const dropdown = document.getElementById('kasunduanJusticeOnDuty');
+    dropdown.innerHTML = '<option value="" disabled selected>Select Lupong Tagapamahala</option>';
+
+    // Fetch Lupon Tagapamahala members from your server.js endpoint and populate the dropdown
+    fetch('/fetch-pangkat-members')  // This endpoint will fetch the members from the server
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(member => {
+                const option = document.createElement('option');
+                option.value = `${member.firstName} ${member.middleName} ${member.lastName}`;
+                option.textContent = `${member.firstName} ${member.middleName} ${member.lastName}`;
+                dropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching Lupon Tagapamahala members:', error));
+}
+
+document.getElementById('addKasunduanForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const getValues = (name) => [...document.querySelectorAll(`[name="${name}"]`)].map(input => input.value);
+
+    const complainantFirstNames = getValues("kasunduancomplainantFirstName[]");
+    const complainantMiddleNames = getValues("kasunduancomplainantMiddleName[]");
+    const complainantLastNames = getValues("kasunduancomplainantLastName[]");
+    const complaineeFirstNames = getValues("kasunduancomplaineeFirstName[]");
+    const complaineeMiddleNames = getValues("kasunduancomplaineeMiddleName[]");
+    const complaineeLastNames = getValues("kasunduancomplaineeLastName[]");
+
+    const newKasunduan = {
+        date: document.getElementById('kasunduanDate').value,
+        time: document.getElementById('kasunduanTime').value,
+        complainants: complainantFirstNames.map((_, i) => ({
+            firstName: complainantFirstNames[i],
+            middleName: complainantMiddleNames[i],
+            lastName: complainantLastNames[i]
+        })),
+        complainees: complaineeFirstNames.map((_, i) => ({
+            firstName: complaineeFirstNames[i],
+            middleName: complaineeMiddleNames[i],
+            lastName: complaineeLastNames[i]
+        })),
+        kasunduan: document.getElementById('kasunduanText').value,
+        justiceOnDuty: document.getElementById('kasunduanJusticeOnDuty').value,
+        status: document.getElementById('kasunduanStatus').value,
+    };
+
+    try {
+        const response = await fetch('/add-lupon-kasunduan', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newKasunduan)
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            closeAddKasunduanModal(); // Close modal after submission
+            fetchKasunduanData(); // Refresh the table to show the new entry
+        } else {
+            alert('Failed to add Kasunduan');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+function closeAddKasunduanModal() {
+  const addKasunduanModal = document.getElementById('addKasunduanModal');
+  addKasunduanModal.style.display = 'none'; // Hide the modal
+}
+
+function setMinHearingDate() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('editHearingDate').setAttribute('min', today); // Restrict dates to today onwards
+}
+
+// Open Edit Lupon Modal and Populate Fields
+function openEditModal(id, date, usapinBlg, complainants, complainees, sumbong, lunas, reason, hearingStage, hearingDate, hearingTime, status) {
+    document.getElementById('editId').value = id;
+    document.getElementById('editDate').value = date;
+    document.getElementById('editText').value = usapinBlg;
+    document.getElementById('editSumbong').value = sumbong;
+    document.getElementById('editLunas').value = lunas;
+    document.getElementById('editReason').value = reason;
+    document.getElementById('editHearingStage').value = hearingStage;
+    document.getElementById('editHearingDate').value = hearingDate;
+    document.getElementById('editHearingTime').value = hearingTime;
+    document.getElementById('editStatus').value = status;
+
+    // Dynamically generate complainant input fields
+    const complainantContainer = document.getElementById('editComplainantsContainer');
+    complainantContainer.innerHTML = ''; // Clear previous inputs
+
+    complainants.forEach((complainant, index) => {
+        const complainantRow = document.createElement('div');
+        complainantRow.classList.add('form-row');
+        complainantRow.innerHTML = `
+        <div class="grid grid-cols-3 gap-2 mb-4">
+            <div>
+                <input type="text" id="editComplainantFirstName${index}" value="${complainant.firstName}" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            <div >
+                <input type="text" id="editComplainantMiddleName${index}" value="${complainant.middleName}" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            <div>
+                <input type="text" id="editComplainantLastName${index}" value="${complainant.lastName}" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            </div>
+        `;
+        complainantContainer.appendChild(complainantRow);
+    });
+
+    // Dynamically generate complainee input fields
+    const complaineeContainer = document.getElementById('editComplaineesContainer');
+    complaineeContainer.innerHTML = ''; // Clear previous inputs
+
+    complainees.forEach((complainee, index) => {
+        const complaineeRow = document.createElement('div');
+        complaineeRow.classList.add('form-row');
+        complaineeRow.innerHTML = `
+        <div class="grid grid-cols-3 gap-2 mb-4">
+            <div>
+                <input type="text" id="editComplaineeFirstName${index}" value="${complainee.firstName}" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            <div>
+                <input type="text" id="editComplaineeMiddleName${index}" value="${complainee.middleName}" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            <div>
+                <input type="text" id="editComplaineeLastName${index}" value="${complainee.lastName}" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            </div>
+        `;
+        complaineeContainer.appendChild(complaineeRow);
+    });
+    setMinHearingDate();
+    // Display the Edit Modal
+    document.getElementById('editModal').style.display = 'block';
+}
+
+// Get the edited complainants and complainees
+function getEditedComplainants() {
+    const rows = document.querySelectorAll('#editComplainantsContainer .form-row');
+    const complainants = [];
+
+    rows.forEach(row => {
+        const firstName = row.querySelector('input[id^="editComplainantFirstName"]').value.trim();
+        const middleName = row.querySelector('input[id^="editComplainantMiddleName"]').value.trim();
+        const lastName = row.querySelector('input[id^="editComplainantLastName"]').value.trim();
+
+        if (firstName && middleName && lastName) {
+            complainants.push({ firstName, middleName, lastName });
+        }
+    });
+
+    return complainants;
+}
+
+function getEditedComplainees() {
+    const rows = document.querySelectorAll('#editComplaineesContainer .form-row');
+    const complainees = [];
+
+    rows.forEach(row => {
+        const firstName = row.querySelector('input[id^="editComplaineeFirstName"]').value.trim();
+        const middleName = row.querySelector('input[id^="editComplaineeMiddleName"]').value.trim();
+        const lastName = row.querySelector('input[id^="editComplaineeLastName"]').value.trim();
+
+        if (firstName && middleName && lastName) {
+            complainees.push({ firstName, middleName, lastName });
+        }
+    });
+
+    return complainees;
+}
+
+// Edit Lupon Form Submission
+document.getElementById('editLuponForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const updatedLupon = {
+        petsa: document.getElementById('editDate').value,
+        usapinBlg: document.getElementById('editText').value,
+        complainants: getEditedComplainants(),
+        complainees: getEditedComplainees(),
+        sumbong: document.getElementById('editSumbong').value,
+        lunas: document.getElementById('editLunas').value,
+        reason: document.getElementById('editReason').value,
+        hearingStage: document.getElementById('editHearingStage').value,
+        hearingDate: document.getElementById('editHearingDate').value,
+        hearingTime: document.getElementById('editHearingTime').value,
+        status: document.getElementById('editStatus').value,
+    };
+
+    const luponId = document.getElementById('editId').value;
+
+    try {
+        const response = await fetch(`/update-lupon/${luponId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedLupon)
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            closeEditModal(); // Close the Edit Modal
+            fetchLuponData(); // Refresh the table to reflect the updates
+        } else {
+            alert('Failed to update Lupon');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+function closeEditModal() {
+    const editModal = document.getElementById('editModal');
+    editModal.style.display = 'none'; // Hide the modal
+}
+
+
+// EDITING KASUNDUAN
+function openEditKasunduanModal(id, date, time, complainants, complainees, kasunduan, justiceOnDuty, status) {
+    const editKasunduanModal = document.getElementById('editKasunduanModal');
+    editKasunduanModal.style.display = 'block';
+
+    // Populate the modal form fields with the data
+    document.getElementById('editKasunduanId').value = id;
+    document.getElementById('editKasunduanDate').value = date;
+    document.getElementById('editKasunduanTime').value = time;
+    document.getElementById('editKasunduanText').value = kasunduan;
+
+    // Populate complainants dynamically
+    const complainantContainer = document.getElementById('editKasunduanComplainantsContainer');
+    complainantContainer.innerHTML = ''; // Clear the existing input fields
+
+    complainants.forEach((complainant, index) => {
+        const complainantRow = document.createElement('div');
+        complainantRow.classList.add('form-row');
+        complainantRow.innerHTML = `
+        <div class="grid grid-cols-3 gap-2 mb-4">
+            <div>
+                <input type="text" id="editKasunduanComplainantFirstName${index}" value="${complainant.firstName}" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            <div>
+                <input type="text" id="editKasunduanComplainantMiddleName${index}" value="${complainant.middleName}" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            <div>
+                <input type="text" id="editKasunduanComplainantLastName${index}" value="${complainant.lastName}" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            </div>
+        `;
+        complainantContainer.appendChild(complainantRow);
+    });
+
+    // Populate complainees dynamically
+const complaineeContainer = document.getElementById('editKasunduanComplaineesContainer');
+complaineeContainer.innerHTML = ''; // Clear the existing input fields
+
+complainees.forEach((complainee, index) => {
+    const complaineeRow = document.createElement('div');
+    complaineeRow.classList.add('form-row');
+    complaineeRow.innerHTML = `
+    <div class="grid grid-cols-3 gap-2 mb-4">
+        <div>
+            <input type="text" id="editKasunduanComplaineeFirstName${index}" value="${complainee.firstName}" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+        </div>
+        <div>
+            <input type="text" id="editKasunduanComplaineeMiddleName${index}" value="${complainee.middleName}" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+        </div>
+        <div>
+            <input type="text" id="editKasunduanComplaineeLastName${index}" value="${complainee.lastName}" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+        </div>
+        </div>
+    `;
+    complaineeContainer.appendChild(complaineeRow);
+});
+
+    // Fetch and populate the Lupong Tagapamahala dropdown
+    const dropdown = document.getElementById('editKasunduanJusticeOnDuty');
+    dropdown.innerHTML = '<option value="" disabled>Select Lupong Tagapamahala</option>'; // Reset dropdown
+
+    // Fetch Lupon Tagapamahala members from the server and populate the dropdown
+    fetch('/fetch-pangkat-members')
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(member => {
+                const option = document.createElement('option');
+                option.value = `${member.firstName} ${member.middleName} ${member.lastName}`;
+                option.textContent = `${member.firstName} ${member.middleName} ${member.lastName}`;
+                dropdown.appendChild(option);
+            });
+
+            // Preselect the current justiceOnDuty value in the dropdown
+            dropdown.value = justiceOnDuty;
+        })
+        .catch(error => console.error('Error fetching Lupon Tagapamahala members:', error));
+
+    // Set the status
+    document.getElementById('editKasunduanStatus').value = status;
+}
+
+function getEditedKasunduanComplainants() {
+    const rows = document.querySelectorAll('#editKasunduanComplainantsContainer .form-row');
+    const complainants = [];
+
+    rows.forEach(row => {
+        const firstName = row.querySelector('input[id^="editKasunduanComplainantFirstName"]').value.trim();
+        const middleName = row.querySelector('input[id^="editKasunduanComplainantMiddleName"]').value.trim();
+        const lastName = row.querySelector('input[id^="editKasunduanComplainantLastName"]').value.trim();
+
+        if (firstName && middleName && lastName) {
+            complainants.push({ firstName, middleName, lastName });
+        }
+    });
+
+    return complainants;
+}
+
+function getEditedKasunduanComplainees() {
+    const rows = document.querySelectorAll('#editKasunduanComplaineesContainer .form-row');
+    const complainees = [];
+
+    rows.forEach(row => {
+        const firstName = row.querySelector('input[id^="editKasunduanComplaineeFirstName"]').value.trim();
+        const middleName = row.querySelector('input[id^="editKasunduanComplaineeMiddleName"]').value.trim();
+        const lastName = row.querySelector('input[id^="editKasunduanComplaineeLastName"]').value.trim();
+
+        if (firstName && middleName && lastName) {
+            complainees.push({ firstName, middleName, lastName });
+        }
+    });
+
+    return complainees;
+}
+
+
+document.getElementById('editKasunduanForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const updatedKasunduan = {
+        date: document.getElementById('editKasunduanDate').value,
+        time: document.getElementById('editKasunduanTime').value,
+        complainants: getEditedKasunduanComplainants(),
+        complainees: getEditedKasunduanComplainees(),
+        kasunduan: document.getElementById('editKasunduanText').value,
+        justiceOnDuty: document.getElementById('editKasunduanJusticeOnDuty').value,
+        status: document.getElementById('editKasunduanStatus').value,
+    };
+
+    const kasunduanId = document.getElementById('editKasunduanId').value;
+
+    try {
+        const response = await fetch(`/update-lupon-kasunduan/${kasunduanId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedKasunduan)
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            closeEditKasunduanModal(); // Close modal after submission
+            fetchKasunduanData(); // Refresh the table to show the updated entry
+        } else {
+            alert('Failed to update Kasunduan');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+function closeEditKasunduanModal() {
+    const editKasunduanModal = document.getElementById('editKasunduanModal');
+    editKasunduanModal.style.display = 'none'; // Hide the modal
+}
+
+// TO MAKE THE FORM CLOSE THROUGH CLICKING OUTSIDE
+window.onclick = function(event) {
+  const addLuponModal = document.getElementById('addModal');
+  const addKasunduanModal = document.getElementById('addKasunduanModal');
+
+  if (event.target == addLuponModal) {
+    addLuponModal.style.display = 'none';
+  }
+  
+  if (event.target == addKasunduanModal) {
+    addKasunduanModal.style.display = 'none';
+  }
+}
+
+// DELETING LUPON AND KASUNDUAN DATA
+async function deleteLupon(id) {
+    if (confirm('Are you sure you want to delete this entry?')) {
+        try {
+            const response = await fetch(`/delete-lupon/${id}`, {
+                method: 'DELETE',
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                fetchLuponData(); // Refresh the Lupon table
+            } else {
+                alert('Failed to delete Lupon entry');
+            }
+        } catch (error) {
+            console.error('Error deleting Lupon entry:', error);
+        }
+    }
+}
+
+async function deleteKasunduan(id) {
+    if (confirm('Are you sure you want to delete this entry?')) {
+        try {
+            const response = await fetch(`/delete-lupon-kasunduan/${id}`, {
+                method: 'DELETE',
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                fetchKasunduanData(); // Refresh the Kasunduan table
+            } else {
+                alert('Failed to delete Kasunduan entry');
+            }
+        } catch (error) {
+            console.error('Error deleting Kasunduan entry:', error);
+        }
+    }
+}
+
+// TRANSFER LUPON
+async function transferLupon(id) {
+    if (confirm('Are you sure you want to transfer this entry?')) {
+        try {
+            const response = await fetch(`/transfer-lupon/${id}`, {
+                method: 'PUT',
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                fetchLuponData(); // Refresh the Lupon table
+            } else {
+                alert('Failed to transfer Lupon entry');
+            }
+        } catch (error) {
+            console.error('Error transferring Lupon entry:', error);
+        }
+    }
+}
+
+async function transfertoCFA(id) {
+    try {
+        const response = await fetch(`/transfer-to-cfa/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert("Successfully transferred to CFA!");
+            // Optionally, reload or update the table to reflect the new status
+            fetchLuponData(); // Call this function if you have it to refresh the data
+        } else {
+            alert("Transfer failed: " + data.message);
+        }
+    } catch (error) {
+        console.error("Error transferring to CFA:", error);
+    }
+}
+
+
+// TRANSFER KASUNDUAN
+async function transferkasunduan(id) {
+    if (confirm('Are you sure you want to transfer this Kasunduan entry?')) {
+        try {
+            const response = await fetch(`/transfer-lupon-kasunduan/${id}`, {
+                method: 'PUT',
+            });
+
+            if (response.ok) {
+                const result = await response.json(); // Use JSON only if the response is JSON
+                if (result.success) {
+                    fetchKasunduanData(); // Refresh the Kasunduan table
+                } else {
+                    alert('Failed to transfer Kasunduan entry');
+                }
+            } else {
+                const errorText = await response.text(); // Catch plain text errors
+                alert(`Error: ${errorText}`);
+            }
+        } catch (error) {
+            console.error('Error transferring Kasunduan entry:', error);
+        }
+    }
+}
+
+function generatePatawag(id) { 
+  fetch(`/fetch-lupon/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Fetched Data:", data); // Log to check the API response
+      if (data) {
+        const complainantsText = data.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+        const complaineesText = data.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+
+        const params = new URLSearchParams({
+          date: data.petsa,
+          usapinBlg: data.usapinBlg,
+          nagsumbong: complainantsText,
+          labanKay: complaineesText,
+          sumbong: data.sumbong,
+          lunas: data.lunas,
+          hearingStage: data.hearingStage,
+          hearingDate: data.hearingDate,
+          hearingTime: data.hearingTime,
+        });
+
+        window.location.href = `generate-lupon-patawag.html?${params}`; 
+      }
+    })
+    .catch(error => console.error('Error fetching Lupon:', error));
+}
+
+function generateLupon(id) {
+  fetch(`/fetch-lupon/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Fetched Data:", data); // Log to check the API response
+      if (data) {
+        const complainantsText = data.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+        const complaineesText = data.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+
+        const params = new URLSearchParams({
+          date: data.petsa,
+          usapinBlg: data.usapinBlg,
+          nagsumbong: complainantsText,
+          labanKay: complaineesText,
+          sumbong: data.sumbong,
+          lunas: data.lunas,
+          hearingStage: data.hearingStage,
+          hearingDate: data.hearingDate,
+        });
+
+        window.location.href = `generate-lupon.html?${params}`;
+      }
+    })
+    .catch(error => console.error('Error fetching Lupon:', error));
+}
+
+
+function generateLuponKasunduan(id) {
+  fetch(`/fetch-lupon-kasunduan/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        const complainantsText = data.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+        const complaineesText = data.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+
+        const params = new URLSearchParams({
+          date: data.date,
+          time: data.time,
+          complainants: complainantsText,
+          complainees: complaineesText,
+          kasunduan: data.kasunduan,
+          justiceOnDuty: data.justiceOnDuty || data.LupongTagapamahala, // In case one is undefined
+        });
+
+        // Redirect to the new page with the populated parameters
+        window.location.href = `generate-lupon-kasunduan.html?${params}`;
+      }
+    })
+    .catch(error => console.error('Error fetching Kasunduan:', error));
+}
+
+let kasunduanComplainantCount = 1;
+let kasunduanComplaineeCount = 1;
+
+function addKasunduanComplainant() {
+  if (kasunduanComplainantCount >= 5) return alert("Maximum of 5 complainants only.");
+  
+  const container = document.getElementById('kasunduancomplainant-container');
+  const original = container.querySelector('.kasunduancomplainant-row');
+  const clone = original.cloneNode(true);
+
+  clone.querySelectorAll('input').forEach(input => input.value = '');
+
+  const btn = clone.querySelector('button');
+  btn.textContent = '-';
+  btn.onclick = function () {
+    clone.remove();
+    complainantCount--;
+  };
+
+  container.appendChild(clone);
+  complainantCount++;
+}
+
+function addKasunduanComplainee() {
+  if (kasunduanComplaineeCount >= 5) return alert("Maximum of 5 complainees only.");
+
+  const container = document.getElementById('kasunduancomplainee-container');
+  const original = container.querySelector('.kasunduancomplainee-row');
+  const clone = original.cloneNode(true);
+
+  clone.querySelectorAll('input').forEach(input => input.value = '');
+
+  const btn = clone.querySelector('button');
+  btn.textContent = '-';
+  btn.onclick = function () {
+    clone.remove();
+    complaineeCount--;
+  };
+
+  container.appendChild(clone);
+  complaineeCount++;
+}
+
+function fetchAdminProfilePicture() {
+    fetch('/admin-details-data')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const profilePicElement = document.getElementById('resident-profile-pic');
+            if (data.Profilepic) {
+                profilePicElement.src = data.Profilepic;
+            }
+        })
+        .catch(error => console.error('Error fetching profile picture:', error));
+}   
+
+//side notification count
+// Function to fetch total count of "Processing" requests across all collections
+function fetchTotalProcessingRequests() {
+    fetch('/count-all-processing-requests')
+        .then(response => response.json())
+        .then(data => {
+            const sidebarNotif = document.getElementById('sidebarNotif');
+            if (data.totalCount > 0) {
+                sidebarNotif.textContent = data.totalCount; // Show total count
+                sidebarNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                sidebarNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching total processing count:', error));
+}
+
+        function fetchTotalProcessingComplaints() {
+    fetch('/complaint-counts')
+        .then(response => response.json())
+        .then(data => {
+            const total =
+                (data.blotterCount || 0) +
+                (data.blotterKasunduanCount || 0) +
+                (data.luponCount || 0) +
+                (data.luponKasunduanCount || 0) +
+                (data.cfaCount || 0);
+
+            const complaintsNotif = document.getElementById('complaintsNotif');
+            if (complaintsNotif) {
+                complaintsNotif.textContent = total;
+                complaintsNotif.style.display = total > 0 ? 'inline-flex' : 'none';
+            }
+        })
+        .catch(error => console.error('Error fetching complaint counts:', error));
+}
+
+function fetchProcessingBarangayID() {
+    fetch('/count-processing-barangay-id')
+        .then(response => response.json())
+        .then(data => {
+            const barangayIDNotif = document.getElementById('barangayIDNotif');
+            if (data.barangayIdCount > 0) {
+                barangayIDNotif.textContent = data.barangayIdCount; // Show total count
+                barangayIDNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                barangayIDNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching Barangay ID count:', error));
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+                fetchAdminProfilePicture();
+                fetchTotalProcessingRequests();
+            fetchTotalProcessingComplaints();
+            fetchProcessingBarangayID();
+        });
+    </script>
+</body>
+</html>

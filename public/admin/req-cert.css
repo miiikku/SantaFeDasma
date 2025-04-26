@@ -1,0 +1,602 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 250px; /* Fixed width */
+    min-width: 250px; /* Ensure it doesn't shrink */
+    background-color: #2c662d;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; /* Ensure it takes full height */
+}
+.sidebar .Logo {
+    width: 100px;
+    margin-bottom: 20px;
+}
+.sidebar h1 {
+    font-size: 14px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.sidebar .sidenav {
+    margin-top: 30px;
+    flex-grow: 1; /* Ensure it grows to fill the space */
+}
+.sidebar .sidenav ul {
+    padding: 0;
+    list-style: none;
+}
+.sidebar .sidenav ul li {
+    padding: 20px 0;
+    border-radius: 15px;
+    font-weight: bold;
+}
+.sidebar .sidenav ul li:hover {
+    background-color: #8fb98e;
+}
+.sidebar .sidenav ul li:hover a {
+    color: black;
+}
+.sidebar .sidebar-link {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    padding-left: 20px;
+}
+.sidebar .sidebar-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+.sidebar .sidenav ul li a img {
+    transition: transform 0.3s ease;
+}
+.sidebar .sidenav ul li a:hover img {
+    transform: scale(1.5);
+    filter: brightness(0.100);
+}
+
+/* MAIN */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f1f1f1;
+    box-sizing: border-box;
+    overflow-y: auto; /* Ensure the content can scroll if it overflows */
+}
+.header {
+    background-color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    border-radius: 8px;
+}
+.header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+.header .user-info {
+    display: flex;
+    align-items: center;
+}
+.header .user-info img {
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.overview {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+}
+.overview .card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    flex: 1;
+    margin: 0 10px;
+}
+.vision-mission {
+    display: flex;
+    justify-content: space-around;
+}
+.vision-mission .card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex: 1;
+    margin: 0 10px;
+    text-align: center;
+}
+.vision-mission .card h3 {
+    margin-top: 0;
+    color: #2c662d;
+}
+
+
+
+/* LOGOUT DROPDOWN */
+.dropdown {
+    position: relative;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%; /* Align the dropdown below the button */
+    right: 0; /* Align the dropdown to the right */
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 8px;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+.show {
+    display: block;
+}
+
+/* NOTIFICATION */
+.notification-form {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 20px;
+}
+.notification-form form {
+    display: flex;
+    flex-direction: column;
+}
+.notification-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.notification-form input, .notification-form textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.notification-form textarea {
+    resize: none;
+}
+.notification-form button {
+    padding: 10px;
+    background-color: #2c662d;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.notification-form button:hover {
+    background-color: #8fb98e;
+}
+
+/* USER AND ADMIN ACCOUNT */
+.account-content {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin: 20px;
+}
+
+/* DITO AQ MAY INEDIT */
+.search-and-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.search-box input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 200px;
+    margin-right: 10px;
+}
+
+.filter-box select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+
+
+.account-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+.account-table th, .account-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.account-table th {
+    background-color: #2c662d;
+    color: #fff;
+}
+.account-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+.account-actions .add-btn, .account-actions .delete-btn, .edit-btn {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.account-actions .add-btn {
+    background-color: #007BFF;
+    color: white;
+}
+.account-actions .add-btn:hover {
+    background-color: #0056b3;
+}
+.account-actions .delete-btn {
+    background-color: #FF0000;
+    color: white;
+}
+.account-actions .delete-btn:hover {
+    background-color: #b30000;
+}
+
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2 {
+    text-align: center;
+    color: #2c662d;
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Close Button */
+.modal-content .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.modal-content .close:hover,
+.modal-content .close:focus {
+    color: #2c662d;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Form Row and Group */
+.form-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.floating-label {
+    position: relative;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.floating-label.full-width {
+    flex: 1 1 100%;
+}
+
+.floating-label input,
+.floating-label select,
+.floating-label textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f1f1f1;
+}
+
+textarea {
+    resize: none;
+}
+
+.floating-label label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    padding: 0 5px;
+    background-color: white;
+    color: #999;
+    transition: 0.2s ease all;
+    pointer-events: none;
+    font-size: 16px;
+}
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label,
+.floating-label select:focus + label,
+.floating-label select:not([value=""]) + label,
+.floating-label textarea:focus + label,
+.floating-label textarea:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #005f27;
+}
+
+.floating-label input:focus,
+.floating-label select:focus,
+.floating-label textarea:focus {
+    outline: none;
+    border-color: #005f27;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.button-container button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.add-btn, .edit-btn {
+    background-color: #007BFF;
+    color: white;
+}
+
+.add-btn:hover, .edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.cancel-btn {
+    background-color: #FF0000;
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #b30000;
+}
+
+.table-image {
+    width: 50px; /* Set a width that fits well within your table cell */
+    height: auto; /* Maintain the aspect ratio */
+    object-fit: cover; /* Ensure the image covers the space without distortion */
+}
+
+/* ICON ACTION */
+.edit-icon, .delete-icon, .view-icon, .transfer-icon, .generate-icon {
+    width: 20px; /* Set the desired width */
+    height: 20px; /* Set the desired height */
+    transition: transform 0.2s; /* Optional: Add a hover effect */
+}
+
+.edit-icon:hover, .delete-icon:hover, .view-icon:hover, .transfer-icon:hover, .generate-icon:hover {
+    transform: scale(1.2); /* Example hover effect: zoom in */
+}
+
+/* User Profile styles */
+.profile-header {
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.profile-pic {
+    border-radius: 50%;
+    margin-right: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+.profile-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #f5f5f5;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detail-group {
+    display: flex;
+    justify-content: space-between;
+    width: 45%;
+    padding: 10px 0;
+}
+
+.detail-group label {
+    font-weight: bold;
+    width: 40%;
+}
+
+.detail-group span {
+    width: 60%;
+}
+
+.recent-transactions {
+    background-color: #f5f5f5;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recent-transactions h2, .recent-transactions h3 {
+    margin-top: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #005f27;
+    color: white;
+}
+
+/* BAGONG LAGAY FOR FLORATING LABELS ADMIN SIDE */
+
+/* Floating Label Styles */
+.floating-label {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.floating-label input,
+.floating-label select,
+.floating-label textarea {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+    background-color: #f1f1f1;
+    appearance: none; /* Remove default arrow on select */
+}
+
+.floating-label label {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    background-color: white;
+    color: #999;
+    padding: 0 5px;
+    transition: 0.2s ease all;
+    pointer-events: none;
+    font-size: 16px;
+}
+
+.floating-label input:focus + label,
+.floating-label input:not(:placeholder-shown) + label,
+.floating-label select:focus + label,
+.floating-label select:not([value=""]) + label,
+.floating-label textarea:focus + label,
+.floating-label textarea:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: #005f27;
+}
+
+.floating-label input:focus,
+.floating-label select:focus,
+.floating-label textarea:focus {
+    outline: none;
+    border-color: #005f27;
+}
+
+.form-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.form-row .floating-label {
+    flex: 1;
+}
+
+/* Additional Flexbox adjustments */
+.form-row .form-group {
+    flex: 1 1 calc(33.333% - 10px);
+    min-width: calc(33.333% - 10px);
+}
+
+/* Ensure file input does not stretch the whole row */
+.form-row .file-input {
+    margin-top: 15px;
+    margin-bottom: 15px; /* Increased margin below the file input */
+}
+
+/* Adjust spacing for name fields */
+.form-row.name-fields {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px; /* Add some margin above the name fields */
+}
+
+/* General styling for form rows to ensure consistent spacing */
+.form-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 15px; /* Add margin between each row */
+}

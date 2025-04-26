@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Barangay Certification</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/styles/styles.css">
+    <style>
+        /* Styling similar to generate-clearance and generate-indigency */
+        .certificate-container {
+            margin: 0 auto;
+            font-family: 'Century Gothic', serif;
+            font-size: 12pt;
+            position: relative;
+        }
+
+        /* Header design */
+        .header-barangay {
+            width: 100%;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, #9cf4a1, #b2d7b5);
+            padding: 10px 0;
+            margin-bottom: 10px;
+            border-bottom: 3px solid black;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .header-barangay h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 0;
+            font-family: 'Georgia', serif;
+            margin-left: 110px;
+            text-align: left;
+        }
+
+        .header-barangay h2 {
+            font-size: 12pt;
+            margin: 0;
+            font-family: 'Georgia', serif;
+            margin-left: 110px;
+            text-align: left;
+        }
+
+        .header-barangay h3 {
+            font-size: 16pt;
+            margin: 5px 0 0 0;
+            color: green;
+            text-transform: uppercase;
+            font-family: 'Georgia', serif;
+            margin-right: 75px;
+            text-align: right;
+        }
+
+        .header-barangay img {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            width: 90px;
+        }
+
+        .header-two-logo {
+            position: absolute;
+            right: 250px;
+            top: 1px;
+        }
+
+        .header-two-logo img {
+            width: 120px;
+            height: auto;
+        }
+
+        .certificate-body {
+            margin-left: 20px;
+            margin-right: 20px;
+            font-family: 'Century Gothic', serif;
+            font-size: 12pt;
+        }
+
+        .name-block {
+            font-family: 'Century Gothic', serif;
+            font-size: 10pt;
+            text-align: left;
+            margin-left: 20px;
+        }
+
+        .export-print-buttons {
+            margin: 20px 0;
+            text-align: right;
+        }
+
+        .export-print-buttons button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .export-print-buttons .export-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .export-print-buttons .print-btn {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        @media print {
+    /* Hide the "Generate Barangay Certification" title */
+    .header {
+        display: none !important; /* Hides the "Generate Barangay Certification" title */
+    }
+
+    /* Remove gray background from the body and set it to white */
+    body, .certificate-container {
+        background-color: white !important; /* Ensures white background */
+    }
+
+    /* Hide sidebar and export/print buttons during print */
+    .sidebar, .export-print-buttons {
+        display: none !important;
+    }
+
+    /* Ensure the header gradient prints correctly */
+    .header-barangay {
+        background: linear-gradient(to bottom, #9cf4a1, #b2d7b5) !important;
+        -webkit-print-color-adjust: exact; /* Makes sure background colors appear correctly on print */
+        print-color-adjust: exact;
+    }
+
+    /* Show logos properly during printing */
+    .header-barangay img {
+        display: block !important;
+    }
+
+    /* Ensure the text content in the certificate is printed in black with larger font size */
+    .certificate-body, .barangay-chairman-name, .name-block, .label, .date-time {
+        color: black;
+        font-size: 18px; /* Increase font size for printing clarity */
+    }
+
+    /* Adjust layout for print to fit the entire page */
+    .main-content {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+}
+
+
+        /* Footer Section */
+        .barangay-chairman-name {
+            text-align: center;
+            font-family: 'Century Gothic', serif;
+            margin-top: 30px;
+        }
+
+        .certification-title {
+            text-align: center;
+        }
+
+        .barangay-chairman-name {
+            text-align: left;
+        }
+
+        .towhom-text, .certify-text, .certDescription, .issuedUpon-text, .issued-text, .barangay-chairman-name {
+            font-family: 'Century Gothic', serif;
+            font-size: 12pt;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <center>
+            <img src="https://www.dropbox.com/scl/fi/94o2cqiknm3a4dasbyz1q/sidebarlogo.png?rlkey=9suwtde1z2qk3ea73d64yt5he&st=13kmqf8k&dl=1" class="Logo">
+            <h1>BARANGAY SANTA FE<br>CITY OF DASMARIÑAS</h1>
+        </center>
+        <div class="sidenav">
+            <ul>
+                <li><a href="dashboard.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/es7o8fr6dw2vkkywjpg66/dashboard.png?rlkey=pp0dy252j9wao81jpz1n50f4p&st=83lbnbnz&dl=1" class="sidebar-icon">Dashboard</a></li>
+                <li><a href="notification.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/te9qkrjtunarm8znvfs1w/notification.png?rlkey=kqzy50yimgtro1l8caiqnqbua&st=4zuvr1p0&dl=1" class="sidebar-icon">Notification</a></li>
+                <li><a href="user-account.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccount.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=4ko3y2wy&dl=1" class="sidebar-icon">User Account</a></li>
+                <li><a href="residents.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/e57yqafcdt0z58wbgvv9e/residents.png?rlkey=wcqigcrhwveax3qubldx0qaql&st=np6th3hf&dl=1" class="sidebar-icon">Residents</a></li>
+                <li><a href="complaints.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/kbs0xnrc9usw40lv30clw/scales-of-justice.png?rlkey=d36ewu4dge121egpw53qri8mf&st=r04p7f12&dl=1" class="sidebar-icon">Complaints</a></li>
+                <li><a href="barangay-id.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" class="sidebar-icon">Barangay ID</a></li>
+                <li><a href="request.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/idqomcr0ujnsmd54ktpu5/quote-request.png?rlkey=swquji94hs61jlr8y0p992s0n&st=vkr8y4i7&dl=1" class="sidebar-icon">Requests</a></li>
+                <li><a href="module.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/olqdewf6h2pi148jw0j2p/maintenance.png?rlkey=5rnv8iajpbytp799jgyvs6cqa&st=9qpfgd82&dl=1" class="sidebar-icon">Maintenance</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h2>Generate Certification</h2>
+            <div class="user-info">
+                <div class="dropdown">
+                    <img src="https://www.dropbox.com/scl/fi/oedqyjb59kspzdylesk6y/user.png?rlkey=1axl685fxswp7olj90dbgu53y&st=7jh50r8n&dl=1" alt="User Avatar" class="dropbtn" onclick="toggleDropdown()">
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="admin-details.html" onclick="viewProfile()">User Profile</a>
+                        <a href="module.html">Maintenance</a>
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-barangay">
+            <img src="https://www.dropbox.com/scl/fi/14aqli76v3qnysocj1xin/generateLOGO.png?rlkey=q5nxwu5nh94lekglr8p55z01g&st=nph69ivj&dl=1" alt="Barangay Logo">
+            <h2>Republic of the Philippines</h2>
+            <h2>Province of Cavite</h2>
+            <h1>City of Dasmariñas</h1>
+            <div class="separator-line"></div>
+            <div class="header-two-logo">
+                <img src="https://www.dropbox.com/scl/fi/zp2ptp9efgo3thn7jgdtj/FINALheadertwo.png?rlkey=nzvg8dca2lygkjp0r9ruq4ay9&st=8siirakz&dl=1" style="float: right" alt="Barangay Two Logo">
+            </div>
+            <h3>BARANGAY STA. FE</h3>
+        </div>
+        
+
+        <div class="certificate-body">
+            <div class="certification-title">
+                <h3>CERTIFICATION<h3>
+            </div>
+
+            <div class="towhom-text">
+                <p>To whom it may concern,</p><br>
+            </div>
+
+            <div class="certify-text">
+                <p>This is to certify that <strong><span id="certNameInline"></span></strong>, 
+                <strong><span id="certAgeInline"></span></strong>, is a bonafide resident of 
+                <strong><span id="certAddressInline"></span></strong>.</p>
+            </div>
+            
+            
+            <p><span id="certDescription"></span></p><br>
+
+            <div class="issuedUpon-text">
+                <p>This certification is issued upon the request of <strong><span id="certNameRequest"></span></strong> for <strong><span id="certPurposeRequest"></span></strong> for whatever legal purpose/s it may serve him/her best.</p><br>
+            </div>
+
+            <div class="issued-text">
+                <p>Issued this <strong><span id="certDay"></span><span id="certDaySuffix"></span></strong> day of <strong><span id="certMonth"></span></strong>, <strong><span id="certYear"></span></strong> at Barangay Santa Fe, City of Dasmariñas, Cavite.</p><br>
+            </div>
+            
+            <div class="barangay-chairman-name">
+                <p>Certified By:</p><br>
+                <b><p id="chairman">HON. EMMANUEL B. NOORA</p></b>
+                <p id="position">Punong Barangay</p>
+            </div>
+            
+        </div>
+
+        <!-- Footer Section for the Barangay Chairman -->
+        
+
+        <!-- Export and Print Buttons -->
+        <div class="export-print-buttons">
+            <button class="export-btn" onclick="exportToPDF()">Export as PDF</button>
+            <button class="print-btn" onclick="window.print()">Print</button>
+        </div>
+    </div>
+    <script src="/public/js/sessionTimeout.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', async function () {
+    // Fetch Punong Barangay name from the server
+    try {
+        const response = await fetch('/fetch-punong-barangay');
+        const data = await response.json();
+        
+        if (response.ok) {
+            // Update the chairman's name dynamically and convert it to uppercase
+            document.getElementById('chairman').textContent = `HON. ${data.name.toUpperCase()}`;
+        } else {
+            console.error(data.message);
+            document.getElementById('chairman').textContent = 'PUNONG BARANGAY NOT FOUND';
+        }
+    } catch (error) {
+        console.error("Error fetching Punong Barangay name:", error);
+        document.getElementById('chairman').textContent = 'ERROR FETCHING PUNONG BARANGAY';
+    }
+
+    // Fill in the certificate details from the URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name') || 'N/A';
+    const age = params.get('age') || 'N/A';
+    const address = params.get('address') || 'N/A';
+    const description = params.get('description') || 'N/A';
+    const purpose = params.get('purpose') || 'N/A';
+    const dateIssued = params.get('dateIssued') || new Date().toISOString().split('T')[0];
+
+    // Handle age logic for singular or plural
+    const ageText = age === '1' ? 'year old' : 'years old';
+    document.getElementById('certAgeInline').textContent = `${age} ${ageText}`;
+
+    // Dynamically fill other inline certification text
+    document.getElementById('certNameInline').textContent = name;
+    document.getElementById('certAddressInline').textContent = address;
+    document.getElementById('certDescription').textContent = description;
+    document.getElementById('certNameRequest').textContent = name;
+    document.getElementById('certPurposeRequest').textContent = purpose;
+
+    // Fill in the date components (assume dateIssued is in format YYYY-MM-DD)
+    const date = new Date(dateIssued);
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    const year = date.getFullYear();
+    
+    document.getElementById('certDay').textContent = day;
+    document.getElementById('certMonth').textContent = month;
+    document.getElementById('certYear').textContent = year;
+
+    // Determine and append the correct ordinal suffix (th, nd, st, rd)
+    document.getElementById('certDaySuffix').textContent = getOrdinalSuffix(day);
+});
+
+// Function to get ordinal suffix based on the day
+function getOrdinalSuffix(day) {
+    if (day > 3 && day < 21) return 'th'; // 11th - 20th are 'th'
+    switch (day % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+    }
+}
+
+function exportToPDF() {
+    // Hide buttons for PDF export
+    document.querySelector('.export-print-buttons').style.display = 'none';
+    document.body.style.backgroundColor = 'white';
+
+    const element = document.querySelector('.main-content');
+    const opt = {
+        margin: 0.5,
+        filename: 'Barangay_Certification.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    // Generate PDF
+    html2pdf().from(element).set(opt).save().then(() => {
+        // Restore visibility after export
+        document.querySelector('.header').style.display = 'block';
+        document.querySelector('.export-print-buttons').style.display = 'block';
+        document.body.style.backgroundColor = "";  
+        document.querySelector('.main-content').style.backgroundColor = "";  
+    });
+}
+
+function toggleDropdown() {
+    var dropdown = document.getElementById("myDropdown");
+    if (dropdown) {
+        dropdown.classList.toggle("show");
+    } else {
+        console.error("Dropdown element not found");
+    }
+}
+
+window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        for (var i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    }
+}
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</body>
+</html>

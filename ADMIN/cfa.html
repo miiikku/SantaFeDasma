@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Certification to File Action</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter m-0 p-0 bg-gray-100 flex min-h-screen overflow-x-hidden">
+
+    <!-- Sidebar (Visible on larger screens) -->
+    <div class="sidebar w-80 bg-green-900 text-white p-4 flex flex-col justify-between h-auto hidden md:block">
+        <center>
+            <img src="https://www.dropbox.com/scl/fi/94o2cqiknm3a4dasbyz1q/sidebarlogo.png?rlkey=9suwtde1z2qk3ea73d64yt5he&st=13kmqf8k&dl=1" alt="Barangay Santa Fe Logo" class="w-36 mb-4">
+            <h1 class="text-sm text-center font-inter font-bold">BARANGAY SANTA FE<br>CITY OF DASMARIÑAS</h1>
+        </center>
+        <div class="sidenav mt-8 flex-grow">
+            <ul class="space-y-4">
+                <li><a href="dashboard.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/es7o8fr6dw2vkkywjpg66/dashboard.png?rlkey=pp0dy252j9wao81jpz1n50f4p&st=83lbnbnz&dl=1" class="w-5 h-5 ">
+                        <span class="ml-3">Dashboard</span></a></li>
+                
+                <li><a href="notification.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/te9qkrjtunarm8znvfs1w/notification.png?rlkey=kqzy50yimgtro1l8caiqnqbua&st=4zuvr1p0&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Notification</span></a></li>
+
+                <li><a href="user-account.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccount.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=4ko3y2wy&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">User Account</span></a></li>
+
+                <li><a href="residents.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/e57yqafcdt0z58wbgvv9e/residents.png?rlkey=wcqigcrhwveax3qubldx0qaql&st=np6th3hf&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Residents</span></a></li>
+
+                <li class="relative">
+                    <a href="complaints.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/kbs0xnrc9usw40lv30clw/scales-of-justice.png?rlkey=d36ewu4dge121egpw53qri8mf&st=r04p7f12&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Complaints</span></a>
+                        <span id="complaintsNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+
+                <li class="relative">
+                    <a href="barangay-id.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Barangay ID</span></a>
+                        <span id="barangayIDNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+
+                <li class="relative">
+                    <a href="request.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/idqomcr0ujnsmd54ktpu5/quote-request.png?rlkey=swquji94hs61jlr8y0p992s0n&st=vkr8y4i7&dl=1" class="w-5 h-5">
+                        <span class="ml-3">Requests</span></a>
+                        <span id="sidebarNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+                
+                <li><a href="module.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                    <img src="https://www.dropbox.com/scl/fi/olqdewf6h2pi148jw0j2p/maintenance.png?rlkey=5rnv8iajpbytp799jgyvs6cqa&st=dn26ng5a&dl=1" class="w-5 h-5">
+                    <span class="ml-3">Maintenance</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Menu (for smaller screens) -->
+    <div id="bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 bg-green-900 text-white p-3 font-inter">
+        <div class="flex overflow-x-auto space-x-6 px-4 py-2">
+            <!-- Dashboard Icon -->
+            <a href="dashboard.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/es7o8fr6dw2vkkywjpg66/dashboard.png?rlkey=pp0dy252j9wao81jpz1n50f4p&st=83lbnbnz&dl=1" class="w-6 h-6">
+                <span class="text-xs">Dashboard</span>
+            </a>
+            <!-- Notification Icon -->
+            <a href="notification.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/te9qkrjtunarm8znvfs1w/notification.png?rlkey=kqzy50yimgtro1l8caiqnqbua&st=4zuvr1p0&dl=1" class="w-6 h-6">
+                <span class="text-xs">Notification</span>
+            </a>
+            <!-- User Account Icon -->
+            <a href="user-account.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccount.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=4ko3y2wy&dl=1" class="w-6 h-6">
+                <span class="text-xs">Account</span>
+            </a>
+            <!-- Residents Icon -->
+            <a href="residents.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/e57yqafcdt0z58wbgvv9e/residents.png?rlkey=wcqigcrhwveax3qubldx0qaql&st=np6th3hf&dl=1" class="w-6 h-6">
+                <span class="text-xs">Residents</span>
+            </a>
+            <!-- Complaints Icon -->
+            <a href="complaints.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/kbs0xnrc9usw40lv30clw/scales-of-justice.png?rlkey=d36ewu4dge121egpw53qri8mf&st=r04p7f12&dl=1" class="w-6 h-6">
+                <span class="text-xs">Complaints</span>
+            </a>
+            <!-- Barangay ID Icon -->
+            <a href="barangay-id.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" class="w-6 h-6">
+                <span class="text-xs">ID</span>
+            </a>
+            <!-- Requests Icon -->
+            <a href="request.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/idqomcr0ujnsmd54ktpu5/quote-request.png?rlkey=swquji94hs61jlr8y0p992s0n&st=vkr8y4i7&dl=1" class="w-6 h-6">
+                <span class="text-xs">Requests</span>
+            </a>
+            <!-- Maintenance Icon -->
+            <a href="module.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/olqdewf6h2pi148jw0j2p/maintenance.png?rlkey=5rnv8iajpbytp799jgyvs6cqa&st=dn26ng5a&dl=1" class="w-6 h-6">
+                <span class="text-xs">Maintenance</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content flex-grow p-6 bg-gray-100 max-w-full pb-24">
+        <div class="header flex justify-between items-center bg-white p-4 shadow-md rounded-xl">
+            <h2 class="text-2xl font-semibold">Certification to File Action</h2>
+            <div class="user-info flex items-center space-x-4">
+                <!-- User Avatar -->
+                <div class="dropdown relative">
+                    <img id="resident-profile-pic" src="" 
+                         alt="User Avatar" 
+                         class="w-8 h-8 rounded-full cursor-pointer" onclick="toggleDropdown()">
+                
+                    <!-- User Profile Popup -->
+                    <div id="user-popup" class="user-popup hidden absolute right-0 top-10 bg-white shadow-lg p-4 rounded-lg w-64 border border-gray-200">
+                        <div class="user-header flex justify-between items-center border-b border-gray-300 pb-2 mb-3">
+                            <span class="text-lg font-semibold text-gray-800">Admin Options</span>
+                            <span class="close-btn cursor-pointer font-bold text-xl text-gray-600 hover:text-gray-800" onclick="toggleDropdown()">&times;</span>
+                        </div>
+                        <div class="user-content space-y-2">
+                            <a href="admin-details.html" class="block text-gray-800 hover:text-green-600 transition-colors duration-200">User Profile</a>
+                            <a href="module.html" class="block text-gray-800 hover:text-yellow-600 transition-colors duration-200">Maintenance</a>
+                            <a href="#" onclick="logout()" class="block text-gray-800 hover:text-red-600 transition-colors duration-200">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Actions Section -->
+        <div class="mb-2 flex items-center justify-end gap-6 p-6">
+            <!-- Search Input -->
+            <div class="w-full sm:w-auto">
+                <input type="text" id="searchInput" placeholder="Search..." oninput="searchCFA()" class="ml-auto w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-800">
+            </div>
+
+        <!-- Filter Dropdown -->
+        <div class="w-full sm:w-auto">
+            <select onchange="navigateToPage(this)" class="ml-auto w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800 overflow-hidden text-ellipsis">
+                <option value="cfa.html" selected>Processing</option>
+                <option value="cfa-complete.html">Completed</option>
+            </select>
+        </div>
+        </div>
+
+        <!-- Completed CFA Table -->
+        <div class="account-content bg-white p-6 rounded-lg shadow-md overflow-x-auto mb-8">
+            <h3 class="text-xl font-semibold text-gray-800">Certification to File Action</h3>
+            <div class="overflow-x-auto mt-4 max-h-[500px] relative">
+                <table class="min-w-full table-auto border-collapse border border-gray-300">
+                    <thead class="bg-green-800">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Brgy Case No</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">For (Reason)</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Complainant</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Complainee</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Date Issued</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Pangkat Chairperson</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Pangkat Member</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Pangkat Member</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Status</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="completed-cfa-table-body">
+                        <!-- CFA Rows will be dynamically inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+  <!-- Edit CFA Modal -->
+  <div id="editCFAModal" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="modal-content bg-white p-4 rounded-lg shadow-xl w-full max-w-xl mx-auto mt-24 sm:mt-24 px-4 relative">
+        <span class="close absolute top-4 right-4 text-3xl font-bold cursor-pointer text-gray-300 hover:text-green-800" onclick="closeEditCFAModal()">&times;</span>
+                <h2 class="text-2xl font-semibold text-green-800 mb-4 text-center">Edit CFA</h2>
+      <form id="editCFAForm">
+        <input type="hidden" id="editCFAId" name="id">
+
+        <!-- Brgy Case No, For (Reason) -->
+        <div class="grid grid-cols-2 gap-2 mb-4">
+          <div>
+            <input type="text" id="editBrgyCaseNo" name="brgyCaseNo" placeholder="Brgy Case No" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+          </div>
+          <div>
+            <input type="text" id="editReason" name="reason" placeholder="For (Reason)" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+          </div>
+        </div>
+
+        <!-- Complainant Fields -->
+        <div>
+            <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+          <div id="editComplainantsContainer"></div>
+      </div>
+      
+      <!-- Complainee Fields -->
+      <div>
+        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainee Details</label>
+          <div id="editComplaineesContainer"></div>
+      </div>
+
+      <!-- Date Issued and Select Chairperson -->
+      <div class="grid grid-cols-2 gap-2 mb-4">
+          <div>
+            <input type="date" id="editDateIssued" name="dateIssued" placeholder="Date Issued" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+          </div>
+
+          <div>
+            <select id="editPangkatChairperson" name="pangkatChairperson" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+              <option value="" disabled>Select Chairperson</option>
+              <!-- Options will be dynamically populated -->
+          </select>
+          </div>
+        </div>
+
+        <!-- Pangkat Member 1, Pangkat Member 2, and Status -->
+        <div class="grid grid-cols-3 gap-2 mb-4">
+          <div>
+            <select id="editPangkatMember1" name="pangkatMember1" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+              <option value="" disabled>Select Member 1</option>
+              <!-- Options will be dynamically populated -->
+          </select>
+          </div>
+
+          <div>
+            <select id="editPangkatMember2" name="pangkatMember2" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+              <option value="" disabled>Select Member 2</option>
+              <!-- Options will be dynamically populated -->
+          </select>
+          </div>
+
+        <div>
+          <select id="editStatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            <option value="" disabled selected>Status</option>
+            <option value="Processing">Processing</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+    </div>
+
+    <div class="flex justify-end gap-4">
+        <button type="submit" class="bg-green-800 text-white px-6 py-2 rounded-md hover:bg-green-700 text-sm">Save</button>
+        <button type="button" class="bg-gray-200 text-black px-6 py-2 rounded-md hover:bg-gray-400 text-sm" onclick="closeEditCFAModal()">Cancel</button>
+    </div>
+</form>
+</div>
+</div>
+    
+  
+
+        <script src="public/styles/script.js"></script>
+        <script src="/public/js/sessionTimeout.js"></script>
+        <script>
+          //SEARCH
+          function searchCFA() {
+    // Get the search input value
+    const searchValue = document.querySelector('#searchInput').value.toLowerCase();
+
+    // Search Completed CFA Table
+    const cfaRows = document.querySelectorAll('#completed-cfa-table-body tr');
+    cfaRows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const matches = Array.from(cells).some(cell => 
+            cell.textContent.toLowerCase().includes(searchValue)
+        );
+        if (matches) {
+            row.style.display = ''; // Show the row
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+}
+
+             // DISPLAY THE MONGO DB TABLE
+  function fetchCFAData() {
+    fetch('/fetch-cfa-data')
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.getElementById('completed-cfa-table-body');
+        tableBody.innerHTML = ''; // Clear any existing data
+        
+        data.forEach(entry => {
+          const complainantsText = entry.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ') || '';
+          const complaineesText = entry.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ') || '';
+
+    
+    const row = document.createElement('tr');
+    row.classList.add('border-b', 'border-gray-300');
+    row.innerHTML = `
+        <td class="px-4 py-2">${entry.brgyCaseNo}</td>
+        <td class="px-4 py-2">${entry.reason}</td>
+        <td class="px-4 py-2">${complainantsText}</td>
+        <td class="px-4 py-2">${complaineesText}</td>
+        <td class="px-4 py-2">${entry.dateIssued}</td>
+        <td class="px-4 py-2">${entry.pangkatChairperson}</td>
+        <td class="px-4 py-2">${entry.pangkatMember1}</td>
+        <td class="px-4 py-2">${entry.pangkatMember2}</td>
+        <td class="px-4 py-2">${entry.status}</td>
+        <td class="px-4 py-2"><div class="flex items-center space-x-1">
+            <a href="#"><img src="https://www.dropbox.com/scl/fi/u6i83geituweeaybi8y9w/pen.png?rlkey=5f7vjmsrn42d1t0iaxdu3jbjy&st=0sk8r60h&dl=1" alt="Edit" class="edit-icon" onclick='openEditModal(${JSON.stringify(entry._id)}, ${JSON.stringify(entry.brgyCaseNo)}, ${JSON.stringify(entry.reason)}, ${JSON.stringify(entry.complainants)}, ${JSON.stringify(entry.complainees)}, ${JSON.stringify(entry.dateIssued)}, ${JSON.stringify(entry.pangkatChairperson)}, ${JSON.stringify(entry.pangkatMember1)}, ${JSON.stringify(entry.pangkatMember2)}, ${JSON.stringify(entry.status)})'></a>
+            <a href="#"><img src="https://www.dropbox.com/scl/fi/ho6y40rqr930v22ja9219/delete.png?rlkey=b1xjg0s1v3rnrgjx1n5v2usgm&st=xgbxk20f&dl=1" alt="Delete" class="delete-icon" onclick="deleteCFA('${entry._id}')"></a>
+            <a href="#"><img src="https://www.dropbox.com/scl/fi/v185qat4whwt769dbbbya/blueDocument.png?rlkey=uy1zoguvwgxd55x7sw6ki8c6h&st=4jg7gfil&dl=1" alt="Generate" class="generate-icon" onclick="generateCFA('${entry._id}')"></a>
+            ${entry.status === 'Completed' ? `<a href="#"><img src="https://www.dropbox.com/scl/fi/brbnzjxfdeqjerssseaxc/checked.png?rlkey=yinbka4wjvra6n5dxazi4l13a&st=wpwljnp2&dl=1" alt="Transfer" class="transfer-icon" onclick="transferCFA('${entry._id}')"></a>` : ''}
+          </div></td>
+          `;
+          tableBody.appendChild(row);
+        });
+      })
+      .catch(error => console.error('Error fetching CFA data:', error));
+  }
+
+  // Call the function when the page loads
+  window.onload = fetchCFAData;
+
+// EDITING CFA
+function openEditModal(id, brgyCaseNo, reason, complainants, complainees, dateIssued, pangkatChairperson, pangkatMember1, pangkatMember2, status) {
+    document.getElementById("editCFAId").value = id;
+    document.getElementById("editBrgyCaseNo").value = brgyCaseNo;
+    document.getElementById("editReason").value = reason;
+    document.getElementById("editDateIssued").value = dateIssued;
+    document.getElementById("editStatus").value = status;
+
+    // Dynamically fill complainants
+    const complainantContainer = document.getElementById("editComplainantsContainer");
+    complainantContainer.innerHTML = "";
+    complainants.forEach((c, i) => {
+        complainantContainer.innerHTML += `
+            <div class="form-row">
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                <div class="floating-label">
+                    <input type="text" id="editComplainantFirstName${i}" value="${c.firstName}" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div class="floating-label">
+                    <input type="text" id="editComplainantMiddleName${i}" value="${c.middleName}" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div class="floating-label">
+                    <input type="text" id="editComplainantLastName${i}" value="${c.lastName}" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+        `;
+    });
+
+    // Dynamically fill complainees
+    const complaineeContainer = document.getElementById("editComplaineesContainer");
+    complaineeContainer.innerHTML = "";
+    complainees.forEach((c, i) => {
+        complaineeContainer.innerHTML += `
+            <div class="form-row">
+                <div class="grid grid-cols-3 gap-2 mb-4">
+                <div class="floating-label">
+                    <input type="text" id="editComplaineeFirstName${i}" value="${c.firstName}" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div class="floating-label">
+                    <input type="text" id="editComplaineeMiddleName${i}" value="${c.middleName}" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div class="floating-label">
+                    <input type="text" id="editComplaineeLastName${i}" value="${c.lastName}" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+            </div>
+        `;
+    });
+
+    Promise.all([
+        fetchPangkatChairperson('editPangkatChairperson'),
+        fetchPangkatMembers('editPangkatMember1', 'editPangkatMember2')
+    ]).then(() => {
+        document.getElementById("editPangkatChairperson").value = pangkatChairperson;
+        document.getElementById("editPangkatMember1").value = pangkatMember1;
+        document.getElementById("editPangkatMember2").value = pangkatMember2;
+    });
+
+    document.getElementById("editCFAModal").style.display = "block";
+}
+
+
+function closeEditCFAModal() {
+  document.getElementById("editCFAModal").style.display = "none";
+}
+
+// Close modal when clicking outside of it
+window.onclick = function(event) {
+  const modal = document.getElementById("editCFAModal");
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+
+function getEditedComplainants() {
+    const rows = document.querySelectorAll('#editComplainantsContainer .form-row');
+    const result = [];
+
+    rows.forEach((row, i) => {
+        result.push({
+            firstName: row.querySelector(`#editComplainantFirstName${i}`).value.trim(),
+            middleName: row.querySelector(`#editComplainantMiddleName${i}`).value.trim(),
+            lastName: row.querySelector(`#editComplainantLastName${i}`).value.trim()
+        });
+    });
+
+    return result;
+}
+
+function getEditedComplainees() {
+    const rows = document.querySelectorAll('#editComplaineesContainer .form-row');
+    const result = [];
+
+    rows.forEach((row, i) => {
+        result.push({
+            firstName: row.querySelector(`#editComplaineeFirstName${i}`).value.trim(),
+            middleName: row.querySelector(`#editComplaineeMiddleName${i}`).value.trim(),
+            lastName: row.querySelector(`#editComplaineeLastName${i}`).value.trim()
+        });
+    });
+
+    return result;
+}
+
+
+// Submit the edit form
+document.addEventListener("DOMContentLoaded", () => {
+    const editCFAForm = document.getElementById("editCFAForm");
+
+    if (editCFAForm) {
+        editCFAForm.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const formData = {
+                id: document.getElementById("editCFAId").value,
+                brgyCaseNo: document.getElementById("editBrgyCaseNo").value,
+                reason: document.getElementById("editReason").value,
+                complainants: getEditedComplainants(),
+                complainees: getEditedComplainees(),
+                dateIssued: document.getElementById("editDateIssued").value,
+                pangkatChairperson: document.getElementById("editPangkatChairperson").value,
+                pangkatMember1: document.getElementById("editPangkatMember1").value,
+                pangkatMember2: document.getElementById("editPangkatMember2").value,
+                status: document.getElementById("editStatus").value,
+            };
+
+
+            fetch(`/update-cfa/${formData.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        alert("CFA updated successfully!");
+                        closeEditCFAModal();
+                        fetchCFAData(); // Refresh the table
+                    } else {
+                        alert("Error updating CFA");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error:", error);
+                });
+        });
+    } else {
+        console.error('Element "editCFAForm" not found.');
+    }
+});
+
+
+// DELETING CFA
+function deleteCFA(id) {
+  if (confirm('Are you sure you want to delete this entry?')) {
+    fetch(`/delete-cfa/${id}`, {
+      method: 'DELETE',
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert('CFA deleted successfully!');
+        fetchCFAData(); // Refresh the table after deletion
+      } else {
+        alert('Error deleting CFA');
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+}
+
+// TRANSFER CFA TO COMPLETE
+function transferCFA(id) {
+  if (confirm('Are you sure you want to transfer this entry to the completed list?')) {
+    fetch(`/transfer-cfa/${id}`, {
+      method: 'PUT',
+    })
+    .then(response => response.text())  // Parse as text if it's not JSON
+    .then(data => {
+      if (data.includes('success')) {  // Adjust check based on your server response
+        alert('CFA transferred successfully!');
+        window.location.reload(); // Automatically refresh the page
+      } else {
+        alert('Error transferring CFA');
+      }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+}
+
+// Bagong Lagay for Dates (CFA Version)
+// Function to set the minimum date to today's date
+function setMinDateForCFA() {
+    const today = new Date().toISOString().split('T')[0]; 
+
+    // Apply the minimum date to the relevant input fields in the CFA form
+    document.getElementById('editDateIssued').min = today;  // For Edit CFA form
+}
+
+// Set the min date whenever the document is ready for CFA forms
+document.addEventListener('DOMContentLoaded', setMinDateForCFA);
+
+function generateCFA(id) {
+    fetch(`/fetch-cfa-data/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        const complainantsText = data.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+        const complaineesText = data.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+
+        const params = new URLSearchParams({
+            date: data.dateIssued, 
+            brgyCaseNo: data.brgyCaseNo,
+            complainant: complainantsText,
+            complainee: complaineesText,
+            reason: data.reason,
+            pangkatChairperson: data.pangkatChairperson,
+            pangkatMember1: data.pangkatMember1,
+            pangkatMember2: data.pangkatMember2
+        });
+        window.location.href = `generate-cfa.html?${params.toString()}`;
+      }
+    })
+    .catch(error => console.error('Error fetching CFA data:', error));
+}
+
+// Bagong lagay for Pangkat Chairperson and Members
+function fetchPangkatChairperson(dropdownId = 'pangkatChairperson') {
+    return fetch('/fetch-pangkat-chairperson')
+        .then(response => response.json())
+        .then(data => {
+            const chairpersonDropdown = document.getElementById(dropdownId);
+            chairpersonDropdown.innerHTML = '<option value="" disabled selected>Select Pangkat Chairperson</option>'; // Reset dropdown with placeholder
+            data.forEach(person => {
+                const option = document.createElement('option');
+                option.value = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                option.textContent = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                chairpersonDropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching Pangkat Chairperson:', error));
+}
+
+function fetchPangkatMembers(dropdownId1 = 'pangkatMember1', dropdownId2 = 'pangkatMember2') {
+    return fetch('/fetch-pangkat-members')
+        .then(response => response.json())
+        .then(data => {
+            const member1Dropdown = document.getElementById(dropdownId1);
+            const member2Dropdown = document.getElementById(dropdownId2);
+            member1Dropdown.innerHTML = '<option value="" disabled selected>Select Pangkat Member 1</option>'; // Reset with placeholder
+            member2Dropdown.innerHTML = '<option value="" disabled selected>Select Pangkat Member 2</option>'; // Reset with placeholder
+            data.forEach(person => {
+                const option1 = document.createElement('option');
+                const option2 = document.createElement('option');
+                option1.value = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                option1.textContent = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                option2.value = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                option2.textContent = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                member1Dropdown.appendChild(option1);
+                member2Dropdown.appendChild(option2);
+            });
+        })
+        .catch(error => console.error('Error fetching Pangkat Members:', error));
+}
+
+function fetchAdminProfilePicture() {
+    fetch('/admin-details-data')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const profilePicElement = document.getElementById('resident-profile-pic');
+            if (data.Profilepic) {
+                profilePicElement.src = data.Profilepic;
+            }
+        })
+        .catch(error => console.error('Error fetching profile picture:', error));
+}   
+
+             //side notification count
+// Function to fetch total count of "Processing" requests across all collections
+function fetchTotalProcessingRequests() {
+    fetch('/count-all-processing-requests')
+        .then(response => response.json())
+        .then(data => {
+            const sidebarNotif = document.getElementById('sidebarNotif');
+            if (data.totalCount > 0) {
+                sidebarNotif.textContent = data.totalCount; // Show total count
+                sidebarNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                sidebarNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching total processing count:', error));
+}
+
+        function fetchTotalProcessingComplaints() {
+    fetch('/complaint-counts')
+        .then(response => response.json())
+        .then(data => {
+            const total =
+                (data.blotterCount || 0) +
+                (data.blotterKasunduanCount || 0) +
+                (data.luponCount || 0) +
+                (data.luponKasunduanCount || 0) +
+                (data.cfaCount || 0);
+
+            const complaintsNotif = document.getElementById('complaintsNotif');
+            if (complaintsNotif) {
+                complaintsNotif.textContent = total;
+                complaintsNotif.style.display = total > 0 ? 'inline-flex' : 'none';
+            }
+        })
+        .catch(error => console.error('Error fetching complaint counts:', error));
+}
+
+function fetchProcessingBarangayID() {
+    fetch('/count-processing-barangay-id')
+        .then(response => response.json())
+        .then(data => {
+            const barangayIDNotif = document.getElementById('barangayIDNotif');
+            if (data.barangayIdCount > 0) {
+                barangayIDNotif.textContent = data.barangayIdCount; // Show total count
+                barangayIDNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                barangayIDNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching Barangay ID count:', error));
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+                fetchAdminProfilePicture();
+                fetchTotalProcessingRequests();
+            fetchTotalProcessingComplaints();
+            fetchProcessingBarangayID();
+        });
+        </script>
+</body>
+</html>

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Barangay ID</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter m-0 p-0 bg-gray-100 flex min-h-screen overflow-x-hidden">
+
+    <!-- Sidebar (Visible on larger screens) -->
+    <div class="sidebar w-80 bg-green-900 text-white p-4 flex flex-col justify-between h-auto hidden md:block">
+        <center>
+            <img src="https://www.dropbox.com/scl/fi/hplpyx3p3gjc3ozhxa7w6/DasmaLogo.png?rlkey=bw11d1gi5odcv59ingug5pjeh&st=d7rp2eom&dl=1" alt="Barangay Santa Fe Logo" class="w-24 mb-4">
+            <h1 class="text-sm text-center font-inter font-bold">BARANGAY SANTA FE<br>CITY OF DASMARIÑAS</h1>
+        </center>
+        <div class="sidenav mt-8 flex-grow">
+            <ul class="space-y-4">
+                <li><a href="dashboard.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/es7o8fr6dw2vkkywjpg66/dashboard.png?rlkey=pp0dy252j9wao81jpz1n50f4p&st=83lbnbnz&dl=1" class="w-5 h-5 ">
+                        <span class="ml-3">Dashboard</span></a></li>
+                
+                <li><a href="notification.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/te9qkrjtunarm8znvfs1w/notification.png?rlkey=kqzy50yimgtro1l8caiqnqbua&st=4zuvr1p0&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Notification</span></a></li>
+
+                <li><a href="user-account.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccount.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=4ko3y2wy&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">User Account</span></a></li>
+
+                <li><a href="residents.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/e57yqafcdt0z58wbgvv9e/residents.png?rlkey=wcqigcrhwveax3qubldx0qaql&st=np6th3hf&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Residents</span></a></li>
+
+                <li class="relative">
+                    <a href="complaints.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/kbs0xnrc9usw40lv30clw/scales-of-justice.png?rlkey=d36ewu4dge121egpw53qri8mf&st=r04p7f12&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Complaints</span></a>
+                        <span id="complaintsNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+
+                <li class="relative">
+                    <a href="barangay-id.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" class="w-5 h-5"> 
+                        <span class="ml-3">Barangay ID</span></a>
+                        <span id="barangayIDNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+
+                <li class="relative">
+                    <a href="request.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                        <img src="https://www.dropbox.com/scl/fi/idqomcr0ujnsmd54ktpu5/quote-request.png?rlkey=swquji94hs61jlr8y0p992s0n&st=vkr8y4i7&dl=1" class="w-5 h-5">
+                        <span class="ml-3">Requests</span></a>
+                        <span id="sidebarNotif" class="absolute top-1/2 right-3 bg-red-500 text-white text-sm font-semibold rounded-full w-5 h-5 flex items-center justify-center transform -translate-y-1/2">3</span>
+                
+                <li><a href="module.html" class="flex items-center text-white font-bold hover:bg-green-700 p-2 rounded">
+                    <img src="https://www.dropbox.com/scl/fi/olqdewf6h2pi148jw0j2p/maintenance.png?rlkey=5rnv8iajpbytp799jgyvs6cqa&st=dn26ng5a&dl=1" class="w-5 h-5">
+                    <span class="ml-3">Maintenance</span></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation Menu (for smaller screens) -->
+    <div id="bottom-nav" class="md:hidden fixed bottom-0 left-0 right-0 bg-green-900 text-white p-3 font-inter">
+        <div class="flex overflow-x-auto space-x-6 px-4 py-2">
+            <!-- Dashboard Icon -->
+            <a href="dashboard.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/es7o8fr6dw2vkkywjpg66/dashboard.png?rlkey=pp0dy252j9wao81jpz1n50f4p&st=83lbnbnz&dl=1" class="w-6 h-6">
+                <span class="text-xs">Dashboard</span>
+            </a>
+            <!-- Notification Icon -->
+            <a href="notification.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/te9qkrjtunarm8znvfs1w/notification.png?rlkey=kqzy50yimgtro1l8caiqnqbua&st=4zuvr1p0&dl=1" class="w-6 h-6">
+                <span class="text-xs">Notification</span>
+            </a>
+            <!-- User Account Icon -->
+            <a href="user-account.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccount.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=4ko3y2wy&dl=1" class="w-6 h-6">
+                <span class="text-xs">Account</span>
+            </a>
+            <!-- Residents Icon -->
+            <a href="residents.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/e57yqafcdt0z58wbgvv9e/residents.png?rlkey=wcqigcrhwveax3qubldx0qaql&st=np6th3hf&dl=1" class="w-6 h-6">
+                <span class="text-xs">Residents</span>
+            </a>
+            <!-- Complaints Icon -->
+            <a href="complaints.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/kbs0xnrc9usw40lv30clw/scales-of-justice.png?rlkey=d36ewu4dge121egpw53qri8mf&st=r04p7f12&dl=1" class="w-6 h-6">
+                <span class="text-xs">Complaints</span>
+            </a>
+            <!-- Barangay ID Icon -->
+            <a href="barangay-id.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" class="w-6 h-6">
+                <span class="text-xs">ID</span>
+            </a>
+            <!-- Requests Icon -->
+            <a href="request.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/idqomcr0ujnsmd54ktpu5/quote-request.png?rlkey=swquji94hs61jlr8y0p992s0n&st=vkr8y4i7&dl=1" class="w-6 h-6">
+                <span class="text-xs">Requests</span>
+            </a>
+            <!-- Maintenance Icon -->
+            <a href="module.html" class="flex flex-col items-center text-white">
+                <img src="https://www.dropbox.com/scl/fi/olqdewf6h2pi148jw0j2p/maintenance.png?rlkey=5rnv8iajpbytp799jgyvs6cqa&st=dn26ng5a&dl=1" class="w-6 h-6">
+                <span class="text-xs">Maintenance</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content flex-grow p-6 bg-gray-100 max-w-full pb-24">
+        <div class="header flex justify-between items-center bg-white p-4 shadow-md rounded-xl">
+            <h2 class="text-2xl font-semibold">Barangay ID</h2>
+            <div class="user-info flex items-center space-x-4">
+                <!-- User Avatar -->
+                <div class="dropdown relative">
+                    <img id="resident-profile-pic" src="" 
+                         alt="User Avatar" 
+                         class="w-8 h-8 rounded-full cursor-pointer" onclick="toggleDropdown()">
+                
+                    <!-- User Profile Popup -->
+                    <div id="user-popup" class="user-popup hidden absolute right-0 top-10 bg-white shadow-lg p-4 rounded-lg w-64 border border-gray-200">
+                        <div class="user-header flex justify-between items-center border-b border-gray-300 pb-2 mb-3">
+                            <span class="text-lg font-semibold text-gray-800">Admin Options</span>
+                            <span class="close-btn cursor-pointer font-bold text-xl text-gray-600 hover:text-gray-800" onclick="toggleDropdown()">&times;</span>
+                        </div>
+                        <div class="user-content space-y-2">
+                            <a href="admin-details.html" class="block text-gray-800 hover:text-green-600 transition-colors duration-200">User Profile</a>
+                            <a href="module.html" class="block text-gray-800 hover:text-yellow-600 transition-colors duration-200">Maintenance</a>
+                            <a href="#" onclick="logout()" class="block text-gray-800 hover:text-red-600 transition-colors duration-200">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Actions -->
+        <div class="mb-2 flex items-center justify-end gap-6 p-6">
+            
+            <!-- Search Input -->
+            <div class="w-full sm:w-auto">
+                <input type="text" id="searchInput" placeholder="Search..." oninput="searchBarangayID()" class="ml-auto w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-800">
+            </div>
+
+            <!-- Dropdown for Resident/Official Account -->
+            <div class="w-full sm:w-auto">
+            <select onchange="navigateToPage(this)" class="ml-auto w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800 overflow-hidden text-ellipsis">
+                <option value="barangay-id.html" selected>Processing</option>
+                <option value="barangay-id-complete.html">Completed</option>
+            </select>
+            </div>
+
+            <!-- Add Button -->
+            <div>
+                <button class="bg-green-800 text-white px-6 py-1 rounded-md hover:bg-green-700 focus:outline-none" onclick="openModal()">Add</button>
+            </div>
+        </div>
+
+        <!-- Barangay ID Request Table -->
+        <div class="account-content bg-white p-6 rounded-lg shadow-md overflow-x-auto mb-8">
+            <h3 class="text-lg font-semibold text-gray-800">Barangay ID Request</h3>
+            <div class="overflow-x-auto mt-4 max-h-[500px] relative">
+                <table class="min-w-full table-auto border-collapse border border-gray-300">
+                    <thead class="bg-green-800">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Date</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">IGP #</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Name</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Amount</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Remarks</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Received by</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Status</th>
+                            <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="barangayIdTableBody">
+                        <!-- Rows will be appended here by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add Modal -->
+<div id="addModal" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="modal-content bg-white p-6 rounded-lg shadow-xl w-full max-w-xl mx-auto px-4 relative mt-56">
+        <span class="close absolute top-4 right-4 text-3xl font-bold cursor-pointer text-gray-300 hover:text-green-800" onclick="closeModal()">&times;</span>
+        <h2 class="text-2xl font-semibold text-green-800 mb-6 text-center">Add Barangay ID Request</h2>
+        <form id="addForm">
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <!-- Date and IGP # -->
+                <div class="floating-label">
+                    <input type="date" id="date" placeholder=" " required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
+                </div>
+                <div class="floating-label">
+                    <input type="text" id="igp" name="igp" placeholder="IGP #" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 mb-6">
+                <!-- First Name, Middle Name, Last Name -->
+                <div class="floating-label">
+                    <input type="text" id="firstName" name="firstName" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
+                </div>
+                <div class="floating-label">
+                    <input type="text" id="middleName" name="middleName" placeholder="Middle Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
+                </div>
+                <div class="floating-label">
+                    <input type="text" id="lastName" name="lastName" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <!-- Amount, Remarks -->
+                <div class="floating-label">
+                    <input type="text" id="amount" name="amount" placeholder="Amount" readonly class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
+                </div>
+                <div class="floating-label">
+                    <select id="remarks" name="remarks" onchange="updateAmount()" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
+                        <option value="" disabled selected>Remarks</option>
+                        <option value="Rush">Rush</option>
+                        <option value="Regular">Regular</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <!-- Received By, Status -->
+                <div class="floating-label">
+                    <input type="text" id="receivedBy" name="receivedBy" placeholder="Received by" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800">
+                </div>
+                <div class="floating-label">
+                    <select id="Status" name="Status" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800">
+                        <option value="" disabled selected>Status</option>
+                        <option value="Complete">Complete</option>
+                        <option value="Processing">Processing</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-4">
+                <button type="button" class="bg-green-800 text-white px-6 py-2 rounded-md hover:bg-green-700 text-sm" onclick="submitAddForm()">Add</button>
+                <button type="button" class="bg-gray-200 text-black px-6 py-2 rounded-md hover:bg-gray-400 text-sm" onclick="closeModal()">Cancel</button>
+            </div>
+        </form>        
+    </div>
+</div>
+
+
+
+<!-- Edit Modal -->
+<div id="editModal" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+    <div class="modal-content bg-white p-6 rounded-lg shadow-xl w-full max-w-xl mx-auto px-4 relative mt-56">
+        <span class="close absolute top-4 right-4 text-3xl font-bold cursor-pointer text-gray-300 hover:text-green-800" onclick="closeEditModal()">&times;</span>
+        <h2 class="text-2xl font-semibold text-green-800 mb-6 text-center">Edit Barangay ID Request</h2>
+        <form id="editForm">
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <!-- Date and IGP # -->
+                <div class="relative">
+                    <input type="date" id="editDate" placeholder=" " required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800">
+                </div>
+                <div class="relative">
+                    <input type="text" id="editIgp" name="igp" placeholder="IGP #" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-4 mb-6">
+                <!-- First Name, Middle Name, Last Name -->
+                <div class="relative">
+                    <input type="text" id="editFirstName" name="firstName" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800">
+                </div>
+                <div class="relative">
+                    <input type="text" id="editMiddleName" name="middleName" placeholder="Middle Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800">
+                </div>
+                <div class="relative">
+                    <input type="text" id="editLastName" name="lastName" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <!-- Amount, Remarks -->
+                <div class="relative">
+                    <input type="text" id="editAmount" placeholder="Amount" name="amount" readonly class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800">
+                </div>
+                <div class="relative">
+                    <select id="editRemarks" name="remarks" onchange="updateEditAmount()" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800">
+                        <option value="" disabled selected>Remarks</option>
+                        <option value="Rush">Rush</option>
+                        <option value="Regular">Regular</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <!-- Received By, Status -->
+                <div class="relative">
+                    <input type="text" id="editReceivedBy" placeholder="Received by" name="receivedBy" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800">
+                </div>
+                <div class="relative">
+                    <select id="editStatus" name="status" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800">
+                        <option value="" disabled selected>Status</option>
+                        <option value="Complete">Complete</option>
+                        <option value="Processing">Processing</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-4">
+                <button type="submit" class="bg-green-800 text-white px-6 py-2 rounded-md hover:bg-green-700 text-sm">Edit</button>
+                <button type="button" class="bg-gray-200 text-black px-6 py-2 rounded-md hover:bg-gray-400 text-sm" onclick="closeEditModal()">Cancel</button>
+            </div>
+        </form>        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <script src="public/styles/script.js"></script>
+    <script src="/public/js/sessionTimeout.js"></script>
+    <script>
+         // SEARCH
+         function searchBarangayID() {
+                // Get the search input value
+                const searchValue = document.querySelector('#searchInput').value.toLowerCase(); // Use correct selector
+
+                // Get the table rows
+                const rows = document.querySelectorAll('#barangayIdTableBody tr');
+
+                // Loop through all rows and hide those that don't match the search query
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    const matches = Array.from(cells).some(cell => 
+                        cell.textContent.toLowerCase().includes(searchValue) // Search through text content
+                    );
+
+                    if (matches) {
+                        row.style.display = ''; // Show the row
+                    } else {
+                        row.style.display = 'none'; // Hide the row
+                    }
+                });
+            }
+
+            function openModal() {
+            document.getElementById("addModal").style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById("addModal").style.display = "none";
+    }
+
+        function submitAddForm() {
+            const formData = new FormData(document.getElementById('addForm'));
+            const dateValue = new Date(document.getElementById('date').value);
+            const formattedDate = dateValue.getFullYear() + '-' +
+                                ('0' + (dateValue.getMonth() + 1)).slice(-2) + '-' +
+                                ('0' + dateValue.getDate()).slice(-2);
+
+            const newBarangayId = {
+                date: formattedDate,
+                igp: formData.get('igp'),
+                firstName: formData.get('firstName'),
+                middleName: formData.get('middleName'),
+                lastName: formData.get('lastName'),
+                amount: formData.get('amount'),
+                remarks: formData.get('remarks'),
+                receivedBy: formData.get('receivedBy'),
+                status: formData.get('Status') // Include the status field
+            };
+
+            fetch('/barangay-ids', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newBarangayId)
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.querySelector('form').reset(); // Clear the form
+                    closeModal();
+                    fetchBarangayIds(); // Refresh the table
+                } else {
+                    console.error('Error adding barangay ID:', response.statusText);
+                }
+            })
+            .catch(error => console.error('Error adding barangay ID:', error));
+        }
+
+        function openEditModal(id) {
+            fetch(`/barangay-ids/${id}`)
+                .then(response => response.json())
+                .then(barangayId => {
+                    document.getElementById('editDate').value = barangayId.date || '';
+                    document.getElementById('editIgp').value = barangayId.igp || '';
+                    document.getElementById('editFirstName').value = barangayId.firstName || '';
+                    document.getElementById('editMiddleName').value = barangayId.middleName || '';
+                    document.getElementById('editLastName').value = barangayId.lastName || '';
+                    document.getElementById('editAmount').value = barangayId.amount || '';
+                    document.getElementById('editRemarks').value = barangayId.remarks || '';
+                    document.getElementById('editReceivedBy').value = barangayId.receivedBy || '';
+                    document.getElementById('editStatus').value = barangayId.status || '';
+
+                    const hiddenIdInput = document.createElement('input');
+                    hiddenIdInput.type = 'hidden';
+                    hiddenIdInput.id = 'editBarangayId';
+                    hiddenIdInput.value = barangayId._id;
+                    document.getElementById('editForm').appendChild(hiddenIdInput);
+
+                    document.getElementById('editModal').style.display = 'block';
+                })
+                .catch(error => console.error('Error fetching barangay ID:', error));
+        }
+
+        function closeEditModal() {
+            document.getElementById('editModal').style.display = 'none';
+            const hiddenIdInput = document.getElementById('editBarangayId');
+            if (hiddenIdInput) {
+                hiddenIdInput.remove();
+            }
+        }
+
+        function submitEditForm(event) {
+            event.preventDefault();
+            const id = document.getElementById('editBarangayId').value;
+            const formData = new FormData(document.getElementById('editForm'));
+            const dateValue = new Date(document.getElementById('editDate').value);
+            const formattedDate = dateValue.getFullYear() + '-' +
+                                ('0' + (dateValue.getMonth() + 1)).slice(-2) + '-' +
+                                ('0' + dateValue.getDate()).slice(-2);
+
+            const updatedBarangayId = {
+                date: formattedDate,
+                igp: formData.get('igp'),
+                firstName: formData.get('firstName'),
+                middleName: formData.get('middleName'),
+                lastName: formData.get('lastName'),
+                amount: formData.get('amount'),
+                remarks: formData.get('remarks'),
+                receivedBy: formData.get('receivedBy'),
+                status: formData.get('status') // Include the status field
+            };
+
+            fetch(`/barangay-ids/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedBarangayId)
+            })
+            .then(response => {
+                if (response.ok) {
+                    closeEditModal();
+                    fetchBarangayIds(); // Refresh the table
+                } else {
+                    console.error('Error updating barangay ID:', response.statusText);
+                }
+            })
+            .catch(error => console.error('Error updating barangay ID:', error));
+        }
+
+        function deleteBarangayId(id) {
+    if (confirm("Are you sure you want to delete this Barangay ID?")) {
+        fetch(`/barangay-ids/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (response.ok) {
+                fetchBarangayIds(); // Refresh the table after deletion
+            } else {
+                alert('Failed to delete Barangay ID');
+            }
+        })
+        .catch(error => {
+            console.error('Error deleting Barangay ID:', error);
+        });
+    }
+}
+
+
+        function transferBarangayId(id) {
+            fetch(`/barangay-ids/transfer/${id}`, {
+                method: 'PUT',
+            })
+            .then(response => {
+                if (response.ok) {
+                    fetchBarangayIds(); // Refresh the table after transfer
+                } else {
+                    console.error('Error transferring barangay ID:', response.statusText);
+                }
+            })
+            .catch(error => console.error('Error transferring barangay ID:', error));
+        }
+
+        // Update Amount Based on Remarks
+        function updateAmount() {
+            const remarks = document.getElementById('remarks').value;
+            const amountField = document.getElementById('amount');
+
+            if (remarks === 'Rush') {
+                amountField.value = 50;
+            } else if (remarks === 'Regular') {
+                amountField.value = 25;
+            } else {
+                amountField.value = '';
+            }
+        }
+
+        // Update Amount Based on Remarks in Edit Modal
+        function updateEditAmount() {
+            const remarks = document.getElementById('editRemarks').value;
+            const amountField = document.getElementById('editAmount');
+
+            if (remarks === 'Rush') {
+                amountField.value = 50;
+            } else if (remarks === 'Regular') {
+                amountField.value = 25;
+            } else {
+                amountField.value = '';
+            }
+        }
+
+        // Fetch Barangay IDs
+        function fetchBarangayIds() {
+            fetch('/barangay-ids')
+                .then(response => response.json())
+                .then(barangayIds => {
+                    const tableBody = document.querySelector('#barangayIdTableBody');
+                    tableBody.innerHTML = ''; // Clear any existing rows
+
+                    barangayIds.forEach(barangayId => {
+                        // Determine the appropriate status icon
+                        const statusIcon = barangayId.status === 'Complete'
+                            ? '<img src="https://www.dropbox.com/scl/fi/brbnzjxfdeqjerssseaxc/checked.png?rlkey=yinbka4wjvra6n5dxazi4l13a&st=wpwljnp2&dl=1" alt="Complete" class="status-icon">'
+                            : '<img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" alt="Processing" class="status-icon">';
+
+                        // Create the row for the table
+                        const row = document.createElement('tr');
+                        row.classList.add('border-b', 'border-gray-300'); // Add gray border line between rows
+                        row.innerHTML = `
+                            <td class="p-2">${barangayId.date}</td>
+                            <td class="p-2">${barangayId.igp}</td>
+                            <td class="p-2">${barangayId.firstName} ${barangayId.middleName} ${barangayId.lastName}</td>
+                            <td class="p-2">${barangayId.amount}</td>
+                            <td class="p-2">${barangayId.remarks}</td>
+                            <td class="p-2">${barangayId.receivedBy}</td>
+                            <td class="p-2">${barangayId.status || 'Processing'}</td>
+                            <td class="p-2"><div class="flex items-center space-x-2">
+                                <a href="#"><img src="https://www.dropbox.com/scl/fi/u6i83geituweeaybi8y9w/pen.png?rlkey=5f7vjmsrn42d1t0iaxdu3jbjy&st=0sk8r60h&dl=1" alt="Edit" class="edit-icon" onclick="openEditModal('${barangayId._id}')"></a>
+                                <a href="#"><img src="https://www.dropbox.com/scl/fi/ho6y40rqr930v22ja9219/delete.png?rlkey=b1xjg0s1v3rnrgjx1n5v2usgm&st=xgbxk20f&dl=1" alt="Delete" class="delete-icon" onclick="deleteBarangayId('${barangayId._id}')"></a>
+                                ${barangayId.status === 'Complete' ? '<a href="#"><img src="https://www.dropbox.com/scl/fi/brbnzjxfdeqjerssseaxc/checked.png?rlkey=yinbka4wjvra6n5dxazi4l13a&st=wpwljnp2&dl=1" alt="Transfer" class="transfer-icon" onclick="transferBarangayId(\'' + barangayId._id + '\')"></a>' : ''}
+                            </div></td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error fetching barangay IDs:', error));
+        }
+
+
+        document.addEventListener('DOMContentLoaded', function() {
+            fetchTotalProcessingRequests();
+            fetchTotalProcessingComplaints();
+            fetchProcessingBarangayID();
+            fetchAdminProfilePicture();
+            document.getElementById('addForm').addEventListener('submit', submitAddForm);
+            document.getElementById('editForm').addEventListener('submit', submitEditForm);
+            fetchBarangayIds(); // Fetch and display barangay IDs on page load
+        });
+
+        //notification count
+        // Function to fetch total count of "Processing" requests across all collections
+function fetchTotalProcessingRequests() {
+    fetch('/count-all-processing-requests')
+        .then(response => response.json())
+        .then(data => {
+            const sidebarNotif = document.getElementById('sidebarNotif');
+            if (data.totalCount > 0) {
+                sidebarNotif.textContent = data.totalCount; // Show total count
+                sidebarNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                sidebarNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching total processing count:', error));
+}
+
+function fetchTotalProcessingComplaints() {
+    fetch('/complaint-counts')
+        .then(response => response.json())
+        .then(data => {
+            const total =
+                (data.blotterCount || 0) +
+                (data.blotterKasunduanCount || 0) +
+                (data.luponCount || 0) +
+                (data.luponKasunduanCount || 0) +
+                (data.cfaCount || 0);
+
+            const complaintsNotif = document.getElementById('complaintsNotif');
+            if (complaintsNotif) {
+                complaintsNotif.textContent = total;
+                complaintsNotif.style.display = total > 0 ? 'inline-flex' : 'none';
+            }
+        })
+        .catch(error => console.error('Error fetching complaint counts:', error));
+}
+
+function fetchProcessingBarangayID() {
+    fetch('/count-processing-barangay-id')
+        .then(response => response.json())
+        .then(data => {
+            const barangayIDNotif = document.getElementById('barangayIDNotif');
+            if (data.barangayIdCount > 0) {
+                barangayIDNotif.textContent = data.barangayIdCount; // Show total count
+                barangayIDNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                barangayIDNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching Barangay ID count:', error));
+}
+function fetchAdminProfilePicture() {
+    fetch('/admin-details-data')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const profilePicElement = document.getElementById('resident-profile-pic');
+            if (data.Profilepic) {
+                profilePicElement.src = data.Profilepic;
+            }
+        })
+        .catch(error => console.error('Error fetching profile picture:', error));
+}   
+    </script>
+</body>
+</html>

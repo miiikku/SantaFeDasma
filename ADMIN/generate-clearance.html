@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Barangay Clearance</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="public/styles/styles.css">
+    <style>
+        /* Styling similar to generate-cfa */
+        .clearance-container {
+            margin: 0 auto;
+            font-family: 'Century Gothic', serif;
+            font-size: 12pt;
+            display: flex; /* Use flexbox to position the left and right containers */
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .left-officials {
+            width: 20%; /* Further reduced the width */
+            padding: 7px; /* Reduced padding */
+            border-right: 2px solid black;
+            margin-top: 10px;
+        }
+        .left-officials h4 {
+            font-size: 10pt;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+        .left-officials p {
+            font-size: 8pt;
+            line-height: 2.1;
+            text-align: left;
+            margin-bottom: 50px;
+        }
+        .clearance-body {
+            width: 80%; /* Adjusted width for the right content */
+            padding-left: 20px; /* Adjusted left padding */
+            margin-top: 10px;
+        
+        }
+        .header-barangay {
+            width: 100%;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(to bottom, #9cf4a1, #b2d7b5);
+            padding: 10px 0;
+            margin-bottom: 10px;
+            border-bottom: 3px solid black;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .header-barangay h1 {
+            font-size: 16pt;
+            font-weight: bold;
+            margin: 0;
+            font-family: 'Georgia', serif;
+            margin-left: 110px;
+            text-align: left;
+        }
+
+        .header-barangay h2 {
+            font-size: 12pt;
+            margin: 0;
+            font-family: 'Georgia', serif;
+            margin-left: 110px;
+            text-align: left;
+        }
+
+        .header-barangay h3 {
+            font-size: 16pt;
+            margin: 5px 0 0 0;
+            color: green;
+            text-transform: uppercase;
+            font-family: 'Georgia', serif;
+            margin-right: 75px;
+            text-align: right;
+        }
+
+        .header-barangay img {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            width: 90px;
+        }
+
+        .header-two-logo {
+            position: absolute;
+            right: 250px;
+            top: 1px;
+        }
+
+        .header-two-logo img {
+            width: 120px;
+            height: auto;
+        }
+
+        .clearance-body {
+            width: 70%;
+            padding: 20px;
+            margin-top: 10px;
+            font-size: 12pt;
+            margin-left: 20px; /* Space between the content and the line */
+        }
+
+        .name-block {
+            font-family: 'Century Gothic', serif;
+            font-size: 10pt;
+            text-align: left;
+            margin-left: 20px;
+        }
+
+        .export-print-buttons {
+            margin: 20px 0;
+            text-align: right;
+        }
+
+        .export-print-buttons button {
+            padding: 10px 20px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .export-print-buttons .export-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .export-print-buttons .print-btn {
+            background-color: #007BFF;
+            color: white;
+        }
+
+        @media print {
+             /* Hide the "Generate Barangay Clearance" title */
+            .header {
+                display: none !important; /* Hides the "Generate Barangay Clearance" title */
+            }
+
+            /* Remove gray background from the body and set it to white */
+            body, .clearance-container {
+                background-color: white !important; /* Ensures white background */
+            }
+
+            /* Hide sidebar and export/print buttons during print */
+            .sidebar, .export-print-buttons {
+                display: none !important;
+            }
+
+            /* Ensure the header gradient prints correctly */
+            .header-barangay {
+                background: linear-gradient(to bottom, #9cf4a1, #b2d7b5) !important;
+                -webkit-print-color-adjust: exact; /* Makes sure background colors appear correctly on print */
+                print-color-adjust: exact;
+            }
+
+            /* Show logos properly during printing */
+            .header-barangay img {
+                display: block !important;
+            }
+
+            /* Ensure the text content in the clearance is printed in black with larger font size */
+            .clearance-body, .barangay-chairman-name, .name-block, .label, .date-time {
+                color: black;
+                font-size: 18px; /* Increase font size for printing clarity */
+            }
+
+            /* Adjust layout for print to fit the entire page */
+            .main-content {
+                padding: 0;
+                margin: 0;
+                width: 100%;
+            }
+        }
+
+
+        /* Footer Section */
+        .footer-picture {
+            text-align: center;
+        }
+
+        .footer-picture img {
+            width: 70%;
+            height: auto;
+            display: inline-block;
+        }
+
+        .barangay-chairman-name {
+            margin-left: 180px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Century Gothic', serif;
+    margin-top: 30px;
+    margin-bottom: 100px;
+    font-size: 12pt;
+}
+
+.barangay-chairman-name p {
+    margin: 0;
+}
+
+.signature-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Aligns to the left */
+    margin-top: 20px;
+    margin-left: 20px; /* Adjust this value to align perfectly with other content */
+}
+
+.signature-box {
+    border: 2px solid black;
+    width: 150px;
+    height: 50px;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+.signature-line {
+    width: 200px;
+    border-bottom: 2px solid black;
+    margin-top: 30px;
+}
+
+.signature-text {
+    text-align: left; /* Align text to the left */
+    font-family: 'Century Gothic', serif;
+    font-size: 10pt;
+    color: black;
+    margin-top: 5px;
+    margin-left: 30px;
+}
+
+        
+
+        .clearance-title {
+            text-align: center;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .certify-text, .towhom-text, .issuedUpon-text {
+            text-align: justify; /* This ensures these specific sections are justified */
+        }
+
+        .towhom-text, .certify-text, .issuedUpon-text, .date-issued {
+            font-size: 11pt;
+        }
+
+        .sidebar-notif {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 7px;
+    border-radius: 50%;
+    margin-left: 50px;
+}
+
+.sidebar-notif2 {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 7px;
+    border-radius: 50%;
+    margin-left: 40px;
+}
+
+.sidebar-notif3 {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 7px;
+    border-radius: 50%;
+    margin-left: 35px;
+}
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <center>
+            <img src="https://www.dropbox.com/scl/fi/94o2cqiknm3a4dasbyz1q/sidebarlogo.png?rlkey=9suwtde1z2qk3ea73d64yt5he&st=13kmqf8k&dl=1" class="Logo">
+            <h1>BARANGAY SANTA FE<br>CITY OF DASMARIÑAS</h1>
+        </center>
+        <div class="sidenav">
+            <ul>
+                <li><a href="dashboard.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/es7o8fr6dw2vkkywjpg66/dashboard.png?rlkey=pp0dy252j9wao81jpz1n50f4p&st=83lbnbnz&dl=1" class="sidebar-icon">Dashboard</a></li>
+                <li><a href="notification.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/te9qkrjtunarm8znvfs1w/notification.png?rlkey=kqzy50yimgtro1l8caiqnqbua&st=4zuvr1p0&dl=1" class="sidebar-icon">Notification</a></li>
+                <li><a href="user-account.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/tnounxbo8vd5763gnoysp/userAccount.png?rlkey=hyos7zrh4ghwr66mjivsqfd5b&st=4ko3y2wy&dl=1" class="sidebar-icon">User Account</a></li>
+                <li><a href="residents.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/e57yqafcdt0z58wbgvv9e/residents.png?rlkey=wcqigcrhwveax3qubldx0qaql&st=np6th3hf&dl=1" class="sidebar-icon">Residents</a></li>
+                <li>
+                    <a href="complaints.html" class="sidebar-link">
+                        <img src="https://www.dropbox.com/scl/fi/kbs0xnrc9usw40lv30clw/scales-of-justice.png?rlkey=d36ewu4dge121egpw53qri8mf&st=r04p7f12&dl=1" class="sidebar-icon">
+                        Complaints
+                        <span id="complaintsNotif" class="sidebar-notif2" style="display: none;">0</span>
+                    </a>
+                </li>                
+                <li>
+                    <a href="barangay-id.html" class="sidebar-link">
+                        <img src="https://www.dropbox.com/scl/fi/5bv5aqyto4z9york6lzwq/id-card.png?rlkey=crbfg36zcmb1tq9yfdg0t8zm2&st=ocm8u8fd&dl=1" class="sidebar-icon">
+                        Barangay ID
+                        <span id="barangayIDNotif" class="sidebar-notif3" style="display: none;">0</span>
+                    </a>
+                </li>                               
+                <li>
+                    <a href="request.html" class="sidebar-link">
+                        <img src="https://www.dropbox.com/scl/fi/idqomcr0ujnsmd54ktpu5/quote-request.png?rlkey=swquji94hs61jlr8y0p992s0n&st=vkr8y4i7&dl=1" class="sidebar-icon">
+                        Requests
+                        <span id="sidebarNotif" class="sidebar-notif" style="display: none;">0</span>
+                    </a>
+                </li>
+                <li><a href="module.html" class="sidebar-link"><img src="https://www.dropbox.com/scl/fi/olqdewf6h2pi148jw0j2p/maintenance.png?rlkey=5rnv8iajpbytp799jgyvs6cqa&st=9qpfgd82&dl=1" class="sidebar-icon">Maintenance</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h2>Generate Clearance</h2>
+            <div class="user-info">
+                <div class="dropdown">
+                    <img id="resident-profile-pic" src=""  alt="User Avatar" class="dropbtn" onclick="toggleDropdown()">
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="admin-details.html" onclick="viewProfile()">User Profile</a>
+                        <a href="module.html">Maintenance</a>
+                        <a href="#" onclick="logout()">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-barangay">
+            <img src="https://www.dropbox.com/scl/fi/14aqli76v3qnysocj1xin/generateLOGO.png?rlkey=q5nxwu5nh94lekglr8p55z01g&st=nph69ivj&dl=1" alt="Barangay Logo">
+            <h2>Republic of the Philippines</h2>
+            <h2>Province of Cavite</h2>
+            <h1>City of Dasmariñas</h1>
+            <div class="separator-line"></div>
+            <div class="header-two-logo">
+                <img src="https://www.dropbox.com/scl/fi/zp2ptp9efgo3thn7jgdtj/FINALheadertwo.png?rlkey=nzvg8dca2lygkjp0r9ruq4ay9&st=8siirakz&dl=1" style="float: right" alt="Barangay Two Logo">
+            </div>
+            <h3>BARANGAY STA. FE</h3>
+        </div>
+
+        <div class="clearance-container">
+            <!-- Left Side Officials -->
+            <div class="left-officials">
+                <p>
+                    <strong id="chairman"></strong><br>Barangay Captain<br><br>
+                    <strong id="secretary"></strong><br>Barangay Secretary<br><br>
+                    <strong id="treasurer"></strong><br>Barangay Treasurer<br><br>
+                    <strong class="kagawad"></strong><br>Barangay Kagawad<br><br>
+                    <strong class="kagawad"></strong><br>Barangay Kagawad<br><br>
+                    <strong class="kagawad"></strong><br>Barangay Kagawad<br><br>
+                    <strong class="kagawad"></strong><br>Barangay Kagawad<br><br>
+                    <strong class="kagawad"></strong><br>Barangay Kagawad<br><br>
+                    <strong class="kagawad"></strong><br>Barangay Kagawad<br><br>
+                    <strong class="kagawad"></strong><br>Barangay Kagawad<br><br>
+                    <strong id="sk-chairperson"></strong><br>SK-Chairperson<br><br>
+                </p>
+                    <img src="https://www.dropbox.com/scl/fi/5uoezz3yg4fj8h6guurck/vertakeFINAL.png?rlkey=g35kvv94hwoyxwkgmobpoxf05&st=038ijuos&dl=1" style="float: right" alt="vertake">
+            </div>
+            
+
+        <!-- Clearance Content on the Right -->
+        <div class="clearance-body">
+            <div class="clearance-title">
+                <h3>BARANGAY CLEARANCE<h3>
+            </div>
+
+            <div class="towhom-text">
+                <p>To whom it may concern,</p><br>
+            </div>
+
+            <div class="certify-text">
+                <p>This is to certify that <strong><span id="clearanceName"></span></strong>, 
+                <strong><span id="clearanceAge"></span> of age</strong>, Filipino Citizen and whose specimen signature appears below is a register resident of
+                <strong><span id="clearanceAddress"></span></strong>, Cavite and has been residing in this Barangay for 
+                <strong><span id="clearanceYearsResiding"></span></strong>.</p><br>
+            </div>
+
+            <div class="towhom-text">
+                <p>He/She is known to be of good moral character and law-abiding citizen of the community and has <strong>NO CRIMINAL AND DEROGATORY RECORDS</strong> in our Barangay files as of this date.</p><br>
+            </div>
+
+            <div class="issuedUpon-text">
+                <p>This certification is being issued upon the request of the above named person with his/her in compliance for
+                <strong><span id="certPurposeInline"></span></strong> or any legal purpose that may serve him/her best.</p><br>
+            </div>
+
+            <div class="date-issued">
+                <p><strong>Date Issued:</strong> <span id="clearanceDateIssued"></span></p>
+            </div>
+
+            <div class="signature-section">
+                <div class="signature-box"></div>
+                <div class="signature-line"></div>
+                <p class="signature-text">Signature of Applicant</p>
+            </div>
+
+            <!-- Footer Section for the Barangay Chairman -->
+            <div class="barangay-chairman-name">
+                <p>Certified By:</p><br>
+                <b><p id="chairman-footer">HON. EMMANUEL B. NOORA</p></b>
+                <p id="position">Punong Barangay</p>
+            </div>
+            <!-- HINIDE KO NALANG, PAG DINELETE TO AYAW MAG POPULATE NG DATE ISSUED, KAYA HINIDE KO NALANG HAHA -->
+            <div class="hidden">
+                <p><strong>Purpose:</strong> <span id="clearancePurpose"></span></p>
+            </div>
+            
+            <div class="export-print-buttons">
+                <button class="print-btn" onclick="window.print()">Print</button>
+            </div>  
+        </div>
+        <script src="/public/js/sessionTimeout.js"></script>
+    <script>
+document.addEventListener('DOMContentLoaded', function () {
+    const params = new URLSearchParams(window.location.search);
+
+    // Fill in the clearance details from the URL parameters
+    const name = params.get('name') || 'N/A';
+    const age = params.get('age') || 'N/A';
+    const address = params.get('address') || 'N/A';
+    const yearsResiding = params.get('yearsResiding') || 'N/A';
+    const purpose = params.get('purpose') || 'N/A';
+    const dateIssued = params.get('dateIssued') || 'N/A';
+
+    // Check if the age is 1, then use "year", otherwise "years"
+    const ageText = age === '1' ? 'year' : 'years';
+    
+    // Check if years residing is 1, then use "year", otherwise "years"
+    const yearsResidingText = yearsResiding === '1' ? 'year' : 'years';
+
+    // Populate the inline certificate text
+    document.getElementById('clearanceName').textContent = name;
+    document.getElementById('clearanceAge').textContent = `${age} ${ageText}`;
+    document.getElementById('clearanceAddress').textContent = address;
+    document.getElementById('clearanceYearsResiding').textContent = `${yearsResiding} ${yearsResidingText}`;
+    document.getElementById('clearancePurpose').textContent = purpose;
+    document.getElementById('clearanceDateIssued').textContent = dateIssued;
+
+    // Fetch Punong Barangay's name
+    fetch('/fetch-punong-barangay')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('chairman').textContent = `HON. ${data.name.toUpperCase()}`; // Uppercased name
+            document.getElementById('chairman-footer').textContent = `HON. ${data.name.toUpperCase()}`;
+        })
+        .catch(error => {
+            console.error('Error fetching Punong Barangay:', error);
+        });
+
+    // Fetch Barangay Secretary
+    fetch('/fetch-secretary')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('secretary').textContent = `${data.name}`;
+        })
+        .catch(error => {
+            console.error('Error fetching Secretary:', error);
+        });
+
+    // Fetch Barangay Treasurer
+    fetch('/fetch-treasurer')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('treasurer').textContent = `${data.name}`;
+        })
+        .catch(error => {
+            console.error('Error fetching Treasurer:', error);
+        });
+
+// Fetch Kagawads
+fetch('/fetch-kagawads')
+    .then(response => response.json())
+    .then(kagawadNames => {
+        const kagawadElements = document.querySelectorAll('.kagawad');
+        kagawadNames.forEach((name, index) => {
+            if (kagawadElements[index]) {
+                kagawadElements[index].textContent = name;
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching Kagawads:', error);
+    });
+
+
+    // Fetch SK Chairperson
+    fetch('/fetch-sk-chairperson')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('sk-chairperson').textContent = `${data.name}`;
+        })
+        .catch(error => {
+            console.error('Error fetching SK Chairperson:', error);
+        });
+});
+
+
+        function exportToPDF() {
+            // Hide buttons for PDF export
+            document.querySelector('.export-print-buttons').style.display = 'none';
+            document.body.style.backgroundColor = 'white';
+
+            const element = document.querySelector('.main-content');
+            const opt = {
+                margin: 0.5,
+                filename: 'Barangay_Clearance.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            // Generate PDF
+            html2pdf().from(element).set(opt).save().then(() => {
+                // Restore visibility after export
+                document.querySelector('.header').style.display = 'block';
+                document.querySelector('.export-print-buttons').style.display = 'block';
+                document.body.style.backgroundColor = "";  
+                document.querySelector('.main-content').style.backgroundColor = "";  
+            });
+        }
+
+    // Toggle Dropdown
+    function toggleDropdown() {
+        var dropdown = document.getElementById("myDropdown");
+            if (dropdown) {
+                dropdown.classList.toggle("show");
+            } else {
+                console.error("Dropdown element not found");
+            }
+    }
+
+    function fetchAdminProfilePicture() {
+    fetch('/admin-details-data')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const profilePicElement = document.getElementById('resident-profile-pic');
+            if (data.Profilepic) {
+                profilePicElement.src = data.Profilepic;
+            }
+        })
+        .catch(error => console.error('Error fetching profile picture:', error));
+}   
+document.addEventListener('DOMContentLoaded', function() {
+                fetchAdminProfilePicture();
+                fetchTotalProcessingRequests();
+            fetchTotalProcessingComplaints();
+            fetchProcessingBarangayID();
+        });
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
+                        }
+                }
+        }
+    }        
+
+     //side notification count
+// Function to fetch total count of "Processing" requests across all collections
+function fetchTotalProcessingRequests() {
+    fetch('/count-all-processing-requests')
+        .then(response => response.json())
+        .then(data => {
+            const sidebarNotif = document.getElementById('sidebarNotif');
+            if (data.totalCount > 0) {
+                sidebarNotif.textContent = data.totalCount; // Show total count
+                sidebarNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                sidebarNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching total processing count:', error));
+}
+
+        function fetchTotalProcessingComplaints() {
+    fetch('/complaint-counts')
+        .then(response => response.json())
+        .then(data => {
+            const total =
+                (data.blotterCount || 0) +
+                (data.blotterKasunduanCount || 0) +
+                (data.luponCount || 0) +
+                (data.luponKasunduanCount || 0) +
+                (data.cfaCount || 0);
+
+            const complaintsNotif = document.getElementById('complaintsNotif');
+            if (complaintsNotif) {
+                complaintsNotif.textContent = total;
+                complaintsNotif.style.display = total > 0 ? 'inline-flex' : 'none';
+            }
+        })
+        .catch(error => console.error('Error fetching complaint counts:', error));
+}
+
+function fetchProcessingBarangayID() {
+    fetch('/count-processing-barangay-id')
+        .then(response => response.json())
+        .then(data => {
+            const barangayIDNotif = document.getElementById('barangayIDNotif');
+            if (data.barangayIdCount > 0) {
+                barangayIDNotif.textContent = data.barangayIdCount; // Show total count
+                barangayIDNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                barangayIDNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching Barangay ID count:', error));
+}
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</body>
+</html>

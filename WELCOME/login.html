@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter bg-cover bg-center flex justify-center items-center min-h-screen" style="background-image: url('https://www.dropbox.com/scl/fi/qdz359iwyj5wme0szeiws/LOGIN-ADMIN.png?rlkey=keqj2ywlvjwik2fhk3z71bvjx&st=npybi7z2&dl=1');">
+    <div class="bg-white bg-opacity-90 shadow-md p-8 rounded-xl w-full max-w-lg mx-4">
+        <form class="login-form flex flex-col items-center space-y-6">
+            <h2 class="text-2xl font-bold text-center text-blue-800 mb-5">ADMIN LOGIN</h2>
+
+            <!-- Username -->
+            <div class="w-full space-y-2">
+                <label for="username" class="block text-blue-900 text-sm">Username</label>
+                <input type="text" id="username" name="username" required class="w-full p-2 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-1 focus:ring-black focus:border-black text-sm">
+            </div>
+
+            <!-- Password -->
+            <div class="w-full space-y-2">
+                <label for="password" class="block text-blue-900 text-sm">Password</label>
+                <input type="password" id="password" name="password" required class="w-full p-2 border border-gray-300 bg-white rounded-md focus:outline-none focus:ring-1 focus:ring-black focus:border-black text-sm">
+            </div>
+
+            <!-- Submit Button -->
+            <div class="w-full text-center">
+                <button type="submit" class="w-full p-2 bg-blue-800 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-200">
+                    Login
+                </button>
+            </div>
+
+            <!-- Forgot Password Link -->
+            <div class="w-full text-right mt-3 mr-5">
+                <a href="adminforgotpass.html" class="text-blue-800 hover:underline">Forgot Password?</a>
+            </div>
+
+            <!-- Resident Link -->
+            <div class="w-full text-center mt-3">
+                <a href="login-resident.html" class="text-green-800 hover:underline">Resident</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Notification Popup -->
+    <div id="notification" class="hidden fixed top-5 right-5 bg-red-500 text-white p-4 rounded-md shadow-lg">
+        <span class="closebtn cursor-pointer font-bold text-xl float-right" onclick="this.parentElement.style.display='none';">&times;</span>
+        <span id="notification-message"></span>
+    </div>
+
+    <script>
+        document.querySelector('.login-form').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            const response = await fetch('/admin-login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+
+            const notification = document.getElementById('notification');
+            const message = document.getElementById('notification-message');
+
+            if (response.ok) {
+                window.location.href = '/dashboard.html';
+            } else {
+                const result = await response.text();
+                message.innerText = result;
+                notification.style.display = 'block';
+            }
+        });
+    </script>
+
+</body>
+</html>
