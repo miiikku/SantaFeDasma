@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const { MongoClient, ObjectId } = require('mongodb');
 const path = require('path');
 const session = require('express-session');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 const axios = require('axios');
 const dotenv = require('dotenv');
@@ -18,9 +18,26 @@ const LocalUpload = multer({ dest: "public/uploads" }); // Specify the uploads f
 const cors = require('cors');
 const validator = require('validator'); // Optional: only if you're using the validator package
 const app = express();
-const port = 8080;
+const PORT = 8080;
+const mongoose = require('mongoose');  // If using Mongoose
+const connectDB = require('./dbConn');
 
-const uri = "mongodb+srv://santafedasma:brgysantafedasmarinas@cluster0.uv9yo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+// Connecting to MongoDB Atlas
+mongoose.set('strictQuery', false);
+connectDB();
+
+// Start the server
+mongoose.connection.once('open', () => {
+  app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+  });
+});
+
+mongoose.connection.on('error', (err) => {
+  console.error('Error connecting to MongoDB:', err);
+});
+
+
 const dbName = "BrgyStaFe";
 let db;
 
@@ -157,21 +174,21 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'USER')));
 app.use(express.static(path.join(__dirname, 'ADMIN')));
 
-// Connect to MongoDB
-MongoClient.connect(uri)
-  .then(client => {
-    db = client.db(dbName);
-    console.log('Connected to MongoDB');
+// // Connect to MongoDB
+// MongoClient.connect(uri)
+//   .then(client => {
+//     db = client.db(dbName);
+//     console.log('Connected to MongoDB');
 
-    // Start the server after successful connection
-    app.listen(port, () => {
-      console.log(`Server is running on http://localhost:${port}`);
-    });
-  })
-  .catch(err => {
-    console.error('Failed to connect to MongoDB', err);
-    process.exit(1);
-  });
+//     // Start the server after successful connection
+//     app.listen(port, () => {
+//       console.log(`Server is running on http://localhost:${port}`);
+//     });
+//   })
+//   .catch(err => {
+//     console.error('Failed to connect to MongoDB', err);
+//     process.exit(1);
+//   });
 
 // Set up routes
 app.get('/', (req, res) => {
