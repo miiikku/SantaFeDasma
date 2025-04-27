@@ -245,7 +245,7 @@
                             <input type="text" name="kasunduancomplainantFirstName[]" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                           </div>
                           <div>
-                            <input type="text" name="kasunduancomplainantMiddleName[]" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                            <input type="text" name="kasunduancomplainantMiddleName[]" placeholder="Middle Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                           </div>
                           <div>
                             <input type="text" name="kasunduancomplainantLastName[]" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
@@ -266,7 +266,7 @@
                 <input type="text" name="kasunduancomplaineeFirstName[]" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                 </div>
                 <div>
-                <input type="text" name="kasunduancomplaineeMiddleName[]" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                <input type="text" name="kasunduancomplaineeMiddleName[]" placeholder="Middle Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                 </div>
                 <div>
                 <input type="text" name="kasunduancomplaineeLastName[]" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
@@ -689,7 +689,7 @@ function openEditModal(id, date, usapinBlg, complainants, complainees, sumbong, 
                 <input type="text" id="editComplainantFirstName${index}" value="${complainant.firstName}" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
             </div>
             <div >
-                <input type="text" id="editComplainantMiddleName${index}" value="${complainant.middleName}" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                <input type="text" id="editComplainantMiddleName${index}" value="${complainant.middleName}" placeholder="Middle Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
             </div>
             <div>
                 <input type="text" id="editComplainantLastName${index}" value="${complainant.lastName}" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
@@ -712,7 +712,7 @@ function openEditModal(id, date, usapinBlg, complainants, complainees, sumbong, 
                 <input type="text" id="editComplaineeFirstName${index}" value="${complainee.firstName}" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
             </div>
             <div>
-                <input type="text" id="editComplaineeMiddleName${index}" value="${complainee.middleName}" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                <input type="text" id="editComplaineeMiddleName${index}" value="${complainee.middleName}" placeholder="Middle Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
             </div>
             <div>
                 <input type="text" id="editComplaineeLastName${index}" value="${complainee.lastName}" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
@@ -832,7 +832,7 @@ function openEditKasunduanModal(id, date, time, complainants, complainees, kasun
                 <input type="text" id="editKasunduanComplainantFirstName${index}" value="${complainant.firstName}" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
             </div>
             <div>
-                <input type="text" id="editKasunduanComplainantMiddleName${index}" value="${complainant.middleName}" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                <input type="text" id="editKasunduanComplainantMiddleName${index}" value="${complainant.middleName}" placeholder="Middle Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
             </div>
             <div>
                 <input type="text" id="editKasunduanComplainantLastName${index}" value="${complainant.lastName}" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
@@ -855,7 +855,7 @@ complainees.forEach((complainee, index) => {
             <input type="text" id="editKasunduanComplaineeFirstName${index}" value="${complainee.firstName}" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
         </div>
         <div>
-            <input type="text" id="editKasunduanComplaineeMiddleName${index}" value="${complainee.middleName}" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            <input type="text" id="editKasunduanComplaineeMiddleName${index}" value="${complainee.middleName}" placeholder="Middle Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
         </div>
         <div>
             <input type="text" id="editKasunduanComplaineeLastName${index}" value="${complainee.lastName}" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
