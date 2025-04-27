@@ -463,7 +463,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.success) {
-                        alert("CFA updated successfully!");
                         closeEditCFAModal();
                         fetchCFAData(); // Refresh the table
                     } else {
