@@ -519,12 +519,12 @@ async function fetchLuponData() {
     <td class="px-4 py-2">${lupon.hearingTime}</td>
     <td class="px-4 py-2">${lupon.status}</td>
          <td class="px-4 py-2"><div class="flex items-center space-x-1">
-          <a href="#"><img src="https://www.dropbox.com/scl/fi/u6i83geituweeaybi8y9w/pen.png?rlkey=5f7vjmsrn42d1t0iaxdu3jbjy&st=0sk8r60h&dl=1" alt="Edit" class="edit-icon" onclick='openEditModal(${JSON.stringify(lupon._id)}, ${JSON.stringify(lupon.petsa)}, ${JSON.stringify(lupon.usapinBlg)}, ${JSON.stringify(lupon.complainants)}, ${JSON.stringify(lupon.complainees)}, ${JSON.stringify(lupon.sumbong)}, ${JSON.stringify(lupon.lunas)}, ${JSON.stringify(lupon.reason)}, ${JSON.stringify(lupon.hearingStage)}, ${JSON.stringify(lupon.hearingDate)}, ${JSON.stringify(lupon.hearingTime)}, ${JSON.stringify(lupon.status)})'></a>
-          <a href="#"><img src="https://www.dropbox.com/scl/fi/ho6y40rqr930v22ja9219/delete.png?rlkey=b1xjg0s1v3rnrgjx1n5v2usgm&st=xgbxk20f&dl=1" alt="Delete" class="delete-icon" onclick="deleteLupon('${lupon._id}')"></a>
-          ${lupon.status === 'Processing' ? `<a href="#"><img src="https://www.dropbox.com/scl/fi/2f706u84pw40jwnv3mice/generateJusticeSystem.png?rlkey=xjmdwr9qljhbs4d2p065i8ofe&st=klgizqwg&dl=1" alt="Generate" class="generate-icon" onclick="generatePatawag('${lupon._id}')"></a>` : ''}
-          ${lupon.hearingStage === "3" ? `<a href="#"><img src="https://www.dropbox.com/scl/fi/v185qat4whwt769dbbbya/blueDocument.png?rlkey=uy1zoguvwgxd55x7sw6ki8c6h&st=4jg7gfil&dl=1" alt="Generate" class="generate-icon" onclick="generateLupon('${lupon._id}')"></a>` : ''}
-          ${lupon.status === 'Completed' ? `<a href="#"><img src="https://www.dropbox.com/scl/fi/brbnzjxfdeqjerssseaxc/checked.png?rlkey=yinbka4wjvra6n5dxazi4l13a&st=wpwljnp2&dl=1" alt="Transfer" class="transfer-icon" onclick="transferLupon('${lupon._id}')"></a>` : ''}
-          ${lupon.status === 'Transfer to CFA' ? `<a href="#"><img src="https://www.dropbox.com/scl/fi/brbnzjxfdeqjerssseaxc/checked.png?rlkey=yinbka4wjvra6n5dxazi4l13a&st=wpwljnp2&dl=1" alt="Transfer" class="transfer-icon" onclick="transfertoCFA('${lupon._id}')"></a>` : ''}
+          <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749884/edit_tchmia.png" alt="Edit" class="edit-icon" onclick='openEditModal(${JSON.stringify(lupon._id)}, ${JSON.stringify(lupon.petsa)}, ${JSON.stringify(lupon.usapinBlg)}, ${JSON.stringify(lupon.complainants)}, ${JSON.stringify(lupon.complainees)}, ${JSON.stringify(lupon.sumbong)}, ${JSON.stringify(lupon.lunas)}, ${JSON.stringify(lupon.reason)}, ${JSON.stringify(lupon.hearingStage)}, ${JSON.stringify(lupon.hearingDate)}, ${JSON.stringify(lupon.hearingTime)}, ${JSON.stringify(lupon.status)})'></a>
+          <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749756/delete_iyld39.png" alt="Delete" class="delete-icon" onclick="deleteLupon('${lupon._id}')"></a>
+          ${lupon.status === 'Processing' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750132/redPROCESSING_edoaf5.png" alt="Generate" class="generate-icon" onclick="generatePatawag('${lupon._id}')"></a>` : ''}
+          ${lupon.hearingStage === "3" ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750179/blueCOMPLETED_ymvmje.png" alt="Generate" class="generate-icon" onclick="generateLupon('${lupon._id}')"></a>` : ''}
+          ${lupon.status === 'Completed' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750222/checked_bgey1p.png" alt="Transfer" class="transfer-icon" onclick="transferLupon('${lupon._id}')"></a>` : ''}
+          ${lupon.status === 'Transfer to CFA' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750222/checked_bgey1p.png" alt="Transfer" class="transfer-icon" onclick="transfertoCFA('${lupon._id}')"></a>` : ''}
           </div></td>
       `;
       luponTableBody.appendChild(row);
@@ -559,11 +559,11 @@ async function fetchKasunduanData() {
         <td class="px-4 py-2">${kasunduan.justiceOnDuty}</td>
         <td class="px-4 py-2">${kasunduan.status}
         <td class="px-4 py-2"><div class="flex items-center space-x-1">
-          <a href="#"><img src="https://www.dropbox.com/scl/fi/u6i83geituweeaybi8y9w/pen.png?rlkey=5f7vjmsrn42d1t0iaxdu3jbjy&st=0sk8r60h&dl=1" alt="Edit" class="edit-icon" onclick='openEditKasunduanModal("${kasunduan._id}", "${kasunduan.date}", "${kasunduan.time}", ${JSON.stringify(kasunduan.complainants)}, ${JSON.stringify(kasunduan.complainees)}, ${JSON.stringify(kasunduan.kasunduan)}, ${JSON.stringify(kasunduan.justiceOnDuty)}, ${JSON.stringify(kasunduan.status)})'></a>
-          <a href="#"><img src="https://www.dropbox.com/scl/fi/ho6y40rqr930v22ja9219/delete.png?rlkey=b1xjg0s1v3rnrgjx1n5v2usgm&st=xgbxk20f&dl=1" alt="Delete" class="delete-icon" onclick="deleteKasunduan('${kasunduan._id}')"></a>
-          <a href="#"><img src="https://www.dropbox.com/scl/fi/v185qat4whwt769dbbbya/blueDocument.png?rlkey=uy1zoguvwgxd55x7sw6ki8c6h&st=4jg7gfil&dl=1" alt="Generate" class="generate-icon" onclick="generateLuponKasunduan('${kasunduan._id}')"></a>
+          <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749884/edit_tchmia.png" alt="Edit" class="edit-icon" onclick='openEditKasunduanModal("${kasunduan._id}", "${kasunduan.date}", "${kasunduan.time}", ${JSON.stringify(kasunduan.complainants)}, ${JSON.stringify(kasunduan.complainees)}, ${JSON.stringify(kasunduan.kasunduan)}, ${JSON.stringify(kasunduan.justiceOnDuty)}, ${JSON.stringify(kasunduan.status)})'></a>
+          <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749756/delete_iyld39.png" alt="Delete" class="delete-icon" onclick="deleteKasunduan('${kasunduan._id}')"></a>
+          <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750179/blueCOMPLETED_ymvmje.png" alt="Generate" class="generate-icon" onclick="generateLuponKasunduan('${kasunduan._id}')"></a>
 
-          ${kasunduan.status === 'Completed' ? `<a href="#"><img src="https://www.dropbox.com/scl/fi/brbnzjxfdeqjerssseaxc/checked.png?rlkey=yinbka4wjvra6n5dxazi4l13a&st=wpwljnp2&dl=1" alt="Transfer" class="transfer-icon" onclick="transferkasunduan('${kasunduan._id}')"></a>` : ''}
+          ${kasunduan.status === 'Completed' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750222/checked_bgey1p.png" alt="Transfer" class="transfer-icon" onclick="transferkasunduan('${kasunduan._id}')"></a>` : ''}
         </div></td>
       `;
       kasunduanTableBody.appendChild(row);

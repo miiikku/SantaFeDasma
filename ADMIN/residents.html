@@ -746,9 +746,9 @@ function fetchResidents() {
                     <td class="px-4 py-2">${resident.Address}</td>
                     <td class="px-4 py-2">${resident.yearsresiding}</td> 
                     <td class="px-4 py-2"><div class="flex items-center space-x-1">
-                        <a href="#"><img src="https://www.dropbox.com/scl/fi/u6i83geituweeaybi8y9w/pen.png?rlkey=5f7vjmsrn42d1t0iaxdu3jbjy&st=0sk8r60h&dl=1" alt="Edit" class="edit-icon" onclick="openEditModal('${resident._id}')"></a>
-                        <a href="#"><img src="https://www.dropbox.com/scl/fi/ho6y40rqr930v22ja9219/delete.png?rlkey=b1xjg0s1v3rnrgjx1n5v2usgm&st=xgbxk20f&dl=1" alt="Delete" class="delete-icon" onclick="deleteResident('${resident._id}')"></a>
-                        <a href="resident-details.html?id=${resident._id}"><img src="https://www.dropbox.com/scl/fi/htv0k6jfdgwb5jd1j5chz/right-arrow.png?rlkey=9vigkl2f1vzdq86892hruea3d&st=s63pgtou&dl=1" alt="Details" class="view-icon"></a>
+                        <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749884/edit_tchmia.png" alt="Edit" class="edit-icon" onclick="openEditModal('${resident._id}')"></a>
+                        <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749756/delete_iyld39.png" alt="Delete" class="delete-icon" onclick="deleteResident('${resident._id}')"></a>
+                        <a href="resident-details.html?id=${resident._id}"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749861/details_isytlj.png" alt="Details" class="view-icon"></a>
                     </div></td>
                 `;
                 tableBody.appendChild(row);

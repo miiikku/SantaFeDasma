@@ -311,10 +311,10 @@
         <td class="px-4 py-2">${entry.pangkatMember2}</td>
         <td class="px-4 py-2">${entry.status}</td>
         <td class="px-4 py-2"><div class="flex items-center space-x-1">
-            <a href="#"><img src="https://www.dropbox.com/scl/fi/u6i83geituweeaybi8y9w/pen.png?rlkey=5f7vjmsrn42d1t0iaxdu3jbjy&st=0sk8r60h&dl=1" alt="Edit" class="edit-icon" onclick='openEditModal(${JSON.stringify(entry._id)}, ${JSON.stringify(entry.brgyCaseNo)}, ${JSON.stringify(entry.reason)}, ${JSON.stringify(entry.complainants)}, ${JSON.stringify(entry.complainees)}, ${JSON.stringify(entry.dateIssued)}, ${JSON.stringify(entry.pangkatChairperson)}, ${JSON.stringify(entry.pangkatMember1)}, ${JSON.stringify(entry.pangkatMember2)}, ${JSON.stringify(entry.status)})'></a>
-            <a href="#"><img src="https://www.dropbox.com/scl/fi/ho6y40rqr930v22ja9219/delete.png?rlkey=b1xjg0s1v3rnrgjx1n5v2usgm&st=xgbxk20f&dl=1" alt="Delete" class="delete-icon" onclick="deleteCFA('${entry._id}')"></a>
-            <a href="#"><img src="https://www.dropbox.com/scl/fi/v185qat4whwt769dbbbya/blueDocument.png?rlkey=uy1zoguvwgxd55x7sw6ki8c6h&st=4jg7gfil&dl=1" alt="Generate" class="generate-icon" onclick="generateCFA('${entry._id}')"></a>
-            ${entry.status === 'Completed' ? `<a href="#"><img src="https://www.dropbox.com/scl/fi/brbnzjxfdeqjerssseaxc/checked.png?rlkey=yinbka4wjvra6n5dxazi4l13a&st=wpwljnp2&dl=1" alt="Transfer" class="transfer-icon" onclick="transferCFA('${entry._id}')"></a>` : ''}
+            <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749884/edit_tchmia.png" alt="Edit" class="edit-icon" onclick='openEditModal(${JSON.stringify(entry._id)}, ${JSON.stringify(entry.brgyCaseNo)}, ${JSON.stringify(entry.reason)}, ${JSON.stringify(entry.complainants)}, ${JSON.stringify(entry.complainees)}, ${JSON.stringify(entry.dateIssued)}, ${JSON.stringify(entry.pangkatChairperson)}, ${JSON.stringify(entry.pangkatMember1)}, ${JSON.stringify(entry.pangkatMember2)}, ${JSON.stringify(entry.status)})'></a>
+            <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749756/delete_iyld39.png" alt="Delete" class="delete-icon" onclick="deleteCFA('${entry._id}')"></a>
+            <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750179/blueCOMPLETED_ymvmje.png" alt="Generate" class="generate-icon" onclick="generateCFA('${entry._id}')"></a>
+            ${entry.status === 'Completed' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750222/checked_bgey1p.png" alt="Transfer" class="transfer-icon" onclick="transferCFA('${entry._id}')"></a>` : ''}
           </div></td>
           `;
           tableBody.appendChild(row);

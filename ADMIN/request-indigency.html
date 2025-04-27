@@ -396,10 +396,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     <td class="px-4 py-2">${request.dateIssued}</td>
                     <td class="px-4 py-2">${request.status}</td>
                     <td class="px-4 py-2"><div class="flex items-center space-x-1">
-                        <a href="#"><img src="https://www.dropbox.com/scl/fi/u6i83geituweeaybi8y9w/pen.png?rlkey=5f7vjmsrn42d1t0iaxdu3jbjy&st=0sk8r60h&dl=1" alt="Edit" class="edit-icon" onclick="openEditModal('${request._id}')"></a>
-                        <a href="#"><img src="https://www.dropbox.com/scl/fi/ho6y40rqr930v22ja9219/delete.png?rlkey=b1xjg0s1v3rnrgjx1n5v2usgm&st=xgbxk20f&dl=1" alt="Delete" class="delete-icon" onclick="deleteRequest('${request._id}')"></a>
-                        <a href="#"><img src="https://www.dropbox.com/scl/fi/n1hy2jgp7k25kj1pvg9yz/greenDocument.png?rlkey=exgue55jtsy1frhnpsnc7koi7&st=r1kou07n&dl=1" alt="Generate" class="generate-icon" onclick="generateRequestIndigency('${request._id}')"></a>
-                        ${request.status === 'Complete' ? `<a href="#"><img src="https://www.dropbox.com/scl/fi/brbnzjxfdeqjerssseaxc/checked.png?rlkey=yinbka4wjvra6n5dxazi4l13a&st=wpwljnp2&dl=1" alt="Transfer" class="transfer-icon" onclick="transferRequest('${request._id}')"></a>` : ''}
+                        <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749884/edit_tchmia.png" alt="Edit" class="edit-icon" onclick="openEditModal('${request._id}')"></a>
+                        <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749756/delete_iyld39.png" alt="Delete" class="delete-icon" onclick="deleteRequest('${request._id}')"></a>
+                        <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745751132/greenINDIGENCY_vj6jlh.png" alt="Generate" class="generate-icon" onclick="generateRequestIndigency('${request._id}')"></a>
+                        ${request.status === 'Complete' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750222/checked_bgey1p.png" alt="Transfer" class="transfer-icon" onclick="transferRequest('${request._id}')"></a>` : ''}
                     </div></td>
                 `;
                 tableBody.appendChild(row);
