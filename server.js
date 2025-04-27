@@ -9,7 +9,6 @@ const axios = require('axios');
 const dotenv = require('dotenv');
 dotenv.config(); // Load .env file contents into process.env
 const nodemailer = require('nodemailer');
-const crypto = require('crypto');
 const otpStorage ={};
 const multer = require("multer");
 const { v2: cloudinary } = require('cloudinary');
@@ -153,12 +152,12 @@ app.use(cors(corsOptions));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(session({
-  secret: 'your_secret_key',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
     maxAge: 60 * 60 * 1000, // 1 hour
-    secure: process.env.NODE_ENV === 'production', // Only send cookie over HTTPS in production
+    secure: process.env.NODE_ENV, // Only send cookie over HTTPS in production
     httpOnly: true, // Prevents JavaScript access to session cookie
   },
 }));
