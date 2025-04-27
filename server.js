@@ -9,7 +9,6 @@ const axios = require('axios');
 const dotenv = require('dotenv');
 dotenv.config(); // Load .env file contents into process.env
 const nodemailer = require('nodemailer');
-const crypto = require('crypto');
 const otpStorage ={};
 const multer = require("multer");
 const { v2: cloudinary } = require('cloudinary');
@@ -126,6 +125,8 @@ const corsOptions = {
   credentials: true // Allow cookies to be sent with requests if needed
 };
 
+// Use CORS middleware with the defined options
+app.use(cors(corsOptions));
 
 /************** MIDDLEWARE BAGONG LAGAY *****************/
 // Middleware to ensure user is authenticated and has 'admin' role
@@ -139,27 +140,25 @@ function ensureAdmin(req, res, next) {
 
 // Middleware to ensure user is authenticated and has 'user' role
 function ensureUser(req, res, next) {
-  if (req.session.role === 'user') {
+  if (req.session.role === 'user' && req.session.userId) {
     next();
   } else {
     res.status(403).send('Forbidden: Users only');
   }
 }
 
-
-// Use CORS middleware with the defined options
-app.use(cors(corsOptions));
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
 app.use(session({
-  secret: 'your_secret_key',
+  secret: process.env.SESSION_SECRET, //0427
   resave: false,
   saveUninitialized: true,
   cookie: {
     maxAge: 60 * 60 * 1000, // 1 hour
     secure: process.env.NODE_ENV === 'production', // Only send cookie over HTTPS in production
     httpOnly: true, // Prevents JavaScript access to session cookie
+    sameSite: 'None', //0427  Allow cross-origin cookies (required for third-party requests)
   },
 }));
 
@@ -441,6 +440,8 @@ app.post('/signup', async (req, res) => {
 app.post('/resident-login', async (req, res) => {
   const { username, password } = req.body;
 
+  console.log('Before login session:', req.session); //0427
+
   try {
     const userAccountCollection = db.collection('user-account');
     const user = await userAccountCollection.findOne({ username });
@@ -459,6 +460,8 @@ app.post('/resident-login', async (req, res) => {
     req.session.userId = user._id;
     req.session.username = user.username;
     req.session.role = 'user'; // Store 'user' role in session
+    console.log('After login session:', req.session); // Should contain the user info 0427
+    alert('Login Successful');
     res.status(200).send('Login successful');
   } catch (err) {
     console.error(err);
@@ -503,7 +506,7 @@ app.get('/user-details', async (req, res) => {
       user.age = resident ? resident.age : null;
       user.Address = resident ? resident.Address : null;
       user.yearsresiding = resident ? resident.yearsresiding : null;
-
+      
       console.log("Fetched resident from resident collection:", resident);
       res.json(user);
     } else {

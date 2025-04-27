@@ -167,7 +167,10 @@
     <script>
         // Fetch resident profile data
         document.addEventListener('DOMContentLoaded', function () {
-            fetch('/user-profile-data')
+            fetch('/user-profile-data', {
+                method: 'GET',
+                credentials: 'include',//0427
+            })
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('resident-name').textContent = `${data.Firstname} ${data.Middlename} ${data.Lastname}`;
