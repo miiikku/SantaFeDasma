@@ -37,8 +37,8 @@ body {
     list-style: none;
 }
 .sidebar .sidenav ul li {
-    padding: 20px 0;
-    border-radius: 15px;
+    padding: 17px 0;
+    border-radius: 8px;
     font-weight: bold;
 }
 .sidebar .sidenav ul li:hover {
@@ -63,10 +63,7 @@ body {
 .sidebar .sidenav ul li a img {
     transition: transform 0.3s ease;
 }
-.sidebar .sidenav ul li a:hover img {
-    transform: scale(1.5);
-    filter: brightness(0.100);
-}
+
 
 /* MAIN */
 .main-content {
