@@ -151,14 +151,18 @@ app.use(cors(corsOptions));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.set('trust proxy', 1); // Trust first proxy (needed for secure cookies behind HTTPS/proxy)
+
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   cookie: {
     maxAge: 60 * 60 * 1000, // 1 hour
-    secure: process.env.NODE_ENV, // Only send cookie over HTTPS in production
-    httpOnly: true, // Prevents JavaScript access to session cookie
+    secure: process.env.NODE_ENV === 'production', // Only send cookie over HTTPS in production
+    httpOnly: true,
+    sameSite: 'lax' // Prevents JavaScript access to session cookie
   },
 }));
 
@@ -221,12 +225,22 @@ app.post('/admin-login', async (req, res) => {
     // Store role and username in session
     req.session.username = user.username;
     req.session.role = 'admin'; // Store 'admin' role in session
-    res.redirect('/dashboard.html'); // Redirect to admin dashboard
+
+    // Save the session before redirecting
+    req.session.save((err) => {
+      if (err) {
+        console.error('Session save error:', err);
+        return res.status(500).send('Internal Server Error');
+      }
+      res.redirect('/dashboard.html'); // Safe to redirect after save
+    });
+
   } catch (err) {
     console.error('Error during login:', err);
     res.status(500).send('Internal Server Error');
   }
 });
+
 
 app.get('/admin-details-data', ensureAdmin, async (req, res) => {
   if (!req.session.username || req.session.role !== 'admin') {
@@ -458,7 +472,16 @@ app.post('/resident-login', async (req, res) => {
     req.session.userId = user._id;
     req.session.username = user.username;
     req.session.role = 'user'; // Store 'user' role in session
-    res.status(200).send('Login successful');
+
+    // Save the session before sending success response
+    req.session.save((err) => {
+      if (err) {
+        console.error('Session save error:', err);
+        return res.status(500).send('Internal Server Error');
+      }
+      res.status(200).send('Login successful');
+    });
+
   } catch (err) {
     console.error(err);
     res.status(500).send('Internal Server Error');
