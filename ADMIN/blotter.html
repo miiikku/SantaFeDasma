@@ -237,7 +237,7 @@
 
                     <!-- BLOTTER COMPLAINANTS -->
                     <div id="complainant-container">
-                        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Detail's</label>
+                        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
                         <div class="form-row complainant-row">
                           <div>
                             <button type="button" class="add-btn-name" onclick="addBlotterComplainant()">+</button>
@@ -258,7 +258,7 @@
 
                     <!-- BLOTTER COMPLAINEES -->
                     <div id="complainee-container">
-                        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Detail's</label>
+                        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainee Details</label>
                     <div class="form-row complainee-row">
                         <div>
                         <button type="button" class="add-btn-name" onclick="addBlotterComplainee()">+</button>
@@ -360,7 +360,7 @@
 
                     <!-- KASUNDUAN COMPLAINEES -->
                     <div id="kasunduancomplainee-container">
-                        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+                        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainee Details</label>
                     <div class="form-row kasunduancomplainee-row">
                         <div>
                         <button type="button" class="add-btn-name" onclick="addKasunduanComplainee()">+</button>
@@ -760,10 +760,10 @@
             complaineeRow.innerHTML = `
             <div class="grid grid-cols-3 gap-2 mb-4">
                 <div>
-                    <input type="text" id="editComplaineeFirstName${index}" value="${complainee.firstName}" placeholder=">First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                    <input type="text" id="editComplaineeFirstName${index}" value="${complainee.firstName}" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                 </div>
                 <div>
-                    <input type="text" id="editComplaineeMiddleName${index}" value="${complainee.middleName}" placeholder=">Middle Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                    <input type="text" id="editComplaineeMiddleName${index}" value="${complainee.middleName}" placeholder="Middle Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                 </div>
                 <div>
                     <input type="text" id="editComplaineeLastName${index}" value="${complainee.lastName}" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
