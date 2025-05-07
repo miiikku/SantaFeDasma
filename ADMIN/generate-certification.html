@@ -172,6 +172,35 @@
             font-family: 'Century Gothic', serif;
             font-size: 12pt;
         }
+        .sidebar-notif {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 7px;
+    border-radius: 50%;
+    margin-left: 50px;
+}
+
+.sidebar-notif2 {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 7px;
+    border-radius: 50%;
+    margin-left: 40px;
+}
+
+.sidebar-notif3 {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 7px;
+    border-radius: 50%;
+    margin-left: 35px;
+}
         .inter-font {
             font-family: 'Inter', sans-serif;
         }
@@ -220,7 +249,7 @@
             <h2>Generate Certification</h2>
             <div class="user-info">
                 <div class="dropdown">
-                    <img src="https://www.dropbox.com/scl/fi/oedqyjb59kspzdylesk6y/user.png?rlkey=1axl685fxswp7olj90dbgu53y&st=7jh50r8n&dl=1" alt="User Avatar" class="dropbtn" onclick="toggleDropdown()">
+                    <img id="resident-profile-pic" src=""  alt="User Avatar" class="dropbtn" onclick="toggleDropdown()">
                     <div id="myDropdown" class="dropdown-content">
                         <a href="admin-details.html" onclick="viewProfile()">User Profile</a>
                         <a href="module.html">Maintenance</a>
@@ -394,7 +423,66 @@ window.onclick = function(event) {
         }
     }
 }
+document.addEventListener('DOMContentLoaded', function () {
+    fetchTotalProcessingRequests();
+    fetchTotalProcessingComplaints();
+    fetchProcessingBarangayID();
+});
 
+// Fetch for sidebarNotif (REQUESTS)
+function fetchTotalProcessingRequests() {
+    fetch('/count-all-processing-requests')
+        .then(response => response.json())
+        .then(data => {
+            const sidebarNotif = document.getElementById('sidebarNotif');
+            if (data.totalCount > 0) {
+                sidebarNotif.textContent = data.totalCount;
+                sidebarNotif.style.display = 'inline-block';
+            } else {
+                sidebarNotif.style.display = 'none';
+            }
+        })
+        .catch(error => console.error('Error fetching request count:', error));
+}
+
+// Fetch for complaintsNotif (COMPLAINTS)
+function fetchTotalProcessingComplaints() {
+    fetch('/complaint-counts')
+        .then(response => response.json())
+        .then(data => {
+            const total =
+                (data.blotterCount || 0) +
+                (data.blotterKasunduanCount || 0) +
+                (data.luponCount || 0) +
+                (data.luponKasunduanCount || 0) +
+                (data.cfaCount || 0);
+
+            const complaintsNotif = document.getElementById('complaintsNotif');
+            if (total > 0) {
+                complaintsNotif.textContent = total;
+                complaintsNotif.style.display = 'inline-block';
+            } else {
+                complaintsNotif.style.display = 'none';
+            }
+        })
+        .catch(error => console.error('Error fetching complaints count:', error));
+}
+
+// Fetch for barangayIDNotif (BARANGAY ID)
+function fetchProcessingBarangayID() {
+    fetch('/count-processing-barangay-id')
+        .then(response => response.json())
+        .then(data => {
+            const barangayIDNotif = document.getElementById('barangayIDNotif');
+            if (data.barangayIdCount > 0) {
+                barangayIDNotif.textContent = data.barangayIdCount;
+                barangayIDNotif.style.display = 'inline-block';
+            } else {
+                barangayIDNotif.style.display = 'none';
+            }
+        })
+        .catch(error => console.error('Error fetching Barangay ID count:', error));
+}
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
 </body>
