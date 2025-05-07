@@ -412,6 +412,30 @@ function toggleDropdown() {
     }
 }
 
+function fetchAdminProfilePicture() {
+    fetch('/admin-details-data')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const profilePicElement = document.getElementById('resident-profile-pic');
+            if (data.Profilepic) {
+                profilePicElement.src = data.Profilepic;
+            }
+        })
+        .catch(error => console.error('Error fetching profile picture:', error));
+}   
+
+document.addEventListener('DOMContentLoaded', function () {
+    fetchAdminProfilePicture();
+    fetchTotalProcessingRequests();
+    fetchTotalProcessingComplaints();
+    fetchProcessingBarangayID();
+});
+
 window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -423,30 +447,25 @@ window.onclick = function(event) {
         }
     }
 }
-document.addEventListener('DOMContentLoaded', function () {
-    fetchTotalProcessingRequests();
-    fetchTotalProcessingComplaints();
-    fetchProcessingBarangayID();
-});
 
-// Fetch for sidebarNotif (REQUESTS)
+//side notification count
+// Function to fetch total count of "Processing" requests across all collections
 function fetchTotalProcessingRequests() {
     fetch('/count-all-processing-requests')
         .then(response => response.json())
         .then(data => {
             const sidebarNotif = document.getElementById('sidebarNotif');
             if (data.totalCount > 0) {
-                sidebarNotif.textContent = data.totalCount;
-                sidebarNotif.style.display = 'inline-block';
+                sidebarNotif.textContent = data.totalCount; // Show total count
+                sidebarNotif.style.display = 'inline-block'; // Make it visible
             } else {
-                sidebarNotif.style.display = 'none';
+                sidebarNotif.style.display = 'none'; // Hide if no processing requests
             }
         })
-        .catch(error => console.error('Error fetching request count:', error));
+        .catch(error => console.error('Error fetching total processing count:', error));
 }
 
-// Fetch for complaintsNotif (COMPLAINTS)
-function fetchTotalProcessingComplaints() {
+        function fetchTotalProcessingComplaints() {
     fetch('/complaint-counts')
         .then(response => response.json())
         .then(data => {
@@ -458,27 +477,24 @@ function fetchTotalProcessingComplaints() {
                 (data.cfaCount || 0);
 
             const complaintsNotif = document.getElementById('complaintsNotif');
-            if (total > 0) {
+            if (complaintsNotif) {
                 complaintsNotif.textContent = total;
-                complaintsNotif.style.display = 'inline-block';
-            } else {
-                complaintsNotif.style.display = 'none';
+                complaintsNotif.style.display = total > 0 ? 'inline-flex' : 'none';
             }
         })
-        .catch(error => console.error('Error fetching complaints count:', error));
+        .catch(error => console.error('Error fetching complaint counts:', error));
 }
 
-// Fetch for barangayIDNotif (BARANGAY ID)
 function fetchProcessingBarangayID() {
     fetch('/count-processing-barangay-id')
         .then(response => response.json())
         .then(data => {
             const barangayIDNotif = document.getElementById('barangayIDNotif');
             if (data.barangayIdCount > 0) {
-                barangayIDNotif.textContent = data.barangayIdCount;
-                barangayIDNotif.style.display = 'inline-block';
+                barangayIDNotif.textContent = data.barangayIdCount; // Show total count
+                barangayIDNotif.style.display = 'inline-block'; // Make it visible
             } else {
-                barangayIDNotif.style.display = 'none';
+                barangayIDNotif.style.display = 'none'; // Hide if no processing requests
             }
         })
         .catch(error => console.error('Error fetching Barangay ID count:', error));
