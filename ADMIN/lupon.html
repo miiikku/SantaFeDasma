@@ -147,12 +147,13 @@
             <div class="w-full sm:w-auto">
                 <input type="text" id="searchInput" placeholder="Search..." oninput="searchLuponAndKasunduan()" class="ml-auto w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-800">
             </div>
-
         
             <!-- Filter Dropdown -->
             <div class="w-full sm:w-auto">
                 <select onchange="navigateToPage(this)" class="ml-auto w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800 overflow-hidden text-ellipsis">
-                    <option value="lupon.html" selected>Processing</option>
+                    <option value="lupon.html" selected>Hearing 1</option>
+                    <option value="lupon2.html" >Hearing 2</option>
+                    <option value="lupon3.html" >Hearing 3</option>
                     <option value="lupon-complete.html">Completed</option>
                 </select>
             </div>
@@ -356,9 +357,9 @@
             <div class="grid grid-cols-4 gap-2 mb-4">
                 <div>
                     <select id="editHearingStage" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
-                      <option value="1" >1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
+                      <option value="1">1</option>
+                      <option value="2" disabled selected>2</option>
+                      <option value="3" disabled selected>3</option>
                     </select>
                 </div>
 
@@ -373,7 +374,7 @@
                 <div>
                     <select id="editStatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                         <option value="Processing">Processing</option>
-                        <option value="Transfer to CFA">Transfer to CFA</option>
+                        <option value="Transfer to Hearing 2">Transfer to Hearing 2</option> <!-- Backend, transfer to lupon2.html and mongodb-->
                         <option value="Completed">Completed</option>
                     </select>
                 </div>
@@ -524,7 +525,7 @@ async function fetchLuponData() {
           ${lupon.status === 'Processing' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750132/redPROCESSING_edoaf5.png" alt="Generate" class="generate-icon" onclick="generatePatawag('${lupon._id}')"></a>` : ''}
           ${lupon.hearingStage === "3" ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750179/blueCOMPLETED_ymvmje.png" alt="Generate" class="generate-icon" onclick="generateLupon('${lupon._id}')"></a>` : ''}
           ${lupon.status === 'Completed' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750222/checked_bgey1p.png" alt="Transfer" class="transfer-icon" onclick="transferLupon('${lupon._id}')"></a>` : ''}
-          ${lupon.status === 'Transfer to CFA' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750222/checked_bgey1p.png" alt="Transfer" class="transfer-icon" onclick="transfertoCFA('${lupon._id}')"></a>` : ''}
+          ${lupon.status === 'Transfer to Hearing 2' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750222/checked_bgey1p.png" alt="Transfer" class="transfer-icon" onclick="transfertoHearing2('${lupon._id}')"></a>` : ''}
           </div></td>
       `;
       luponTableBody.appendChild(row);
@@ -1038,6 +1039,7 @@ async function transferLupon(id) {
     }
 }
 
+// MAKE IT TRANSFER LUPON TO HEARING 2
 async function transfertoCFA(id) {
     try {
         const response = await fetch(`/transfer-to-cfa/${id}`, {

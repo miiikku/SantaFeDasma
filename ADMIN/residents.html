@@ -151,6 +151,9 @@
             <div>
                 <button class="bg-green-800 text-white px-6 py-1 rounded-md hover:bg-green-700 focus:outline-none" onclick="openModal()">Add</button>
             </div>
+            <div>
+                <button class="bg-blue-800 text-white px-6 py-1 rounded-md hover:bg-blue-700 focus:outline-none" onclick="openModal()">Print</button>  <!-- Logic for printing -->
+            </div>
         </div>
 
        <!-- Add Modal -->
@@ -191,6 +194,7 @@
                         <option value="" disabled selected>Select Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
                     </select>
                 </div>
                 <div>
@@ -210,17 +214,23 @@
             <div class="grid grid-cols-5 gap-2 mb-4">
                 <div>
                     <select id="addPwdSenior" name="pwd_senior" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
-                        <option value="" disabled selected>Select PWD/Senior</option>
-                        <option value="N/A">N/A</option>
+                        <option value="" disabled selected>Select Organization</option>
+                        <option value="None">None</option>
                         <option value="PWD">PWD</option>
                         <option value="Senior">Senior</option>
+                        <option value="4PS">4PS</option>
+                        <option value="Officials">Officials</option>
+                        <option value="Single Parents">Single Parents</option>
+                        <option value="Block Leaders">Block Leaders</option>
                     </select>
                 </div>
                 <div>
                     <select id="addVoterStatus" name="voter_status" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                         <option value="" disabled selected>Select Voter Status</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
+                        <option value="Active">Active, </option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="Registered">Registered</option>
+                        <option value="Not Registered">Not Registered</option>
                     </select>
                 </div>
                 <div>
@@ -295,7 +305,7 @@
                         <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Age</th>
                         <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Gender</th>
                         <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Civil Status</th>
-                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">PWD/Senior</th>
+                        <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Organization</th>
                         <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Voter Status</th>
                         <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Contact #</th>
                         <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Email</th>
@@ -349,6 +359,7 @@
                         <option value="" disabled selected>Select Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
                     </select>
                 </div>
                 <div>
@@ -368,17 +379,23 @@
             <div class="grid grid-cols-5 gap-2 mb-4">
                 <div>
                     <select id="editPwdSenior" name="pwd_senior" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
-                        <option value="" disabled selected>Select PWD/Senior</option>
-                        <option value="N/A">N/A</option>
+                        <option value="" disabled selected>Select Organization</option>
+                        <option value="None">None</option>
                         <option value="PWD">PWD</option>
                         <option value="Senior">Senior</option>
+                        <option value="4PS">4PS</option>
+                        <option value="Officials">Officials</option>
+                        <option value="Single Parents">Single Parents</option>
+                        <option value="Block Leaders">Block Leaders</option>
                     </select>
                 </div>
                 <div>
                     <select id="editVoterStatus" name="voter_status" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                         <option value="" disabled selected>Select Voter Status</option>
-                        <option value="Yes">Yes</option>
-                        <option value="No">No</option>
+                        <option value="Active">Active, </option>
+                        <option value="Inactive">Inactive</option>
+                        <option value="Registered">Registered</option>
+                        <option value="Not Registered">Not Registered</option>
                     </select>
                 </div>
                 <div>

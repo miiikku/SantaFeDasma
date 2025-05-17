@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lupon Complete</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Lupon</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -115,7 +115,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="main-content flex-grow p-6 bg-gray-100 max-w-full overflow-x-auto pb-32">
+    <div class="main-content flex-grow p-6 bg-gray-100 max-w-full pb-24">
         <div class="header flex justify-between items-center bg-white p-4 shadow-md rounded-xl">
             <h2 class="text-2xl font-semibold">Lupon</h2>
             <div class="user-info flex items-center space-x-4">
@@ -143,30 +143,28 @@
 
         <!-- Search and Actions Section -->
         <div class="mb-2 flex items-center justify-end gap-6 p-6">
-
-         <!-- Search Box -->
-<div class="w-full sm:w-auto search-box">
-    <input type="text" placeholder="Search..." oninput="searchLuponAndKasunduanComplete()"
-           class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-800">
-</div>
-
-            <!-- Filter Box -->
-    <div class="w-full sm:w-auto">
-        <select onchange="navigateToPage(this)" class="ml-auto w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800 overflow-hidden text-ellipsis">
-            <option value="lupon.html">Hearing 1</option>
-            <option value="lupon2.html">Hearing 2</option>
-            <option value="lupon3.html">Hearing 3</option>
-            <option value="lupon-complete.html" selected>Completed</option>
-        </select>
-    </div>
-</div>
+            <!-- Search Input -->
+            <div class="w-full sm:w-auto">
+                <input type="text" id="searchInput" placeholder="Search..." oninput="searchLuponAndKasunduan()" class="ml-auto w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-800">
+            </div>
         
-        <!-- Completed Lupon Table -->
-        <div class="account-content bg-white p-6 rounded-lg shadow-md overflow-x-auto">
-            <h3 class="text-lg font-semibold text-gray-800">Completed Lupon</h3>
-            <div class="overflow-x-auto mt-4 max-h-[300px]">
+            <!-- Filter Dropdown -->
+            <div class="w-full sm:w-auto">
+                <select onchange="navigateToPage(this)" class="ml-auto w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-green-800 overflow-hidden text-ellipsis">
+                    <option value="lupon.html" >Hearing 1</option>
+                    <option value="lupon2.html">Hearing 2</option>
+                    <option value="lupon3.html" selected>Hearing 3</option>
+                    <option value="lupon-complete.html">Completed</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Lupon Table -->
+        <div class="account-content bg-white p-6 rounded-lg shadow-md overflow-x-auto mb-8">
+            <h3 class="text-xl font-semibold text-gray-800">Lupon</h3>
+            <div class="overflow-x-auto mt-4 max-h-[300px] relative">
                 <table class="min-w-full table-auto border-collapse border border-gray-300">
-            <thead class="bg-green-800 text-white">
+                    <thead class="bg-green-800">
                 <tr>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Petsa</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Usapin Blg.</th>
@@ -174,226 +172,105 @@
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Laban kay</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Sumbong</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Lunas</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Reason</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Stage</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Date</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Date</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Status</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Action</th> <!-- include logic at script -->
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Action</th> 
                 </tr>
             </thead>
-            <tbody id="completed-lupon-table-body">
-                <!-- Blotter Rows will be dynamically inserted here -->
+            <tbody id="lupon-table-body">
+                <!-- Rows will be dynamically inserted here -->
             </tbody>
         </table>
     </div>
 </div>
 
+        <!-- Edit Lupon Modal -->
+        <div id="editModal" class="modal fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
+            <div class="modal-content bg-white p-4 rounded-lg shadow-xl w-full max-w-xl mx-auto mt-24 sm:mt-24 px-4 relative">
+                <span class="close absolute top-4 right-4 text-3xl font-bold cursor-pointer text-gray-300 hover:text-green-800" onclick="closeEditModal()">&times;</span>
+                <h2 class="text-2xl font-semibold text-green-800 mb-4 text-center">Edit Lupon</h2>
+                <form id="editLuponForm">
+            <input type="hidden" id="editId">
 
-<!-- Completed Kasunduan Table -->
-<div class="account-content bg-white p-6 rounded-lg shadow-md overflow-x-auto mt-4">
-    <h3 class="text-lg font-semibold text-gray-800">Completed Lupon Kasunduan</h3>
-    <div class="overflow-x-auto mt-4 max-h-[300px]">
-        <table class="min-w-full table-auto border-collapse border border-gray-300">
-            <thead class="bg-green-800 text-white">
-                <tr>
-                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Date</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Time</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Complainant's Name</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Complainee's Name</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Kasunduan</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Lupong Tagapamahala</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Status</th>
-                </tr>
-            </thead>
-            <tbody id="completed-kasunduan-table-body">
-                <!-- Kasunduan Rows will be dynamically inserted here -->
-            </tbody>
-        </table>
+            <!-- Date, Time, Blotter Number -->
+            <div class="grid grid-cols-2 gap-2 mb-4">
+                <div>
+                    <input type="date" id="editDate" placeholder="Petsa" readonly class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+                <div>
+                    <input type="text" id="editText" placeholder="Usapin Blg." required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+            </div>
+
+           <!-- Nagsumbong Fields for Edit -->
+           <div>
+            <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+            <div id="editComplainantsContainer"></div>         
+        </div>
+
+        <!-- Laban Kay Fields for Edit -->
+        <div>
+            <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+            <div id="editComplaineesContainer"></div>   
+        </div>
+        
+        <!-- Sumbong, Lunas, Reason -->
+        <div class="mb-4">
+                <div>
+                    <textarea id="editSumbong" placeholder="Sumbong" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
+                </div>
+            </div>
+
+        <div class="mb-4">
+                <div>
+                    <textarea id="editLunas" placeholder="Lunas" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
+                </div>
+            </div>
+
+        <div class="mb-4">
+                <div>
+                    <textarea id="editReason" placeholder="Reason" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
+                </div>
+            </div>
+
+            <!-- Hearing Stage, Hearing Date, Hearing Time, Status -->
+            <div class="grid grid-cols-4 gap-2 mb-4">
+                <div>
+                    <select id="editHearingStage" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                      <option value="1"disabled selected>1</option>
+                      <option value="2" disabled selected>2</option>
+                      <option value="3" >3</option>
+                    </select>
+                </div>
+
+                <div>
+                    <input type="date" id="editHearingDate" placeholder=" " class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+
+                <div>
+                    <input type="time" id="editHearingTime" placeholder=" " class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                </div>
+
+                <div>
+                    <select id="editStatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+                        <option value="Processing">Processing</option>
+                        <option value="Transfer to CFA">Transfer to CFA</option> <!-- Backend, transfer to cfa.html and mongodb-->
+                        <option value="Completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-4">
+                <button type="submit" class="bg-green-800 text-white px-6 py-2 rounded-md hover:bg-green-700 text-sm">Save</button>
+                <button type="button" class="bg-gray-200 text-black px-6 py-2 rounded-md hover:bg-gray-400 text-sm" onclick="closeEditModal()">Cancel</button>
+            </div>
+        </form>
     </div>
 </div>
 
-
-
-        <script src="public/styles/script.js"></script>
-        <script src="/public/js/sessionTimeout.js"></script>
-        <script>
-           function searchLuponAndKasunduanComplete() {
-        // Get the search input value
-        const searchValue = document.querySelector('.search-box input').value.toLowerCase();
-
-        // Search Completed Lupon Table
-        const completedLuponRows = document.querySelectorAll('#completed-lupon-table-body tr');
-        completedLuponRows.forEach(row => {
-            const cells = row.querySelectorAll('td');
-            const matches = Array.from(cells).some(cell => 
-                cell.textContent.toLowerCase().includes(searchValue)
-            );
-            if (matches) {
-                row.style.display = ''; // Show the row
-            } else {
-                row.style.display = 'none'; // Hide the row
-            }
-        });
-
-        // Search Completed Kasunduan Table
-        const completedKasunduanRows = document.querySelectorAll('#completed-kasunduan-table-body tr');
-        completedKasunduanRows.forEach(row => {
-            const cells = row.querySelectorAll('td');
-            const matches = Array.from(cells).some(cell => 
-                cell.textContent.toLowerCase().includes(searchValue)
-            );
-            if (matches) {
-                row.style.display = ''; // Show the row
-            } else {
-                row.style.display = 'none'; // Hide the row
-            }
-        });
-    }
-
-       // DISPLAYING COMPLETED LUPON
-       async function fetchCompletedLupon() {
-  try {
-    const response = await fetch('/fetch-completed-lupon');
-    const data = await response.json();
-
-    const luponTableBody = document.getElementById('completed-lupon-table-body');
-    luponTableBody.innerHTML = ''; // Clear existing rows
-
-    data.forEach(entry => {
-      // for arrays
-        const complainantsText = entry.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ') || '';
-        const complaineesText = entry.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ') || '';
-// ACTION - include docu
-      const row = document.createElement('tr');
-      row.classList.add('border-b', 'border-gray-300');
-      row.innerHTML = `
-        <td class="px-4 py-2">${entry.petsa || ''}</td>
-        <td class="px-4 py-2">${entry.usapinBlg || ''}</td>
-        <td class="px-4 py-2">${complainantsText}</td>
-        <td class="px-4 py-2">${complaineesText}</td>
-        <td class="px-4 py-2">${entry.sumbong || ''}</td>
-        <td class="px-4 py-2">${entry.lunas || ''}</td>
-        <td class="px-4 py-2">${entry.hearingStage || ''}</td>
-        <td class="px-4 py-2">${entry.hearingDate || ''}</td>
-        <td class="px-4 py-2">${entry.status || ''}</td>
-        <td class="px-4 py-2">${entry.action || ''}</td> 
-      `;
-      luponTableBody.appendChild(row);
-    });
-  } catch (err) {
-    console.error('Error fetching completed lupon:', err);
-  }
-}
-
-
-// DISPLAYING COMPLETED KASUNDUAN
-async function fetchCompletedKasunduan() {
-  try {
-    const response = await fetch('/fetch-completed-lupon-kasunduan');
-    const data = await response.json();
-
-    const kasunduanTableBody = document.getElementById('completed-kasunduan-table-body');
-    kasunduanTableBody.innerHTML = ''; // Clear existing rows
-
-    data.forEach(entry => {
-      // for arrays
-      const complainantsText = entry.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ') || '';
-        const complaineesText = entry.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ') || '';
-
-      const row = document.createElement('tr');
-      row.classList.add('border-b', 'border-gray-300');
-      row.innerHTML = `
-        <td class="px-4 py-2">${entry.date || ''}</td>
-        <td class="px-4 py-2">${entry.time || ''}</td>
-        <td class="px-4 py-2">${complainantsText}</td>
-        <td class="px-4 py-2">${complaineesText}</td>
-        <td class="px-4 py-2">${entry.kasunduan || ''}</td>
-        <td class="px-4 py-2">${entry.justiceOnDuty || ''}</td>
-        <td class="px-4 py-2">${entry.status || ''}</td>
-      `;
-      kasunduanTableBody.appendChild(row);
-    });
-  } catch (err) {
-    console.error('Error fetching completed kasunduan:', err);
-  }
-}
-
-function fetchAdminProfilePicture() {
-    fetch('/admin-details-data')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            const profilePicElement = document.getElementById('resident-profile-pic');
-            if (data.Profilepic) {
-                profilePicElement.src = data.Profilepic;
-            }
-        })
-        .catch(error => console.error('Error fetching profile picture:', error));
-}
-
-//side notification count
-// Function to fetch total count of "Processing" requests across all collections
-function fetchTotalProcessingRequests() {
-    fetch('/count-all-processing-requests')
-        .then(response => response.json())
-        .then(data => {
-            const sidebarNotif = document.getElementById('sidebarNotif');
-            if (data.totalCount > 0) {
-                sidebarNotif.textContent = data.totalCount; // Show total count
-                sidebarNotif.style.display = 'inline-block'; // Make it visible
-            } else {
-                sidebarNotif.style.display = 'none'; // Hide if no processing requests
-            }
-        })
-        .catch(error => console.error('Error fetching total processing count:', error));
-}
-
-        function fetchTotalProcessingComplaints() {
-    fetch('/complaint-counts')
-        .then(response => response.json())
-        .then(data => {
-            const total =
-                (data.blotterCount || 0) +
-                (data.blotterKasunduanCount || 0) +
-                (data.luponCount || 0) +
-                (data.luponKasunduanCount || 0) +
-                (data.cfaCount || 0);
-
-            const complaintsNotif = document.getElementById('complaintsNotif');
-            if (complaintsNotif) {
-                complaintsNotif.textContent = total;
-                complaintsNotif.style.display = total > 0 ? 'inline-flex' : 'none';
-            }
-        })
-        .catch(error => console.error('Error fetching complaint counts:', error));
-}
-
-function fetchProcessingBarangayID() {
-    fetch('/count-processing-barangay-id')
-        .then(response => response.json())
-        .then(data => {
-            const barangayIDNotif = document.getElementById('barangayIDNotif');
-            if (data.barangayIdCount > 0) {
-                barangayIDNotif.textContent = data.barangayIdCount; // Show total count
-                barangayIDNotif.style.display = 'inline-block'; // Make it visible
-            } else {
-                barangayIDNotif.style.display = 'none'; // Hide if no processing requests
-            }
-        })
-        .catch(error => console.error('Error fetching Barangay ID count:', error));
-}
-
-// Call these functions to populate tables when the page loads
-fetchCompletedLupon();
-fetchCompletedKasunduan();
-fetchAdminProfilePicture();
-fetchTotalProcessingRequests();
-            fetchTotalProcessingComplaints();
-            fetchProcessingBarangayID();
-
-        </script>
-</body>
-</html>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="public/styles/script.js"></script>
+    <script src="/public/js/sessionTimeout.js"></script>
