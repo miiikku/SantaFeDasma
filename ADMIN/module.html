@@ -206,9 +206,6 @@
     </div>
 </div>
 
-
-
-
         <!-- Resident Accounts Table -->
         <div class="account-content bg-white p-6 rounded-lg shadow-md overflow-x-auto">
             <h3 class="text-lg font-semibold text-gray-800">Current Elected Officers</h3>
@@ -238,25 +235,30 @@
             <input type="hidden" id="editOfficialId">
 
             <!-- Profile Picture Input -->
-            <div class="mb-4">
+            <div class="mb-2">
+                <label for="editPhoto" class="text-xs sm:text-sm text-green-800">Choose Photo</label>
                 <input type="file" id="editOfficialPhoto" name="photo" accept="image/*" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
             </div>
 
             <!-- Name Fields -->
-            <div class="grid grid-cols-3 gap-2 mb-4">
+            <div class="grid grid-cols-3 gap-2 mb-2">
                 <div>
+                    <label for="editPhoto" class="text-xs sm:text-sm text-green-800">First Name</label>
                     <input type="text" id="editFirstName" name="firstName" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                 </div>
                 <div>
+                    <label for="editPhoto" class="text-xs sm:text-sm text-green-800">Middle Name</label>
                     <input type="text" id="editMiddleName" name="middleName" placeholder="Middle Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                 </div>
                 <div>
+                    <label for="editPhoto" class="text-xs sm:text-sm text-green-800">Last Name</label>
                     <input type="text" id="editLastName" name="lastName" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                 </div>
             </div>
 
             <!-- Position Dropdown -->
-            <div class="mb-4">
+            <div class="mb-2">
+                <label for="editPhoto" class="text-xs sm:text-sm text-green-800">Position</label>
                 <select id="editPosition" name="position" required class="w-full mt-2 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-800">
                     <option value="Position in Barangay" disabled selected>Select Position</option>
                     <option value="Punong Barangay">Punong Barangay</option>

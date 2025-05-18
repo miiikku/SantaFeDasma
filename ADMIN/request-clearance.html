@@ -278,65 +278,79 @@
                 <input type="hidden" id="editId">
 
                 <!-- Row 1: First Name, Middle Name, Last Name, Age -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-2">
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">First Name</label>
                     <input type="text" id="editFirstName" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
                 </div>
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Middle Name</label>
                     <input type="text" id="editMiddleName" placeholder="Middle Name" class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
                 </div>
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Last Name</label>
                     <input type="text" id="editLastName" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
                 </div>
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Age</label>
                     <input type="number" id="editAge" placeholder="Age" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
                 </div>
             </div>
 
             <!-- Row 2: Blk, Lot -->
-            <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="grid grid-cols-2 gap-2 mb-2">
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Blk</label>
                     <input type="text" id="editBlk" placeholder="Blk" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
                 </div>
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Lot</label>
                     <input type="text" id="editLot" placeholder="Lot No." required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
                 </div>
             </div>
 
             <!-- Row 3: Street, Barangay -->
-            <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="grid grid-cols-2 gap-2 mb-2">
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Street</label>
                     <input type="text" id="editStreet" placeholder="Street" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
                 </div>
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Barangay</label>
                     <input type="text" id="editBarangay" placeholder="Barangay" value="Santa Fe" readonly required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
                 </div>
             </div>
 
             <!-- Row 4: City, Province -->
-            <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="grid grid-cols-2 gap-2 mb-2">
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">City</label>
                     <input type="text" id="editCity" placeholder="City" value="Dasmariñas" readonly required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
                 </div>
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Province</label>
                     <input type="text" id="editProvince" placeholder="Province" value="Cavite" readonly required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
                 </div>
             </div>
 
             <!-- Row 5: Years Residing -->
             <div class="mb-6">
+                <label class="text-xs sm:text-sm text-green-800">Years Residing</label>
                 <input type="number" id="editYearsResiding" placeholder="Years Residing" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
             </div>
 
             <!-- Row 6: Purpose, Date Issued, Status -->
-            <div class="grid grid-cols-3 gap-4 mb-6">
+            <div class="grid grid-cols-3 gap-2 mb-2">
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Purpose</label>
                     <input type="text" id="editPurpose" placeholder="Purpose" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
                 </div>
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Date Issued</label>
                     <input type="date" id="editDateIssued" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
                 </div>
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Status</label>
                     <select id="editStatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-1 focus:ring-green-800">
                         <option value="Processing" disabled selected>Processing</option>
                         <option value="Complete">Complete</option>
