@@ -173,6 +173,7 @@
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Sumbong</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Lunas</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Reason</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Lupon</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Stage</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Date</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Time</th>
@@ -239,6 +240,37 @@
                 </div>
             </div>
 
+        <div class="mb-4">
+                <div>
+                    <textarea id="editLuponmom" placeholder="Luponmom" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 mb-4">
+            <div>
+            <select id="editPangkatChairperson" name="pangkatChairperson" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+              <option value="" disabled>Select Chairperson</option>
+              <!-- Options will be dynamically populated -->
+          </select>
+          </div>
+
+          <!-- Pangkat Member 1, Pangkat Member 2, and Status -->
+          <div>
+            <select id="editPangkatMember1" name="pangkatMember1" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+              <option value="" disabled>Select Member 1</option>
+              <!-- Options will be dynamically populated -->
+          </select>
+          </div>
+
+          <div>
+            <select id="editPangkatMember2" name="pangkatMember2" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+              <option value="" disabled>Select Member 2</option>
+              <!-- Options will be dynamically populated -->
+          </select>
+          </div>
+        </div>
+
+
             <!-- Hearing Stage, Hearing Date, Hearing Time, Status -->
             <div class="grid grid-cols-4 gap-2 mb-4">
                 <div>
@@ -259,8 +291,8 @@
 
                 <div>
                     <select id="editStatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
-                        <option value="Processing">Processing</option>
-                        <option value="Transfer to Hearing 3">Transfer to Hearing 3</option> <!-- Backend, transfer to lupon3.html and mongodb-->
+                        <option value="Processing" disabled selected>Processing</option>
+                        <option value="Transfer to Hearing 3">Transfer to Hearing 3</option>
                         <option value="Completed">Completed</option>
                     </select>
                 </div>
@@ -298,11 +330,58 @@
     });
 }
 
-   //TODO: FETCH LUPON DATA
+   // FETCH LUPON DATA
+    async function fetchLupon2Data() {
+    try {
+    const response = await fetch('/fetch-lupon2');
+    const lupon2Data = await response.json();
+
+    const lupon2TableBody = document.getElementById('lupon-table-body');
+    lupon2TableBody.innerHTML = ''; // Clear existing rows
+
+    lupon2Data.forEach(lupon => {
+      const complainantsText = lupon.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ') || '';
+      const complaineesText = lupon.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ') || '';
+
+      const row = document.createElement('tr');
+      row.classList.add('border-b', 'border-gray-300');
+      row.innerHTML = `
+        <td class="px-4 py-2">${lupon.petsa}</td>
+        <td class="px-4 py-2">${lupon.usapinBlg}</td>
+        <td class="px-4 py-2">${complainantsText}</td>
+        <td class="px-4 py-2">${complaineesText}</td>
+        <td class="px-4 py-2">${lupon.sumbong}</td>
+        <td class="px-4 py-2">${lupon.lunas}</td>
+        <td class="px-4 py-2">${lupon.reason}</td>
+        <td class="px-4 py-2">${lupon.luponmom}</td>
+        <td class="px-4 py-2">${lupon.hearingStage}</td>
+        <td class="px-4 py-2">${lupon.hearingDate}</td>
+        <td class="px-4 py-2">${lupon.hearingTime}</td>
+        <td class="px-4 py-2">${lupon.pangkatChairperson}</td>
+        <td class="px-4 py-2">${lupon.pangkatMember1}</td>
+        <td class="px-4 py-2">${lupon.pangkatMember2}</td>
+        <td class="px-4 py-2">${lupon.status}</td>
+        <td class="px-4 py-2">
+          <div class="flex items-center space-x-1">
+            <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749884/edit_tchmia.png" alt="Edit" class="edit-icon" onclick='openEditModal(${JSON.stringify(lupon._id)}, ${JSON.stringify(lupon.petsa)}, ${JSON.stringify(lupon.usapinBlg)}, ${JSON.stringify(lupon.complainants)}, ${JSON.stringify(lupon.complainees)}, ${JSON.stringify(lupon.sumbong)}, ${JSON.stringify(lupon.lunas)}, ${JSON.stringify(lupon.reason)}, ${JSON.stringify(lupon.luponmom)}, ${JSON.stringify(lupon.hearingStage)}, ${JSON.stringify(lupon.hearingDate)}, ${JSON.stringify(lupon.hearingTime)}, ${JSON.stringify(lupon.pangkatChairperson)}, ${JSON.stringify(lupon.pangkatMember1)},  ${JSON.stringify(lupon.pangkatMember2)}, ${JSON.stringify(lupon.status)})'></a>
+            <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749756/delete_iyld39.png" alt="Delete" class="delete-icon" onclick="deleteLupon('${lupon._id}')"></a>
+            ${lupon.status === 'Completed' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750222/checked_bgey1p.png" alt="Transfer" class="transfer-icon" onclick="transferLupon('${lupon._id}')"></a>` : ''}
+            ${lupon.status === 'Processing' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750132/redPROCESSING_edoaf5.png" alt="Generate" class="generate-icon" onclick="generatePatawag('${lupon._id}')"></a>` : ''}
+            ${lupon.status === "Transfer to Hearing 3" ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1747579762/google-docs_7_ubm1ft.png" alt="Generate" class="generate-icon" onclick="generateHearing('${lupon._id}')"></a>` : ''}
+            ${lupon.status === 'Transfer to Hearing 3' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750222/checked_bgey1p.png" alt="Transfer" class="transfer-icon" onclick="transfertolupon3('${lupon._id}')"></a>` : ''}
+            </div>
+        </td>
+      `;
+      lupon2TableBody.appendChild(row);
+    });
+  } catch (err) {
+    console.error('Error fetching Hearing 2 data:', err);
+  }
+}
 
 // Call the functions to fetch and populate the data when the page loads
 document.addEventListener('DOMContentLoaded', () => {
-  fetchLuponData();
+  fetchLupon2Data();
 });
 
 function setMinHearingDate() {
@@ -311,13 +390,14 @@ function setMinHearingDate() {
 }
 
 // Open Edit Lupon Modal and Populate Fields
-function openEditModal(id, date, usapinBlg, complainants, complainees, sumbong, lunas, reason, hearingStage, hearingDate, hearingTime,  pangkatChairperson, pangkatMember1, pangkatMember2, status) {
+function openEditModal(id, date, usapinBlg, complainants, complainees, sumbong, lunas, reason, luponmom, hearingStage, hearingDate, hearingTime,  pangkatChairperson, pangkatMember1, pangkatMember2, status) {
     document.getElementById('editId').value = id;
     document.getElementById('editDate').value = date;
     document.getElementById('editText').value = usapinBlg;
     document.getElementById('editSumbong').value = sumbong;
     document.getElementById('editLunas').value = lunas;
     document.getElementById('editReason').value = reason;
+    document.getElementById('editLuponmom').value = luponmom;
     document.getElementById('editHearingStage').value = hearingStage;
     document.getElementById('editHearingDate').value = hearingDate;
     document.getElementById('editHearingTime').value = hearingTime;
@@ -470,6 +550,7 @@ document.getElementById('editLuponForm').addEventListener('submit', async functi
         sumbong: document.getElementById('editSumbong').value,
         lunas: document.getElementById('editLunas').value,
         reason: document.getElementById('editReason').value,
+        luponmom: document.getElementById('editLuponmom').value,
         hearingStage: document.getElementById('editHearingStage').value,
         hearingDate: document.getElementById('editHearingDate').value,
         hearingTime: document.getElementById('editHearingTime').value,
@@ -482,7 +563,7 @@ document.getElementById('editLuponForm').addEventListener('submit', async functi
     const luponId = document.getElementById('editId').value;
 
     try {
-        const response = await fetch(`/update-lupon/${luponId}`, {
+        const response = await fetch(`/update-lupon2/${luponId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -493,7 +574,7 @@ document.getElementById('editLuponForm').addEventListener('submit', async functi
         const result = await response.json();
         if (result.success) {
             closeEditModal(); // Close the Edit Modal
-            fetchLuponData(); // Refresh the table to reflect the updates
+            fetchLupon2Data(); // Refresh the table to reflect the updates
         } else {
             alert('Failed to update Lupon');
         }
@@ -508,9 +589,69 @@ function closeEditModal() {
 }
 
 
-//TODO: DELETE LUPON 
+//DELETE LUPON 
+async function deleteLupon(id) {
+    if (confirm('Are you sure you want to delete this entry?')) {
+        try {
+            const response = await fetch(`/delete-lupon2/${id}`, {
+                method: 'DELETE',
+            });
 
-//TODO: TRANSFER TO HEARING 3
+            const result = await response.json();
+            if (result.success) {
+                fetchLupon2Data(); // Refresh the Lupon table
+            } else {
+                alert('Failed to delete Lupon entry');
+            }
+        } catch (error) {
+            console.error('Error deleting Lupon entry:', error);
+        }
+    }
+}
+
+// TRANSFER LUPON2 TO LUPON COMPLETE
+async function transferLupon(id) {
+    if (confirm('Are you sure you want to transfer this entry?')) {
+        try {
+            const response = await fetch(`/transfer-lupon2/${id}`, {
+                method: 'PUT',
+            });
+
+            const result = await response.json();
+            if (result.success) {
+                fetchLupon2Data(); // Refresh the Lupon table
+            } else {
+                alert('Failed to transfer Lupon entry');
+            }
+        } catch (error) {
+            console.error('Error transferring Lupon entry:', error);
+        }
+    }
+}
+
+//TRANSFER LUPON HEARING 2 TO HEARING 3
+async function transfertolupon3(id) {
+    try {
+        const response = await fetch(`/transfer-to-lupon3/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            alert("Successfully transferred to Hearing Stage 3!");
+            // Optionally, reload or update the table to reflect the new status
+            fetchLupon2Data(); // Call this function if you have it to refresh the data
+        } else {
+            alert("Transfer failed: " + data.message);
+        }
+    } catch (error) {
+        console.error("Error transferring to Hearing Stage 3:", error);
+    }
+}
 
 function generatePatawag(id) { 
   fetch(`/fetch-lupon2/${id}`)
@@ -565,7 +706,39 @@ function generateLupon(id) {
     .catch(error => console.error('Error fetching Lupon:', error));
 }
 
-//TODO: GENERATE HEARING 
+// Generate Hearing
+function generateHearing(id) {
+  fetch(`/fetch-lupon2/${id}`) // Fetch from Hearing 1 collection only
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        const complainantsText = data.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+        const complaineesText = data.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+
+        const params = new URLSearchParams({
+          date: data.petsa,
+          usapinBlg: data.usapinBlg,
+          nagsumbong: complainantsText,
+          labanKay: complaineesText,
+          reason: data.reason,
+          luponmom: data.luponmom,
+          sumbong: data.sumbong,
+          lunas: data.lunas,
+          hearingStage: data.hearingStage,
+          hearingDate: data.hearingDate,
+          hearingTime: data.hearingTime,
+          pangkatChairperson: data.pangkatChairperson,
+          pangkatMember1: data.pangkatMember1,
+          pangkatMember2: data.pangkatMember2
+        });
+
+        window.location.href = `generate-hearing.html?${params}`;
+      } else {
+        alert("No record found.");
+      }
+    })
+    .catch(error => console.error('Error fetching Lupon (Hearing 1) data:', error));
+}
 
 function fetchAdminProfilePicture() {
     fetch('/admin-details-data')

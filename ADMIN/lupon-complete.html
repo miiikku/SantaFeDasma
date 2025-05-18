@@ -174,6 +174,8 @@
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Laban kay</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Sumbong</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Lunas</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Reason</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Lupon</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Stage</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Date</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Pangkat Chairperson</th>
@@ -275,14 +277,22 @@
         <td class="px-4 py-2">${complaineesText}</td>
         <td class="px-4 py-2">${entry.sumbong || ''}</td>
         <td class="px-4 py-2">${entry.lunas || ''}</td>
+        <td class="px-4 py-2">${entry.reason || ''}</td>
+        <td class="px-4 py-2">${entry.luponmom || ''}</td>
         <td class="px-4 py-2">${entry.hearingStage || ''}</td>
         <td class="px-4 py-2">${entry.hearingDate || ''}</td>
         <td class="px-4 py-2">${entry.pangkatChairperson || ''}</td>
         <td class="px-4 py-2">${entry.pangkatMember1 || ''}</td>
         <td class="px-4 py-2">${entry.pangkatMember2 || ''}</td>
         <td class="px-4 py-2">${entry.status || ''}</td>
-        <td class="px-4 py-2">${entry.action || ''}</td> 
-      `;
+        <td class="px-4 py-2">
+            <div class="flex items-center space-x-1">
+        ${entry.status === "Transfer to Hearing 2" ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1747579762/google-docs_7_ubm1ft.png" alt="Generate" class="generate-icon" onclick="generateHearing1('${entry._id}')"></a>` : ''}
+        ${entry.status === "Transfer to Hearing 3" ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1747579762/google-docs_7_ubm1ft.png" alt="Generate" class="generate-icon" onclick="generateHearing2('${entry._id}')"></a>` : ''}
+        ${entry.status === "Transfer to CFA" ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1747579762/google-docs_7_ubm1ft.png" alt="Generate" class="generate-icon" onclick="generateHearing3('${entry._id}')"></a>` : ''}
+        ${entry.status === "Transfer to CFA" ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750179/blueCOMPLETED_ymvmje.png" alt="Generate" class="generate-icon" onclick="generateLupon('${entry._id}')"></a>` : ''}
+        </div>
+        `;
       luponTableBody.appendChild(row);
     });
   } catch (err) {
@@ -390,6 +400,135 @@ function fetchProcessingBarangayID() {
             }
         })
         .catch(error => console.error('Error fetching Barangay ID count:', error));
+}
+
+// GENERATE HEARING 
+function generateHearing1(id) {
+  fetch(`/fetch-lupon/${id}`) // Fetch from Hearing 1 collection only
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        const complainantsText = data.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+        const complaineesText = data.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+
+        const params = new URLSearchParams({
+          date: data.petsa,
+          usapinBlg: data.usapinBlg,
+          nagsumbong: complainantsText,
+          labanKay: complaineesText,
+          reason: data.reason,
+          luponmom: data.luponmom,
+          sumbong: data.sumbong,
+          lunas: data.lunas,
+          hearingStage: data.hearingStage,
+          hearingDate: data.hearingDate,
+          hearingTime: data.hearingTime,
+          pangkatChairperson: data.pangkatChairperson,
+          pangkatMember1: data.pangkatMember1,
+          pangkatMember2: data.pangkatMember2
+        });
+
+        window.location.href = `generate-hearing.html?${params}`;
+      } else {
+        alert("No record found.");
+      }
+    })
+    .catch(error => console.error('Error fetching Lupon (Hearing 1) data:', error));
+}
+
+// GENERATE HEARING 2
+function generateHearing2(id) {
+  fetch(`/fetch-lupon2/${id}`) // Fetch from Hearing 1 collection only
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        const complainantsText = data.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+        const complaineesText = data.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+
+        const params = new URLSearchParams({
+          date: data.petsa,
+          usapinBlg: data.usapinBlg,
+          nagsumbong: complainantsText,
+          labanKay: complaineesText,
+          reason: data.reason,
+          luponmom: data.luponmom,
+          sumbong: data.sumbong,
+          lunas: data.lunas,
+          hearingStage: data.hearingStage,
+          hearingDate: data.hearingDate,
+          hearingTime: data.hearingTime,
+          pangkatChairperson: data.pangkatChairperson,
+          pangkatMember1: data.pangkatMember1,
+          pangkatMember2: data.pangkatMember2
+        });
+
+        window.location.href = `generate-hearing.html?${params}`;
+      } else {
+        alert("No record found.");
+      }
+    })
+    .catch(error => console.error('Error fetching Lupon (Hearing 2) data:', error));
+}
+
+// GENERATE HEARING 3 
+function generateHearing3(id) {
+  fetch(`/fetch-lupon3/${id}`) // Fetch from Hearing 1 collection only
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        const complainantsText = data.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+        const complaineesText = data.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+
+        const params = new URLSearchParams({
+          date: data.petsa,
+          usapinBlg: data.usapinBlg,
+          nagsumbong: complainantsText,
+          labanKay: complaineesText,
+          reason: data.reason,
+          luponmom: data.luponmom,
+          sumbong: data.sumbong,
+          lunas: data.lunas,
+          hearingStage: data.hearingStage,
+          hearingDate: data.hearingDate,
+          hearingTime: data.hearingTime,
+          pangkatChairperson: data.pangkatChairperson,
+          pangkatMember1: data.pangkatMember1,
+          pangkatMember2: data.pangkatMember2
+        });
+
+        window.location.href = `generate-hearing.html?${params}`;
+      } else {
+        alert("No record found.");
+      }
+    })
+    .catch(error => console.error('Error fetching Lupon (Hearing 3) data:', error));
+}
+
+// Generate Lupon
+function generateLupon(id) {
+  fetch(`/fetch-lupon3/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Fetched Data:", data); // Log to check the API response
+      if (data) {
+        const complainantsText = data.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+        const complaineesText = data.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+
+        const params = new URLSearchParams({
+          date: data.petsa,
+          usapinBlg: data.usapinBlg,
+          nagsumbong: complainantsText,
+          labanKay: complaineesText,
+          sumbong: data.sumbong,
+          lunas: data.lunas,
+          hearingStage: data.hearingStage,
+          hearingDate: data.hearingDate,
+        });
+
+        window.location.href = `generate-lupon.html?${params}`;
+      }
+    })
+    .catch(error => console.error('Error fetching Lupon:', error));
 }
 
 // Call these functions to populate tables when the page loads

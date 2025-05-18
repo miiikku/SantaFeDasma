@@ -916,7 +916,6 @@ app.get('/check-username-official', async (req, res) => {
   }
 });
 
-
 app.delete('/admin-accounts/:id',  async (req, res) => {
   const id = req.params.id;
   try {
@@ -1850,6 +1849,7 @@ app.put('/transfer-to-lupon/:id', async (req, res) => {
           sumbong: blotterData.blotter || "",
           lunas: "",
           reason: blotterData.reason || "",
+          luponmom: "",
           hearingStage: "1",
           hearingDate: "",
           hearingTime: "",
@@ -1928,10 +1928,8 @@ app.get('/fetch-completed-kasunduan', async (req, res) => {
 
 // Blotter (justice on duty dropdown)
 
-
-
-// BAGONG LAGAY FOR LUPON.HTML
-  // DISPLAY LUPON AND KASUNDUAN TABLE
+// FOR LUPON.HTML
+// DISPLAY LUPON AND KASUNDUAN
 app.get('/fetch-lupon', async (req, res) => {
   try {
     const luponCollection = db.collection('lupon');
@@ -1939,6 +1937,28 @@ app.get('/fetch-lupon', async (req, res) => {
     res.json(luponData);
   } catch (err) {
     console.error('Error fetching lupon data:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/fetch-lupon2', async (req, res) => {
+  try {
+    const lupon2Collection = db.collection('lupon2');
+    const lupon2Data = await lupon2Collection.find().toArray();
+    res.json(lupon2Data);
+  } catch (err) {
+    console.error('Error fetching lupon2 data:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+app.get('/fetch-lupon3', async (req, res) => {
+  try {
+    const lupon3Collection = db.collection('lupon3');
+    const lupon3Data = await lupon3Collection.find().toArray();
+    res.json(lupon3Data);
+  } catch (err) {
+    console.error('Error fetching lupon3 data:', err);
     res.status(500).send('Internal Server Error');
   }
 });
@@ -1968,8 +1988,8 @@ app.post('/add-lupon-kasunduan', async (req, res) => {
   }
 });
 
-  // EDITING LUPON AND KASUNDUAN
 // EDITING LUPON AND KASUNDUAN
+// EDITING LUPON 1
 app.put('/update-lupon/:id', async (req, res) => {
   const id = req.params.id;
 
@@ -1980,6 +2000,7 @@ app.put('/update-lupon/:id', async (req, res) => {
     sumbong: req.body.sumbong,
     lunas: req.body.lunas,
     reason: req.body.reason,
+    luponmom: req.body.luponmom,
     hearingStage: req.body.hearingStage,
     hearingDate: req.body.hearingDate,
     hearingTime: req.body.hearingTime,
@@ -2014,6 +2035,97 @@ app.put('/update-lupon/:id', async (req, res) => {
   }
 });
 
+// EDITING LUPON 2
+app.put('/update-lupon2/:id', async (req, res) => {
+  const id = req.params.id;
+
+  // Get the updated data from the request body
+  const updatedLupon = {
+    petsa: req.body.petsa,
+    usapinBlg: req.body.usapinBlg,
+    sumbong: req.body.sumbong,
+    lunas: req.body.lunas,
+    reason: req.body.reason,
+    luponmom: req.body.luponmom,
+    hearingStage: req.body.hearingStage,
+    hearingDate: req.body.hearingDate,
+    hearingTime: req.body.hearingTime,
+    pangkatChairperson: req.body.pangkatChairperson,
+    pangkatMember1: req.body.pangkatMember1,
+    pangkatMember2: req.body.pangkatMember2,
+    status: req.body.status,
+
+    // Handle multiple complainants and complainees as arrays
+    complainants: req.body.complainants.map(c => ({
+      firstName: c.firstName,
+      middleName: c.middleName,
+      lastName: c.lastName,
+    })),
+    complainees: req.body.complainees.map(c => ({
+      firstName: c.firstName,
+      middleName: c.middleName,
+      lastName: c.lastName,
+    })),
+  };
+
+  try {
+    const lupon2Collection = db.collection('lupon2');
+    
+    // Update the specific Lupon document by ID
+    await lupon2Collection.updateOne({ _id: new ObjectId(id) }, { $set: updatedLupon });
+
+    res.status(200).send({ success: true });
+  } catch (err) {
+    console.error('Error updating Lupon 2:', err);
+    res.status(500).send({ success: false });
+  }
+});
+
+// EDITING LUPON 3
+app.put('/update-lupon3/:id', async (req, res) => {
+  const id = req.params.id;
+
+  // Get the updated data from the request body
+  const updatedLupon = {
+    petsa: req.body.petsa,
+    usapinBlg: req.body.usapinBlg,
+    sumbong: req.body.sumbong,
+    lunas: req.body.lunas,
+    reason: req.body.reason,
+    luponmom: req.body.luponmom,
+    hearingStage: req.body.hearingStage,
+    hearingDate: req.body.hearingDate,
+    hearingTime: req.body.hearingTime,
+    pangkatChairperson: req.body.pangkatChairperson,
+    pangkatMember1: req.body.pangkatMember1,
+    pangkatMember2: req.body.pangkatMember2,
+    status: req.body.status,
+
+    // Handle multiple complainants and complainees as arrays
+    complainants: req.body.complainants.map(c => ({
+      firstName: c.firstName,
+      middleName: c.middleName,
+      lastName: c.lastName,
+    })),
+    complainees: req.body.complainees.map(c => ({
+      firstName: c.firstName,
+      middleName: c.middleName,
+      lastName: c.lastName,
+    })),
+  };
+
+  try {
+    const lupon3Collection = db.collection('lupon3');
+    
+    // Update the specific Lupon document by ID
+    await lupon3Collection.updateOne({ _id: new ObjectId(id) }, { $set: updatedLupon });
+
+    res.status(200).send({ success: true });
+  } catch (err) {
+    console.error('Error updating Lupon 3:', err);
+    res.status(500).send({ success: false });
+  }
+});
 
 app.put('/update-lupon-kasunduan/:id', async (req, res) => {
   const id = req.params.id;
@@ -2046,6 +2158,40 @@ app.put('/update-lupon-kasunduan/:id', async (req, res) => {
     }
 });
 
+// Delete Lupon 2
+app.delete('/delete-lupon2/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        const lupon2Collection = db.collection('lupon2');
+        const result = await lupon2Collection.deleteOne({ _id: new ObjectId(id) });
+        if (result.deletedCount === 1) {
+            res.status(200).send({ success: true });
+        } else {
+            res.status(404).send({ success: false, message: 'Hearing 2 entry not found' });
+        }
+    } catch (err) {
+        console.error('Error deleting Hearing 2 entry:', err);
+        res.status(500).send({ success: false, message: 'Internal Server Error' });
+    }
+});
+
+// Delete Lupon 3
+app.delete('/delete-lupon3/:id', async (req, res) => {
+    const id = req.params.id;
+    try {
+        const lupon3Collection = db.collection('lupon3');
+        const result = await lupon3Collection.deleteOne({ _id: new ObjectId(id) });
+        if (result.deletedCount === 1) {
+            res.status(200).send({ success: true });
+        } else {
+            res.status(404).send({ success: false, message: 'Hearing 3 entry not found' });
+        }
+    } catch (err) {
+        console.error('Error deleting Hearing 3 entry:', err);
+        res.status(500).send({ success: false, message: 'Internal Server Error' });
+    }
+});
+
 app.delete('/delete-lupon-kasunduan/:id', async (req, res) => {
   const id = req.params.id;
   try {
@@ -2062,8 +2208,8 @@ app.delete('/delete-lupon-kasunduan/:id', async (req, res) => {
   }
 });
 
-  // TRANSFER LUPON AND KASUNDUAN
-// Transfer Lupon entry from "lupon" collection to "lupon-complete" collection
+// TRANSFER LUPON AND KASUNDUAN
+// Transfer Lupon to Lupon-Complete
 app.put('/transfer-lupon/:id', async (req, res) => {
   const id = req.params.id;
   try {
@@ -2089,46 +2235,149 @@ app.put('/transfer-lupon/:id', async (req, res) => {
   }
 });
 
-// Transfer Lupon to CFA and Lupon-Complete
-app.put('/transfer-to-cfa/:id', async (req, res) => {
+// Transfer Lupon 1 to Lupon 2
+app.put('/transfer-to-lupon2/:id', async (req, res) => {
   const luponId = req.params.id;
-  try {
-      const luponCollection = db.collection('lupon');
-      const cfaCollection = db.collection('cfa');
-      const luponCompleteCollection = db.collection('lupon-complete');
 
-      // Find the Lupon entry
-      const luponData = await luponCollection.findOne({ _id: new ObjectId(luponId) });
-      if (!luponData) {
-          return res.status(404).send({ success: false, message: 'Lupon entry not found' });
+  try {
+    const luponCollection = db.collection('lupon');
+    const lupon2Collection = db.collection('lupon2');
+    const luponCompleteCollection = db.collection('lupon-complete');
+
+    // Step 1: Find the Lupon document
+    const luponData = await luponCollection.findOne({ _id: new ObjectId(luponId) });
+    if (!luponData) {
+      return res.status(404).send({ success: false, message: 'Lupon entry not found' });
+    }
+
+    // Step 2: Modify the data for lupon2
+    const lupon2Data = {
+      ...luponData,
+      hearingStage: "2", // override
+      status: "Processing",
+      luponmom: "",
+      pangkatChairperson: "",
+      pangkatMember1: "",
+      pangkatMember2: ""
+    };
+
+    // Step 3: Insert into lupon2
+    await lupon2Collection.insertOne(lupon2Data);
+
+    // Step 4: Insert original into lupon-complete (as-is)
+    await luponCompleteCollection.insertOne(luponData);
+
+    // Step 5: Delete from original lupon
+    await luponCollection.deleteOne({ _id: new ObjectId(luponId) });
+
+    res.status(200).send({
+      success: true,
+      message: 'Lupon successfully transferred to Hearing 2 and archived.',
+    });
+
+  } catch (err) {
+    console.error('Error during transfer:', err);
+    res.status(500).send({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+// Transfer Lupon2 to Lupon-Complete
+app.put('/transfer-lupon2/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+      const lupon2Collection = db.collection('lupon2');
+      const completeCollection = db.collection('lupon-complete');
+
+      // Find the document to transfer
+      const lupon2 = await lupon2Collection.findOne({ _id: new ObjectId(id) });
+      if (!lupon2) {
+          return res.status(404).send('Lupon entry not found');
       }
 
-      // Prepare data for the CFA entry with exact field mappings
-      const cfaData = {
-          brgyCaseNo: luponData.usapinBlg || "", 
-          reason: "",
-          complainants: luponData.complainants || [],
-          complainees: luponData.complainees || [],
-          dateIssued: "",
-          pangkatChairperson: "",
-          pangkatMember1: "",
-          pangkatMember2: "",
-          status: "Processing",
-      };
+      // Insert the document into the "lupon-complete" collection
+      await completeCollection.insertOne(lupon2);
 
-      // Insert into the cfa collection
-      await cfaCollection.insertOne(cfaData);
+      // Delete the document from the original "lupon" collection
+      await lupon2Collection.deleteOne({ _id: new ObjectId(id) });
 
-      // Insert the complete lupon data into lupon-complete
-      await luponCompleteCollection.insertOne(luponData);
-
-      // Delete the lupon entry from the lupon collection
-      await luponCollection.deleteOne({ _id: new ObjectId(luponId) });
-
-      res.status(200).send({ success: true, message: 'Lupon successfully transferred to CFA and completed.' });
+      res.status(200).send({ success: true });
   } catch (err) {
-      console.error('Error transferring Lupon to CFA:', err);
-      res.status(500).send({ success: false, message: 'Internal Server Error' });
+      console.error('Error transferring Lupon 2 entry:', err);
+      res.status(500).send({ success: false });
+  }
+});
+
+// Transfer Lupon2 to Lupon3
+app.put('/transfer-to-lupon3/:id', async (req, res) => {
+  const luponId3 = req.params.id;
+
+  try {
+    const lupon2Collection = db.collection('lupon2');
+    const lupon3Collection = db.collection('lupon3');
+    const luponCompleteCollection = db.collection('lupon-complete');
+
+    // 1. Fetch the entry from lupon2
+    const luponData = await lupon2Collection.findOne({ _id: new ObjectId(luponId3) });
+    if (!luponData) {
+      return res.status(404).json({ success: false, message: 'Lupon entry not found in Hearing 2' });
+    }
+
+    // 2. Prepare the data for lupon3
+    const lupon3Data = {
+      ...luponData,
+      hearingStage: "3",
+      status: "Processing",
+      luponmom: "",
+      pangkatChairperson: "",
+      pangkatMember1: "",
+      pangkatMember2: ""
+    };
+
+    // 3. Insert into lupon3
+    await lupon3Collection.insertOne(lupon3Data);
+
+    // ✅ 4. Archive to lupon-complete (REMOVE _id)
+    const { _id, ...archivedData } = luponData;
+    await luponCompleteCollection.insertOne(archivedData);
+
+    // 5. Delete from lupon2
+    await lupon2Collection.deleteOne({ _id: new ObjectId(luponId3) });
+
+    // 6. Respond
+    res.status(200).json({
+      success: true,
+      message: 'Lupon successfully transferred to Hearing 3 and archived.'
+    });
+
+  } catch (err) {
+    console.error('Error during transfer to Hearing 3:', err);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+// Transfer Lupon3 to Lupon-Complete
+app.put('/transfer-lupon3/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+      const lupon3Collection = db.collection('lupon3');
+      const completeCollection = db.collection('lupon-complete');
+
+      // Find the document to transfer
+      const lupon3 = await lupon3Collection.findOne({ _id: new ObjectId(id) });
+      if (!lupon3) {
+          return res.status(404).send('Lupon entry not found');
+      }
+
+      // Insert the document into the "lupon-complete" collection
+      await completeCollection.insertOne(lupon3);
+
+      // Delete the document from the original "lupon" collection
+      await lupon3Collection.deleteOne({ _id: new ObjectId(id) });
+
+      res.status(200).send({ success: true });
+  } catch (err) {
+      console.error('Error transferring Hearing 3 entry:', err);
+      res.status(500).send({ success: false });
   }
 });
 
@@ -2156,6 +2405,41 @@ app.put('/transfer-lupon-kasunduan/:id', async (req, res) => {
   } catch (err) {
       console.error('Error transferring Kasunduan entry:', err);
       res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
+});
+
+// Trasfer Hearing 3 to CFA
+app.put('/transfer-to-cfa/:id', async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const lupon3Collection = db.collection('lupon3');
+    const cfaCollection = db.collection('cfa');
+    const luponCompleteCollection = db.collection('lupon-complete');
+
+    const lupon = await lupon3Collection.findOne({ _id: new ObjectId(id) });
+    if (!lupon) {
+      return res.status(404).send('Lupon entry not found in Hearing 3');
+    }
+
+    // Insert to CFA with a new ObjectId (always)
+    const cfaCopy = { ...lupon, _id: new ObjectId() };
+    await cfaCollection.insertOne(cfaCopy);
+
+    // Check if already in lupon-complete to avoid duplicate error
+    const alreadyInComplete = await luponCompleteCollection.findOne({ _id: lupon._id });
+    if (!alreadyInComplete) {
+      await luponCompleteCollection.insertOne(lupon);
+    }
+
+    // Delete from lupon3
+    await lupon3Collection.deleteOne({ _id: new ObjectId(id) });
+
+    res.status(200).send({ success: true });
+
+  } catch (err) {
+    console.error('Error transferring to CFA:', err);
+    res.status(500).send({ success: false });
   }
 });
 
@@ -2377,6 +2661,7 @@ app.get('/fetch-blotter-kasunduan/:id', async (req, res) => {
   }
 });
 
+// HEARING 1
 app.get('/fetch-lupon/:id', async (req, res) => {
   const id = req.params.id;
   try {
@@ -2389,7 +2674,31 @@ app.get('/fetch-lupon/:id', async (req, res) => {
   }
 });
 
-//TODO: HEARING 2 AND 3
+// HEARING 2
+app.get('/fetch-lupon2/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const lupon2Collection = db.collection('lupon2');
+    const lupon2 = await lupon2Collection.findOne({ _id: new ObjectId(id) });
+    res.json(lupon2);
+  } catch (err) {
+    console.error('Error fetching Lupon 2:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// HEARING 3
+app.get('/fetch-lupon3/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const lupon3Collection = db.collection('lupon3');
+    const lupon3 = await lupon3Collection.findOne({ _id: new ObjectId(id) });
+    res.json(lupon3);
+  } catch (err) {
+    console.error('Error fetching Lupon 3:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
 
 app.get('/fetch-lupon-kasunduan/:id', async (req, res) => {
   const id = req.params.id;

@@ -264,7 +264,7 @@
     
         <div class="blotter-container">
             <div class="date-time">
-                <span id="luponDate"></span><br>
+                <span id="luponHearingDate"></span><br>
                 <b><label>Petsa</label></b>
             </div>
 
@@ -272,14 +272,14 @@
                 <div class="labelRepublika">
                 <br><br><h4>Republika ng Pilipinas Lalawigan ng Kabite</h4>
                 <h4>Lungsod ng Dasmariñas Barangay Santa Fe</h4>
-                <h4>(1st Hearing)</h4> 
+                <h4 id="hearingStageDisplay">(Hearing Stage)</h4>
             </div>
             </div>
             
             <div class = "usapin">
                 <label>Usaping Barangay Blg. </label>
                 <span id="luponUsapinBlg">Hearing Num.</span>
-                <p id="luponsumbong">Reason</p>
+                <p id="luponReason">Reason</p>
             </div>
 
             <div class="name-block">
@@ -287,9 +287,11 @@
                 <p id="luponNagsumbong"></p>
                 <p class="label">Complainant's Name</p><br>
 
-                <p class="label">Complainee's Name</p>
                 <p id="luponLabanKay"></p>
+                <p class="label">Complainee's Name</p>
+                
                 </div>
+                <p id="luponmom"></p>
             </div>
 
             <br>
@@ -309,35 +311,38 @@
                     </div>
                 </div>
             
+            <br>
+                
             <div class="blotter-body">
-                <br><p id="blotterText">Dito nakalagay yung Sumbong</p>
+                <p id="luponmom"></p>
             </div>
 
             <!-- Signature of Complainant/Complainee -->
             <div class="name-block">
-                <div class="name-block">
-                <p id="luponNagsumbong"></p>
+            <div class="name-block">
+                <p id="luponNagsumbongSignature"></p>
                 <p class="label">Complainant's Name</p><br>
 
                 <p class="label">Complainee's Name</p>
-                <p id="luponLabanKay"></p>
-                </div>
+                <p id="luponLabanKaySignature"></p>
             </div>
+            </div>
+
             
             <!-- Signature of Lupon -->
             <br>
                 <div class="chairman-row">
                     <div class="chairman-name">
                         
-                        <b><p id="pangkatChairperson"></p></b>
+                        <b><p id="pangkatChairpersonSign"></p></b>
                         <p>Pangkat Chairperson</p>
                     </div>
                     <div class="chairman-name">
-                        <b><p id="pangkatMember1"></p></b>
+                        <b><p id="pangkatMember1Sign"></p></b>
                         <p>Pangkat Member 1</p>
                     </div>
                     <div class="chairman-name">
-                        <b><p id="pangkatMember2"></p></b>
+                        <b><p id="pangkatMember2Sign"></p></b>
                         <p>Pangkat Member 2</p>
                     </div>
                 </div>
@@ -353,24 +358,7 @@
     </div>
     <script src="/public/js/sessionTimeout.js"></script>
      <script>
-document.addEventListener('DOMContentLoaded', async function () {
-    try {
-        // Fetch Punong Barangay name from the server
-        const response = await fetch('/fetch-punong-barangay');
-        const data = await response.json();
-        
-        if (response.ok) {
-            // Update the chairman's name dynamically and convert it to uppercase
-            document.getElementById('chairman').textContent = `HON. ${data.name.toUpperCase()}`;
-        } else {
-            console.error(data.message);
-            document.getElementById('chairman').textContent = 'PUNONG BARANGAY NOT FOUND';
-        }
-    } catch (error) {
-        console.error("Error fetching Punong Barangay name:", error);
-        document.getElementById('chairman').textContent = 'ERROR FETCHING PUNONG BARANGAY';
-    }
-
+    document.addEventListener('DOMContentLoaded', function () {
     // Process other data from the URL params
     const params = new URLSearchParams(window.location.search);
 
@@ -390,24 +378,32 @@ document.addEventListener('DOMContentLoaded', async function () {
     ];
     const month = months[dateObj.getMonth()]; // Get the month name
 
-    // Create formatted text
-    const dateIssuedText = `Ginawa ngayong ika-${day} ng ${month}, ${year}.`;
-    const dateReceivedText = `Tinanggap at inihain ngayong ${day} ng ${month}, ${year}.`;
-
-    // Insert the formatted date into the respective elements
-    document.getElementById('luponDate').textContent = luponDate; // Original location for luponDate
-    document.getElementById('date-issued-text').textContent = dateIssuedText;
-    document.getElementById('date-received-text').textContent = dateReceivedText;
-
     // Fill the rest of the details from URL params
     document.getElementById('luponUsapinBlg').textContent = params.get('usapinBlg');
     document.getElementById('luponNagsumbong').textContent = params.get('nagsumbong');
     document.getElementById('luponLabanKay').textContent = params.get('labanKay');
-    document.getElementById('luponSumbong').textContent = params.get('sumbong');
-    document.getElementById('luponLunas').textContent = params.get('lunas');
-    document.getElementById('luponHearingStage').textContent = params.get('hearingStage');
+    document.getElementById('luponReason').textContent = params.get('reason');
+    document.getElementById('luponmom').textContent = params.get('luponmom');
     document.getElementById('luponHearingDate').textContent = params.get('hearingDate');
-    document.getElementById('luponStatus').textContent = params.get('status');
+
+    document.getElementById('pangkatChairperson').textContent = params.get('pangkatChairperson');
+    document.getElementById('pangkatMember1').textContent = params.get('pangkatMember1');
+    document.getElementById('pangkatMember2').textContent = params.get('pangkatMember2');
+
+    // also update for signature section
+    document.getElementById('luponNagsumbongSignature').textContent = params.get('nagsumbong');
+    document.getElementById('luponLabanKaySignature').textContent = params.get('labanKay');
+
+    document.getElementById('pangkatChairpersonSign').textContent = params.get('pangkatChairperson');
+    document.getElementById('pangkatMember1Sign').textContent = params.get('pangkatMember1');
+    document.getElementById('pangkatMember2Sign').textContent = params.get('pangkatMember2');
+
+    const hearingStage = parseInt(params.get('hearingStage'), 10);
+    if (!isNaN(hearingStage)) {
+        const stageText = getOrdinalSuffix(hearingStage) + " Hearing";
+        document.getElementById('hearingStageDisplay').textContent = `(${stageText})`;
+    }
+
 });
 
 function fetchAdminProfilePicture() {
@@ -484,6 +480,13 @@ function fetchProcessingBarangayID() {
         })
         .catch(error => console.error('Error fetching Barangay ID count:', error));
 }
+
+function getOrdinalSuffix(n) {
+    const s = ["th", "st", "nd", "rd"];
+    const v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]);
+}
+
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>

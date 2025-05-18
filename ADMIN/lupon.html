@@ -179,9 +179,10 @@
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Sumbong</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Lunas</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Reason</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Lupon</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Stage</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Date</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Time/th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Time</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Pangkat Chairperson</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Pangkat Member</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Pangkat Member</th>
@@ -353,6 +354,12 @@
         <div class="mb-4">
                 <div>
                     <textarea id="editReason" placeholder="Reason" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
+                </div>
+            </div>
+
+        <div class="mb-4">
+                <div>
+                    <textarea id="editLuponmom" placeholder="Luponmom" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
                 </div>
             </div>
 
@@ -543,20 +550,21 @@ async function fetchLuponData() {
     <td class="px-4 py-2">${lupon.sumbong}</td>
     <td class="px-4 py-2">${lupon.lunas}</td>
     <td class="px-4 py-2">${lupon.reason}</td>
+    <td class="px-4 py-2">${lupon.luponmom}</td>
     <td class="px-4 py-2">${lupon.hearingStage}</td>
     <td class="px-4 py-2">${lupon.hearingDate}</td>
     <td class="px-4 py-2">${lupon.hearingTime}</td>
     <td class="px-4 py-2">${lupon.pangkatChairperson}</td>
-        <td class="px-4 py-2">${lupon.pangkatMember1}</td>
-        <td class="px-4 py-2">${lupon.pangkatMember2}</td>
+    <td class="px-4 py-2">${lupon.pangkatMember1}</td>
+    <td class="px-4 py-2">${lupon.pangkatMember2}</td>
     <td class="px-4 py-2">${lupon.status}</td>
          <td class="px-4 py-2"><div class="flex items-center space-x-1">
-          <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749884/edit_tchmia.png" alt="Edit" class="edit-icon" onclick='openEditModal(${JSON.stringify(lupon._id)}, ${JSON.stringify(lupon.petsa)}, ${JSON.stringify(lupon.usapinBlg)}, ${JSON.stringify(lupon.complainants)}, ${JSON.stringify(lupon.complainees)}, ${JSON.stringify(lupon.sumbong)}, ${JSON.stringify(lupon.lunas)}, ${JSON.stringify(lupon.reason)}, ${JSON.stringify(lupon.hearingStage)}, ${JSON.stringify(lupon.hearingDate)}, ${JSON.stringify(lupon.hearingTime)}, ${JSON.stringify(lupon.pangkatChairperson)}, ${JSON.stringify(lupon.pangkatMember1)},  ${JSON.stringify(lupon.pangkatMember2)}, ${JSON.stringify(lupon.status)})'></a>
+          <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749884/edit_tchmia.png" alt="Edit" class="edit-icon" onclick='openEditModal(${JSON.stringify(lupon._id)}, ${JSON.stringify(lupon.petsa)}, ${JSON.stringify(lupon.usapinBlg)}, ${JSON.stringify(lupon.complainants)}, ${JSON.stringify(lupon.complainees)}, ${JSON.stringify(lupon.sumbong)}, ${JSON.stringify(lupon.lunas)}, ${JSON.stringify(lupon.reason)}, ${JSON.stringify(lupon.luponmom)}, ${JSON.stringify(lupon.hearingStage)}, ${JSON.stringify(lupon.hearingDate)}, ${JSON.stringify(lupon.hearingTime)}, ${JSON.stringify(lupon.pangkatChairperson)}, ${JSON.stringify(lupon.pangkatMember1)},  ${JSON.stringify(lupon.pangkatMember2)}, ${JSON.stringify(lupon.status)})'></a>
           <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749756/delete_iyld39.png" alt="Delete" class="delete-icon" onclick="deleteLupon('${lupon._id}')"></a>
           ${lupon.status === 'Processing' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750132/redPROCESSING_edoaf5.png" alt="Generate" class="generate-icon" onclick="generatePatawag('${lupon._id}')"></a>` : ''}
-          ${lupon.hearingStage === "3" ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750179/blueCOMPLETED_ymvmje.png" alt="Generate" class="generate-icon" onclick="generateLupon('${lupon._id}')"></a>` : ''}
+          ${lupon.status === "Transfer to Hearing 2" ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1747579762/google-docs_7_ubm1ft.png" alt="Generate" class="generate-icon" onclick="generateHearing('${lupon._id}')"></a>` : ''}
           ${lupon.status === 'Completed' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750222/checked_bgey1p.png" alt="Transfer" class="transfer-icon" onclick="transferLupon('${lupon._id}')"></a>` : ''}
-          ${lupon.status === 'Transfer to Hearing 2' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750222/checked_bgey1p.png" alt="Transfer" class="transfer-icon" onclick="transfertoHearing2('${lupon._id}')"></a>` : ''}
+          ${lupon.status === 'Transfer to Hearing 2' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750222/checked_bgey1p.png" alt="Transfer" class="transfer-icon" onclick="transfertolupon2('${lupon._id}')"></a>` : ''}
           </div></td>
       `;
       luponTableBody.appendChild(row);
@@ -696,13 +704,14 @@ function setMinHearingDate() {
 }
 
 // Open Edit Lupon Modal and Populate Fields
-function openEditModal(id, date, usapinBlg, complainants, complainees, sumbong, lunas, reason, hearingStage, hearingDate, hearingTime,  pangkatChairperson, pangkatMember1, pangkatMember2, status) {
+function openEditModal(id, date, usapinBlg, complainants, complainees, sumbong, lunas, reason, luponmom, hearingStage, hearingDate, hearingTime,  pangkatChairperson, pangkatMember1, pangkatMember2, status) {
     document.getElementById('editId').value = id;
     document.getElementById('editDate').value = date;
     document.getElementById('editText').value = usapinBlg;
     document.getElementById('editSumbong').value = sumbong;
     document.getElementById('editLunas').value = lunas;
     document.getElementById('editReason').value = reason;
+    document.getElementById('editLuponmom').value = luponmom;
     document.getElementById('editHearingStage').value = hearingStage;
     document.getElementById('editHearingDate').value = hearingDate;
     document.getElementById('editHearingTime').value = hearingTime;
@@ -855,6 +864,7 @@ document.getElementById('editLuponForm').addEventListener('submit', async functi
         sumbong: document.getElementById('editSumbong').value,
         lunas: document.getElementById('editLunas').value,
         reason: document.getElementById('editReason').value,
+        luponmom: document.getElementById('editLuponmom').value,
         hearingStage: document.getElementById('editHearingStage').value,
         hearingDate: document.getElementById('editHearingDate').value,
         hearingTime: document.getElementById('editHearingTime').value,
@@ -1103,7 +1113,7 @@ async function deleteKasunduan(id) {
     }
 }
 
-// TRANSFER LUPON
+// TRANSFER LUPON TO LUPON COMPLETE
 async function transferLupon(id) {
     if (confirm('Are you sure you want to transfer this entry?')) {
         try {
@@ -1123,10 +1133,10 @@ async function transferLupon(id) {
     }
 }
 
-// MAKE IT TRANSFER LUPON TO HEARING 2
-async function transfertoCFA(id) {
+//TRANSFER LUPON HEARING 1 TO HEARING 2
+async function transfertolupon2(id) {
     try {
-        const response = await fetch(`/transfer-to-cfa/${id}`, {
+        const response = await fetch(`/transfer-to-lupon2/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -1136,14 +1146,14 @@ async function transfertoCFA(id) {
         const data = await response.json();
 
         if (data.success) {
-            alert("Successfully transferred to CFA!");
+            alert("Successfully transferred to Hearing Stage 2!");
             // Optionally, reload or update the table to reflect the new status
             fetchLuponData(); // Call this function if you have it to refresh the data
         } else {
             alert("Transfer failed: " + data.message);
         }
     } catch (error) {
-        console.error("Error transferring to CFA:", error);
+        console.error("Error transferring to Hearing Stage 2:", error);
     }
 }
 
@@ -1226,6 +1236,38 @@ function generateLupon(id) {
     .catch(error => console.error('Error fetching Lupon:', error));
 }
 
+function generateHearing(id) {
+  fetch(`/fetch-lupon/${id}`) // Fetch from Hearing 1 collection only
+    .then(response => response.json())
+    .then(data => {
+      if (data) {
+        const complainantsText = data.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+        const complaineesText = data.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+
+        const params = new URLSearchParams({
+          date: data.petsa,
+          usapinBlg: data.usapinBlg,
+          nagsumbong: complainantsText,
+          labanKay: complaineesText,
+          reason: data.reason,
+          luponmom: data.luponmom,
+          sumbong: data.sumbong,
+          lunas: data.lunas,
+          hearingStage: data.hearingStage,
+          hearingDate: data.hearingDate,
+          hearingTime: data.hearingTime,
+          pangkatChairperson: data.pangkatChairperson,
+          pangkatMember1: data.pangkatMember1,
+          pangkatMember2: data.pangkatMember2
+        });
+
+        window.location.href = `generate-hearing.html?${params}`;
+      } else {
+        alert("No record found.");
+      }
+    })
+    .catch(error => console.error('Error fetching Lupon (Hearing 1) data:', error));
+}
 
 function generateLuponKasunduan(id) {
   fetch(`/fetch-lupon-kasunduan/${id}`)
