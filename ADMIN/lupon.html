@@ -181,7 +181,10 @@
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Reason</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Stage</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Date</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Date</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Time/th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Pangkat Chairperson</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Pangkat Member</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Pangkat Member</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Status</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Action</th> 
                 </tr>
@@ -353,6 +356,31 @@
                 </div>
             </div>
 
+            <div class="grid grid-cols-3 gap-2 mb-4">
+            <div>
+            <select id="editPangkatChairperson" name="pangkatChairperson" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+              <option value="" disabled>Select Chairperson</option>
+              <!-- Options will be dynamically populated -->
+          </select>
+          </div>
+
+          <!-- Pangkat Member 1, Pangkat Member 2, and Status -->
+          <div>
+            <select id="editPangkatMember1" name="pangkatMember1" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+              <option value="" disabled>Select Member 1</option>
+              <!-- Options will be dynamically populated -->
+          </select>
+          </div>
+
+          <div>
+            <select id="editPangkatMember2" name="pangkatMember2" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+              <option value="" disabled>Select Member 2</option>
+              <!-- Options will be dynamically populated -->
+          </select>
+          </div>
+        </div>
+
+
             <!-- Hearing Stage, Hearing Date, Hearing Time, Status -->
             <div class="grid grid-cols-4 gap-2 mb-4">
                 <div>
@@ -518,9 +546,12 @@ async function fetchLuponData() {
     <td class="px-4 py-2">${lupon.hearingStage}</td>
     <td class="px-4 py-2">${lupon.hearingDate}</td>
     <td class="px-4 py-2">${lupon.hearingTime}</td>
+    <td class="px-4 py-2">${lupon.pangkatChairperson}</td>
+        <td class="px-4 py-2">${lupon.pangkatMember1}</td>
+        <td class="px-4 py-2">${lupon.pangkatMember2}</td>
     <td class="px-4 py-2">${lupon.status}</td>
          <td class="px-4 py-2"><div class="flex items-center space-x-1">
-          <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749884/edit_tchmia.png" alt="Edit" class="edit-icon" onclick='openEditModal(${JSON.stringify(lupon._id)}, ${JSON.stringify(lupon.petsa)}, ${JSON.stringify(lupon.usapinBlg)}, ${JSON.stringify(lupon.complainants)}, ${JSON.stringify(lupon.complainees)}, ${JSON.stringify(lupon.sumbong)}, ${JSON.stringify(lupon.lunas)}, ${JSON.stringify(lupon.reason)}, ${JSON.stringify(lupon.hearingStage)}, ${JSON.stringify(lupon.hearingDate)}, ${JSON.stringify(lupon.hearingTime)}, ${JSON.stringify(lupon.status)})'></a>
+          <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749884/edit_tchmia.png" alt="Edit" class="edit-icon" onclick='openEditModal(${JSON.stringify(lupon._id)}, ${JSON.stringify(lupon.petsa)}, ${JSON.stringify(lupon.usapinBlg)}, ${JSON.stringify(lupon.complainants)}, ${JSON.stringify(lupon.complainees)}, ${JSON.stringify(lupon.sumbong)}, ${JSON.stringify(lupon.lunas)}, ${JSON.stringify(lupon.reason)}, ${JSON.stringify(lupon.hearingStage)}, ${JSON.stringify(lupon.hearingDate)}, ${JSON.stringify(lupon.hearingTime)}, ${JSON.stringify(lupon.pangkatChairperson)}, ${JSON.stringify(lupon.pangkatMember1)},  ${JSON.stringify(lupon.pangkatMember2)}, ${JSON.stringify(lupon.status)})'></a>
           <a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745749756/delete_iyld39.png" alt="Delete" class="delete-icon" onclick="deleteLupon('${lupon._id}')"></a>
           ${lupon.status === 'Processing' ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750132/redPROCESSING_edoaf5.png" alt="Generate" class="generate-icon" onclick="generatePatawag('${lupon._id}')"></a>` : ''}
           ${lupon.hearingStage === "3" ? `<a href="#"><img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745750179/blueCOMPLETED_ymvmje.png" alt="Generate" class="generate-icon" onclick="generateLupon('${lupon._id}')"></a>` : ''}
@@ -665,7 +696,7 @@ function setMinHearingDate() {
 }
 
 // Open Edit Lupon Modal and Populate Fields
-function openEditModal(id, date, usapinBlg, complainants, complainees, sumbong, lunas, reason, hearingStage, hearingDate, hearingTime, status) {
+function openEditModal(id, date, usapinBlg, complainants, complainees, sumbong, lunas, reason, hearingStage, hearingDate, hearingTime,  pangkatChairperson, pangkatMember1, pangkatMember2, status) {
     document.getElementById('editId').value = id;
     document.getElementById('editDate').value = date;
     document.getElementById('editText').value = usapinBlg;
@@ -725,6 +756,17 @@ function openEditModal(id, date, usapinBlg, complainants, complainees, sumbong, 
     setMinHearingDate();
     // Display the Edit Modal
     document.getElementById('editModal').style.display = 'block';
+
+    Promise.all([
+        fetchPangkatChairperson('editPangkatChairperson'),
+        fetchPangkatMembers('editPangkatMember1', 'editPangkatMember2')
+    ]).then(() => {
+        document.getElementById("editPangkatChairperson").value = pangkatChairperson;
+        document.getElementById("editPangkatMember1").value = pangkatMember1;
+        document.getElementById("editPangkatMember2").value = pangkatMember2;
+    });
+
+    document.getElementById("editLuponModal").style.display = "block";
 }
 
 // Get the edited complainants and complainees
@@ -762,6 +804,45 @@ function getEditedComplainees() {
     return complainees;
 }
 
+// Bagong lagay for Pangkat Chairperson and Members
+function fetchPangkatChairperson(dropdownId = 'pangkatChairperson') {
+    return fetch('/fetch-pangkat-chairperson')
+        .then(response => response.json())
+        .then(data => {
+            const chairpersonDropdown = document.getElementById(dropdownId);
+            chairpersonDropdown.innerHTML = '<option value="" disabled selected>Select Pangkat Chairperson</option>'; // Reset dropdown with placeholder
+            data.forEach(person => {
+                const option = document.createElement('option');
+                option.value = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                option.textContent = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                chairpersonDropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching Pangkat Chairperson:', error));
+}
+
+function fetchPangkatMembers(dropdownId1 = 'pangkatMember1', dropdownId2 = 'pangkatMember2') {
+    return fetch('/fetch-pangkat-members')
+        .then(response => response.json())
+        .then(data => {
+            const member1Dropdown = document.getElementById(dropdownId1);
+            const member2Dropdown = document.getElementById(dropdownId2);
+            member1Dropdown.innerHTML = '<option value="" disabled selected>Select Pangkat Member 1</option>'; // Reset with placeholder
+            member2Dropdown.innerHTML = '<option value="" disabled selected>Select Pangkat Member 2</option>'; // Reset with placeholder
+            data.forEach(person => {
+                const option1 = document.createElement('option');
+                const option2 = document.createElement('option');
+                option1.value = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                option1.textContent = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                option2.value = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                option2.textContent = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                member1Dropdown.appendChild(option1);
+                member2Dropdown.appendChild(option2);
+            });
+        })
+        .catch(error => console.error('Error fetching Pangkat Members:', error));
+}
+
 // Edit Lupon Form Submission
 document.getElementById('editLuponForm').addEventListener('submit', async function(event) {
     event.preventDefault();
@@ -777,6 +858,9 @@ document.getElementById('editLuponForm').addEventListener('submit', async functi
         hearingStage: document.getElementById('editHearingStage').value,
         hearingDate: document.getElementById('editHearingDate').value,
         hearingTime: document.getElementById('editHearingTime').value,
+        pangkatChairperson: document.getElementById("editPangkatChairperson").value,
+        pangkatMember1: document.getElementById("editPangkatMember1").value,
+        pangkatMember2: document.getElementById("editPangkatMember2").value,
         status: document.getElementById('editStatus').value,
     };
 

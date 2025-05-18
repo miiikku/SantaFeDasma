@@ -175,7 +175,10 @@
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Reason</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Stage</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Date</th>
-                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Date</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Hearing Time</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Pangkat Chairperson</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Pangkat Member</th>
+                    <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Pangkat Member</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Status</th>
                     <th class="px-4 py-2 text-left text-sm font-semibold text-white border border-gray-300">Action</th> 
                 </tr>
@@ -274,3 +277,371 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="public/styles/script.js"></script>
     <script src="/public/js/sessionTimeout.js"></script>
+     <script>
+        //SEARCH
+        function searchLuponAndKasunduan() {
+    // Get the search input value
+    const searchValue = document.querySelector('#searchInput').value.toLowerCase();
+
+    // Search Lupon Table
+    const luponRows = document.querySelectorAll('#lupon-table-body tr');
+    luponRows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        const matches = Array.from(cells).some(cell => 
+            cell.textContent.toLowerCase().includes(searchValue)
+        );
+        if (matches) {
+            row.style.display = ''; // Show the row
+        } else {
+            row.style.display = 'none'; // Hide the row
+        }
+    });
+}
+
+   //TODO: FETCH LUPON DATA
+
+// Call the functions to fetch and populate the data when the page loads
+document.addEventListener('DOMContentLoaded', () => {
+  fetchLuponData();
+});
+
+function setMinHearingDate() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('editHearingDate').setAttribute('min', today); // Restrict dates to today onwards
+}
+
+// Open Edit Lupon Modal and Populate Fields
+function openEditModal(id, date, usapinBlg, complainants, complainees, sumbong, lunas, reason, hearingStage, hearingDate, hearingTime,  pangkatChairperson, pangkatMember1, pangkatMember2, status) {
+    document.getElementById('editId').value = id;
+    document.getElementById('editDate').value = date;
+    document.getElementById('editText').value = usapinBlg;
+    document.getElementById('editSumbong').value = sumbong;
+    document.getElementById('editLunas').value = lunas;
+    document.getElementById('editReason').value = reason;
+    document.getElementById('editHearingStage').value = hearingStage;
+    document.getElementById('editHearingDate').value = hearingDate;
+    document.getElementById('editHearingTime').value = hearingTime;
+    document.getElementById('editStatus').value = status;
+
+    // Dynamically generate complainant input fields
+    const complainantContainer = document.getElementById('editComplainantsContainer');
+    complainantContainer.innerHTML = ''; // Clear previous inputs
+
+    complainants.forEach((complainant, index) => {
+        const complainantRow = document.createElement('div');
+        complainantRow.classList.add('form-row');
+        complainantRow.innerHTML = `
+        <div class="grid grid-cols-3 gap-2 mb-4">
+            <div>
+                <input type="text" id="editComplainantFirstName${index}" value="${complainant.firstName}" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            <div >
+                <input type="text" id="editComplainantMiddleName${index}" value="${complainant.middleName}" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            <div>
+                <input type="text" id="editComplainantLastName${index}" value="${complainant.lastName}" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            </div>
+        `;
+        complainantContainer.appendChild(complainantRow);
+    });
+
+    // Dynamically generate complainee input fields
+    const complaineeContainer = document.getElementById('editComplaineesContainer');
+    complaineeContainer.innerHTML = ''; // Clear previous inputs
+
+    complainees.forEach((complainee, index) => {
+        const complaineeRow = document.createElement('div');
+        complaineeRow.classList.add('form-row');
+        complaineeRow.innerHTML = `
+        <div class="grid grid-cols-3 gap-2 mb-4">
+            <div>
+                <input type="text" id="editComplaineeFirstName${index}" value="${complainee.firstName}" placeholder="First Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            <div>
+                <input type="text" id="editComplaineeMiddleName${index}" value="${complainee.middleName}" placeholder="Middle Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            <div>
+                <input type="text" id="editComplaineeLastName${index}" value="${complainee.lastName}" placeholder="Last Name" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
+            </div>
+            </div>
+        `;
+        complaineeContainer.appendChild(complaineeRow);
+    });
+    setMinHearingDate();
+    // Display the Edit Modal
+    document.getElementById('editModal').style.display = 'block';
+
+    Promise.all([
+        fetchPangkatChairperson('editPangkatChairperson'),
+        fetchPangkatMembers('editPangkatMember1', 'editPangkatMember2')
+    ]).then(() => {
+        document.getElementById("editPangkatChairperson").value = pangkatChairperson;
+        document.getElementById("editPangkatMember1").value = pangkatMember1;
+        document.getElementById("editPangkatMember2").value = pangkatMember2;
+    });
+
+    document.getElementById("editLuponModal").style.display = "block";
+}
+
+// Get the edited complainants and complainees
+function getEditedComplainants() {
+    const rows = document.querySelectorAll('#editComplainantsContainer .form-row');
+    const complainants = [];
+
+    rows.forEach(row => {
+        const firstName = row.querySelector('input[id^="editComplainantFirstName"]').value.trim();
+        const middleName = row.querySelector('input[id^="editComplainantMiddleName"]').value.trim();
+        const lastName = row.querySelector('input[id^="editComplainantLastName"]').value.trim();
+
+        if (firstName && middleName && lastName) {
+            complainants.push({ firstName, middleName, lastName });
+        }
+    });
+
+    return complainants;
+}
+
+function getEditedComplainees() {
+    const rows = document.querySelectorAll('#editComplaineesContainer .form-row');
+    const complainees = [];
+
+    rows.forEach(row => {
+        const firstName = row.querySelector('input[id^="editComplaineeFirstName"]').value.trim();
+        const middleName = row.querySelector('input[id^="editComplaineeMiddleName"]').value.trim();
+        const lastName = row.querySelector('input[id^="editComplaineeLastName"]').value.trim();
+
+        if (firstName && middleName && lastName) {
+            complainees.push({ firstName, middleName, lastName });
+        }
+    });
+
+    return complainees;
+}
+
+// Bagong lagay for Pangkat Chairperson and Members
+function fetchPangkatChairperson(dropdownId = 'pangkatChairperson') {
+    return fetch('/fetch-pangkat-chairperson')
+        .then(response => response.json())
+        .then(data => {
+            const chairpersonDropdown = document.getElementById(dropdownId);
+            chairpersonDropdown.innerHTML = '<option value="" disabled selected>Select Pangkat Chairperson</option>'; // Reset dropdown with placeholder
+            data.forEach(person => {
+                const option = document.createElement('option');
+                option.value = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                option.textContent = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                chairpersonDropdown.appendChild(option);
+            });
+        })
+        .catch(error => console.error('Error fetching Pangkat Chairperson:', error));
+}
+
+function fetchPangkatMembers(dropdownId1 = 'pangkatMember1', dropdownId2 = 'pangkatMember2') {
+    return fetch('/fetch-pangkat-members')
+        .then(response => response.json())
+        .then(data => {
+            const member1Dropdown = document.getElementById(dropdownId1);
+            const member2Dropdown = document.getElementById(dropdownId2);
+            member1Dropdown.innerHTML = '<option value="" disabled selected>Select Pangkat Member 1</option>'; // Reset with placeholder
+            member2Dropdown.innerHTML = '<option value="" disabled selected>Select Pangkat Member 2</option>'; // Reset with placeholder
+            data.forEach(person => {
+                const option1 = document.createElement('option');
+                const option2 = document.createElement('option');
+                option1.value = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                option1.textContent = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                option2.value = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                option2.textContent = `${person.firstName} ${person.middleName} ${person.lastName}`;
+                member1Dropdown.appendChild(option1);
+                member2Dropdown.appendChild(option2);
+            });
+        })
+        .catch(error => console.error('Error fetching Pangkat Members:', error));
+}
+
+// Edit Lupon Form Submission
+document.getElementById('editLuponForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const updatedLupon = {
+        petsa: document.getElementById('editDate').value,
+        usapinBlg: document.getElementById('editText').value,
+        complainants: getEditedComplainants(),
+        complainees: getEditedComplainees(),
+        sumbong: document.getElementById('editSumbong').value,
+        lunas: document.getElementById('editLunas').value,
+        reason: document.getElementById('editReason').value,
+        hearingStage: document.getElementById('editHearingStage').value,
+        hearingDate: document.getElementById('editHearingDate').value,
+        hearingTime: document.getElementById('editHearingTime').value,
+        pangkatChairperson: document.getElementById("editPangkatChairperson").value,
+        pangkatMember1: document.getElementById("editPangkatMember1").value,
+        pangkatMember2: document.getElementById("editPangkatMember2").value,
+        status: document.getElementById('editStatus').value,
+    };
+
+    const luponId = document.getElementById('editId').value;
+
+    try {
+        const response = await fetch(`/update-lupon/${luponId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedLupon)
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            closeEditModal(); // Close the Edit Modal
+            fetchLuponData(); // Refresh the table to reflect the updates
+        } else {
+            alert('Failed to update Lupon');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+
+function closeEditModal() {
+    const editModal = document.getElementById('editModal');
+    editModal.style.display = 'none'; // Hide the modal
+}
+
+
+//TODO: DELETE LUPON 
+
+//TODO: TRANSFER TO CFA
+
+function generatePatawag(id) { 
+  fetch(`/fetch-lupon3/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Fetched Data:", data); // Log to check the API response
+      if (data) {
+        const complainantsText = data.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+        const complaineesText = data.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+
+        const params = new URLSearchParams({
+          date: data.petsa,
+          usapinBlg: data.usapinBlg,
+          nagsumbong: complainantsText,
+          labanKay: complaineesText,
+          sumbong: data.sumbong,
+          lunas: data.lunas,
+          hearingStage: data.hearingStage,
+          hearingDate: data.hearingDate,
+          hearingTime: data.hearingTime,
+        });
+
+        window.location.href = `generate-lupon-patawag.html?${params}`; 
+      }
+    })
+    .catch(error => console.error('Error fetching Lupon:', error));
+}
+
+function generateLupon(id) {
+  fetch(`/fetch-lupon3/${id}`)
+    .then(response => response.json())
+    .then(data => {
+      console.log("Fetched Data:", data); // Log to check the API response
+      if (data) {
+        const complainantsText = data.complainants?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+        const complaineesText = data.complainees?.map(c => `${c.firstName} ${c.middleName} ${c.lastName}`).join(', ');
+
+        const params = new URLSearchParams({
+          date: data.petsa,
+          usapinBlg: data.usapinBlg,
+          nagsumbong: complainantsText,
+          labanKay: complaineesText,
+          sumbong: data.sumbong,
+          lunas: data.lunas,
+          hearingStage: data.hearingStage,
+          hearingDate: data.hearingDate,
+        });
+
+        window.location.href = `generate-lupon.html?${params}`;
+      }
+    })
+    .catch(error => console.error('Error fetching Lupon:', error));
+}
+
+//TODO: GENERATE HEARING 
+
+function fetchAdminProfilePicture() {
+    fetch('/admin-details-data')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const profilePicElement = document.getElementById('resident-profile-pic');
+            if (data.Profilepic) {
+                profilePicElement.src = data.Profilepic;
+            }
+        })
+        .catch(error => console.error('Error fetching profile picture:', error));
+}   
+
+//side notification count
+// Function to fetch total count of "Processing" requests across all collections
+function fetchTotalProcessingRequests() {
+    fetch('/count-all-processing-requests')
+        .then(response => response.json())
+        .then(data => {
+            const sidebarNotif = document.getElementById('sidebarNotif');
+            if (data.totalCount > 0) {
+                sidebarNotif.textContent = data.totalCount; // Show total count
+                sidebarNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                sidebarNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching total processing count:', error));
+}
+
+        function fetchTotalProcessingComplaints() {
+    fetch('/complaint-counts')
+        .then(response => response.json())
+        .then(data => {
+            const total =
+                (data.blotterCount || 0) +
+                (data.blotterKasunduanCount || 0) +
+                (data.luponCount || 0) +
+                (data.luponKasunduanCount || 0) +
+                (data.cfaCount || 0);
+
+            const complaintsNotif = document.getElementById('complaintsNotif');
+            if (complaintsNotif) {
+                complaintsNotif.textContent = total;
+                complaintsNotif.style.display = total > 0 ? 'inline-flex' : 'none';
+            }
+        })
+        .catch(error => console.error('Error fetching complaint counts:', error));
+}
+
+function fetchProcessingBarangayID() {
+    fetch('/count-processing-barangay-id')
+        .then(response => response.json())
+        .then(data => {
+            const barangayIDNotif = document.getElementById('barangayIDNotif');
+            if (data.barangayIdCount > 0) {
+                barangayIDNotif.textContent = data.barangayIdCount; // Show total count
+                barangayIDNotif.style.display = 'inline-block'; // Make it visible
+            } else {
+                barangayIDNotif.style.display = 'none'; // Hide if no processing requests
+            }
+        })
+        .catch(error => console.error('Error fetching Barangay ID count:', error));
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+                fetchAdminProfilePicture();
+                fetchTotalProcessingRequests();
+            fetchTotalProcessingComplaints();
+            fetchProcessingBarangayID();
+        });
+    </script>
+</body>
+</html>

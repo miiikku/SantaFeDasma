@@ -1853,6 +1853,9 @@ app.put('/transfer-to-lupon/:id', async (req, res) => {
           hearingStage: "1",
           hearingDate: "",
           hearingTime: "",
+          pangkatChairperson: "",
+          pangkatMember1: "",
+          pangkatMember2: "",
           status: "Processing"
       };
 
@@ -1980,6 +1983,9 @@ app.put('/update-lupon/:id', async (req, res) => {
     hearingStage: req.body.hearingStage,
     hearingDate: req.body.hearingDate,
     hearingTime: req.body.hearingTime,
+    pangkatChairperson: req.body.pangkatChairperson,
+    pangkatMember1: req.body.pangkatMember1,
+    pangkatMember2: req.body.pangkatMember2,
     status: req.body.status,
 
     // Handle multiple complainants and complainees as arrays
@@ -2382,6 +2388,8 @@ app.get('/fetch-lupon/:id', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+//TODO: HEARING 2 AND 3
 
 app.get('/fetch-lupon-kasunduan/:id', async (req, res) => {
   const id = req.params.id;
