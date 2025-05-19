@@ -416,56 +416,65 @@
                     <input type="hidden" id="editId">
 
                     <!-- Date, Time, Blotter Number -->
-                    <div class="grid grid-cols-3 gap-2 mb-4">
+                    <div class="grid grid-cols-3 gap-2 mb-2">
                         <div class="floating-label">
+                            <label class="text-xs sm:text-sm text-green-800">Date</label>
                             <input type="date" id="editDate" placeholder="Date" readonly class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                         </div>
                         <div class="floating-label">
+                            <label class="text-xs sm:text-sm text-green-800">Time</label>
                             <input type="time" id="editTime" placeholder="Time" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                         </div>
                         <div class="floating-label">
+                            <label class="text-xs sm:text-sm text-green-800">Blotter No.</label>
                             <input type="text" id="editBlotterNo" placeholder="Blotter No." readonly class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                         </div>
                     </div>
 
                     <!-- BLOTTER COMPLAINANTS -->
                     <div>
-                        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+                        <label class="text-xs sm:text-sm text-green-800">Complainant Details</label>
                         <!-- Complainant's Name (First Name, Middle Name, Last Name) -->
                         <div id="editComplainantsContainer"></div> 
                     </div>
                     <div>
-                        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainee Details</label>
+                        <label class="text-xs sm:text-sm text-green-800">Complainee Details</label>
                         <!-- Complainee's Name (First Name, Middle Name, Last Name) -->
                         <div id="editComplaineesContainer"></div> 
                     </div>
                     
                     <!-- Blotter and Reason -->
-                    <div class="mb-4">
+                    <div class="mb-2">
                         <div>
+                            <label class="text-xs sm:text-sm text-green-800">Blotter</label>
                             <textarea id="editBlotter" placeholder="Blotter" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
                         </div>
                     </div>
                     <div class="mb-4">
                         <div>
+                            <label class="text-xs sm:text-sm text-green-800">Reason</label>
                             <textarea id="editReason" placeholder="Reason" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
                         </div>
                     </div>
 
                     <!-- Justice on Duty, Hearing Date, Hearing Time, Status -->
-                    <div class="grid grid-cols-4 gap-2 mb-4">
+                    <div class="grid grid-cols-4 gap-2 mb-2">
                         <div>
+                            <label class="text-xs sm:text-sm text-green-800">Justice on Duty</label>
                             <select id="editJusticeOnDuty" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                                 <option value="" disabled>Select Justice on Duty</option>
                             </select>
                         </div>
                         <div>
+                            <label class="text-xs sm:text-sm text-green-800">Hearing Date</label>
                             <input type="date" id="editHearingDate" placeholder="Hearing Date" readonly class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                         </div>
                         <div class="floating-label">
+                            <label class="text-xs sm:text-sm text-green-800">Hearing Time</label>
                             <input type="time" id="editHearingTime" placeholder="Hearing Time" readonly class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                         </div>
                         <div class="floating-label">
+                            <label class="text-xs sm:text-sm text-green-800">Status</label>
                             <select id="editStatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                                 <option value="Processing">Processing</option>
                                 <option value="Transfer to Lupon">Transfer to Lupon</option>
@@ -473,7 +482,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="flex justify-end gap-4">
+                    <div class="flex justify-end gap-2">
                         <button type="submit" class="bg-green-800 text-white px-6 py-2 rounded-md hover:bg-green-700 text-sm">Save</button>
                         <button type="button" class="bg-gray-200 text-black px-6 py-2 rounded-md hover:bg-gray-400 text-sm" onclick="closeEditModal()">Cancel</button>
                     </div>
@@ -490,43 +499,48 @@
                     <input type="hidden" id="editKasunduanId">
 
                      <!-- Date, Time -->
-                    <div class="grid grid-cols-2 gap-2 mb-4">
+                    <div class="grid grid-cols-2 gap-2 mb-2">
                         <div>
+                            <label class="text-xs sm:text-sm text-green-800">Date</label>
                             <input type="date" id="editKasunduanDate" placeholder="Date" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                         </div>
                         <div>
+                            <label class="text-xs sm:text-sm text-green-800">Time</label>
                             <input type="time" id="editKasunduanTime" placeholder="Time" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                         </div>
                     </div>
 
                     <!-- EDIT KASUNDUAN COMPLAINANTS -->
                     <div>
-                        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+                        <label class="text-xs sm:text-sm text-green-800">Complainant Details</label>
                         <!-- Complainant's Name (First Name, Middle Name, Last Name) -->
                         <div id="editKasunduanComplainantsContainer"></div> <!-- Dynamic Complainant Fields -->
                     </div>
 
                     <!-- EDIT KASUNDUAN COMPLAINEES -->
                     <div>
-                        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainee Details</label>
+                        <label class="text-xs sm:text-sm text-green-800">Complainee Details</label>
                         <!-- Complainee's Name (First Name, Middle Name, Last Name) -->
                         <div id="editKasunduanComplaineesContainer"></div> <!-- Dynamic Complainee Fields -->
                     </div>
                     
                     <!-- Kasunduan -->
-                    <div class="mb-4">
+                    <div class="mb-2">
+                        <label class="text-xs sm:text-sm text-green-800">Kasunduan</label>
                             <textarea id="editKasunduanText" placeholder="Kasunduan" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
                     </div>
 
                     <!-- Justice on Duty and Status -->
-                    <div class="grid grid-cols-2 gap-2 mb-4">
+                    <div class="grid grid-cols-2 gap-2 mb-2">
                         <div>
+                            <label class="text-xs sm:text-sm text-green-800">Justice on Duty</label>
                             <select id="editKasunduanJusticeOnDuty" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                                 <option value="" disabled>Select Justice on Duty</option>
                             </select>
                         </div>
 
                         <div>
+                            <label class="text-xs sm:text-sm text-green-800">Status</label>
                             <select id="editKasunduanStatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                                 <option value="Processing">Processing</option>
                                 <option value="Completed">Completed</option>
@@ -1581,7 +1595,7 @@ function setupComplainantAutocomplete() {
                     }
                     if (!dropdown) {
                     dropdown = document.createElement('div');
-                    dropdown.className = 'autocomplete absolute bg-white border border-gray-300 mt-1 rounded-md z-50 w-full shadow-md';
+                    dropdown.className = 'autocomplete absolute bg-white border border-gray-300 mt-1 rounded-md z-50 w-[200px] max-h-48 overflow-y-auto shadow-md';
                     container.appendChild(dropdown);
                     }
                 dropdown.innerHTML = '';
@@ -1645,7 +1659,7 @@ function setupComplaineeAutocomplete() {
                     }
                     if (!dropdown) {
                     dropdown = document.createElement('div');
-                    dropdown.className = 'autocomplete absolute bg-white border border-gray-300 mt-1 rounded-md z-50 w-full shadow-md';
+                    dropdown.className = 'autocomplete absolute bg-white border border-gray-300 mt-1 rounded-md z-50 w-[200px] max-h-48 overflow-y-auto shadow-md';
                     container.appendChild(dropdown);
                 }
                 dropdown.innerHTML = '';
@@ -1709,7 +1723,7 @@ function setupKasunduanComplainantAutocomplete() {
 
                 if (!dropdown) {
                     dropdown = document.createElement('div');
-                    dropdown.className = 'autocomplete absolute bg-white border border-gray-300 mt-1 rounded-md z-50 w-full shadow-md';
+                    dropdown.className = 'autocomplete absolute bg-white border border-gray-300 mt-1 rounded-md z-50 w-[200px] max-h-48 overflow-y-auto shadow-md';
                     container.appendChild(dropdown);
                 }
 
@@ -1774,7 +1788,7 @@ function setupKasunduanComplaineeAutocomplete() {
 
                 if (!dropdown) {
                     dropdown = document.createElement('div');
-                    dropdown.className = 'autocomplete absolute bg-white border border-gray-300 mt-1 rounded-md z-50 w-full shadow-md';
+                    dropdown.className = 'autocomplete absolute bg-white border border-gray-300 mt-1 rounded-md z-50 w-[200px] max-h-48 overflow-y-auto shadow-md';
                     container.appendChild(dropdown);
                 }
 

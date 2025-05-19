@@ -192,34 +192,38 @@
         <input type="hidden" id="editCFAId" name="id">
 
         <!-- Brgy Case No, For (Reason) -->
-        <div class="grid grid-cols-2 gap-2 mb-4">
+        <div class="grid grid-cols-2 gap-2 mb-2">
           <div>
+            <label class="text-xs sm:text-sm text-green-800">Brgy. Case No.</label>
             <input type="text" id="editBrgyCaseNo" name="brgyCaseNo" placeholder="Brgy Case No" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
           </div>
           <div>
+            <label class="text-xs sm:text-sm text-green-800">Reason</label>
             <input type="text" id="editReason" name="reason" placeholder="For (Reason)" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
           </div>
         </div>
 
         <!-- Complainant Fields -->
         <div>
-            <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+            <label class="text-xs sm:text-sm text-green-800">Complainant Details</label>
           <div id="editComplainantsContainer"></div>
       </div>
       
       <!-- Complainee Fields -->
       <div>
-        <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainee Details</label>
+        <label class="text-xs sm:text-sm text-green-800">Complainee Details</label>
           <div id="editComplaineesContainer"></div>
       </div>
 
       <!-- Date Issued and Select Chairperson -->
-      <div class="grid grid-cols-2 gap-2 mb-4">
+      <div class="grid grid-cols-2 gap-2 mb-2">
           <div>
+            <label class="text-xs sm:text-sm text-green-800">Date Issued</label>
             <input type="date" id="editDateIssued" name="dateIssued" placeholder="Date Issued" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
           </div>
 
           <div>
+            <label class="text-xs sm:text-sm text-green-800">Chairperson</label>
             <select id="editPangkatChairperson" name="pangkatChairperson" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
               <option value="" disabled>Select Chairperson</option>
               <!-- Options will be dynamically populated -->
@@ -228,8 +232,9 @@
         </div>
 
         <!-- Pangkat Member 1, Pangkat Member 2, and Status -->
-        <div class="grid grid-cols-3 gap-2 mb-4">
+        <div class="grid grid-cols-3 gap-2 mb-2">
           <div>
+            <label class="text-xs sm:text-sm text-green-800">Member 1</label>
             <select id="editPangkatMember1" name="pangkatMember1" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
               <option value="" disabled>Select Member 1</option>
               <!-- Options will be dynamically populated -->
@@ -237,6 +242,7 @@
           </div>
 
           <div>
+            <label class="text-xs sm:text-sm text-green-800">Member 2</label>
             <select id="editPangkatMember2" name="pangkatMember2" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
               <option value="" disabled>Select Member 2</option>
               <!-- Options will be dynamically populated -->
@@ -244,6 +250,7 @@
           </div>
 
         <div>
+            <label class="text-xs sm:text-sm text-green-800">Status</label>
           <select id="editStatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
             <option value="" disabled selected>Status</option>
             <option value="Processing">Processing</option>

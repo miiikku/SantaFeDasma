@@ -191,8 +191,53 @@
     margin-left: 35px;
 }
 .inter-font {
-            font-family: 'Inter', sans-serif;
-        }
+    font-family: 'Inter', sans-serif;
+}
+
+.usapin label {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.name-block-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.name-col {
+    flex: 1;
+}
+
+.name-col p {
+    margin: 0;             /* Remove default paragraph spacing */
+    line-height: 1.2em;    /* Tighten line spacing */
+}
+
+.chairman-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.chairman-name {
+    flex: 1;
+    text-align: center;
+}
+/* 🆕 Add this */
+.chairman-name p {
+    margin: 0;
+    line-height: 1.2em;
+}
+.lupon-description {
+    font-size: 14px;
+}
+        
+
     </style>
 </head>
 <body>
@@ -276,59 +321,54 @@
             </div>
             </div>
             
-            <div class = "usapin">
-                <label>Usaping Barangay Blg. </label>
-                <span id="luponUsapinBlg">Hearing Num.</span>
-                <p id="luponReason">Reason</p>
+        <div class="usapin">
+        <label>Usaping Barangay Blg. <span id="luponUsapinBlg"></span>: <span id="luponReason"></span></label>
+    </div>
+
+        <div class="name-block-row">
+        <div class="name-col">
+            <p id="luponNagsumbong"></p>
+            <p class="label">Complainant's Name</p>
+        </div>
+        <div class="name-col">
+            <p id="luponLabanKay"></p>
+            <p class="label">Complainee's Name</p>
+        </div>
+    </div>
+
+        <div class="chairman-row">
+            <div class="chairman-name">
+                <p><b id="pangkatChairperson"></b></p>
+                <p>Pangkat Chairperson</p>
             </div>
-
-            <div class="name-block">
-                <div class="name-block">
-                <p id="luponNagsumbong"></p>
-                <p class="label">Complainant's Name</p><br>
-
-                <p id="luponLabanKay"></p>
-                <p class="label">Complainee's Name</p>
-                
-                </div>
-                <p id="luponmom"></p>
+            <div class="chairman-name">
+                <p><b id="pangkatMember1"></b></p>
+                <p>Pangkat Member 1</p>
             </div>
-
-            <br>
-                <div class="chairman-row">
-                    <div class="chairman-name">
-                        
-                        <b><p id="pangkatChairperson"></p></b>
-                        <p>Pangkat Chairperson</p>
-                    </div>
-                    <div class="chairman-name">
-                        <b><p id="pangkatMember1"></p></b>
-                        <p>Pangkat Member 1</p>
-                    </div>
-                    <div class="chairman-name">
-                        <b><p id="pangkatMember2"></p></b>
-                        <p>Pangkat Member 2</p>
-                    </div>
-                </div>
-            
-            <br>
-                
-            <div class="blotter-body">
-                <p id="luponmom"></p>
+            <div class="chairman-name">
+                <p><b id="pangkatMember2"></b></p>
+                <p>Pangkat Member 2</p>
             </div>
+        </div>
 
+        <br>
+        <div class="lupon-description">
+        <p id="luponmom"></p>
+    </div>
+           
+    <br>
             <!-- Signature of Complainant/Complainee -->
-            <div class="name-block">
-            <div class="name-block">
-                <p id="luponNagsumbongSignature"></p>
-                <p class="label">Complainant's Name</p><br>
+            <div class="name-block-row">
+    <div class="name-col">
+        <p id="luponNagsumbongSignature"></p>
+        <p class="label">Complainant's Name</p>
+    </div>
+    <div class="name-col">
+        <p id="luponLabanKaySignature"></p>
+        <p class="label">Complainee's Name</p>
+    </div>
+</div>
 
-                <p class="label">Complainee's Name</p>
-                <p id="luponLabanKaySignature"></p>
-            </div>
-            </div>
-
-            
             <!-- Signature of Lupon -->
             <br>
                 <div class="chairman-row">
@@ -347,6 +387,8 @@
                     </div>
                 </div>
 
+                <br>
+                
             <div class="footer-picture">
                 <img src="https://res.cloudinary.com/ddqxanugr/image/upload/v1745754730/generateFOOTER_mnr4mu.png" class="center" alt="Footer Logo">
             </div>

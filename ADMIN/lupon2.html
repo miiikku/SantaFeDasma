@@ -200,54 +200,57 @@
             <input type="hidden" id="editId">
 
             <!-- Date, Time, Blotter Number -->
-            <div class="grid grid-cols-2 gap-2 mb-4">
+            <div class="grid grid-cols-2 gap-2 mb-2">
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Petsa</label>
                     <input type="date" id="editDate" placeholder="Petsa" readonly class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                 </div>
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Usapin Blg.</label>
                     <input type="text" id="editText" placeholder="Usapin Blg." required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                 </div>
             </div>
 
            <!-- Nagsumbong Fields for Edit -->
            <div>
-            <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+            <label class="text-xs sm:text-sm text-green-800">Complainant Details</label>
             <div id="editComplainantsContainer"></div>         
         </div>
 
         <!-- Laban Kay Fields for Edit -->
         <div>
-            <label class="text-xs sm:text-sm font-semibold text-gray-700">Complainant Details</label>
+            <label class="text-xs sm:text-sm text-green-800">Complainant Details</label>
             <div id="editComplaineesContainer"></div>   
         </div>
         
         <!-- Sumbong, Lunas, Reason -->
-        <div class="mb-4">
+        <div class="grid grid-cols-2 gap-2 mb-2">
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Sumbong</label>
                     <textarea id="editSumbong" placeholder="Sumbong" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
                 </div>
-            </div>
 
-        <div class="mb-4">
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Lunas</label>
                     <textarea id="editLunas" placeholder="Lunas" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
                 </div>
             </div>
 
-        <div class="mb-4">
+        <div class="grid grid-cols-2 gap-2 mb-2">
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Reason</label>
                     <textarea id="editReason" placeholder="Reason" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
                 </div>
-            </div>
 
-        <div class="mb-4">
                 <div>
-                    <textarea id="editLuponmom" placeholder="Luponmom" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
+                    <label class="text-xs sm:text-sm text-green-800">Lupon</label>
+                    <textarea id="editLuponmom" placeholder="Lupon" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm"></textarea>
                 </div>
             </div>
 
-            <div class="grid grid-cols-3 gap-2 mb-4">
+            <div class="grid grid-cols-3 gap-2 mb-2">
             <div>
+                <label class="text-xs sm:text-sm text-green-800">Chairperson</label>
             <select id="editPangkatChairperson" name="pangkatChairperson" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
               <option value="" disabled>Select Chairperson</option>
               <!-- Options will be dynamically populated -->
@@ -256,6 +259,7 @@
 
           <!-- Pangkat Member 1, Pangkat Member 2, and Status -->
           <div>
+            <label class="text-xs sm:text-sm text-green-800">Member 1</label>
             <select id="editPangkatMember1" name="pangkatMember1" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
               <option value="" disabled>Select Member 1</option>
               <!-- Options will be dynamically populated -->
@@ -263,6 +267,7 @@
           </div>
 
           <div>
+            <label class="text-xs sm:text-sm text-green-800">Member 2</label>
             <select id="editPangkatMember2" name="pangkatMember2" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
               <option value="" disabled>Select Member 2</option>
               <!-- Options will be dynamically populated -->
@@ -272,8 +277,9 @@
 
 
             <!-- Hearing Stage, Hearing Date, Hearing Time, Status -->
-            <div class="grid grid-cols-4 gap-2 mb-4">
+            <div class="grid grid-cols-4 gap-2 mb-2">
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Hearing Stage</label>
                     <select id="editHearingStage" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                       <option value="1"disabled selected>1</option>
                       <option value="2">2</option>
@@ -282,14 +288,17 @@
                 </div>
 
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Hearing Date</label>
                     <input type="date" id="editHearingDate" placeholder=" " class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                 </div>
 
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Hearing Time</label>
                     <input type="time" id="editHearingTime" placeholder=" " class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                 </div>
 
                 <div>
+                    <label class="text-xs sm:text-sm text-green-800">Status</label>
                     <select id="editStatus" required class="w-full p-2 border border-gray-300 rounded-md shadow-sm text-sm">
                         <option value="Processing" disabled selected>Processing</option>
                         <option value="Transfer to Hearing 3">Transfer to Hearing 3</option>
