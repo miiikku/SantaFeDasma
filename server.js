@@ -1186,6 +1186,38 @@ app.get('/barangay-ids-complete', async (req, res) => {
   }
 });
 
+// GET /next-igp-no
+app.get('/next-igp-no', async (req, res) => {
+  try {
+    const barangayIdCollection = db.collection('barangay-id'); // Replace with your actual collection name
+    const barangayIdCompleteCollection = db.collection('barangay-id-complete'); // Optional, if you have a completed collection
+
+    const [latestPending, latestComplete] = await Promise.all([
+      barangayIdCollection.findOne({}, { sort: { igp: -1 } }),
+      barangayIdCompleteCollection.findOne({}, { sort: { igp: -1 } })
+    ]);
+
+    const getNumericPart = (str) => {
+      const match = str ? str.match(/\d+/) : null;
+      return match ? parseInt(match[0], 10) : 0;
+    };
+
+    const highestNumbers = [
+      getNumericPart(latestPending?.igp),
+      getNumericPart(latestComplete?.igp)
+    ];
+
+    const nextNumber = Math.max(...highestNumbers) + 1;
+    const nextIgp = `IGP-${String(nextNumber).padStart(6, '0')}`;
+
+    res.status(200).json({ nextIgp });
+  } catch (err) {
+    console.error('Error generating next IGP#:', err);
+    res.status(500).json({ error: 'Failed to generate IGP#' });
+  }
+});
+
+
 app.post('/submit-request', async (req, res) => {
   const newRequest = req.body;
   try {
@@ -2422,17 +2454,15 @@ app.put('/transfer-to-cfa/:id', async (req, res) => {
       return res.status(404).send('Lupon entry not found in Hearing 3');
     }
 
-    // Insert to CFA with a new ObjectId (always)
+    // ✅ Insert to CFA with new ID
     const cfaCopy = { ...lupon, _id: new ObjectId() };
     await cfaCollection.insertOne(cfaCopy);
 
-    // Check if already in lupon-complete to avoid duplicate error
-    const alreadyInComplete = await luponCompleteCollection.findOne({ _id: lupon._id });
-    if (!alreadyInComplete) {
-      await luponCompleteCollection.insertOne(lupon);
-    }
+    // ✅ Always insert new copy into lupon-complete
+    const { _id, ...archivedData } = lupon;
+    await luponCompleteCollection.insertOne({ ...archivedData, _id: new ObjectId() });
 
-    // Delete from lupon3
+    // ✅ Delete from lupon3
     await lupon3Collection.deleteOne({ _id: new ObjectId(id) });
 
     res.status(200).send({ success: true });
@@ -2442,6 +2472,7 @@ app.put('/transfer-to-cfa/:id', async (req, res) => {
     res.status(500).send({ success: false });
   }
 });
+
 
 // BAGONG LAGAY FOR LUPON-COMPLETE.HTML
 
@@ -2699,6 +2730,24 @@ app.get('/fetch-lupon3/:id', async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 });
+
+app.get('/fetch-lupon-complete/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const completeCollection = db.collection('lupon-complete');
+    const record = await completeCollection.findOne({ _id: new ObjectId(id) });
+
+    if (!record) {
+      return res.status(404).json({ success: false, message: 'Lupon Complete entry not found' });
+    }
+
+    res.json(record);
+  } catch (err) {
+    console.error('Error fetching from Lupon Complete:', err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
 
 app.get('/fetch-lupon-kasunduan/:id', async (req, res) => {
   const id = req.params.id;

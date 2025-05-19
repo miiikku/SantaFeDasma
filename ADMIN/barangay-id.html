@@ -364,6 +364,13 @@
 
             function openModal() {
             document.getElementById("addModal").style.display = "block";
+                // Fetch the next IGP# and insert into the field
+    fetch('/next-igp-no')
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('igp').value = data.nextIgp;
+        })
+        .catch(err => console.error('Error fetching next IGP number:', err));
     }
 
     function closeModal() {

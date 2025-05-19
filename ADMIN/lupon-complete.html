@@ -404,7 +404,7 @@ function fetchProcessingBarangayID() {
 
 // GENERATE HEARING 
 function generateHearing1(id) {
-  fetch(`/fetch-lupon/${id}`) // Fetch from Hearing 1 collection only
+  fetch(`/fetch-lupon-complete/${id}`)
     .then(response => response.json())
     .then(data => {
       if (data) {
@@ -438,7 +438,7 @@ function generateHearing1(id) {
 
 // GENERATE HEARING 2
 function generateHearing2(id) {
-  fetch(`/fetch-lupon2/${id}`) // Fetch from Hearing 1 collection only
+    fetch(`/fetch-lupon-complete/${id}`)   
     .then(response => response.json())
     .then(data => {
       if (data) {
@@ -472,7 +472,7 @@ function generateHearing2(id) {
 
 // GENERATE HEARING 3 
 function generateHearing3(id) {
-  fetch(`/fetch-lupon3/${id}`) // Fetch from Hearing 1 collection only
+  fetch(`/fetch-lupon-complete/${id}`)
     .then(response => response.json())
     .then(data => {
       if (data) {
@@ -506,7 +506,7 @@ function generateHearing3(id) {
 
 // Generate Lupon
 function generateLupon(id) {
-  fetch(`/fetch-lupon3/${id}`)
+  fetch(`/fetch-lupon-complete/${id}`)
     .then(response => response.json())
     .then(data => {
       console.log("Fetched Data:", data); // Log to check the API response

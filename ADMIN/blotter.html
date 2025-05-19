@@ -1557,6 +1557,263 @@
         fetchTotalProcessingRequests();
                     fetchTotalProcessingComplaints();
                     fetchProcessingBarangayID();
+    
+        // Autocomplete + Auto-fill Complainant Name
+function setupComplainantAutocomplete() {
+    document.querySelectorAll('#complainant-container input[name="complainantFirstName[]"]').forEach(input => {
+        input.addEventListener('input', async (e) => {
+            const container = e.target.closest('.form-row');
+            const firstNameInput = container.querySelector('input[name="complainantFirstName[]"]');
+            const middleNameInput = container.querySelector('input[name="complainantMiddleName[]"]');
+            const lastNameInput = container.querySelector('input[name="complainantLastName[]"]');
+
+            const query = firstNameInput.value.trim();
+            if (query.length < 2) return;
+
+            try {
+                const response = await fetch(`/api/residents/search?query=${encodeURIComponent(query)}`);
+                const data = await response.json();
+
+                let dropdown = container.querySelector('.autocomplete');
+                    if (data.length === 0) {
+                        if (dropdown) dropdown.remove();
+                        return;
+                    }
+                    if (!dropdown) {
+                    dropdown = document.createElement('div');
+                    dropdown.className = 'autocomplete absolute bg-white border border-gray-300 mt-1 rounded-md z-50 w-full shadow-md';
+                    container.appendChild(dropdown);
+                    }
+                dropdown.innerHTML = '';
+
+                data.forEach(resident => {
+                    const option = document.createElement('div');
+                    option.className = 'p-2 hover:bg-green-100 cursor-pointer text-sm';
+                    option.textContent = `${resident.Firstname} ${resident.Middlename || ''} ${resident.Lastname}`;
+                    option.addEventListener('click', () => {
+                        firstNameInput.value = resident.Firstname;
+                        middleNameInput.value = resident.Middlename || '';
+                        lastNameInput.value = resident.Lastname;
+                        dropdown.innerHTML = '';
+                    });
+                    dropdown.appendChild(option);
+                });
+            } catch (err) {
+                console.error('Error fetching autocomplete:', err);
+            }
+        });
+
+        // Remove dropdown if clicked outside
+        document.addEventListener('click', (e) => {
+            if (!input.closest('.form-row').contains(e.target)) {
+                const dropdown = input.closest('.form-row').querySelector('.autocomplete');
+                if (dropdown) dropdown.remove();
+            }
+        });
+    });
+}
+
+// Re-initialize autocomplete after adding new complainant row
+const originalAddComplainant = addBlotterComplainant;
+addBlotterComplainant = function () {
+    originalAddComplainant();
+    setTimeout(setupComplainantAutocomplete, 100); // delay to ensure DOM is updated
+};
+
+document.addEventListener('DOMContentLoaded', setupComplainantAutocomplete);
+
+// Autocomplete + Auto-fill Complainee Name
+function setupComplaineeAutocomplete() {
+    document.querySelectorAll('#complainee-container input[name="complaineeFirstName[]"]').forEach(input => {
+        input.addEventListener('input', async (e) => {
+            const container = e.target.closest('.form-row');
+            const firstNameInput = container.querySelector('input[name="complaineeFirstName[]"]');
+            const middleNameInput = container.querySelector('input[name="complaineeMiddleName[]"]');
+            const lastNameInput = container.querySelector('input[name="complaineeLastName[]"]');
+
+            const query = firstNameInput.value.trim();
+            if (query.length < 2) return;
+
+            try {
+                const response = await fetch(`/api/residents/search?query=${encodeURIComponent(query)}`);
+                const data = await response.json();
+
+                let dropdown = container.querySelector('.autocomplete');
+                if (data.length === 0) {
+                        if (dropdown) dropdown.remove();
+                        return;
+                    }
+                    if (!dropdown) {
+                    dropdown = document.createElement('div');
+                    dropdown.className = 'autocomplete absolute bg-white border border-gray-300 mt-1 rounded-md z-50 w-full shadow-md';
+                    container.appendChild(dropdown);
+                }
+                dropdown.innerHTML = '';
+
+                data.forEach(resident => {
+                    const option = document.createElement('div');
+                    option.className = 'p-2 hover:bg-green-100 cursor-pointer text-sm';
+                    option.textContent = `${resident.Firstname} ${resident.Middlename || ''} ${resident.Lastname}`;
+                    option.addEventListener('click', () => {
+                        firstNameInput.value = resident.Firstname;
+                        middleNameInput.value = resident.Middlename || '';
+                        lastNameInput.value = resident.Lastname;
+                        dropdown.innerHTML = '';
+                    });
+                    dropdown.appendChild(option);
+                });
+            } catch (err) {
+                console.error('Error fetching autocomplete:', err);
+            }
+        });
+
+        // Remove dropdown if clicked outside
+        document.addEventListener('click', (e) => {
+            if (!input.closest('.form-row').contains(e.target)) {
+                const dropdown = input.closest('.form-row').querySelector('.autocomplete');
+                if (dropdown) dropdown.remove();
+            }
+        });
+    });
+}
+
+// Re-initialize autocomplete after adding new complainee row
+const originalAddComplainee = addBlotterComplainee;
+addBlotterComplainee = function () {
+    originalAddComplainee();
+    setTimeout(setupComplaineeAutocomplete, 100);
+};
+
+document.addEventListener('DOMContentLoaded', setupComplaineeAutocomplete);
+
+function setupKasunduanComplainantAutocomplete() {
+    document.querySelectorAll('#kasunduancomplainant-container input[name="kasunduancomplainantFirstName[]"]').forEach(input => {
+        input.addEventListener('input', async (e) => {
+            const container = e.target.closest('.form-row');
+            const firstNameInput = container.querySelector('input[name="kasunduancomplainantFirstName[]"]');
+            const middleNameInput = container.querySelector('input[name="kasunduancomplainantMiddleName[]"]');
+            const lastNameInput = container.querySelector('input[name="kasunduancomplainantLastName[]"]');
+
+            const query = firstNameInput.value.trim();
+            if (query.length < 2) return;
+
+            try {
+                const response = await fetch(`/api/residents/search?query=${encodeURIComponent(query)}`);
+                const data = await response.json();
+
+                let dropdown = container.querySelector('.autocomplete');
+                if (data.length === 0) {
+                    if (dropdown) dropdown.remove();
+                    return;
+                }
+
+                if (!dropdown) {
+                    dropdown = document.createElement('div');
+                    dropdown.className = 'autocomplete absolute bg-white border border-gray-300 mt-1 rounded-md z-50 w-full shadow-md';
+                    container.appendChild(dropdown);
+                }
+
+                dropdown.innerHTML = '';
+
+                data.forEach(resident => {
+                    const option = document.createElement('div');
+                    option.className = 'p-2 hover:bg-green-100 cursor-pointer text-sm';
+                    option.textContent = `${resident.Firstname} ${resident.Middlename || ''} ${resident.Lastname}`;
+                    option.addEventListener('click', () => {
+                        firstNameInput.value = resident.Firstname;
+                        middleNameInput.value = resident.Middlename || '';
+                        lastNameInput.value = resident.Lastname;
+                        dropdown.innerHTML = '';
+                    });
+                    dropdown.appendChild(option);
+                });
+            } catch (err) {
+                console.error('Error fetching autocomplete:', err);
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!input.closest('.form-row').contains(e.target)) {
+                const dropdown = input.closest('.form-row').querySelector('.autocomplete');
+                if (dropdown) dropdown.remove();
+            }
+        });
+    });
+}
+
+// Re-run autocomplete after adding a new complainant row
+const originalAddKasunduanComplainant = addKasunduanComplainant;
+addKasunduanComplainant = function () {
+    originalAddKasunduanComplainant();
+    setTimeout(setupKasunduanComplainantAutocomplete, 100);
+};
+
+document.addEventListener('DOMContentLoaded', setupKasunduanComplainantAutocomplete);
+
+
+function setupKasunduanComplaineeAutocomplete() {
+    document.querySelectorAll('#kasunduancomplainee-container input[name="kasunduancomplaineeFirstName[]"]').forEach(input => {
+        input.addEventListener('input', async (e) => {
+            const container = e.target.closest('.form-row');
+            const firstNameInput = container.querySelector('input[name="kasunduancomplaineeFirstName[]"]');
+            const middleNameInput = container.querySelector('input[name="kasunduancomplaineeMiddleName[]"]');
+            const lastNameInput = container.querySelector('input[name="kasunduancomplaineeLastName[]"]');
+
+            const query = firstNameInput.value.trim();
+            if (query.length < 2) return;
+
+            try {
+                const response = await fetch(`/api/residents/search?query=${encodeURIComponent(query)}`);
+                const data = await response.json();
+
+                let dropdown = container.querySelector('.autocomplete');
+                if (data.length === 0) {
+                    if (dropdown) dropdown.remove();
+                    return;
+                }
+
+                if (!dropdown) {
+                    dropdown = document.createElement('div');
+                    dropdown.className = 'autocomplete absolute bg-white border border-gray-300 mt-1 rounded-md z-50 w-full shadow-md';
+                    container.appendChild(dropdown);
+                }
+
+                dropdown.innerHTML = '';
+
+                data.forEach(resident => {
+                    const option = document.createElement('div');
+                    option.className = 'p-2 hover:bg-green-100 cursor-pointer text-sm';
+                    option.textContent = `${resident.Firstname} ${resident.Middlename || ''} ${resident.Lastname}`;
+                    option.addEventListener('click', () => {
+                        firstNameInput.value = resident.Firstname;
+                        middleNameInput.value = resident.Middlename || '';
+                        lastNameInput.value = resident.Lastname;
+                        dropdown.innerHTML = '';
+                    });
+                    dropdown.appendChild(option);
+                });
+            } catch (err) {
+                console.error('Error fetching autocomplete:', err);
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!input.closest('.form-row').contains(e.target)) {
+                const dropdown = input.closest('.form-row').querySelector('.autocomplete');
+                if (dropdown) dropdown.remove();
+            }
+        });
+    });
+}
+
+const originalAddKasunduanComplainee = addKasunduanComplainee;
+addKasunduanComplainee = function () {
+    originalAddKasunduanComplainee();
+    setTimeout(setupKasunduanComplaineeAutocomplete, 100);
+};
+
+document.addEventListener('DOMContentLoaded', setupKasunduanComplaineeAutocomplete);
+
     </script>
 </body>
 </html>
