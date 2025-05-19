@@ -2440,7 +2440,7 @@ app.put('/transfer-lupon-kasunduan/:id', async (req, res) => {
   }
 });
 
-// Trasfer Hearing 3 to CFA
+// Transfer Hearing 3 to CFA
 app.put('/transfer-to-cfa/:id', async (req, res) => {
   const id = req.params.id;
 
@@ -2454,15 +2454,28 @@ app.put('/transfer-to-cfa/:id', async (req, res) => {
       return res.status(404).send('Lupon entry not found in Hearing 3');
     }
 
-    // ✅ Insert to CFA with new ID
-    const cfaCopy = { ...lupon, _id: new ObjectId() };
-    await cfaCollection.insertOne(cfaCopy);
+    // ✅ Prepare a properly mapped CFA document
+    const cfaData = {
+      _id: new ObjectId(),
+      brgyCaseNo: lupon.usapinBlg || '',
+      reason: lupon.reason || '',
+      complainants: lupon.complainants || [],
+      complainees: lupon.complainees || [],
+      dateIssued: '', 
+      pangkatChairperson: lupon.pangkatChairperson || '',
+      pangkatMember1: lupon.pangkatMember1 || '',
+      pangkatMember2: lupon.pangkatMember2 || '',
+      status: 'Processing'
+    };
 
-    // ✅ Always insert new copy into lupon-complete
+    // ✅ Insert only the mapped version into CFA
+    await cfaCollection.insertOne(cfaData);
+
+    // ✅ Archive the original lupon3 into lupon-complete
     const { _id, ...archivedData } = lupon;
     await luponCompleteCollection.insertOne({ ...archivedData, _id: new ObjectId() });
 
-    // ✅ Delete from lupon3
+    // ✅ Delete the original lupon3 entry
     await lupon3Collection.deleteOne({ _id: new ObjectId(id) });
 
     res.status(200).send({ success: true });
@@ -2472,6 +2485,7 @@ app.put('/transfer-to-cfa/:id', async (req, res) => {
     res.status(500).send({ success: false });
   }
 });
+
 
 
 // BAGONG LAGAY FOR LUPON-COMPLETE.HTML
