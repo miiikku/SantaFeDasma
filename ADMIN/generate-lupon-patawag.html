@@ -319,7 +319,7 @@
             <div class = "usapin">
                 <label>Usaping Barangay Blg. </label>
                 <span id="luponUsapinBlg"></span>
-                <p id="luponsumbong"></p>
+                <p id="luponreason"></p>
             </div>
 
             <div class="name-block">
@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         document.getElementById('chairman').textContent = 'ERROR FETCHING PUNONG BARANGAY';
     }
     document.getElementById('luponUsapinBlg').textContent = params.get('usapinBlg');
-    document.getElementById('luponsumbong').textContent = params.get('sumbong');
+    document.getElementById('luponreason').textContent = params.get('reason');
     document.getElementById('luponNagsumbong').textContent = params.get('nagsumbong');
     document.getElementById('luponLabanKay').textContent = params.get('labanKay');
     

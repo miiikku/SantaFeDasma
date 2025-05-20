@@ -11,6 +11,7 @@ dotenv.config(); // Load .env file contents into process.env
 const nodemailer = require('nodemailer');
 const otpStorage ={};
 const multer = require("multer");
+const puppeteer = require('puppeteer');
 const { v2: cloudinary } = require('cloudinary');
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const LocalUpload = multer({ dest: "public/uploads" }); // Specify the uploads folder
@@ -1009,6 +1010,16 @@ app.post('/residents', ResidentUpload.single('photo'), async (req, res) => {
     const address = `Blk ${blk}, Lot ${lot}, ${street}, ${barangay}, ${city}, ${province}`;
     const profilePicUrl = req.file?.path || '';
 
+    // Organization Array
+    let organization = [];
+    try {
+      if (req.body.Organization) {
+        organization = JSON.parse(req.body.Organization);
+      }
+    } catch (e) {
+      console.error("Failed to parse Organization:", e);
+    }
+
     const newResident = {
       Profilepic: profilePicUrl,
       Firstname: firstname,
@@ -1018,7 +1029,7 @@ app.post('/residents', ResidentUpload.single('photo'), async (req, res) => {
       age,
       gender,
       civilstatus,
-      "PWD/Senior": pwd_senior,
+      Organization: organization,
       "Voter Status": voter_status,
       "Contact Number": contact_number,
       Address: address,
@@ -1046,6 +1057,15 @@ app.put('/residents/:id', ResidentUpload.single('photo'), async (req, res) => {
 
   const fullAddress = `Blk ${blk}, Lot ${lot}, ${street}, ${barangay}, ${city}, ${province}`;
 
+  let organization = [];
+  try {
+    if (req.body.Organization) {
+      organization = JSON.parse(req.body.Organization);
+    }
+  } catch (e) {
+    console.error("Failed to parse Organization:", e);
+  }
+
   const updatedResident = {
     Firstname: firstname,
     Middlename: middlename,
@@ -1054,7 +1074,7 @@ app.put('/residents/:id', ResidentUpload.single('photo'), async (req, res) => {
     age,
     gender,
     civilstatus,
-    "PWD/Senior": pwd_senior,
+    Organization: organization,
     "Voter Status": voter_status,
     "Contact Number": contact_number,
     Address: fullAddress,
@@ -2787,20 +2807,105 @@ app.get('/fetch-cfa-data/:id', async (req, res) => {
   }
 });
 
-/************************ GENERATE END ************************/
+//Generate Send Email
+app.post('/api/patawag/send-email', async (req, res) => {
+  const { complainantName, complaineeName, usapinBarangayBlg, reason, date, hearingDate, hearingTime } = req.body;
 
-/************************ MODULE START ************************/
+  // Format URL with query params
+  const baseUrl = process.env.PUPPETEER_DEV
 
-// Fetch all modules from the "module" collection
-app.get('/modules', async (req, res) => {
-  try {
-    const moduleCollection = db.collection('module');
-    const modules = await moduleCollection.find().toArray();
-    res.json(modules); // Send the modules data as JSON to the frontend
-  } catch (err) {
-    console.error('Error fetching modules:', err);
-    res.status(500).send('Internal Server Error');
+  const url = `${baseUrl}/generate-patawag.html?usapinBarangayBlg=${encodeURIComponent(usapinBarangayBlg)}&complainants=${encodeURIComponent(complainantName)}&complainees=${encodeURIComponent(complaineeName)}&reason=${encodeURIComponent(reason)}&date=${encodeURIComponent(date)}&hearingDate=${encodeURIComponent(hearingDate)}&hearingTime=${encodeURIComponent(hearingTime)}`;
+
+  // Launch browser and render PDF
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto(url, { waitUntil: 'networkidle0' }); // Ensure page is fully loaded
+
+  const pdfBuffer = await page.pdf({
+    format: 'A4',
+    printBackground: true
+  });
+
+  await browser.close();
+
+  // Now find emails from residents collection
+  const residentCollection = db.collection('resident');
+
+  const emailsToFind = [complainantName, complaineeName];
+  const foundEmails = [];
+
+ for (const name of emailsToFind) {
+  if (!name || typeof name !== 'string') {
+    return res.status(400).json({
+      success: false,
+      message: `Invalid name value provided: ${name}`
+    });
   }
+
+  const resident = await residentCollection.findOne({
+    $expr: {
+      $eq: [
+        {
+          $concat: [
+            "$Firstname", " ",
+            { $cond: [{ $eq: ["$Middlename", ""] }, "", { $concat: ["$Middlename", " "] }] },
+            "$Lastname"
+          ]
+        },
+        name.trim()
+      ]
+    }
+  });
+
+  if (!resident) {
+    return res.status(400).json({
+      success: false,
+      message: `${name} was not found in the registered residents.`
+    });
+  }
+
+  if (!resident['e-mail']) {
+    return res.status(400).json({
+      success: false,
+      message: `${name} does not have a registered email.`
+    });
+  }
+
+  foundEmails.push(resident['e-mail']);
+}
+
+  // Send email with PDF
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: foundEmails,
+    subject: 'Official Summon – Patawag Letter',
+    text: `Good day,
+
+Please find attached your official Patawag Letter issued by Barangay Santa Fe, City of Dasmariñas. Your attendance is required at the indicated date and time to address the matter specified.
+
+Failure to comply without valid reason may result in appropriate action.
+
+Thank you for your cooperation.
+
+— Barangay Santa Fe, City of Dasmariñas`,
+    attachments: [
+      {
+        filename: 'patawag.pdf',
+        content: pdfBuffer,
+        contentType: 'application/pdf'
+      }
+    ]
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.error('Email sending failed:', error);
+      return res.status(500).json({ success: false, message: 'Failed to send email' });
+    } else {
+      console.log('Email sent:', info.response);
+      res.json({ success: true, message: 'Patawag email sent successfully' });
+    }
+  });
 });
 
 // POST route to add a new elected official (without photo for now)
@@ -3409,11 +3514,30 @@ app.post('/api/notification/send-email', LocalUpload.single('attachment'), async
           console.error("Error fetching resident emails:", error);
           return res.status(500).json({ success: false, message: 'Error fetching resident emails' });
       }
-  } else {
-      // Split multiple emails separated by commas
-      recipients = to.split(',').map(email => email.trim());
-      console.log("Directly specified recipients:", recipients);
-  }
+  } else if (req.body.organizations) {
+    // ✅ Send to selected organizations
+    try {
+        const organizations = JSON.parse(req.body.organizations);
+        console.log("Sending to organizations:", organizations);
+
+        const residentsCollection = db.collection("resident");
+
+        const matchedResidents = await residentsCollection.find(
+            { Organization: { $in: organizations } },
+            { projection: { 'e-mail': 1 } }
+        ).toArray();
+
+        recipients = matchedResidents.map(r => r['e-mail']);
+        console.log("Emails from organizations:", recipients);
+    } catch (err) {
+        console.error("Error fetching emails by organization:", err);
+        return res.status(500).json({ success: false, message: 'Failed to fetch emails by organization' });
+    }
+} else {
+    // ✅ Fallback: manually typed emails in "to" field
+    recipients = to.split(',').map(email => email.trim());
+    console.log("Directly specified recipients:", recipients);
+}
 
   let attachments = [];
   if (attachment) {

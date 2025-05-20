@@ -331,7 +331,7 @@
 
         <div class="export-print-buttons">
             <button class="print-btn" onclick="window.print()">Print / Export</button>
-            <button class="print-btn" onclick="window.print()">Email</button>
+            <button class="print-btn" onclick="sendPatawagEmail()">Email</button>
         </div>
     </div>
     <script src="/public/js/sessionTimeout.js"></script>
@@ -430,6 +430,45 @@
                 console.error("Dropdown element not found");
             }
         }
+
+        //for email button
+document.querySelector('.print-btn:last-child').addEventListener('click', async () => {
+  const complainantName = document.getElementById('complainantName').textContent.trim();
+  const complaineeName = document.getElementById('complaineeName').textContent.trim();
+
+  const params = new URLSearchParams(window.location.search);
+  const usapinBarangayBlg = params.get('usapinBarangayBlg');
+  const reason = params.get('reason');
+  const date = params.get('date');
+  const hearingDate = params.get('hearingDate');
+  const hearingTime = params.get('hearingTime');
+
+  const data = {
+    complainantName,
+    complaineeName,
+    usapinBarangayBlg,
+    reason,
+    date,
+    hearingDate,
+    hearingTime
+  };
+
+  try {
+    const response = await fetch('/api/patawag/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    alert(result.message);
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong while sending the email.");
+  }
+});
+
+
 
         function fetchAdminProfilePicture() {
     fetch('/admin-details-data')

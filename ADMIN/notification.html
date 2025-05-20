@@ -152,37 +152,37 @@
 
             <div class="flex flex-wrap gap-4">
                 <label class="inline-flex items-center">
-                  <input type="checkbox" class="form-checkbox text-green-500">
+                  <input type="checkbox" id="sendToAll" class="form-checkbox text-green-500">
                   <span class="ml-2 text-sm text-gray-700">Send to All Residents</span>
                 </label>
               
                 <label class="inline-flex items-center">
-                  <input type="checkbox" class="form-checkbox text-green-500">
+                  <input type="checkbox" name="organization" value="PWD" class="form-checkbox text-green-500">
                   <span class="ml-2 text-sm text-gray-700">PWD</span>
                 </label>
               
                 <label class="inline-flex items-center">
-                  <input type="checkbox" class="form-checkbox text-green-500">
+                  <input type="checkbox" name="organization" value="Senior" class="form-checkbox text-green-500">
                   <span class="ml-2 text-sm text-gray-700">Senior</span>
                 </label>
               
                 <label class="inline-flex items-center">
-                  <input type="checkbox" class="form-checkbox text-green-500">
+                  <input type="checkbox" name="organization" value="4PS" class="form-checkbox text-green-500">
                   <span class="ml-2 text-sm text-gray-700">4PS</span>
                 </label>
               
                 <label class="inline-flex items-center">
-                  <input type="checkbox" class="form-checkbox text-green-500">
+                  <input type="checkbox" name="organization" value="Officials" class="form-checkbox text-green-500">
                   <span class="ml-2 text-sm text-gray-700">Officials</span>
                 </label>
               
                 <label class="inline-flex items-center">
-                  <input type="checkbox" class="form-checkbox text-green-500">
+                  <input type="checkbox" name="organization" value="Single Parents" class="form-checkbox text-green-500">
                   <span class="ml-2 text-sm text-gray-700">Single Parent</span>
                 </label>
               
                 <label class="inline-flex items-center">
-                  <input type="checkbox" class="form-checkbox text-green-500">
+                  <input type="checkbox" name="organization" value="Block Leaders" class="form-checkbox text-green-500">
                   <span class="ml-2 text-sm text-gray-700">Block Leader</span>
                 </label>
               </div>              
@@ -265,6 +265,15 @@
 
         const formData = new FormData(form);
         formData.append('sendToAll', document.getElementById('sendToAll').checked);
+
+        // ✅ Collect selected organizations
+        const selectedOrganizations = Array.from(
+        document.querySelectorAll('input[name="organization"]:checked')
+        ).map(cb => cb.value);
+
+        // ✅ Add to form data
+        formData.append('organizations', JSON.stringify(selectedOrganizations));
+
 
         fetch("/api/notification/send-email", {
             method: "POST",

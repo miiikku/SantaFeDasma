@@ -210,41 +210,41 @@
                 </div>
             </div>
 
-            <!-- Row 4: PWD/Senior, Voter Status, Contact #, Start Date, Years Residing (All in one row) -->
+            <!-- Row 4: Organization, Voter Status, Contact #, Start Date, Years Residing (All in one row) -->
             <label class="text-xs sm:text-sm text-gray-400">Organization</label>
             <div id="addPwdSenior" class="flex flex-row flex-nowrap gap-4 items-center overflow-x-auto whitespace-nowrap mb-6">
         <label class="inline-flex items-center">
-            <input type="checkbox" name="pwd_senior[]" value="None" class="form-checkbox text-green-500">
+            <input type="checkbox" name="organization" value="None" class="form-checkbox text-green-500">
             <span class="ml-2 text-sm text-gray-700">None</span>
         </label>
 
         <label class="inline-flex items-center">
-            <input type="checkbox" name="pwd_senior[]" value="PWD" class="form-checkbox text-green-500">
+            <input type="checkbox" name="organization" value="PWD" class="form-checkbox text-green-500">
             <span class="ml-2 text-sm text-gray-700">PWD</span>
         </label>
 
         <label class="inline-flex items-center">
-            <input type="checkbox" name="pwd_senior[]" value="Senior" class="form-checkbox text-green-500">
+            <input type="checkbox" name="organization" value="Senior" class="form-checkbox text-green-500">
             <span class="ml-2 text-sm text-gray-700">Senior</span>
         </label>
 
         <label class="inline-flex items-center">
-            <input type="checkbox" name="pwd_senior[]" value="4PS" class="form-checkbox text-green-500">
+            <input type="checkbox" name="organization" value="4PS" class="form-checkbox text-green-500">
             <span class="ml-2 text-sm text-gray-700">4PS</span>
         </label>
 
         <label class="inline-flex items-center">
-            <input type="checkbox" name="pwd_senior[]" value="Officials" class="form-checkbox text-green-500">
+            <input type="checkbox" name="organization" value="Officials" class="form-checkbox text-green-500">
             <span class="ml-2 text-sm text-gray-700">Officials</span>
         </label>
 
         <label class="inline-flex items-center">
-            <input type="checkbox" name="pwd_senior[]" value="Single Parents" class="form-checkbox text-green-500">
+            <input type="checkbox" name="organization" value="Single Parents" class="form-checkbox text-green-500">
             <span class="ml-2 text-sm text-gray-700">Single Parents</span>
         </label>
 
         <label class="inline-flex items-center">
-            <input type="checkbox" name="pwd_senior[]" value="Block Leaders" class="form-checkbox text-green-500">
+            <input type="checkbox" name="organization" value="Block Leaders" class="form-checkbox text-green-500">
             <span class="ml-2 text-sm text-gray-700">Block Leaders</span>
         </label>
         </div>
@@ -409,42 +409,42 @@
                 </div>
             </div>
 
-            <!-- Row 4: PWD/Senior, Voter Status, Contact # -->
+            <!-- Row 4: Organization, Voter Status, Contact # -->
             
                  <label class="text-xs sm:text-sm text-green-800 block mb-2">Organization</label>
-  <div id="editPwdSenior" class="flex flex-row flex-nowrap gap-4 items-center overflow-x-auto whitespace-nowrap">
+  <div id="editOrganization" class="flex flex-row flex-nowrap gap-4 items-center overflow-x-auto whitespace-nowrap">
     <label class="inline-flex items-center">
-      <input type="checkbox" name="pwd_senior[]" value="None" class="form-checkbox text-green-500">
+      <input type="checkbox" name="organization" value="None" class="form-checkbox text-green-500">
       <span class="ml-2 text-sm text-gray-700">None</span>
     </label>
 
     <label class="inline-flex items-center">
-      <input type="checkbox" name="pwd_senior[]" value="PWD" class="form-checkbox text-green-500">
+      <input type="checkbox" name="organization" value="PWD" class="form-checkbox text-green-500">
       <span class="ml-2 text-sm text-gray-700">PWD</span>
     </label>
 
     <label class="inline-flex items-center">
-      <input type="checkbox" name="pwd_senior[]" value="Senior" class="form-checkbox text-green-500">
+      <input type="checkbox" name="organization" value="Senior" class="form-checkbox text-green-500">
       <span class="ml-2 text-sm text-gray-700">Senior</span>
     </label>
 
     <label class="inline-flex items-center">
-      <input type="checkbox" name="pwd_senior[]" value="4PS" class="form-checkbox text-green-500">
+      <input type="checkbox" name="organization" value="4PS" class="form-checkbox text-green-500">
       <span class="ml-2 text-sm text-gray-700">4PS</span>
     </label>
 
     <label class="inline-flex items-center">
-      <input type="checkbox" name="pwd_senior[]" value="Officials" class="form-checkbox text-green-500">
+      <input type="checkbox" name="organization" value="Officials" class="form-checkbox text-green-500">
       <span class="ml-2 text-sm text-gray-700">Officials</span>
     </label>
 
     <label class="inline-flex items-center">
-      <input type="checkbox" name="pwd_senior[]" value="Single Parents" class="form-checkbox text-green-500">
+      <input type="checkbox" name="organization" value="Single Parents" class="form-checkbox text-green-500">
       <span class="ml-2 text-sm text-gray-700">Single Parents</span>
     </label>
 
     <label class="inline-flex items-center">
-      <input type="checkbox" name="pwd_senior[]" value="Block Leaders" class="form-checkbox text-green-500">
+      <input type="checkbox" name="organization" value="Block Leaders" class="form-checkbox text-green-500">
       <span class="ml-2 text-sm text-gray-700">Block Leaders</span>
     </label>
   </div>
@@ -703,9 +703,25 @@
             if (document.getElementById('editCivilStatus')) {
                 document.getElementById('editCivilStatus').value = resident.civilstatus || '';
             }
-            if (document.getElementById('editPwdSenior')) {
-                document.getElementById('editPwdSenior').value = resident["PWD/Senior"] || 'N/A';
+
+            // Clear all checkboxes
+            document.querySelectorAll('#editOrganization input[name="organization"]').forEach(cb => {
+                cb.checked = false;
+            });
+
+            // Normalize organization data into an array
+            let organizations = [];
+            if (Array.isArray(resident.Organization)) {
+                organizations = resident.Organization;
+            } else if (typeof resident.Organization === 'string') {
+                organizations = resident.Organization.split(',').map(o => o.trim());
             }
+
+            // Check matching checkboxes
+            document.querySelectorAll('#editOrganization input[name="organization"]').forEach(cb => {
+                cb.checked = organizations.includes(cb.value);
+            });
+
             if (document.getElementById('editVoterStatus')) {
                 document.getElementById('editVoterStatus').value = resident["Voter Status"] || '';
             }
@@ -733,6 +749,7 @@
             if (resident.startDate) {
                 document.getElementById('editStartDate').value = new Date(resident.startDate).toISOString().split('T')[0]; // Ensure the date is formatted correctly
             }
+
 
             // Store the resident's ID in a hidden input for later use
             let hiddenIdInput = document.getElementById('editResidentId');
@@ -765,6 +782,14 @@
             const formData = new FormData(form); // Handles both fields + file
             const id = document.getElementById('editResidentId').value;
 
+            const orgCheckboxes = document.querySelectorAll('#editOrganization input[name="organization"]:checked');
+            const organizations = Array.from(orgCheckboxes).map(cb => cb.value);
+            const finalOrganizations = organizations.includes("None") && organizations.length > 1
+                ? organizations.filter(item => item !== "None")
+                : organizations;
+
+            formData.append('Organization', JSON.stringify(finalOrganizations));
+
             fetch(`/residents/${id}`, {
                 method: 'PUT',
                 body: formData
@@ -772,14 +797,14 @@
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                closeEditModal();
-                fetchResidents();
+                    closeEditModal();
+                    fetchResidents();
                 } else {
-                alert(data.message || 'Update failed');
+                    alert(data.message || 'Update failed');
                 }
             })
             .catch(err => console.error('Error updating resident:', err));
-            }
+        }
 
             function deleteResident(id) {
             if (confirm("Are you sure you want to delete this resident?")) {
@@ -828,7 +853,7 @@ function fetchResidents() {
                     <td class="px-4 py-2">${age}</td> <!-- Use calculated age -->
                     <td class="px-4 py-2">${resident.gender}</td>
                     <td class="px-4 py-2">${resident.civilstatus}</td>
-                    <td class="px-4 py-2">${resident["PWD/Senior"]}</td>
+                    <td class="px-4 py-2">${resident["Organization"]}</td>
                     <td class="px-4 py-2">${resident["Voter Status"]}</td>
                     <td class="px-4 py-2">${resident["Contact Number"]}</td>
                     <td class="px-4 py-2">${resident["e-mail"]}</td>
@@ -858,6 +883,18 @@ function fetchResidents() {
             const form = document.getElementById('addForm');
             const formData = new FormData(form); // includes image + fields
 
+            // ✅ Collect all checked organization checkboxes
+            const orgCheckboxes = document.querySelectorAll('input[name="organization"]:checked');
+            const organizations = Array.from(orgCheckboxes).map(cb => cb.value);
+
+            // ✅ Remove "None" if other values are checked
+            const finalOrganizations = organizations.includes("None") && organizations.length > 1
+                ? organizations.filter(item => item !== "None")
+                : organizations;
+
+            // ✅ Append the array as a JSON string
+            formData.append('Organization', JSON.stringify(finalOrganizations));
+
             fetch('/residents', {
                 method: 'POST',
                 body: formData
@@ -865,15 +902,15 @@ function fetchResidents() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                form.reset();
-                closeModal();
-                fetchResidents();
+                    form.reset();
+                    closeModal();
+                    fetchResidents();
                 } else {
-                alert(data.message);
+                    alert(data.message);
                 }
             })
             .catch(error => console.error('Error adding resident:', error));
-            }
+        }
 
             // Close the modal when the user clicks anywhere outside of it
             window.onclick = function(event) {
