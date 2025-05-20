@@ -676,7 +676,7 @@ function generatePatawag(id) {
           usapinBlg: data.usapinBlg,
           nagsumbong: complainantsText,
           labanKay: complaineesText,
-          sumbong: data.sumbong,
+          reason: data.reason,
           lunas: data.lunas,
           hearingStage: data.hearingStage,
           hearingDate: data.hearingDate,
@@ -791,6 +791,8 @@ function fetchTotalProcessingRequests() {
                 (data.blotterCount || 0) +
                 (data.blotterKasunduanCount || 0) +
                 (data.luponCount || 0) +
+                (data.lupon2Count || 0) +
+                (data.lupon3Count || 0) +
                 (data.luponKasunduanCount || 0) +
                 (data.cfaCount || 0);
 

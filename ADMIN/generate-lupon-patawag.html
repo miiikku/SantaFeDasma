@@ -365,6 +365,7 @@
 
         <div class="export-print-buttons">
             <button class="print-btn" onclick="window.print()">Print / Export</button>
+            <button class="print-btn">Email</button>
         </div>
     </div>
     <script src="/public/js/sessionTimeout.js"></script>
@@ -447,6 +448,44 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 });
 
+//for email
+document.querySelector('.print-btn:last-child').addEventListener('click', async () => {
+  const nagsumbong = document.getElementById('luponNagsumbong').textContent.trim();
+  const labanKay = document.getElementById('luponLabanKay').textContent.trim();
+
+  const params = new URLSearchParams(window.location.search);
+  const usapinBlg = params.get('usapinBlg');
+  const reason = params.get('reason');
+  const date = params.get('date');
+  const hearingDate = params.get('hearingDate');
+  const hearingTime = params.get('hearingTime');
+
+  const data = {
+    complainantName: nagsumbong,
+    complaineeName: labanKay,
+    usapinBarangayBlg: usapinBlg,
+    reason,
+    date,
+    hearingDate,
+    hearingTime,
+    isLupon: true  // Optional flag for back-end if needed
+  };
+
+  try {
+    const response = await fetch('/api/lupon-patawag/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+    alert(result.message);
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong while sending the email.");
+  }
+});
+
 function fetchAdminProfilePicture() {
     fetch('/admin-details-data')
         .then(response => {
@@ -495,6 +534,8 @@ function fetchTotalProcessingRequests() {
                 (data.blotterCount || 0) +
                 (data.blotterKasunduanCount || 0) +
                 (data.luponCount || 0) +
+                (data.lupon2Count || 0) +
+                (data.lupon3Count || 0) +
                 (data.luponKasunduanCount || 0) +
                 (data.cfaCount || 0);
 

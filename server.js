@@ -2811,12 +2811,8 @@ app.get('/fetch-cfa-data/:id', async (req, res) => {
 app.post('/api/patawag/send-email', async (req, res) => {
   const { complainantName, complaineeName, usapinBarangayBlg, reason, date, hearingDate, hearingTime } = req.body;
 
-  // Format URL with query params
   const baseUrl = process.env.PUPPETEER_DEV
-
   const url = `${baseUrl}/generate-patawag.html?usapinBarangayBlg=${encodeURIComponent(usapinBarangayBlg)}&complainants=${encodeURIComponent(complainantName)}&complainees=${encodeURIComponent(complaineeName)}&reason=${encodeURIComponent(reason)}&date=${encodeURIComponent(date)}&hearingDate=${encodeURIComponent(hearingDate)}&hearingTime=${encodeURIComponent(hearingTime)}`;
-
-  // Launch browser and render PDF
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'networkidle0' }); // Ensure page is fully loaded
@@ -2828,9 +2824,7 @@ app.post('/api/patawag/send-email', async (req, res) => {
 
   await browser.close();
 
-  // Now find emails from residents collection
   const residentCollection = db.collection('resident');
-
   const emailsToFind = [complainantName, complaineeName];
   const foundEmails = [];
 
@@ -2907,6 +2901,101 @@ Thank you for your cooperation.
     }
   });
 });
+
+app.post('/api/lupon-patawag/send-email', async (req, res) => {
+  const { complainantName, complaineeName, usapinBarangayBlg, reason, date, hearingDate, hearingTime } = req.body;
+  const baseUrl = process.env.PUPPETEER_DEV;
+
+  const url = `${baseUrl}/generate-lupon-patawag.html?usapinBlg=${encodeURIComponent(usapinBarangayBlg)}&nagsumbong=${encodeURIComponent(complainantName)}&labanKay=${encodeURIComponent(complaineeName)}&reason=${encodeURIComponent(reason)}&date=${encodeURIComponent(date)}&hearingDate=${encodeURIComponent(hearingDate)}&hearingTime=${encodeURIComponent(hearingTime)}`;
+
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+  await page.goto(url, { waitUntil: 'networkidle0' });
+
+  const pdfBuffer = await page.pdf({
+    format: 'A4',
+    printBackground: true
+  });
+
+  await browser.close();
+
+  const residentCollection = db.collection('resident');
+  const emailsToFind = [complainantName, complaineeName];
+  const foundEmails = [];
+
+  for (const name of emailsToFind) {
+    if (!name || typeof name !== 'string') {
+      return res.status(400).json({
+        success: false,
+        message: `Invalid name value provided: ${name}`
+      });
+    }
+
+    const resident = await residentCollection.findOne({
+      $expr: {
+        $eq: [
+          {
+            $concat: [
+              "$Firstname", " ",
+              { $cond: [{ $eq: ["$Middlename", ""] }, "", { $concat: ["$Middlename", " "] }] },
+              "$Lastname"
+            ]
+          },
+          name.trim()
+        ]
+      }
+    });
+
+    if (!resident) {
+      return res.status(400).json({
+        success: false,
+        message: `${name} was not found in the registered residents.`
+      });
+    }
+
+    if (!resident['e-mail']) {
+      return res.status(400).json({
+        success: false,
+        message: `${name} does not have a registered email.`
+      });
+    }
+
+    foundEmails.push(resident['e-mail']);
+  }
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: foundEmails,
+    subject: 'Official Summon – Lupon Patawag Letter',
+    text: `Good day,
+
+Please find attached your official Lupon Patawag Letter issued by Barangay Santa Fe, City of Dasmariñas. Your presence is required at the stated hearing date and time.
+
+Failure to appear without valid reason may result in further action.
+
+Thank you for your cooperation.
+
+— Barangay Santa Fe, City of Dasmariñas`,
+    attachments: [
+      {
+        filename: 'lupon-patawag.pdf',
+        content: pdfBuffer,
+        contentType: 'application/pdf'
+      }
+    ]
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.error('Email sending failed:', error);
+      return res.status(500).json({ success: false, message: 'Failed to send email' });
+    } else {
+      console.log('Email sent:', info.response);
+      res.json({ success: true, message: 'Lupon Patawag email sent successfully' });
+    }
+  });
+});
+
 
 // POST route to add a new elected official (without photo for now)
 // Route to add a new elected officer
@@ -3623,6 +3712,8 @@ app.get('/complaint-notification-counts', async (req, res) => {
     const blotter = db.collection('blotter');
     const blotterKasunduan = db.collection('blotter-kasunduan');
     const lupon = db.collection('lupon');
+    const lupon2 = db.collection('lupon2');
+    const lupon3 = db.collection('lupon3');
     const luponKasunduan = db.collection('lupon-kasunduan');
     const cfa = db.collection('cfa');
 
@@ -3630,19 +3721,23 @@ app.get('/complaint-notification-counts', async (req, res) => {
       blotterCount,
       blotterKasunduanCount,
       luponCount,
+      lupon2Count,
+      lupon3Count,
       luponKasunduanCount,
       cfaCount
     ] = await Promise.all([
       blotter.countDocuments({ status: 'Processing' }),
       blotterKasunduan.countDocuments({ status: 'Processing' }),
       lupon.countDocuments({ status: 'Processing' }),
+      lupon2.countDocuments({ status: 'Processing' }),
+      lupon3.countDocuments({ status: 'Processing' }),
       luponKasunduan.countDocuments({ status: 'Processing' }),
       cfa.countDocuments({ status: 'Processing' })
     ]);
 
     res.json({
       blotterKasunduan: blotterCount + blotterKasunduanCount,
-      luponKasunduan: luponCount + luponKasunduanCount,
+      luponKasunduan: luponCount + lupon2Count + lupon3Count + luponKasunduanCount,
       cfa: cfaCount
     });
   } catch (error) {
@@ -3681,6 +3776,8 @@ app.get('/complaint-counts', async (req, res) => {
     const blotterCollection = db.collection('blotter');
     const blotterKasunduanCollection = db.collection('blotter-kasunduan');
     const luponCollection = db.collection('lupon');
+    const lupon2Collection = db.collection('lupon2');
+    const lupon3Collection = db.collection('lupon3');
     const luponKasunduanCollection = db.collection('lupon-kasunduan');
     const cfaCollection = db.collection('cfa');
 
@@ -3688,25 +3785,31 @@ app.get('/complaint-counts', async (req, res) => {
       blotterCount,
       blotterKasunduanCount,
       luponCount,
+      lupon2Count,
+      lupon3Count,
       luponKasunduanCount,
       cfaCount
     ] = await Promise.all([
       blotterCollection.countDocuments({ status: 'Processing' }),
       blotterKasunduanCollection.countDocuments({ status: 'Processing' }),
       luponCollection.countDocuments({ status: 'Processing' }),
+      lupon2Collection.countDocuments({ status: 'Processing' }),
+      lupon3Collection.countDocuments({ status: 'Processing' }),
       luponKasunduanCollection.countDocuments({ status: 'Processing' }),
       cfaCollection.countDocuments({ status: 'Processing' })
     ]);
 
     const totalComplaints =
       blotterCount + blotterKasunduanCount +
-      luponCount + luponKasunduanCount +
+      luponCount + lupon2Count + lupon3Count + luponKasunduanCount +
       cfaCount;
 
     res.json({
       blotterCount,
       blotterKasunduanCount,
       luponCount,
+      lupon2Count,
+      lupon3Count,
       luponKasunduanCount,
       cfaCount,
       totalComplaints
@@ -3717,6 +3820,8 @@ app.get('/complaint-counts', async (req, res) => {
       blotterCount: 0,
       blotterKasunduanCount: 0,
       luponCount: 0,
+      lupon2Count: 0,
+      lupon3Count: 0,
       luponKasunduanCount: 0,
       cfaCount: 0,
       totalComplaints: 0
