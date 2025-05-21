@@ -152,7 +152,10 @@
                 <button class="bg-green-800 text-white px-6 py-1 rounded-md hover:bg-green-700 focus:outline-none" onclick="openModal()">Add</button>
             </div>
             <div>
-                <button class="bg-blue-800 text-white px-6 py-1 rounded-md hover:bg-blue-700 focus:outline-none" onclick="openModal()">Print</button>  <!-- Logic for printing -->
+                <button onclick="printResidentTable()" class="bg-blue-800 text-white px-6 py-1 rounded-md hover:bg-blue-700">
+    Print
+</button>
+  <!-- Logic for printing -->
             </div>
         </div>
 
@@ -319,9 +322,9 @@
 
 
      <!-- Resident Information Table -->
-     <div class="account-content bg-white p-6 rounded-lg shadow-md overflow-x-auto mb-8">
+     <div class="account-content bg-white p-6 rounded-lg shadow-md overflow-x-auto mb-8 printable-table">
         <h3 class="text-lg font-semibold text-gray-800">Resident Information</h3>
-        <div class="overflow-x-auto mt-4 max-h-[500px]"> <!-- Increased max-height for better spacing -->
+        <div class="overflow-x-auto mt-4 max-h-[600px]"> <!-- Increased max-height for better spacing -->
             <table class="min-w-full table-auto border-collapse border border-gray-300">
                 <thead class="bg-green-800">
                     <tr>
@@ -525,15 +528,87 @@
     </div>
 </div>
 
-
-
-
-    
     <!-- Script -->
     <script src="public/styles/script.js"></script>
     <script src="/public/js/sessionTimeout.js"></script>
 
         <script>
+            function printResidentTable() {
+    // Clone the table content to avoid modifying the live DOM
+    const originalTable = document.querySelector('.printable-table').cloneNode(true);
+
+   // Remove "Actions" column from <thead>
+    const headerRow = originalTable.querySelector('thead tr');
+    if (headerRow && headerRow.children.length > 0) {
+        headerRow.removeChild(headerRow.lastElementChild);
+    }
+
+    // Remove "Actions" column from all <tbody> rows
+    const rows = originalTable.querySelectorAll('tbody tr');
+    rows.forEach(row => {
+        if (row.children.length > 0) {
+            row.removeChild(row.lastElementChild);
+        }
+    });
+    
+    const printWindow = window.open('', '', 'width=1000,height=700');
+    printWindow.document.write(`
+        <html>
+            <head>
+                <title>Print Table</title>
+                <style>
+                    body {
+                        font-family: sans-serif;
+                        padding: 20px;
+                        background: white;
+                    }
+
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        table-layout: fixed;
+                        word-wrap: break-word;
+                        font-size: 12px;
+                    }
+
+                    th, td {
+                        border: 1px solid #ccc;
+                        padding: 6px;
+                        text-align: left;
+                    }
+
+                    th {
+                        background-color: #14532d;
+                        color: white;
+                    }
+
+                    img {
+                        width: 30px;
+                        height: 30px;
+                        object-fit: cover;
+                        border-radius: 4px;
+                    }
+
+                    @media print {
+                    body {
+                        margin: 0;
+                    }
+                    th {
+                        background-color: #14532d !important;
+                        -webkit-print-color-adjust: exact;
+                        print-color-adjust: exact;
+                    }
+                }
+
+                </style>
+            </head>
+            <body onload="window.print(); window.close();">
+                ${originalTable.outerHTML}
+            </body>
+        </html>
+    `);
+    printWindow.document.close();
+}
             // SEARCH
             function searchResidents() {
                 // Get the search input value
@@ -1015,6 +1090,7 @@ function fetchProcessingBarangayID() {
                         fetchTotalProcessingComplaints();
                         fetchProcessingBarangayID();
                     });
+
         </script>
 </body>
 </html>
