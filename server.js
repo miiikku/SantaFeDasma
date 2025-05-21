@@ -2813,7 +2813,10 @@ app.post('/api/patawag/send-email', async (req, res) => {
 
   const baseUrl = process.env.PUPPETEER_DEV
   const url = `${baseUrl}/generate-patawag.html?usapinBarangayBlg=${encodeURIComponent(usapinBarangayBlg)}&complainants=${encodeURIComponent(complainantName)}&complainees=${encodeURIComponent(complaineeName)}&reason=${encodeURIComponent(reason)}&date=${encodeURIComponent(date)}&hearingDate=${encodeURIComponent(hearingDate)}&hearingTime=${encodeURIComponent(hearingTime)}`;
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+  headless: true,
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
+});
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'networkidle0' }); // Ensure page is fully loaded
 
@@ -2908,7 +2911,10 @@ app.post('/api/lupon-patawag/send-email', async (req, res) => {
 
   const url = `${baseUrl}/generate-lupon-patawag.html?usapinBlg=${encodeURIComponent(usapinBarangayBlg)}&nagsumbong=${encodeURIComponent(complainantName)}&labanKay=${encodeURIComponent(complaineeName)}&reason=${encodeURIComponent(reason)}&date=${encodeURIComponent(date)}&hearingDate=${encodeURIComponent(hearingDate)}&hearingTime=${encodeURIComponent(hearingTime)}`;
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+  headless: true,
+  args: ['--no-sandbox', '--disable-setuid-sandbox']
+});
   const page = await browser.newPage();
   await page.goto(url, { waitUntil: 'networkidle0' });
 
